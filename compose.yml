@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=fitness_app
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=admin
+    ports:
+      - "5432:5432"
