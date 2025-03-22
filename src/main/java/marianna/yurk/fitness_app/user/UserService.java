@@ -1,6 +1,7 @@
 package marianna.yurk.fitness_app.user;
 
 //import org.springframework.security.crypto.password.PasswordEncoder;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.Period;
@@ -34,14 +35,14 @@ public class UserService {
     }
 
     // Регистрация пользователя
+    @Transactional
     public User registerUser(User user) {
+        // Проверяем, что пользователь с таким email ещё не зарегистрирован
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            throw new RuntimeException("Пользователь с такой почтой уже существует!");
+            throw new RuntimeException("User with this email already exists");
         }
-        // Шифрование пароля
-        //user.setPassword(passwordEncoder.encode(user.getPassword()));
-        // Расчет нормы калорий
-        user.setDailyCalorieNorm(calculateCalorieNorm(user));
+
+        // Сохраняем пользователя в базу данных
         return userRepository.save(user);
     }
 

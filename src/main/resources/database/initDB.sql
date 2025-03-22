@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS activity_tracker (
-    id INT NOT NULL,
-    activity_type VARCHAR(255) NOT NULL,
-    duration INT CHECK (duration > 0) NOT NULL,
-    calories_burned INT CHECK (calories_burned > 0) NOT NULL,
-    activity_timestamp timestamp NOT NULL,
-    PRIMARY KEY (id)
-    );
+                                                id SERIAL PRIMARY KEY,
+                                                activity_type VARCHAR(255) NOT NULL,
+                                                duration INT NOT NULL,
+                                                calories_burned INT NOT NULL,
+                                                activity_timestamp TIMESTAMP NOT NULL,
+                                                user_id BIGINT
+);

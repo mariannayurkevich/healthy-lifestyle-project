@@ -22,6 +22,11 @@ public class ActivityTrackerController {
         return activityTrackerRepository.findAll();
     }
 
+    @GetMapping("/user/{userId}")
+    List<ActivityTracker> findByUserId(@PathVariable Long userId) {
+        return activityTrackerRepository.findByUserId(userId);
+    }
+
     @GetMapping("/{id}")
     ActivityTracker findByID(@PathVariable int id){
         Optional<ActivityTracker> activity = activityTrackerRepository.findById(id);
@@ -34,10 +39,17 @@ public class ActivityTrackerController {
     // post
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    void create(@Valid @RequestBody ActivityTracker activity){
+    void create(@Valid @RequestBody ActivityTracker activity, @RequestParam Long userId) {
+        activity = new ActivityTracker(
+                activity.id(),
+                activity.activityType(),
+                activity.duration(),
+                activity.caloriesBurned(),
+                activity.activityTimestamp(),
+                userId
+        );
         activityTrackerRepository.create(activity);
     }
-
     // put
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

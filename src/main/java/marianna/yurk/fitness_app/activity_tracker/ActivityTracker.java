@@ -16,6 +16,7 @@ public record ActivityTracker(
     int duration, // в минутах
     @Positive
     int caloriesBurned,
-    LocalDateTime activityTimestamp
+    LocalDateTime activityTimestamp,
+    Long userId
 )
     {}
