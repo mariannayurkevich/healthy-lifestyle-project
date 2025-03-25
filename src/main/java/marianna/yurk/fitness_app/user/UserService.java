@@ -19,7 +19,6 @@ public class UserService {
         //this.passwordEncoder = passwordEncoder;
     }
 
-    // Метод для расчета нормы калорий по формуле Миффлина-Сан Жеора
     private double calculateCalorieNorm(User user) {
         int age = Period.between(user.getBirthDate(), LocalDate.now()).getYears();
         double bmr;
@@ -28,30 +27,38 @@ public class UserService {
         } else {
             bmr = 10 * user.getWeight() + 6.25 * user.getHeight() - 5 * age - 161;
         }
-        // Можно добавить коэффициент активности, если требуется:
-        // double activityFactor = 1.2; // пример для малоподвижного образа жизни
-        // return bmr * activityFactor;
-        return bmr;
+        double activityFactor = getActivityFactor(user.getActivityLevel());
+        return bmr * activityFactor;
     }
 
-    // Регистрация пользователя
+    private double getActivityFactor(String activityLevel) {
+        if (activityLevel == null) {
+            return 1.2;
+        }
+
+        return switch (activityLevel.toLowerCase()) {
+            case "sedentary" -> 1.2;       // сидячий образ жизни
+            case "light" -> 1.375;          // легкая активность (1-3 раза в неделю)
+            case "moderate" -> 1.55;         // умеренная активность (3-5 раз в неделю)
+            case "active" -> 1.725;          // высокая активность (6-7 раз в неделю)
+            case "very_active" -> 1.9;      // очень высокая активность (физическая работа + тренировки)
+            default -> 1.2;                 // по умолчанию
+        };
+    }
+
     @Transactional
     public User registerUser(User user) {
-        // Проверяем, что пользователь с таким email ещё не зарегистрирован
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new RuntimeException("User with this email already exists");
         }
-
-        // Сохраняем пользователя в базу данных
+        user.setDailyCalorieNorm(calculateCalorieNorm(user));
         return userRepository.save(user);
     }
 
-    // Получение всех пользователей
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    // Получение пользователя по email
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
@@ -71,11 +78,12 @@ public class UserService {
             user.setAllergies(updatedUser.getAllergies());
             user.setIntolerances(updatedUser.getIntolerances());
             user.setDailyCalorieNorm(calculateCalorieNorm(updatedUser));
+            user.setActivityLevel(updatedUser.getActivityLevel());
+
             return userRepository.save(user);
         }).orElseThrow(() -> new RuntimeException("Пользователь не найден с id " + id));
     }
 
-    // Удаление пользователя
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }

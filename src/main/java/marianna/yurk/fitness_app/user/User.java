@@ -52,10 +52,12 @@ public class User {
 
         private Double dailyCalorieNorm;
 
+        private String activityLevel;
+
         public User() {
         }
 
-        public User(String name, String email, String password, String gender, LocalDate birthDate, Double height, Double weight, String allergies, String intolerances, Double dailyCalorieNorm) {
+        public User(String name, String email, String password, String gender, LocalDate birthDate, Double height, Double weight, String allergies, String intolerances, Double dailyCalorieNorm, String activityLevel) {
                 this.name = name;
                 this.email = email;
                 this.password = password;
@@ -66,5 +68,6 @@ public class User {
                 this.allergies = allergies;
                 this.intolerances = intolerances;
                 this.dailyCalorieNorm = dailyCalorieNorm;
+                this.activityLevel = activityLevel;
         }
 }

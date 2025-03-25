@@ -31,7 +31,8 @@ public class UserInit implements CommandLineRunner {
                     65.0,
                     "none",
                     "none",
-                    0.0  // норма калорий будет рассчитана в сервисе
+                    0.0,  // норма калорий будет рассчитана в сервисе
+                    ""
             );
             userService.registerUser(defaultUser);
             log.info("Default user created: {}", defaultUser.getEmail());
