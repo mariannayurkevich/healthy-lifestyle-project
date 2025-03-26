@@ -14,7 +14,7 @@ import java.util.Optional;
 @Repository
 public class SleepTrackerRepository {
 
-    private static final Logger log = LoggerFactory.getLogger(marianna.yurk.fitness_app.sleep_tracker.SleepTrackerRepository.class);
+    private static final Logger log = LoggerFactory.getLogger(SleepTrackerRepository.class);
     private final JdbcClient jdbcClient;
 
     public SleepTrackerRepository(JdbcClient jdbcClient) {
@@ -28,7 +28,7 @@ public class SleepTrackerRepository {
     }
 
     public Optional<SleepTracker> findById(Integer id) {
-        return jdbcClient.sql("SELECT id,date,bedtime,wakeup_time,sleep_duration,sleep_quality,notes FROM SleepTracker WHERE id = :id" )
+        return jdbcClient.sql("SELECT id,date,bedtime,wakeup_time,sleep_duration,sleep_quality,notes,user_id FROM sleep_tracker WHERE id = :id" )
                 .param("id", id)
                 .query(SleepTracker.class)
                 .optional();

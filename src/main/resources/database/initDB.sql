@@ -17,3 +17,23 @@ CREATE TABLE IF NOT EXISTS sleep_tracker (
                                user_id BIGINT NOT NULL,
                                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS water_tracker (
+                                id SERIAL PRIMARY KEY,
+                                user_id BIGINT NOT NULL,
+                                date DATE NOT NULL,
+                                total_intake_ml DOUBLE PRECISION CHECK (total_intake_ml >= 0),
+                                goal_ml DOUBLE PRECISION CHECK (goal_ml >= 0),
+                                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS water_entries (
+                                id SERIAL PRIMARY KEY,
+                                tracker_id INT NOT NULL,
+                                time TIMESTAMP NOT NULL,
+                                amount_ml DOUBLE PRECISION CHECK (amount_ml > 0),
+                                FOREIGN KEY (tracker_id) REFERENCES water_tracker(id) ON DELETE CASCADE
+);
+

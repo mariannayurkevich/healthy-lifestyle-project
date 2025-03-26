@@ -13,7 +13,7 @@ import java.io.InputStream;
 
 @Component
 public class SleepTrackerJsonDataLoader implements CommandLineRunner {
-    private static final Logger log = LoggerFactory.getLogger(marianna.yurk.fitness_app.sleep_tracker.SleepTrackerJsonDataLoader.class);
+    private static final Logger log = LoggerFactory.getLogger(SleepTrackerJsonDataLoader.class);
     private final SleepTrackerRepository sleepTrackerRepository;
     private final ObjectMapper objectMapper;
 
