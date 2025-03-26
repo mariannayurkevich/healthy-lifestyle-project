@@ -27,7 +27,7 @@ public class ActivityTrackerRepository {
     }
 
     public Optional<ActivityTracker> findById(Integer id) {
-        return jdbcClient.sql("SELECT id,activity_type,duration,calories_burned,activity_timestamp FROM ActivityTracker WHERE id = :id" )
+        return jdbcClient.sql("SELECT id,activity_type,duration,calories_burned,activity_timestamp FROM activity_tracker WHERE id = :id" )
                 .param("id", id)
                 .query(ActivityTracker.class)
                 .optional();
