@@ -46,12 +46,22 @@ public class ActivityTrackerRepository {
     }
 
     public void create(ActivityTracker activityTracker) {
-        var updated = jdbcClient.sql("INSERT INTO Activity_tracker(id, activity_type, duration, calories_burned, activity_timestamp, user_id) values(?, ?, ?, ?, ?, ?)")
-                .params(List.of(activityTracker.id(), activityTracker.activityType(), activityTracker.duration(), activityTracker.caloriesBurned(), activityTracker.activityTimestamp(), activityTracker.userId()))
+        var updated = jdbcClient.sql("""
+        INSERT INTO activity_tracker (id, activity_type, duration, calories_burned, activity_timestamp, user_id)
+        VALUES (?, ?, ?, ?, ?, ?)
+    """)
+                .params(List.of(
+                        activityTracker.id(),
+                        activityTracker.activityType(),
+                        activityTracker.duration(),
+                        activityTracker.caloriesBurned(),
+                        activityTracker.activityTimestamp(),
+                        activityTracker.userId()))
                 .update();
 
         Assert.state(updated == 1, "Failed to create activity " + activityTracker.activityType());
     }
+
 
     public void update(ActivityTracker activityTracker, Integer id) {
         var updated = jdbcClient.sql("""
