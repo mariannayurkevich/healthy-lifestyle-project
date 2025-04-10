@@ -24,17 +24,15 @@ public class DailyReportService {
     @Autowired
     private WaterTrackerRepository waterTrackerRepository;
 
-    public DailySummaryDTO generateReport(LocalDate date) {
+    public DailySummaryDTO generateReport(Long userId,LocalDate date) {
 
-        List<ActivityTracker> activityTrackers = activityTrackerRepository.findAll().stream()
-                .filter(at -> at.activityTimestamp().toLocalDate().equals(date))
-                .toList();
+        List<ActivityTracker> activityTrackers = activityTrackerRepository.findByUserIdAndDate(userId, date);
 
         int activityDurationMinutes = activityTrackers.stream()
                 .mapToInt(ActivityTracker::duration)
                 .sum();
 
-        List<FoodTracker> foodTrackers = foodTrackerRepository.findByDate(date);
+        List<FoodTracker> foodTrackers = foodTrackerRepository.findByUserIdAndDate(userId, date);
 
         double totalCalories = foodTrackers.stream()
                 .mapToDouble(FoodTracker::totalCalories)
@@ -52,12 +50,12 @@ public class DailyReportService {
                 .mapToDouble(FoodTracker::totalCarbs)
                 .sum();
 
-        List<SleepTracker> sleepTrackers = sleepTrackerRepository.findByDate(date);
-        double sleepDurationMinutes = sleepTrackers.stream()
+        List<SleepTracker> sleepTrackers = sleepTrackerRepository.findByUserIdAndDate(userId, date);
+        double sleepDuration = sleepTrackers.stream()
                 .mapToDouble(SleepTracker::sleepDuration)
                 .sum();
 
-        List<WaterTracker> waterTrackers = waterTrackerRepository.findByDate(date);
+        List<WaterTracker> waterTrackers = waterTrackerRepository.findByUserIdAndDate(userId, date);
 
         double totalIntakeMl = waterTrackers.stream()
                 .mapToDouble(WaterTracker::totalIntakeMl)
@@ -84,13 +82,19 @@ public class DailyReportService {
             analysis.append("Достаточная физическая активность. ");
         }
 
-        if (sleepDurationMinutes < 420.0) {
+        if (sleepDuration < 8.0) {
             analysis.append("Недостаток сна. ");
         } else {
             analysis.append("Сон в норме. ");
         }
 
-        return new DailySummaryDTO(date, totalCalories, totalProteins, totalFats, totalCarbs, activityDurationMinutes,
-        sleepDurationMinutes, totalIntakeMl, goalMl, analysis.toString());
+        if (goalMl > 0 && totalIntakeMl < goalMl) {
+            analysis.append("Недостаточное потребление воды. ");
+        } else if (goalMl > 0) {
+            analysis.append("Цель по воде достигнута. ");
+        }
+
+        return new DailySummaryDTO(userId,date, totalCalories, totalProteins, totalFats, totalCarbs, activityDurationMinutes,
+        sleepDuration, totalIntakeMl, goalMl, analysis.toString());
     }
 }

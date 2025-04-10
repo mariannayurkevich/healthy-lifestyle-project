@@ -16,12 +16,13 @@ public class DailyReportController {
     private DailyReportService reportService;
 
     @GetMapping("/today")
-    public DailySummaryDTO getTodayReport() {
-        return reportService.generateReport(LocalDate.now());
+    public DailySummaryDTO getTodayReport(@RequestParam("userId") Long userId) {
+        return reportService.generateReport(userId, LocalDate.now());
     }
 
     @GetMapping("/date")
-    public DailySummaryDTO getReportByDate(@RequestParam("d") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        return reportService.generateReport(date);
+    public DailySummaryDTO getReportByDate(@RequestParam("userId") Long userId,
+                                           @RequestParam("d") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return reportService.generateReport(userId,date);
     }
 }
