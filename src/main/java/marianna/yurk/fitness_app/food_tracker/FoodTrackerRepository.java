@@ -132,6 +132,32 @@ public class FoodTrackerRepository {
                 .list();
     }
 
+    public List<FoodTracker> findByUserIdAndDate(Long userId, LocalDate date) {
+        return jdbcClient.sql("""
+        SELECT id, user_id, date, total_calories, total_proteins, total_fats, total_carbs, total_fiber, total_sugar, created_at, updated_at
+        FROM food_tracker 
+        WHERE user_id = :userId AND date = :date
+    """)
+                .param("userId", userId)
+                .param("date", date)
+                .query((rs, rowNum) -> new FoodTracker(
+                        rs.getInt("id"),
+                        rs.getLong("user_id"),
+                        rs.getDate("date").toLocalDate(),
+                        rs.getDouble("total_calories"),
+                        rs.getDouble("total_proteins"),
+                        rs.getDouble("total_fats"),
+                        rs.getDouble("total_carbs"),
+                        rs.getDouble("total_fiber"),
+                        rs.getDouble("total_sugar"),
+                        findEntriesByTrackerId(rs.getInt("id")),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getTimestamp("updated_at").toLocalDateTime()
+                ))
+                .list();
+    }
+
+
     public void create(FoodTracker foodTracker) {
         int trackerId = jdbcClient.sql("""
             INSERT INTO food_tracker (user_id, date, total_calories, total_proteins, total_fats, total_carbs, total_fiber, total_sugar, created_at, updated_at)
