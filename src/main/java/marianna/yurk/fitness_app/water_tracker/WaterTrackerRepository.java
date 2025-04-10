@@ -95,6 +95,26 @@ public class WaterTrackerRepository {
                 .list();
     }
 
+    public List<WaterTracker> findByUserIdAndDate(Long userId, LocalDate date) {
+        return jdbcClient.sql("""
+        SELECT id, user_id, date, total_intake_ml, goal_ml, created_at, updated_at
+        FROM water_tracker 
+        WHERE user_id = :userId AND date = :date
+    """)
+                .param("userId", userId)
+                .param("date", date)
+                .query((rs, rowNum) -> new WaterTracker(
+                        rs.getInt("id"),
+                        rs.getLong("user_id"),
+                        rs.getDate("date").toLocalDate(),
+                        rs.getDouble("total_intake_ml"),
+                        rs.getDouble("goal_ml"),
+                        findEntriesByTrackerId(rs.getInt("id")),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getTimestamp("updated_at").toLocalDateTime()
+                ))
+                .list();
+    }
 
     public void create(WaterTracker waterTracker) {
         int trackerId = jdbcClient.sql("""
