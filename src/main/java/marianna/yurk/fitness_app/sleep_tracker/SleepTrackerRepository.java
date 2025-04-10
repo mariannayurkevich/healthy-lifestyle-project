@@ -41,6 +41,18 @@ public class SleepTrackerRepository {
                 .list();
     }
 
+    public List<SleepTracker> findByUserIdAndDate(Long userId, LocalDate date) {
+        return jdbcClient.sql("""
+        SELECT * FROM sleep_tracker
+        WHERE user_id = :userId AND date = :date
+    """)
+                .param("userId", userId)
+                .param("date", date)
+                .query(SleepTracker.class)
+                .list();
+    }
+
+
     public void create(SleepTracker sleepTracker) {
         var updated = jdbcClient.sql("INSERT INTO Sleep_tracker(id,date,bedtime,wakeup_time,sleep_duration,sleep_quality,notes, user_id) values(?, ?, ?, ?, ?, ?, ?, ?)")
                 .params(List.of(sleepTracker.id(), sleepTracker.date(), sleepTracker.bedtime(), sleepTracker.wakeupTime(), sleepTracker.sleepDuration(), sleepTracker.sleepQuality(),sleepTracker.notes(),sleepTracker.userId()))
