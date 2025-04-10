@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,22 +46,35 @@ public class ActivityTrackerRepository {
                 .list();
     }
 
-    public void create(ActivityTracker activityTracker) {
-        var updated = jdbcClient.sql("""
-        INSERT INTO activity_tracker (id, activity_type, duration, calories_burned, activity_timestamp, user_id)
-        VALUES (?, ?, ?, ?, ?, ?)
+    public List<ActivityTracker> findByUserIdAndDate(Long userId, LocalDate date) {
+        return jdbcClient.sql("""
+        SELECT * FROM activity_tracker 
+        WHERE user_id = :userId 
+        AND DATE(activity_timestamp) = :date
     """)
-                .params(List.of(
-                        activityTracker.id(),
-                        activityTracker.activityType(),
-                        activityTracker.duration(),
-                        activityTracker.caloriesBurned(),
-                        activityTracker.activityTimestamp(),
-                        activityTracker.userId()))
-                .update();
-
-        Assert.state(updated == 1, "Failed to create activity " + activityTracker.activityType());
+                .param("userId", userId)
+                .param("date", date)
+                .query(ActivityTracker.class)
+                .list();
     }
+
+
+    public void create(ActivityTracker activityTracker) {
+        Assert.notNull(activityTracker, "ActivityTracker must not be null");
+
+        jdbcClient.sql("""
+        INSERT INTO activity_tracker (id, activity_type, duration, calories_burned, activity_timestamp, user_id)
+        VALUES (:id, :activityType, :duration, :caloriesBurned, :activityTimestamp, :userId)
+    """)
+                .param("id", activityTracker.id())
+                .param("activityType", activityTracker.activityType())
+                .param("duration", activityTracker.duration())
+                .param("caloriesBurned", activityTracker.caloriesBurned())
+                .param("activityTimestamp", activityTracker.activityTimestamp())
+                .param("userId", activityTracker.userId())
+                .update();
+    }
+
 
 
     public void update(ActivityTracker activityTracker, Integer id) {
