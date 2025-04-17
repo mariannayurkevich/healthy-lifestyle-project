@@ -14,7 +14,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    // Регистрация пользователя
+    /*
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         try {
@@ -24,8 +24,8 @@ public class UserController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    */
 
-    // Получение всех пользователей (хотя, по условию, их один)
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
@@ -39,7 +39,6 @@ public class UserController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // Обновление пользователя
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody User user) {
         try {
@@ -50,7 +49,6 @@ public class UserController {
         }
     }
 
-    // Удаление пользователя
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);

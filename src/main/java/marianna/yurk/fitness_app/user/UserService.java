@@ -1,23 +1,28 @@
 package marianna.yurk.fitness_app.user;
 
-//import org.springframework.security.crypto.password.PasswordEncoder;
-import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+import marianna.yurk.fitness_app.registration.token.ConfirmationToken;import marianna.yurk.fitness_app.registration.token.ConfirmationTokenService;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
-public class UserService {
+@AllArgsConstructor
+public class UserService implements UserDetailsService {
 
+    private final static String USER_NOT_FOUND_MSG =
+            "User with email %s not found";
     private final UserRepository userRepository;
-    //private final PasswordEncoder passwordEncoder; // Предполагается, что в конфигурации настроен BCryptPasswordEncoder
-
-    public UserService(UserRepository userRepository){//, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        //this.passwordEncoder = passwordEncoder;
-    }
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final ConfirmationTokenService confirmationTokenService;
 
     private double calculateCalorieNorm(User user) {
         int age = Period.between(user.getBirthDate(), LocalDate.now()).getYears();
@@ -46,15 +51,6 @@ public class UserService {
         };
     }
 
-    @Transactional
-    public User registerUser(User user) {
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            throw new RuntimeException("User with this email already exists");
-        }
-        user.setDailyCalorieNorm(calculateCalorieNorm(user));
-        return userRepository.save(user);
-    }
-
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -63,28 +59,96 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    // Обновление пользователя
     public User updateUser(Long id, User updatedUser) {
         return userRepository.findById(id).map(user -> {
-            user.setName(updatedUser.getName());
-            user.setEmail(updatedUser.getEmail());
-//            if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
-//                user.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
-//            }
+            if (!user.getEmail().equals(updatedUser.getEmail())) {
+                if (userRepository.findByEmail(updatedUser.getEmail()).isPresent()) {
+                    throw new IllegalStateException("Email already taken");
+                }
+                user.setEmail(updatedUser.getEmail());
+            }
+
+            user.setFirstName(updatedUser.getFirstName());
+            user.setLastName(updatedUser.getLastName());
             user.setGender(updatedUser.getGender());
             user.setBirthDate(updatedUser.getBirthDate());
             user.setHeight(updatedUser.getHeight());
             user.setWeight(updatedUser.getWeight());
             user.setAllergies(updatedUser.getAllergies());
             user.setIntolerances(updatedUser.getIntolerances());
-            user.setDailyCalorieNorm(calculateCalorieNorm(updatedUser));
             user.setActivityLevel(updatedUser.getActivityLevel());
 
+            if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
+                user.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
+            }
+
+            if (updatedUser.getUserRole() != null) {
+                user.setUserRole(updatedUser.getUserRole());
+            }
+            if (updatedUser.getLocked() != null) {
+                user.setLocked(updatedUser.getLocked());
+            }
+            if (updatedUser.getEnabled() != null) {
+                user.setEnabled(updatedUser.getEnabled());
+            }
+
+            if (updatedUser.getBirthDate() != null
+                    && updatedUser.getHeight() != null
+                    && updatedUser.getWeight() != null
+                    && updatedUser.getGender() != null
+                    && updatedUser.getActivityLevel() != null) {
+                user.setDailyCalorieNorm(calculateCalorieNorm(updatedUser));
+            } else {
+                user.setDailyCalorieNorm(null);
+            }
+
             return userRepository.save(user);
-        }).orElseThrow(() -> new RuntimeException("Пользователь не найден с id " + id));
+        }).orElseThrow(() -> new RuntimeException("The user was not found with the id " + id));
     }
 
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email)
+            throws UsernameNotFoundException {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
+    }
+
+    public String signUpUser(User user) {
+        boolean userExists = userRepository
+                .findByEmail(user.getEmail())
+                .isPresent();
+        if (userExists) {
+            // TODO: check of attributes are the same and
+            // TODO: if email not confirmed set confirmation email.
+            throw new IllegalStateException("User with this email already exists");
+        }
+
+
+        String encodedPassword =  bCryptPasswordEncoder
+                .encode(user.getPassword());
+
+        user.setPassword(encodedPassword);
+        userRepository.save(user);
+
+        String token = UUID.randomUUID().toString();
+        ConfirmationToken confirmationToken = new ConfirmationToken(
+                token,
+                LocalDateTime.now(),
+                LocalDateTime.now().plusMinutes(15),
+                user
+        );
+
+        confirmationTokenService.save(confirmationToken);
+
+        return token;
+    }
+
+    public int enableUser(String email) {
+        return userRepository.enableUser(email);
     }
 }
