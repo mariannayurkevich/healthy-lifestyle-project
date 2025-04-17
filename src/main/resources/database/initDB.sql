@@ -64,3 +64,27 @@ CREATE TABLE IF NOT EXISTS water_entries (
                                 FOREIGN KEY (tracker_id) REFERENCES water_tracker(id) ON DELETE CASCADE
 );
 
+-- CREATE TYPE user_role AS ENUM ('USER', 'ADMIN');
+
+-- CREATE SEQUENCE student_sequence START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE IF NOT EXISTS users (
+                       id BIGINT PRIMARY KEY DEFAULT nextval('student_sequence'),
+                       first_name VARCHAR(255),
+                       last_name VARCHAR(255) NOT NULL,
+                       email VARCHAR(255) NOT NULL UNIQUE,
+                       password VARCHAR(255) NOT NULL,
+                       gender VARCHAR(255),
+                       birth_date DATE,
+                       height DOUBLE PRECISION,
+                       weight DOUBLE PRECISION,
+                       allergies VARCHAR(255),
+                       intolerances VARCHAR(255),
+                       daily_calorie_norm DOUBLE PRECISION,
+                       activity_level VARCHAR(255),
+                       user_role user_role,
+                       locked BOOLEAN,
+                       enabled BOOLEAN
+);
+
+
