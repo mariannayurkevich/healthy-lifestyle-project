@@ -30,7 +30,17 @@ import vector6 from "./src/vector-6.svg";
 import vector7 from "./src/vector-7.svg";
 import vector from "./src/vector.svg";
 
+import { useNavigate } from "react-router-dom";
+
+
 export const SleepScreen = () => {
+  const navigate = useNavigate();
+
+  // Функция обработки клика
+  const handleClick = () => {
+    // Переход к экрану MainScreen
+    navigate('/main');
+  };
   return (
     <div className="sleepscreen">
       <div className="div">
@@ -146,14 +156,19 @@ export const SleepScreen = () => {
           </div>
 
           <div className="view-2">
-
             <img className="vector-5" alt="Vector" src={vector5} />
 
             <div className="group-wrapper">
               <img className="group-3" alt="Group" src={group34} />
             </div>
-
-            <img className="vector-6" alt="Vector" src={vector6} />
+      
+            <img
+              className="vector-6"
+              alt="Vector"
+              src={vector6}
+              onClick={handleClick}
+              style={{ cursor: "pointer" }}
+            />
 
             <img className="vector-7" alt="Vector" src={vector7} />
 
