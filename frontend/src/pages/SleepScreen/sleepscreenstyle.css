@@ -1,0 +1,524 @@
+.sleepscreen {
+  background-color: #170255;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+.sleepscreen .div {
+  background-color: #170255;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.sleepscreen .overlap {
+  height: 597px;
+  left: 11px;
+  position: absolute;
+  top: 74px;
+  width: 414px;
+}
+
+.sleepscreen .view {
+  height: 555px;
+  left: 0;
+  position: absolute;
+  top: 42px;
+  width: 414px;
+}
+
+.sleepscreen .overlap-group {
+  height: 555px;
+  position: relative;
+}
+
+.sleepscreen .group {
+  height: 555px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 414px;
+}
+
+.sleepscreen .overlap-2 {
+  height: 550px;
+  left: 3px;
+  position: relative;
+  top: 2px;
+  width: 411px;
+}
+
+.sleepscreen .overlap-3 {
+  height: 447px;
+  left: 15px;
+  position: absolute;
+  top: 39px;
+  width: 396px;
+}
+
+.sleepscreen .subtract {
+  height: 241px;
+  left: 18px;
+  position: absolute;
+  top: 6px;
+  width: 267px;
+}
+
+.sleepscreen .star {
+  height: 45px;
+  left: 3px;
+  position: absolute;
+  top: 256px;
+  width: 47px;
+}
+
+.sleepscreen .img {
+  height: 54px;
+  left: 0;
+  position: absolute;
+  top: 43px;
+  width: 55px;
+}
+
+.sleepscreen .star-2 {
+  height: 65px;
+  left: 83px;
+  position: absolute;
+  top: 91px;
+  width: 69px;
+}
+
+.sleepscreen .star-3 {
+  height: 44px;
+  left: 118px;
+  position: absolute;
+  top: 396px;
+  width: 45px;
+}
+
+.sleepscreen .star-4 {
+  height: 67px;
+  left: 145px;
+  position: absolute;
+  top: 0;
+  width: 71px;
+}
+
+.sleepscreen .line {
+  height: 212px;
+  left: 48px;
+  position: absolute;
+  top: 164px;
+  width: 6px;
+}
+
+.sleepscreen .line-2 {
+  height: 273px;
+  left: 104px;
+  position: absolute;
+  top: 174px;
+  width: 6px;
+}
+
+.sleepscreen .overlap-group-wrapper {
+  box-shadow: 0px 3px 4px #261b7226;
+  height: 220px;
+  left: 92px;
+  position: absolute;
+  top: 178px;
+  width: 304px;
+}
+
+.sleepscreen .overlap-group-2 {
+  height: 220px;
+  position: relative;
+  width: 281px;
+}
+
+.sleepscreen .union {
+  height: 209px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 281px;
+}
+
+.sleepscreen .union-2 {
+  height: 209px;
+  left: 7px;
+  position: absolute;
+  top: 11px;
+  width: 274px;
+}
+
+.sleepscreen .union-3 {
+  height: 201px;
+  left: 27px;
+  position: absolute;
+  top: 11px;
+  width: 254px;
+}
+
+.sleepscreen .line-3 {
+  height: 22px;
+  left: 92px;
+  position: absolute;
+  top: 101px;
+  width: 48px;
+}
+
+.sleepscreen .line-4 {
+  height: 22px;
+  left: 161px;
+  position: absolute;
+  top: 101px;
+  width: 48px;
+}
+
+.sleepscreen .star-5 {
+  height: 51px;
+  left: 306px;
+  position: absolute;
+  top: 0;
+  width: 50px;
+}
+
+.sleepscreen .star-6 {
+  height: 51px;
+  left: 0;
+  position: absolute;
+  top: 457px;
+  width: 50px;
+}
+
+.sleepscreen .star-7 {
+  height: 85px;
+  left: 267px;
+  position: absolute;
+  top: 465px;
+  width: 89px;
+}
+
+.sleepscreen .overlap-wrapper {
+  background-color: #b71d49;
+  border-radius: 40.53px;
+  height: 81px;
+  left: 36px;
+  position: absolute;
+  top: 398px;
+  transform: rotate(99.32deg);
+  width: 81px;
+}
+
+.sleepscreen .overlap-4 {
+  height: 29px;
+  left: 8px;
+  position: relative;
+  top: 5px;
+  width: 30px;
+}
+
+.sleepscreen .mask-group {
+  height: 15px;
+  left: 1px;
+  position: absolute;
+  top: 13px;
+  transform: rotate(-99.32deg);
+  width: 15px;
+}
+
+.sleepscreen .mask-group-2 {
+  height: 17px;
+  left: 11px;
+  position: absolute;
+  top: 1px;
+  transform: rotate(-99.32deg);
+  width: 17px;
+}
+
+.sleepscreen .line-5 {
+  height: 83px;
+  left: 65px;
+  position: absolute;
+  top: 396px;
+  width: 28px;
+}
+
+.sleepscreen .vector {
+  height: 16px;
+  left: 50px;
+  position: absolute;
+  top: 385px;
+  width: 19px;
+}
+
+.sleepscreen .div-wrapper {
+  height: 52px;
+  left: 110px;
+  position: absolute;
+  top: 480px;
+  transform: rotate(179.95deg);
+  width: 31px;
+}
+
+.sleepscreen .overlap-5 {
+  height: 49px;
+  position: relative;
+}
+
+.sleepscreen .vector-2 {
+  height: 49px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: rotate(-179.95deg);
+  width: 31px;
+}
+
+.sleepscreen .mask-group-3 {
+  height: 16px;
+  left: 8px;
+  position: absolute;
+  top: 5px;
+  transform: rotate(-179.95deg);
+  width: 16px;
+}
+
+.sleepscreen .vector-3 {
+  height: 13px;
+  left: 121px;
+  position: absolute;
+  top: 479px;
+  width: 18px;
+}
+
+.sleepscreen .text-wrapper {
+  color: #cabbff;
+  font-family: "Rubik-SemiBold", Helvetica;
+  font-size: 48px;
+  font-weight: 600;
+  left: 19px;
+  letter-spacing: 0;
+  line-height: 44.3px;
+  position: absolute;
+  top: 0;
+}
+
+.sleepscreen .overlap-6 {
+  height: 76px;
+  left: 83px;
+  position: absolute;
+  top: 673px;
+  width: 212px;
+}
+
+.sleepscreen .vector-4 {
+  height: 76px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 70px;
+}
+
+.sleepscreen .text-wrapper-2 {
+  color: #cabbff;
+  font-family: "Roboto-Medium", Helvetica;
+  font-size: 40px;
+  font-weight: 500;
+  left: 54px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 10px;
+  white-space: nowrap;
+}
+
+.sleepscreen .div-2 {
+  height: 841px;
+  left: 0;
+  position: fixed;
+  top: -5px;
+  width: 402px;
+}
+
+.sleepscreen .div-3 {
+  height: 68px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 404px;
+}
+
+.sleepscreen .overlap-group-3 {
+  -webkit-backdrop-filter: blur(25.35px) brightness(100%);
+  backdrop-filter: blur(25.35px) brightness(100%);
+  background-color: #170256;
+  height: 68px;
+  position: relative;
+  width: 402px;
+}
+
+.sleepscreen .text-wrapper-3 {
+  color: #cabbff;
+  font-family: "Roboto-Medium", Helvetica;
+  font-size: 16px;
+  font-weight: 500;
+  left: 57px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 27px;
+  width: 32px;
+}
+
+.sleepscreen .group-2 {
+  height: 11px;
+  left: 322px;
+  position: absolute;
+  top: 31px;
+  width: 29px;
+}
+
+.sleepscreen .overlap-7 {
+  height: 13px;
+  left: -1px;
+  position: relative;
+  top: -1px;
+  width: 30px;
+}
+
+.sleepscreen .rectangle {
+  border: 1px solid;
+  border-color: #b9b9b9;
+  border-radius: 3px;
+  height: 13px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 28px;
+}
+
+.sleepscreen .rectangle-2 {
+  background-color: #0cff00;
+  border-radius: 3px;
+  height: 9px;
+  left: 2px;
+  position: absolute;
+  top: 2px;
+  width: 19px;
+}
+
+.sleepscreen .rectangle-3 {
+  background-color: #b9b9b9;
+  border-radius: 3px;
+  height: 5px;
+  left: 28px;
+  position: absolute;
+  top: 4px;
+  width: 2px;
+}
+
+.sleepscreen .view-2 {
+  background-color: #170255;
+  border-radius: 58px;
+  box-shadow: 0px 3px 4px #ffdc4e;
+  height: 66px;
+  left: 30px;
+  position: absolute;
+  top: 775px;
+  width: 342px;
+}
+
+.sleepscreen .vector-5 {
+  height: 24px;
+  left: 227px;
+  position: absolute;
+  top: 21px;
+  width: 33px;
+}
+
+.sleepscreen .group-wrapper {
+  background-color: #170255;
+  border-radius: 27px;
+  box-shadow: inset 0px 3px 4px #ffdc4e;
+  height: 54px;
+  left: 88px;
+  position: absolute;
+  top: 6px;
+  width: 54px;
+}
+
+.sleepscreen .group-3 {
+  height: 32px;
+  left: 11px;
+  position: absolute;
+  top: 11px;
+  width: 32px;
+}
+
+.sleepscreen .vector-6 {
+  height: 25px;
+  left: 176px;
+  position: absolute;
+  top: 21px;
+  width: 25px;
+}
+
+.sleepscreen .vector-7 {
+  height: 24px;
+  left: 36px;
+  position: absolute;
+  top: 21px;
+  width: 24px;
+}
+
+.sleepscreen .group-4 {
+  height: 26px;
+  left: 286px;
+  position: absolute;
+  top: 20px;
+  width: 26px;
+}
+
+/* --------------------
+ АДАПТИВНЫЕ СТИЛИ (Медиа-запросы)
+-------------------------*/
+@media (max-width: 600px) {
+  /* Основной контейнер становится шире (95% от экрана) без жесткого ограничения */
+  .sleepscreen .div {
+      width: 95%;
+      max-width: none;
+      margin: 0 auto;
+  }
+  
+  /* Перенастройка основных блоков с абсолютным позиционированием */
+  .sleepscreen .overlap,
+  .sleepscreen .view,
+  .sleepscreen .group {
+      width: 95%;
+      left: 2.5%;
+  }
+  
+  /* Уменьшение размера текста */
+  .sleepscreen .text-wrapper {
+      font-size: 36px;
+      left: 5%;
+      top: 5%;
+  }
+  
+  .sleepscreen .text-wrapper-2 {
+      font-size: 32px;
+      left: 5%;
+  }
+  
+  /* Дополнительные адаптивные изменения */
+  .sleepscreen .div-2 {
+      width: 95%;
+      max-width: none;
+      margin: 0 auto;
+  }
+}
