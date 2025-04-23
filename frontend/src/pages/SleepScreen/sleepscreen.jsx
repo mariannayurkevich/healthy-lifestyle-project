@@ -1,15 +1,17 @@
 import React from "react";
 import group34 from "./src/group-34.png";
 import group from "./src/group.png";
-//import image1 from "./src/image.png";
-//import image from "./src/image.svg";
+import cloud from "./src/cloud.png";
+import bigEntity from "./src/big.png";
+import littleEntity from "./src/little.png";
+import bigEyeLeft from "./src/big-eye-left.png";
+import bigEyeRight from "./src/big-eye-right.png";
+import littleEye from "./src/little-eye.png";
 import line87 from "./src/line-87.svg";
 import line88 from "./src/line-88.svg";
 import line98 from "./src/line-98.svg";
 import line99 from "./src/line-99.svg";
 import line100 from "./src/line-100.svg";
-//import maskGroup2 from "./src/mask-group-2.png";
-//import maskGroup from "./src/mask-group.png";
 import star2 from "./src/star-2.svg";
 import star3 from "./src/star-3.svg";
 import star4 from "./src/star-4.svg";
@@ -20,14 +22,12 @@ import star8 from "./src/star-8.svg";
 import star9 from "./src/star-9.svg";
 import "./sleepscreenstyle.css";
 import subtract from "./src/subtract.svg";
-//import union2 from "./src/union-2.svg";
-//import union from "./src/union.svg";
 import vector2 from "./src/vector-2.svg";
 import vector3 from "./src/vector-3.svg";
-//import vector4 from "./src/vector-4.svg";
-//import vector5 from "./src/vector-5.svg";
-//import vector6 from "./src/vector-6.svg";
-//import vector7 from "./src/vector-7.svg";
+import vector4 from "./src/vector-4.svg";
+import vector5 from "./src/vector-5.svg";
+import vector6 from "./src/vector-6.svg";
+import vector7 from "./src/vector-7.svg";
 import vector from "./src/vector.svg";
 
 export const SleepScreen = () => {
@@ -58,13 +58,9 @@ export const SleepScreen = () => {
 
                     <div className="overlap-group-wrapper">
                       <div className="overlap-group-2">
-                        {/*
-                        <img className="union" alt="Union" src={union} />
-                        
-                        <img className="union-2" alt="Union" src={image} />
 
-                        <img className="union-3" alt="Union" src={union2} />
-                        */}
+                        <img className="cloud" alt="Image" src={cloud} />
+
                         <img className="line-3" alt="Line" src={line87} />
 
                         <img className="line-4" alt="Line" src={line88} />
@@ -79,35 +75,40 @@ export const SleepScreen = () => {
                   <img className="star-7" alt="Star" src={star9} />
                 </div>
               </div>
-                {/*
+                
               <div className="overlap-wrapper">
                 <div className="overlap-4">
                   <img
-                    className="mask-group"
-                    alt="Mask group"
-                    src={maskGroup}
+                    className="mask-group-left"
+                    alt="Eyes"
+                    src={bigEyeLeft}
                   />
 
-                  <img className="mask-group-2" alt="Mask group" src={image1} />
+                  <img
+                    className="mask-group-right"
+                    alt="Eyes"
+                    src={bigEyeRight}
+                  />
+
                 </div>
               </div>
-                */}
+                
               <img className="line-5" alt="Line" src={line100} />
 
               <img className="vector" alt="Vector" src={vector2} />
-{/*
+
               <div className="div-wrapper">
                 <div className="overlap-5">
-                  <img className="vector-2" alt="Vector" src={vector} />
+                  <img className="vector-2" alt="Entity" src={littleEntity} />
 
                   <img
                     className="mask-group-3"
-                    alt="Mask group"
-                    src={maskGroup2}
+                    alt="Eyes"
+                    src={littleEye}
                   />
                 </div>
               </div>
-*/}
+
               <img className="vector-3" alt="Vector" src={vector3} />
             </div>
           </div>
@@ -118,13 +119,13 @@ export const SleepScreen = () => {
             снов
           </div>
         </div>
-{/*
+
         <div className="overlap-6">
           <img className="vector-4" alt="Vector" src={vector4} />
 
-          <div className="text-wrapper-2">08:12:56</div>
+          <div className="text-wrapper-2">00:00:00</div>
         </div>
-*/}
+        
         <div className="div-2">
           <div className="div-3">
             <div className="div-3">
@@ -145,17 +146,17 @@ export const SleepScreen = () => {
           </div>
 
           <div className="view-2">
-            {/*
+
             <img className="vector-5" alt="Vector" src={vector5} />
-*/}
+
             <div className="group-wrapper">
               <img className="group-3" alt="Group" src={group34} />
             </div>
-{/*
+
             <img className="vector-6" alt="Vector" src={vector6} />
 
             <img className="vector-7" alt="Vector" src={vector7} />
-*/}
+
             <img className="group-4" alt="Group" src={group} />
           </div>
         </div>

@@ -1,0 +1,367 @@
+.screen {
+    background-color: #fdfaff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .screen .div {
+    background-color: #fdfaff;
+    height: 874px;
+    overflow: hidden;
+    position: relative;
+    width: 402px;
+  }
+  
+  .screen .text-wrapper {
+    color: #280635;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 24px;
+    font-weight: 500;
+    left: 30px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 82px;
+    white-space: nowrap;
+  }
+  
+  .screen .text-wrapper-2 {
+    color: #280635;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 48px;
+    font-weight: 600;
+    left: 30px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 110px;
+    white-space: nowrap;
+  }
+  
+  .screen .overlap {
+    height: 558px;
+    left: -43px;
+    position: absolute;
+    top: 180px;
+    width: 502px;
+  }
+  
+  .screen .group {
+    height: 200px;
+    left: 261px;
+    position: absolute;
+    top: 358px;
+    width: 154px;
+  }
+  
+  .screen .image {
+    height: 238px;
+    left: 73px;
+    position: absolute;
+    top: 29px;
+    width: 179px;
+  }
+  
+  .screen .view {
+    height: 367px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 502px;
+  }
+  
+  .screen .overlap-group {
+    height: 320px;
+    left: 233px;
+    position: relative;
+    top: 29px;
+    width: 210px;
+  }
+  
+  .screen .rectangle {
+    background-color: #acff64;
+    border-radius: 24px;
+    height: 320px;
+    left: 28px;
+    position: absolute;
+    top: 0;
+    width: 154px;
+  }
+  
+  .screen .ellipse {
+    border: 4px solid;
+    border-color: #f59f00;
+    border-radius: 11.12px / 9.54px;
+    height: 19px;
+    left: 91px;
+    position: absolute;
+    top: 259px;
+    width: 22px;
+  }
+  
+  .screen .line {
+    height: 262px;
+    left: 0;
+    position: absolute;
+    top: 15px;
+    width: 210px;
+  }
+  
+  .screen .overlap-group-wrapper {
+    height: 52px;
+    left: 87px;
+    position: absolute;
+    top: 221px;
+    width: 31px;
+  }
+  
+  .screen .mask-group-wrapper {
+    background-image: url(./vector.svg);
+    background-size: 100% 100%;
+    height: 49px;
+    position: relative;
+  }
+  
+  .screen .mask-group {
+    height: 16px;
+    left: 8px;
+    position: absolute;
+    top: 5px;
+    width: 16px;
+  }
+  
+  .screen .element {
+    color: #280635;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    left: 144px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: right;
+    top: 254px;
+    width: 27px;
+  }
+  
+  .screen .span {
+    color: #280635;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+  
+  .screen .text-wrapper-3 {
+    font-size: 16px;
+  }
+  
+  .screen .p {
+    color: #280635;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 16px;
+    font-weight: 600;
+    left: 71px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: right;
+    top: 14px;
+    width: 100px;
+  }
+  
+  .screen .text-wrapper-4 {
+    color: #280635;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+  
+  .screen .text-wrapper-5 {
+    font-size: 24px;
+  }
+  
+  .screen .overlap-wrapper {
+    height: 282px;
+    left: 73px;
+    position: absolute;
+    top: 276px;
+    width: 202px;
+  }
+  
+  .screen .overlap-2 {
+    height: 282px;
+    position: relative;
+    width: 198px;
+  }
+  
+  .screen .rectangle-2 {
+    background-color: #4532c7;
+    border-radius: 24px;
+    height: 282px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 178px;
+  }
+  
+  .screen .element-2 {
+    color: #fdfaff;
+    font-family: "Rubik-Bold", Helvetica;
+    font-size: 32px;
+    font-weight: 700;
+    left: 17px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 235px;
+    white-space: nowrap;
+    width: 85px;
+  }
+  
+  .screen .text-wrapper-6 {
+    color: #fdfaff;
+    font-family: "Rubik-Bold", Helvetica;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+  
+  .screen .text-wrapper-7 {
+    font-size: 20px;
+  }
+  
+  .screen .text-wrapper-8 {
+    color: #fdfaff;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 32px;
+    font-weight: 600;
+    left: 40px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 213px;
+    width: 67px;
+  }
+  
+  .screen .div-wrapper {
+    height: 194px;
+    left: 6px;
+    position: absolute;
+    top: 26px;
+    width: 192px;
+  }
+  
+  .screen .overlap-3 {
+    height: 197px;
+    left: 3px;
+    position: relative;
+    top: -4px;
+    width: 189px;
+  }
+  
+  .screen .subtract {
+    height: 133px;
+    left: 0;
+    position: absolute;
+    top: 4px;
+    width: 148px;
+  }
+  
+  .screen .star {
+    height: 32px;
+    left: 49px;
+    position: absolute;
+    top: 0;
+    width: 33px;
+  }
+  
+  .screen .img {
+    height: 35px;
+    left: 9px;
+    position: absolute;
+    top: 17px;
+    width: 35px;
+  }
+  
+  .screen .star-2 {
+    height: 39px;
+    left: 31px;
+    position: absolute;
+    top: 51px;
+    width: 41px;
+  }
+  
+  .screen .star-3 {
+    height: 34px;
+    left: 74px;
+    position: absolute;
+    top: 31px;
+    width: 34px;
+  }
+  
+  .screen .view-2 {
+    box-shadow: 0px 3px 4px #261b7226;
+    height: 115px;
+    left: 31px;
+    position: absolute;
+    top: 83px;
+    width: 158px;
+  }
+  
+  .screen .overlap-group-2 {
+    height: 115px;
+    position: relative;
+  }
+  
+  .screen .union {
+    height: 109px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 155px;
+  }
+  
+  .screen .union-2 {
+    height: 109px;
+    left: 3px;
+    position: absolute;
+    top: 6px;
+    width: 155px;
+  }
+  
+  .screen .union-3 {
+    height: 107px;
+    left: 13px;
+    position: absolute;
+    top: 5px;
+    width: 137px;
+  }
+  
+  .screen .line-2 {
+    height: 9px;
+    left: 48px;
+    position: absolute;
+    top: 53px;
+    width: 25px;
+  }
+  
+  .screen .line-3 {
+    height: 9px;
+    left: 84px;
+    position: absolute;
+    top: 53px;
+    width: 25px;
+  }
+  
+  .screen .img-2 {
+    height: 843px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 402px;
+  }
+  

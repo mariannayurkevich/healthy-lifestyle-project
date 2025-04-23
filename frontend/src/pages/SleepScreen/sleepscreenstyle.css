@@ -216,33 +216,33 @@
 
 .sleepscreen .overlap-4 {
   height: 29px;
-  left: 8px;
+  left: 15px;
   position: relative;
   top: 5px;
   width: 30px;
 }
 
-.sleepscreen .mask-group {
-  height: 15px;
-  left: 1px;
+.sleepscreen .mask-group-left {
+  height: 16px;
+  left: -2px;
   position: absolute;
-  top: 13px;
+  top: 8px;
+  transform: rotate(-99.32deg);
+  width: 16px;
+}
+
+.sleepscreen .mask-group-right {
+  height: 15px;
+  left: 11px;
+  position: absolute;
+  top: -1px;
   transform: rotate(-99.32deg);
   width: 15px;
 }
 
-.sleepscreen .mask-group-2 {
-  height: 17px;
-  left: 11px;
-  position: absolute;
-  top: 1px;
-  transform: rotate(-99.32deg);
-  width: 17px;
-}
-
 .sleepscreen .line-5 {
   height: 83px;
-  left: 65px;
+  left: 72px;
   position: absolute;
   top: 396px;
   width: 28px;
@@ -250,7 +250,7 @@
 
 .sleepscreen .vector {
   height: 16px;
-  left: 50px;
+  left: 57px;
   position: absolute;
   top: 385px;
   width: 19px;
@@ -267,6 +267,7 @@
 
 .sleepscreen .overlap-5 {
   height: 49px;
+  left: -10px;
   position: relative;
 }
 
@@ -313,7 +314,7 @@
   left: 83px;
   position: absolute;
   top: 673px;
-  width: 212px;
+  width: 300px;
 }
 
 .sleepscreen .vector-4 {
@@ -330,10 +331,11 @@
   font-size: 40px;
   font-weight: 500;
   left: 54px;
+  transform: translateX(50px);
   letter-spacing: 0;
   line-height: normal;
   position: absolute;
-  top: 10px;
+  top: 15px;
   white-space: nowrap;
 }
 
@@ -427,9 +429,9 @@
   border-radius: 58px;
   box-shadow: 0px 3px 4px #ffdc4e;
   height: 66px;
-  left: 30px;
+  left: 50px;
   position: absolute;
-  top: 775px;
+  top: 750px;
   width: 342px;
 }
 
