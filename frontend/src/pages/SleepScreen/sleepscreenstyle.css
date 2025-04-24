@@ -1,13 +1,41 @@
+/* Сброс отступов и отключение прокрутки */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ===== ГЛОБАЛЬНЫЙ КОНТЕЙНЕР (SleepScreen) ===== */
 .sleepscreen {
   background-color: #170255;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Полная высота экрана */
+}
+
+/* ===== BACKGROUND GROUP (Декоративные элементы) ===== */
+.background-group {
   position: relative;
   width: 100%;
 }
 
-.sleepscreen .div {
+/* Пропорциональное масштабирование всей декоративной группы */
+/* Эталонная ширина: 414px. Масштабируем, ориентируясь на правую сторону */
+.background-group.responsive {
+  transform: scale(calc(100vw / 414px));
+  transform-origin: top right;
+  right: 20px;   /* отступ от правого края */
+  left: auto;
+}
+
+/* Стили содержимого группы (на основе абсолютного позиционирования) */
+.background-group .div {
   background-color: #170255;
   min-height: 100vh;
   overflow: hidden;
@@ -15,15 +43,15 @@
   width: 100%;
 }
 
-.sleepscreen .overlap {
+.background-group .overlap {
   height: 597px;
-  left: 11px;
   position: absolute;
   top: 74px;
-  width: 414px;
+  width: 95%;
+  left: 2.5%;
 }
 
-.sleepscreen .view {
+.background-group .view {
   height: 555px;
   left: 0;
   position: absolute;
@@ -31,12 +59,12 @@
   width: 414px;
 }
 
-.sleepscreen .overlap-group {
+.background-group .overlap-group {
   height: 555px;
   position: relative;
 }
 
-.sleepscreen .group {
+.background-group .group {
   height: 555px;
   left: 0;
   position: absolute;
@@ -44,7 +72,7 @@
   width: 414px;
 }
 
-.sleepscreen .overlap-2 {
+.background-group .overlap-2 {
   height: 550px;
   left: 3px;
   position: relative;
@@ -52,7 +80,7 @@
   width: 411px;
 }
 
-.sleepscreen .overlap-3 {
+.background-group .overlap-3 {
   height: 447px;
   left: 15px;
   position: absolute;
@@ -60,7 +88,7 @@
   width: 396px;
 }
 
-.sleepscreen .subtract {
+.background-group .subtract {
   height: 241px;
   left: 18px;
   position: absolute;
@@ -68,7 +96,7 @@
   width: 267px;
 }
 
-.sleepscreen .star {
+.background-group .star {
   height: 45px;
   left: 3px;
   position: absolute;
@@ -76,7 +104,7 @@
   width: 47px;
 }
 
-.sleepscreen .img {
+.background-group .img {
   height: 54px;
   left: 0;
   position: absolute;
@@ -84,7 +112,7 @@
   width: 55px;
 }
 
-.sleepscreen .star-2 {
+.background-group .star-2 {
   height: 65px;
   left: 83px;
   position: absolute;
@@ -92,7 +120,7 @@
   width: 69px;
 }
 
-.sleepscreen .star-3 {
+background-group .star-3 {
   height: 44px;
   left: 118px;
   position: absolute;
@@ -100,7 +128,7 @@
   width: 45px;
 }
 
-.sleepscreen .star-4 {
+.background-group .star-4 {
   height: 67px;
   left: 145px;
   position: absolute;
@@ -108,7 +136,7 @@
   width: 71px;
 }
 
-.sleepscreen .line {
+.background-group .line {
   height: 212px;
   left: 48px;
   position: absolute;
@@ -116,7 +144,7 @@
   width: 6px;
 }
 
-.sleepscreen .line-2 {
+.background-group .line-2 {
   height: 273px;
   left: 104px;
   position: absolute;
@@ -124,7 +152,7 @@
   width: 6px;
 }
 
-.sleepscreen .overlap-group-wrapper {
+.background-group .overlap-group-wrapper {
   box-shadow: 0px 3px 4px #261b7226;
   height: 220px;
   left: 92px;
@@ -133,13 +161,13 @@
   width: 304px;
 }
 
-.sleepscreen .overlap-group-2 {
+.background-group .overlap-group-2 {
   height: 220px;
   position: relative;
   width: 281px;
 }
 
-.sleepscreen .union {
+.background-group .union {
   height: 209px;
   left: 0;
   position: absolute;
@@ -147,7 +175,7 @@
   width: 281px;
 }
 
-.sleepscreen .union-2 {
+.background-group .union-2 {
   height: 209px;
   left: 7px;
   position: absolute;
@@ -155,7 +183,7 @@
   width: 274px;
 }
 
-.sleepscreen .union-3 {
+.background-group .union-3 {
   height: 201px;
   left: 27px;
   position: absolute;
@@ -163,7 +191,7 @@
   width: 254px;
 }
 
-.sleepscreen .line-3 {
+.background-group .line-3 {
   height: 22px;
   left: 92px;
   position: absolute;
@@ -171,7 +199,7 @@
   width: 48px;
 }
 
-.sleepscreen .line-4 {
+.background-group .line-4 {
   height: 22px;
   left: 161px;
   position: absolute;
@@ -179,7 +207,7 @@
   width: 48px;
 }
 
-.sleepscreen .star-5 {
+.background-group .star-5 {
   height: 51px;
   left: 306px;
   position: absolute;
@@ -187,7 +215,7 @@
   width: 50px;
 }
 
-.sleepscreen .star-6 {
+.background-group .star-6 {
   height: 51px;
   left: 0;
   position: absolute;
@@ -195,7 +223,7 @@
   width: 50px;
 }
 
-.sleepscreen .star-7 {
+.background-group .star-7 {
   height: 85px;
   left: 267px;
   position: absolute;
@@ -203,7 +231,7 @@
   width: 89px;
 }
 
-.sleepscreen .overlap-wrapper {
+.background-group .overlap-wrapper {
   background-color: #b71d49;
   border-radius: 40.53px;
   height: 81px;
@@ -214,7 +242,7 @@
   width: 81px;
 }
 
-.sleepscreen .overlap-4 {
+.background-group .overlap-4 {
   height: 29px;
   left: 15px;
   position: relative;
@@ -222,7 +250,7 @@
   width: 30px;
 }
 
-.sleepscreen .mask-group-left {
+.background-group .mask-group-left {
   height: 16px;
   left: -2px;
   position: absolute;
@@ -231,7 +259,7 @@
   width: 16px;
 }
 
-.sleepscreen .mask-group-right {
+.background-group .mask-group-right {
   height: 15px;
   left: 11px;
   position: absolute;
@@ -240,7 +268,7 @@
   width: 15px;
 }
 
-.sleepscreen .line-5 {
+.background-group .line-5 {
   height: 83px;
   left: 72px;
   position: absolute;
@@ -248,7 +276,7 @@
   width: 28px;
 }
 
-.sleepscreen .vector {
+.background-group .vector {
   height: 16px;
   left: 57px;
   position: absolute;
@@ -256,7 +284,7 @@
   width: 19px;
 }
 
-.sleepscreen .div-wrapper {
+.background-group .div-wrapper {
   height: 52px;
   left: 110px;
   position: absolute;
@@ -265,13 +293,13 @@
   width: 31px;
 }
 
-.sleepscreen .overlap-5 {
+.background-group .overlap-5 {
   height: 49px;
   left: -10px;
   position: relative;
 }
 
-.sleepscreen .vector-2 {
+.background-group .vector-2 {
   height: 49px;
   left: 0;
   position: absolute;
@@ -280,7 +308,7 @@
   width: 31px;
 }
 
-.sleepscreen .mask-group-3 {
+.background-group .mask-group-3 {
   height: 16px;
   left: 8px;
   position: absolute;
@@ -289,7 +317,7 @@
   width: 16px;
 }
 
-.sleepscreen .vector-3 {
+.background-group .vector-3 {
   height: 13px;
   left: 121px;
   position: absolute;
@@ -297,230 +325,173 @@
   width: 18px;
 }
 
-.sleepscreen .text-wrapper {
+/* ===== SleepText (Текст "Спокойной ночи") ===== */
+.sleep-text-group {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  margin: 10px;
+  /* Смещаем немного вниз и вправо – без поворота */
+  transform: translate(40px, 40px);
+}
+.sleep-text-group .text-wrapper {
   color: #cabbff;
   font-family: "Rubik-SemiBold", Helvetica;
   font-size: 48px;
   font-weight: 600;
-  left: 19px;
-  letter-spacing: 0;
+  margin: 0;
   line-height: 44.3px;
-  position: absolute;
-  top: 0;
 }
 
-.sleepscreen .overlap-6 {
-  height: 76px;
-  left: 83px;
-  position: absolute;
-  top: 673px;
-  width: 300px;
+/* ===== SleepTimer (Таймер: vector-4 и текст 00:00:00 на одном уровне) ===== */
+.sleep-timer-group {
+  position: fixed;
+  /* Опускаем таймер чуть ниже */
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 90;
+  gap: 10px;
 }
 
-.sleepscreen .vector-4 {
+.sleep-timer-group .vector-4 {
   height: 76px;
-  left: 0;
-  position: absolute;
-  top: 0;
   width: 70px;
+  display: block;
 }
 
-.sleepscreen .text-wrapper-2 {
+.sleep-timer-group .text-wrapper-2 {
   color: #cabbff;
   font-family: "Roboto-Medium", Helvetica;
   font-size: 40px;
   font-weight: 500;
-  left: 54px;
-  transform: translateX(50px);
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 15px;
+  margin: 0;
   white-space: nowrap;
-}
-
-.sleepscreen .div-2 {
-  height: 841px;
-  left: 0;
-  position: fixed;
-  top: -5px;
-  width: 402px;
-}
-
-.sleepscreen .div-3 {
-  height: 68px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 404px;
-}
-
-.sleepscreen .overlap-group-3 {
-  -webkit-backdrop-filter: blur(25.35px) brightness(100%);
-  backdrop-filter: blur(25.35px) brightness(100%);
-  background-color: #170256;
-  height: 68px;
-  position: relative;
-  width: 402px;
-}
-
-.sleepscreen .text-wrapper-3 {
-  color: #cabbff;
-  font-family: "Roboto-Medium", Helvetica;
-  font-size: 16px;
-  font-weight: 500;
-  left: 57px;
-  letter-spacing: 0;
   line-height: normal;
-  position: absolute;
-  top: 27px;
-  width: 32px;
 }
 
-.sleepscreen .group-2 {
-  height: 11px;
-  left: 322px;
-  position: absolute;
-  top: 31px;
-  width: 29px;
+/* ===== MenuGroup (Меню страниц) ===== */
+.menu-group {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80vw;
+  max-width: 500px;
+  padding: 10px 0;
+  background-color: transparent;
 }
 
-.sleepscreen .overlap-7 {
-  height: 13px;
-  left: -1px;
-  position: relative;
-  top: -1px;
-  width: 30px;
+/* Для пропорционального масштабирования меню создаём внутренний wrapper */
+.menu-inner {
+  transform: scale(calc(100vw / 500px));
+  transform-origin: center bottom;
+  width: 500px;
 }
 
-.sleepscreen .rectangle {
-  border: 1px solid;
-  border-color: #b9b9b9;
-  border-radius: 3px;
-  height: 13px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 28px;
-}
-
-.sleepscreen .rectangle-2 {
-  background-color: #0cff00;
-  border-radius: 3px;
-  height: 9px;
-  left: 2px;
-  position: absolute;
-  top: 2px;
-  width: 19px;
-}
-
-.sleepscreen .rectangle-3 {
-  background-color: #b9b9b9;
-  border-radius: 3px;
-  height: 5px;
-  left: 28px;
-  position: absolute;
-  top: 4px;
-  width: 2px;
-}
-
-.sleepscreen .view-2 {
+/* Закругленный прямоугольник (фон панели меню) */
+.menu-group .view-2 {
   background-color: #170255;
   border-radius: 58px;
   box-shadow: 0px 3px 4px #ffdc4e;
   height: 66px;
-  left: 50px;
-  position: absolute;
-  top: 750px;
-  width: 342px;
+  width: 100%;
+  max-width: 342px;
+  margin: 0 auto;
+  position: relative;
 }
 
-.sleepscreen .vector-5 {
-  height: 24px;
-  left: 227px;
+/* Новый вложенный контейнер для позиционирования иконок меню */
+.menu-group .menu-icons {
+  position: relative;
+  width: 100%;
+  height: 68px; /* Высота панели меню */
+}
+
+/* --- Выравнивание иконок на панели меню --- */
+
+/* vector-7 — слева, отступ 20px */
+.menu-group .vector-7 {
   position: absolute;
+  left: 30px;
   top: 21px;
-  width: 33px;
-}
-
-.sleepscreen .group-wrapper {
-  background-color: #170255;
-  border-radius: 27px;
-  box-shadow: inset 0px 3px 4px #ffdc4e;
-  height: 54px;
-  left: 88px;
-  position: absolute;
-  top: 6px;
-  width: 54px;
-}
-
-.sleepscreen .group-3 {
-  height: 32px;
-  left: 11px;
-  position: absolute;
-  top: 11px;
-  width: 32px;
-}
-
-.sleepscreen .vector-6 {
-  height: 25px;
-  left: 176px;
-  position: absolute;
-  top: 21px;
-  width: 25px;
-}
-
-.sleepscreen .vector-7 {
-  height: 24px;
-  left: 36px;
-  position: absolute;
-  top: 21px;
-  width: 24px;
-}
-
-.sleepscreen .group-4 {
   height: 26px;
-  left: 286px;
-  position: absolute;
-  top: 20px;
   width: 26px;
 }
 
-/* --------------------
- АДАПТИВНЫЕ СТИЛИ (Медиа-запросы)
--------------------------*/
+/* vector-6 — по центру меню */
+.menu-group .vector-6 {
+  position: absolute;
+  left: 50%;
+  top: 21px;
+  transform: translateX(-50%);
+  height: 25px;
+  width: 25px;
+}
+
+/* group-4 — справа, отступ 20px */
+.menu-group .group-4 {
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  height: 26px;
+  width: 26px;
+}
+
+/* vector-5 — между vector-6 и group-4 */
+.menu-group .vector-5 {
+  position: absolute;
+  left: calc((50% + (100% - 30px)) / 2);
+  top: 21px;
+  transform: translateX(-50%);
+  height: 24px;
+  width: 33px;
+}
+
+/* group-3 — между vector-6 и vector-7 */
+.menu-group .group-3 {
+  position: absolute;
+  left: calc((50% + 30px) / 2);
+  top: 16px;
+  transform: translateX(-50%);
+  height: 32px;
+  width: 32px;
+}
+
+/* ===== АДАПТИВНЫЕ СТИЛИ (Медиа-запросы) ===== */
 @media (max-width: 600px) {
-  /* Основной контейнер становится шире (95% от экрана) без жесткого ограничения */
-  .sleepscreen .div {
-      width: 95%;
-      max-width: none;
-      margin: 0 auto;
+  /* Фоновые элементы */
+  .background-group .div {
+    width: 95%;
+    max-width: none;
+    margin: 0 auto;
   }
-  
-  /* Перенастройка основных блоков с абсолютным позиционированием */
-  .sleepscreen .overlap,
-  .sleepscreen .view,
-  .sleepscreen .group {
-      width: 95%;
-      left: 2.5%;
+  .background-group .overlap,
+  .background-group .view,
+  .background-group .group {
+    width: 95%;
+    left: 2.5%;
   }
-  
-  /* Уменьшение размера текста */
-  .sleepscreen .text-wrapper {
-      font-size: 36px;
-      left: 5%;
-      top: 5%;
+
+  /* Изменение размера текста */
+  .sleep-text-group .text-wrapper {
+    font-size: 40px;
   }
-  
-  .sleepscreen .text-wrapper-2 {
-      font-size: 32px;
-      left: 5%;
+
+  /* Изменение размера таймера */
+  .sleep-timer-group .text-wrapper-2 {
+    font-size: 32px;
   }
-  
-  /* Дополнительные адаптивные изменения */
-  .sleepscreen .div-2 {
-      width: 95%;
-      max-width: none;
-      margin: 0 auto;
+
+  /* Меню */
+  .menu-group {
+    width: 90vw;
+  }
+  .menu-group .menu-icons {
+    height: 68px;
   }
 }
