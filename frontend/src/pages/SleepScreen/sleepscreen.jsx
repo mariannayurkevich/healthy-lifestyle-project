@@ -41,6 +41,7 @@ export const SleepScreen = () => {
     // Переход к экрану MainScreen
     navigate('/main');
   };
+  
   return (
     <div className="sleepscreen">
       <div className="div">

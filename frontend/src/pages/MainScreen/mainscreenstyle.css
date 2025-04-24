@@ -116,7 +116,7 @@
     top: 221px;
     width: 31px;
   }
-  
+
   /*
   .mainscreen .mask-group-wrapper {
     background-image: url(./vector.svg);
@@ -365,5 +365,67 @@
     position: fixed;
     top: 0;
     width: 402px;
+  }
+
+  .mainscreen .view-3 {
+    background-color: #FEFAFF;
+    border-radius: 58px;
+    box-shadow: 0px 3px 4px rgba(38, 27, 114, 0.15);
+    height: 66px;
+    left: 50px;
+    position: absolute;
+    top: 750px;
+    width: 342px;
+  }
+  
+  .mainscreen .vector-5 {
+    height: 24px;
+    left: 227px;
+    position: absolute;
+    top: 21px;
+    width: 33px;
+  }
+  
+  .mainscreen .group-wrapper {
+    background-color: #FEFAFF;
+    border-radius: 27px;
+    box-shadow: 0px 3px 4px rgba(38, 27, 114, 0.15);
+    height: 54px;
+    left: 145px;
+    position: absolute;
+    top: 6px;
+    width: 54px;
+  }
+  
+  .mainscreen .group-3 {
+    height: 24px;
+    left: 88px;
+    position: absolute;
+    top: 21px;
+    width: 32px;
+  }
+  
+  .mainscreen .vector-6 {
+    height: 32px;
+    left: 11px;
+    position: absolute;
+    top: 11px;
+    width: 32px;
+  }
+  
+  .mainscreen .vector-7 {
+    height: 24px;
+    left: 36px;
+    position: absolute;
+    top: 21px;
+    width: 24px;
+  }
+  
+  .mainscreen .group-4 {
+    height: 26px;
+    left: 286px;
+    position: absolute;
+    top: 20px;
+    width: 26px;
   }
   

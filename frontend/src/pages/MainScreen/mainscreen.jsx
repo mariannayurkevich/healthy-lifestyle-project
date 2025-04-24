@@ -15,14 +15,49 @@ import "./mainscreenstyle.css";
 import subtract from "./src/subtract.svg";
 //import union2 from "./src/union-2.svg";
 //import union from "./src/union.svg";
+import vector5 from './src/vector-3.svg';
+import group34 from './src/group-34.svg';
+import vector6 from './src/group-36.svg';
+import vector7 from './src/vector-38.svg';
+import group from './src/group-37.svg';
+
+import { useNavigate } from "react-router-dom";
 
 export const MainScreen = () => {
+    const navigate = useNavigate();
+    
+      // Функция обработки клика
+      const handleClick = () => {
+        // Переход к экрану MainScreen
+        navigate('/sleep');
+      };
+
   return (
     <div className="mainscreen">
       <div className="div">
         <div className="text-wrapper">Привет,</div>
 
         <div className="text-wrapper-2">Малинка Ди</div>
+
+        <div className="view-3">
+            <img className="vector-5" alt="Vector" src={vector5} />
+
+            <div className="group-wrapper">
+              <img className="vector-6" alt="Vector" src={vector6} />
+            </div>
+      
+            <img
+              className="group-3"
+              alt="Group"
+              src={group34}
+              onClick={handleClick}
+              style={{ cursor: "pointer" }}
+            />
+
+            <img className="vector-7" alt="Vector" src={vector7} />
+
+            <img className="group-4" alt="Group" src={group} />
+          </div>
 
         <div className="overlap">
           <img className="group" alt="Group" src={group35} />
