@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import vector4 from "../src/vector-4.svg";
+import pause from "../src/pause.svg";
 
 const SleepTimer = () => {
   // Ленивое считывание значений из localStorage при инициализации состояний.
@@ -85,7 +86,7 @@ const SleepTimer = () => {
       <img
         className="vector-4"
         alt="Timer Button"
-        src={vector4}
+        src={isRunning ? pause : vector4}
         onClick={handleToggle}
         style={{ cursor: "pointer" }}
       />

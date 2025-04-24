@@ -347,7 +347,6 @@ background-group .star-3 {
 /* ===== SleepTimer (Таймер: vector-4 и текст 00:00:00 на одном уровне) ===== */
 .sleep-timer-group {
   position: fixed;
-  /* Опускаем таймер чуть ниже */
   bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
@@ -355,7 +354,7 @@ background-group .star-3 {
   align-items: center;
   justify-content: center;
   z-index: 90;
-  gap: 10px;
+  gap: 1px;
 }
 
 .sleep-timer-group .vector-4 {
@@ -372,6 +371,7 @@ background-group .star-3 {
   margin: 0;
   white-space: nowrap;
   line-height: normal;
+  margin-top: -5px;
 }
 
 /* ===== MenuGroup (Меню страниц) ===== */
