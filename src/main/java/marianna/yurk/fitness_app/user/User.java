@@ -73,6 +73,10 @@ public class User implements UserDetails {
 
         @Enumerated(EnumType.STRING)
         private UserRole userRole;
+
+        @Enumerated(EnumType.STRING)
+        private Goal goal;
+
         private Boolean locked = false;
         private Boolean enabled = false;
 
