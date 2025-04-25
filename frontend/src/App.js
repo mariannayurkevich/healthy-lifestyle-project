@@ -1,18 +1,32 @@
 // App.js
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// Другие импорты, например, стилей и компонентов
-import {SleepScreen} from "./pages/SleepScreen/sleepscreen";
-import {MainScreen} from "./pages/MainScreen/mainscreen";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+
+// Импорты ваших страниц
+import { SleepScreen } from "./pages/SleepScreen/sleepscreen";
+import { MainScreen } from "./pages/MainScreen/mainscreen";
+import { EntryScreen } from "./pages/EnterScreen/entryscreen"; 
+
+// Оборачиваем маршруты в компонент с анимацией
+const AnimatedRoutes = () => {
+  const location = useLocation();
+  return (
+    <AnimatePresence exitBeforeEnter>
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<EntryScreen />} />
+        <Route path="/main" element={<MainScreen />} />
+        <Route path="/sleep" element={<SleepScreen />} />
+        <Route path="/entry" element={<EntryScreen />} />
+      </Routes>
+    </AnimatePresence>
+  );
+};
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<MainScreen />} />
-        <Route path="/main" element={<MainScreen />} />
-        <Route path="/sleep" element={<SleepScreen />} />
-      </Routes>
+      <AnimatedRoutes />
     </Router>
   );
 }

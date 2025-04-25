@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion"; // импортируем Framer Motion
 import BackgroundGroup from "./components/background";
 import SleepText from "./components/goodnighttext";
 import SleepTimer from "./components/timer";
@@ -13,8 +14,28 @@ export const SleepScreen = () => {
     navigate('/main');
   };
 
+  // Определяем только вариант анимации выхода
+  const pageVariants = {
+    out: {
+      opacity: 0,
+      x: "-100vw",
+    },
+  };
+
+  const pageTransition = {
+    type: "tween",
+    ease: "easeInOut",
+    duration: 0.7,
+  };
+
   return (
-    <div className="sleepscreen">
+    <motion.div
+      className="sleepscreen"
+      // Не задаём initial и animate, поэтому экран появляется мгновенно
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransition}
+    >
       {/* Фоновая группа – все декоративные изображения */}
       <BackgroundGroup />
       
@@ -26,6 +47,6 @@ export const SleepScreen = () => {
       
       {/* Группа меню, отвечающая за переключение экранов */}
       <MenuGroup onMenuClick={handleMenuClick} />
-    </div>
+    </motion.div>
   );
 };
