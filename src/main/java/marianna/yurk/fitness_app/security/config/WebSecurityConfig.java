@@ -29,7 +29,8 @@ public class WebSecurityConfig{
                                 "/",                   // Главная страница
                                 "/api/v*/registration/**",  // Регистрация
                                 "/error",              // Страницы ошибок
-                                "/favicon.ico"         // Иконка сайта
+                                "/favicon.ico",         // Иконка сайта
+                                "/api/v1/password/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
