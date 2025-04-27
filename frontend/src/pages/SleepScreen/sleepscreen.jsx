@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion"; // для анимации выхода
-import { useSwipeable } from "react-swipeable"; // для обработки свайпов
+import { motion } from "framer-motion";
+import { useSwipeable } from "react-swipeable"; 
 import BackgroundGroup from "./components/background";
 import SleepText from "./components/goodnighttext";
 import SleepTimer from "./components/timer";

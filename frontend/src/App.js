@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 // Импорты ваших страниц
 import { SleepScreen } from "./pages/SleepScreen/sleepscreen";
 import { MainScreen } from "./pages/MainScreen/mainscreen";
-import { EntryScreen } from "./pages/EnterScreen/entryscreen"; 
+import { FirstScreen } from "./pages/EnterScreen/firstscreen"; 
 
 // Оборачиваем маршруты в компонент с анимацией
 const AnimatedRoutes = () => {
@@ -14,10 +14,10 @@ const AnimatedRoutes = () => {
   return (
     <AnimatePresence exitBeforeEnter>
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<EntryScreen />} />
+        <Route path="/" element={<FirstScreen />} />
         <Route path="/main" element={<MainScreen />} />
         <Route path="/sleep" element={<SleepScreen />} />
-        <Route path="/entry" element={<EntryScreen />} />
+        <Route path="/entry" element={<FirstScreen />} />
       </Routes>
     </AnimatePresence>
   );
