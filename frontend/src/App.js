@@ -9,6 +9,7 @@ import { MainScreen } from "./pages/MainScreen/mainscreen";
 import { FirstScreen } from "./pages/FirstScreen/firstscreen"; 
 import { EntryScreen } from "./pages/EntryScreen/entryscreen";
 import { RegistrationFirstScreen } from "./pages/RegistrationFirst/registrationfirst";
+import { RegistrationSecondScreen } from "./pages/RegistrationSecond/registrationsecond";
 
 // Оборачиваем маршруты в компонент с анимацией
 const AnimatedRoutes = () => {
@@ -22,6 +23,7 @@ const AnimatedRoutes = () => {
         <Route path="/entry" element={<EntryScreen />} />
         <Route path="/first" element={<FirstScreen />} />
         <Route path="/registrationfirst" element={<RegistrationFirstScreen />} />
+        <Route path="/registrationsecond" element={<RegistrationSecondScreen />} />
       </Routes>
     </AnimatePresence>
   );

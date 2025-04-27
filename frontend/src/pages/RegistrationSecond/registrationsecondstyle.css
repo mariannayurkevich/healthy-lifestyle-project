@@ -1,0 +1,273 @@
+/* Глобальный сброс */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+.registrationsecond {
+    background-color: #ff5151;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  .registrationsecond .div {
+    background-color: #ff5151;
+    height: 874px;
+    position: relative;
+    width: 402px;
+  }
+  
+  .registrationsecond .overlap {
+    background-color: #fefaff;
+    border-radius: 54px;
+    height: 597px;
+    left: 0;
+    position: absolute;
+    top: 277px;
+    width: 402px;
+  }
+  
+  .registrationsecond .overlap-group-wrapper {
+    height: 49px;
+    left: 30px;
+    position: absolute;
+    top: 181px;
+    width: 344px;
+  }
+  
+  .registrationsecond .overlap-group {
+    background-color: #ececec;
+    border-radius: 28px;
+    height: 49px;
+    position: relative;
+    width: 342px;
+  }
+  
+  .registrationsecond .text-wrapper {
+    color: #28063533;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 26px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 15px;
+    white-space: nowrap;
+  }
+  
+  .registrationsecond .view {
+    height: 16px;
+    left: 177px;
+    position: absolute;
+    top: 27px;
+    width: 48px;
+  }
+  
+  .registrationsecond .overlap-2 {
+    height: 16px;
+    position: relative;
+  }
+  
+  .registrationsecond .ellipse {
+    background-color: #280635;
+    border: 1px solid;
+    border-radius: 8px;
+    height: 16px;
+    left: 32px;
+    position: absolute;
+    top: 0;
+    width: 16px;
+  }
+  
+  .registrationsecond .line {
+    height: 4px;
+    left: 8px;
+    position: absolute;
+    top: 6px;
+    width: 30px;
+  }
+  
+  .registrationsecond .ellipse-2 {
+    background-color: #280635;
+    border: 1px solid;
+    border-radius: 8px;
+    height: 16px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 16px;
+  }
+  
+  .registrationsecond .button {
+    all: unset;
+    box-sizing: border-box;
+    height: 49px;
+    left: 30px;
+    position: absolute;
+    top: 448px;
+    width: 344px;
+  }
+  
+  .registrationsecond .div-wrapper {
+    background-color: #280636;
+    border-radius: 28px;
+    height: 49px;
+    position: relative;
+    width: 342px;
+  }
+  
+  .registrationsecond .text-wrapper-2 {
+    color: #ffffff;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 119px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 15px;
+    width: 105px;
+  }
+  
+  .registrationsecond .div-2 {
+    height: 91px;
+    left: 45px;
+    position: absolute;
+    top: 69px;
+    width: 235px;
+  }
+  
+  .registrationsecond .ellipse-3 {
+    background-color: #ececec;
+    border-radius: 45.5px;
+    height: 91px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 91px;
+  }
+  
+  .registrationsecond .text-wrapper-3 {
+    color: #280635;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 103px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 25px;
+    white-space: nowrap;
+  }
+  
+  .registrationsecond .text-wrapper-4 {
+    color: #280635;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 103px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 47px;
+    white-space: nowrap;
+  }
+  
+  .registrationsecond .text-wrapper-5 {
+    color: #ffffff;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 48px;
+    font-weight: 500;
+    left: 29px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 186px;
+    white-space: nowrap;
+  }
+  
+  .registrationsecond .overlap-3 {
+    height: 112px;
+    left: 31px;
+    position: absolute;
+    top: 63px;
+    width: 339px;
+  }
+  
+  .registrationsecond .div-3 {
+    height: 19px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 339px;
+  }
+  
+  .registrationsecond .text-wrapper-6 {
+    color: #fefaff;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 288px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+  }
+  
+  .registrationsecond .vector-prev {
+    height: 14px;
+    left: 0;
+    position: absolute;
+    top: 5px;
+    width: 18px;
+  }
+  
+  .registrationsecond .overlap-wrapper {
+    height: 93px;
+    left: 97px;
+    position: absolute;
+    top: 19px;
+    width: 163px;
+  }
+  
+  .registrationsecond .overlap-4 {
+    height: 93px;
+    position: relative;
+  }
+  
+  .registrationsecond .left-eye {
+    height: 89px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 89px;
+  }
+  
+  .registrationsecond .right-eye {
+    height: 81px;
+    left: 83px;
+    position: absolute;
+    top: 12px;
+    width: 81px;
+  }
+  
+  .registrationsecond .p {
+    color: #ff5151;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    left: 56px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: fixed;
+    top: 513px;
+  }
+  
