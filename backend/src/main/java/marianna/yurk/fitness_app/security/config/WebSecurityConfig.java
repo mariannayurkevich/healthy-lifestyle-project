@@ -5,10 +5,10 @@ import marianna.yurk.fitness_app.user.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -29,14 +29,16 @@ public class WebSecurityConfig{
                                 "/",                   // Главная страница
                                 "/api/v*/registration/**",  // Регистрация
                                 "/error",              // Страницы ошибок
-                                "/favicon.ico"         // Иконка сайта
+                                "/favicon.ico",         // Иконка сайта
+                                "/api/v1/password/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .defaultSuccessUrl("/")  // Перенаправление после успешного входа
                         .permitAll()
-                );
+                )
+                .oauth2Login(Customizer.withDefaults());
 
         return http.build();
     }

@@ -24,6 +24,9 @@ public class RegistrationService {
         if (!isValidEmail) {
             throw new IllegalStateException("Invalid email address");
         }
+        if (!request.getPassword().equals(request.getConfirmPassword())) {
+            throw new IllegalArgumentException("Passwords do not match");
+        }
         String token = userService.signUpUser(
                 new User(
                         request.getFirstName(),

@@ -33,7 +33,15 @@ public class UserService implements UserDetailsService {
             bmr = 10 * user.getWeight() + 6.25 * user.getHeight() - 5 * age - 161;
         }
         double activityFactor = getActivityFactor(user.getActivityLevel());
-        return bmr * activityFactor;
+
+        double maintenanceCalories = bmr * activityFactor;
+
+        return switch (user.getGoal()) {
+            case LOSE -> maintenanceCalories - 500;
+            case GAIN -> maintenanceCalories + 500;
+            default -> maintenanceCalories;
+        };
+
     }
 
     private double getActivityFactor(String activityLevel) {
@@ -77,6 +85,8 @@ public class UserService implements UserDetailsService {
             user.setAllergies(updatedUser.getAllergies());
             user.setIntolerances(updatedUser.getIntolerances());
             user.setActivityLevel(updatedUser.getActivityLevel());
+            user.setGoal(updatedUser.getGoal());
+
 
             if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
                 user.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
@@ -118,23 +128,7 @@ public class UserService implements UserDetailsService {
                         new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
     }
 
-    public String signUpUser(User user) {
-        boolean userExists = userRepository
-                .findByEmail(user.getEmail())
-                .isPresent();
-        if (userExists) {
-            // TODO: check of attributes are the same and
-            // TODO: if email not confirmed set confirmation email.
-            throw new IllegalStateException("User with this email already exists");
-        }
-
-
-        String encodedPassword =  bCryptPasswordEncoder
-                .encode(user.getPassword());
-
-        user.setPassword(encodedPassword);
-        userRepository.save(user);
-
+    private String createAndSaveConfirmationToken(User user) {
         String token = UUID.randomUUID().toString();
         ConfirmationToken confirmationToken = new ConfirmationToken(
                 token,
@@ -142,10 +136,28 @@ public class UserService implements UserDetailsService {
                 LocalDateTime.now().plusMinutes(15),
                 user
         );
-
         confirmationTokenService.save(confirmationToken);
-
         return token;
+    }
+
+    public String signUpUser(User user) {
+        Optional<User> existingUserOpt = userRepository.findByEmail(user.getEmail());
+
+        if (existingUserOpt.isPresent()) {
+            User existingUser = existingUserOpt.get();
+
+            if (!existingUser.getEnabled()) {
+                return createAndSaveConfirmationToken(existingUser);
+            }
+
+            throw new IllegalStateException("User with this email already exists");
+        }
+
+        String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        userRepository.save(user);
+
+        return createAndSaveConfirmationToken(user);
     }
 
     public int enableUser(String email) {
