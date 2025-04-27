@@ -13,7 +13,7 @@ export const FirstScreen = () => {
   };
 
   const handleRedirect2 = () => {
-    navigate("/registration");
+    navigate("/registrationfirst");
   };
 
   return (

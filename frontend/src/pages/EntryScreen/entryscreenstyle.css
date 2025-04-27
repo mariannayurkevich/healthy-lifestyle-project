@@ -186,11 +186,11 @@ html, body {
     white-space: nowrap;
 }
 
-.entryscreen .pointer {
+.entryscreen .pointer2 {
     height: 14px;
     left: 308px;
     position: absolute;
-    top: 16px;
+    top: 20px;
     width: 18px;
 }
 
@@ -237,24 +237,24 @@ html, body {
 }
 
 .entryscreen .view-2 {
+    display: flex;
     height: 100px;
-    left: 192px;
+    left: 50%;
     position: fixed;
-    top: 131px;
+    top: 15%;
     width: 164px;
 }
 
 .entryscreen .overlap-3 {
+    
     height: 100px;
     position: relative;
 }
 
 .entryscreen .left-eye {
-    height: 91px;
-    left: 0;
+    height: 83px;
     position: absolute;
-    top: 0;
-    width: 91px;
+    width: 83px;
 }
 
 .entryscreen .right-eye {

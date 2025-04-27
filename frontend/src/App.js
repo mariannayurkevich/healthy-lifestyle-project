@@ -8,6 +8,7 @@ import { SleepScreen } from "./pages/SleepScreen/sleepscreen";
 import { MainScreen } from "./pages/MainScreen/mainscreen";
 import { FirstScreen } from "./pages/FirstScreen/firstscreen"; 
 import { EntryScreen } from "./pages/EntryScreen/entryscreen";
+import { RegistrationFirstScreen } from "./pages/RegistrationFirst/registrationfirst";
 
 // Оборачиваем маршруты в компонент с анимацией
 const AnimatedRoutes = () => {
@@ -19,6 +20,8 @@ const AnimatedRoutes = () => {
         <Route path="/main" element={<MainScreen />} />
         <Route path="/sleep" element={<SleepScreen />} />
         <Route path="/entry" element={<EntryScreen />} />
+        <Route path="/first" element={<FirstScreen />} />
+        <Route path="/registrationfirst" element={<RegistrationFirstScreen />} />
       </Routes>
     </AnimatePresence>
   );

@@ -1,0 +1,244 @@
+/* Глобальный сброс */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+.registrationfirst {
+    background-color: #ff5151;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  .registrationfirst .div {
+    background-color: #ff5151;
+    height: 874px;
+    position: relative;
+    width: 402px;
+  }
+  
+  .registrationfirst .overlap {
+    background-color: #fefaff;
+    border-radius: 54px;
+    height: 597px;
+    left: 0;
+    position: absolute;
+    top: 277px;
+    width: 402px;
+  }
+  
+  .registrationfirst .overlap-group-wrapper {
+    height: 49px;
+    left: 30px;
+    position: absolute;
+    top: 76px;
+    width: 344px;
+  }
+  
+  .registrationfirst .overlap-group {
+    background-color: #ececec;
+    border-radius: 28px;
+    height: 49px;
+    position: relative;
+    width: 342px;
+  }
+  
+  .registrationfirst .text-wrapper {
+    color: #28063533;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 26px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 15px;
+    white-space: nowrap;
+  }
+  
+  .registrationfirst .overlap-wrapper {
+    height: 49px;
+    left: 29px;
+    position: absolute;
+    top: 146px;
+    width: 344px;
+  }
+  
+  .registrationfirst .div-wrapper {
+    height: 49px;
+    left: 29px;
+    position: absolute;
+    top: 237px;
+    width: 344px;
+  }
+  
+  .registrationfirst .view {
+    height: 16px;
+    left: 177px;
+    position: absolute;
+    top: 27px;
+    width: 48px;
+  }
+  
+  .registrationfirst .overlap-2 {
+    height: 16px;
+    position: relative;
+  }
+  
+  .registrationfirst .ellipse {
+    background-color: #28063533;
+    border: 1px solid;
+    border-color: #d3c9d7;
+    border-radius: 8px;
+    height: 16px;
+    left: 32px;
+    position: absolute;
+    top: 0;
+    width: 16px;
+  }
+  
+  .registrationfirst .line {
+    height: 4px;
+    left: 8px;
+    position: absolute;
+    top: 6px;
+    width: 30px;
+  }
+  
+  .registrationfirst .ellipse-2 {
+    background-color: #280635;
+    border: 1px solid;
+    border-radius: 8px;
+    height: 16px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 16px;
+  }
+  
+  .registrationfirst .button-next {
+    height: 49px;
+    left: 30px;
+    position: absolute;
+    top: 448px;
+    width: 344px;
+  }
+  
+  .registrationfirst .overlap-3 {
+    background-color: #280636;
+    border-radius: 28px;
+    height: 49px;
+    position: relative;
+    width: 342px;
+  }
+  
+  .registrationfirst .text-wrapper-2 {
+    color: #ffffff;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 26px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 15px;
+    width: 54px;
+  }
+  
+  .registrationfirst .vector-next {
+    height: 14px;
+    left: 308px;
+    position: absolute;
+    top: 17px;
+    width: 18px;
+  }
+  
+  .registrationfirst .text-wrapper-3 {
+    color: #ffffff;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 48px;
+    font-weight: 500;
+    left: 29px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 186px;
+    white-space: nowrap;
+  }
+  
+  .registrationfirst .div-2 {
+    height: 19px;
+    left: 31px;
+    position: absolute;
+    top: 59px;
+    width: 339px;
+  }
+  
+  .registrationfirst .text-wrapper-4 {
+    color: #fefaff;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 288px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+  }
+  
+  .registrationfirst .vector-prev {
+    height: 14px;
+    left: 0;
+    position: absolute;
+    top: 5px;
+    width: 18px;
+  }
+  
+  .registrationfirst .view-2 {
+    height: 98px;
+    left: 61px;
+    position: absolute;
+    top: 86px;
+    width: 160px;
+  }
+  
+  .registrationfirst .overlap-4 {
+    height: 98px;
+    position: relative;
+  }
+  
+  .registrationfirst .left-eye {
+    height: 76px;
+    left: 0;
+    position: absolute;
+    top: 22px;
+    width: 76px;
+  }
+  
+  .registrationfirst .right-eye {
+    height: 93px;
+    left: 67px;
+    position: absolute;
+    top: 0;
+    width: 93px;
+  }
+  
+  .registrationfirst .text-wrapper-5 {
+    color: #ff5151;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    left: 55px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: fixed;
+    top: 475px;
+  }
+  

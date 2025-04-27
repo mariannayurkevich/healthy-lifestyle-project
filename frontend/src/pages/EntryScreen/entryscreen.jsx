@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import google from "./src/google.svg";
-import leftEye from "./src/left-eye.svg";
+import leftEye from "./src/right-eye.svg";
 import pointer from "./src/pointer.svg";
 import ponter2 from "./src/pointer-2.svg";
 import rightEye from "./src/right-eye.svg";
@@ -24,6 +24,14 @@ export const EntryScreen = () => {
       setError(false);
       navigate("/main");
     }
+  };
+
+  const handleRedirect2 = () => {
+    navigate("/first");
+  };
+
+  const handleRedirect3 = () => {
+    navigate("/registrationfirst");
   };
 
   return (
@@ -72,7 +80,7 @@ export const EntryScreen = () => {
             <div className="overlap-2">
               <img className="google" alt="Google" src={google} />
               <div className="text-wrapper-4">Продолжить с Google</div>
-              <img className="pointer" alt="Pointer" src={pointer} />
+              <img className="pointer2" alt="Pointer" src={pointer} />
             </div>
           </div>
         </div>
@@ -80,8 +88,11 @@ export const EntryScreen = () => {
         <div className="text-wrapper-5">Вход</div>
 
         <div className="div-2">
-          <div className="text-wrapper-6">Регистрация</div>
-          <img className="pointer" alt="Ponter" src={ponter2} />
+          <div className="text-wrapper-6" onClick={handleRedirect3}>Регистрация</div>
+
+          <div className="button" onClick={handleRedirect2}>
+             <img className="pointer" alt="Ponter" src={ponter2} />
+          </div>
         </div>
 
         <div className="view-2">
