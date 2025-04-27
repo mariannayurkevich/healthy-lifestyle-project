@@ -11,18 +11,32 @@ import "./sleepscreenstyle.css";
 export const SleepScreen = () => {
   const navigate = useNavigate();
 
-  // Обработчики свайпа: при свайпе влево переходим на страницу MainScreen
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => {
       navigate("/main");
     },
-    // минимальное расстояние свайпа (можно настроить по необходимости)
     delta: 50,
   });
 
   // Обработчик клика по меню, который также ведёт на страницу /main
   const handleMenuClick = () => {
     navigate("/main");
+  };
+
+  const handleMenuClick2 = () => {
+    navigate("/statistic");
+  };
+
+  const handleMenuClick3 = () => {
+    navigate("/chat");
+  };
+
+  const handleMenuClick4 = () => {
+    navigate("/account");
+  };
+
+  const handleMenuClick5 = () => {
+    navigate("/sleep");
   };
 
   // Задаём вариант анимации выхода: экран уходит влево с плавным снижением прозрачности
@@ -58,7 +72,13 @@ export const SleepScreen = () => {
       <SleepTimer />
       
       {/* Группа меню, отвечающая за переключение экранов */}
-      <MenuGroup onMenuClick={handleMenuClick} />
+      <MenuGroup 
+        onMenuClickAccount={handleMenuClick4}
+        onMenuClickSleep={handleMenuClick5}
+        onMenuClickMain={handleMenuClick}
+        onMenuClickStatistic={handleMenuClick2}
+        onMenuClickChat={handleMenuClick3}
+      />
     </motion.div>
   );
 };
