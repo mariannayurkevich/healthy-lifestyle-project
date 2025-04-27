@@ -9,7 +9,11 @@ export const FirstScreen = () => {
 
   // Функция для перенаправления на главный экран
   const handleRedirect = () => {
-    navigate("/main");
+    navigate("/entry");
+  };
+
+  const handleRedirect2 = () => {
+    navigate("/registration");
   };
 
   return (
@@ -32,7 +36,7 @@ export const FirstScreen = () => {
 
         <div className="buttons">
           <div className="overlap-wrapper">
-            <div className="overlap-2" onClick={handleRedirect}>
+            <div className="overlap-2" onClick={handleRedirect2}>
               <div className="text-wrapper">Зарегестрироваться</div>
             </div>
           </div>

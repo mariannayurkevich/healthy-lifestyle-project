@@ -1,0 +1,266 @@
+/* Глобальный сброс */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  
+.entryscreen {
+    background-color: #ff5151;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.entryscreen .div {
+    background-color: #ff5151;
+    height: 874px;
+    overflow: hidden;
+    position: relative;
+    width: 401px;
+}
+
+.entryscreen .overlap {
+    background-color: #fefaff;
+    border-radius: 54px;
+    height: 597px;
+    left: 0;
+    position: absolute;
+    top: 277px;
+    width: 402px;
+}
+
+.entryscreen .overlap-group-wrapper {
+    height: 49px;
+    left: 30px;
+    position: absolute;
+    top: 266px;
+    width: 344px;
+}
+
+.entryscreen .overlap-group {
+    background-color: #280636;
+    border-radius: 28px;
+    height: 49px;
+    position: relative;
+    width: 342px;
+}
+
+.entryscreen .text-wrapper {
+    color: #ffffff;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 145px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 15px;
+    width: 52px;
+}
+
+.entryscreen .text-wrapper-2 {
+    color: #280636;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 12px;
+    font-weight: 550;
+    left: 265px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 208px;
+    white-space: nowrap;
+}
+
+.entryscreen .view {
+    background-color: #ececec;
+    height: 16px;
+    left: 0;
+    position: absolute;
+    top: 345px;
+    width: 402px;
+}
+
+.entryscreen .overlap-wrapper {
+    height: 49px;
+    left: 30px;
+    position: absolute;
+    top: 77px;
+    width: 344px;
+}
+
+.entryscreen .div-wrapper {
+    background-color: #ececec;
+    border-radius: 28px;
+    height: 49px;
+    position: relative;
+    width: 342px;
+}
+
+.entryscreen .text-wrapper-3 {
+    color: #28063533;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 26px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 15px;
+    white-space: nowrap;
+}
+
+.entryscreen .overlap-wrapper-2 {
+    height: 49px;
+    left: 30px;
+    position: absolute;
+    top: 147px;
+    width: 344px;
+}
+
+.entryscreen .overlap-wrapper-3 {
+    height: 49px;
+    left: 30px;
+    position: absolute;
+    top: 397px;
+    width: 344px;
+}
+
+.entryscreen .input-email,
+.entryscreen .input-password {
+  background-color: #ECECEC;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 28px;
+  padding: 0 10px;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  outline: none;
+}
+
+.entryscreen .error-message {
+    position: absolute;
+    left: 50px;
+    top: 245px;
+    font-family: "Rubik-Medium", Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #FF5252;
+    white-space: nowrap;
+  }
+  
+
+.entryscreen .overlap-2 {
+    background-color: #fefaff;
+    border-radius: 58px;
+    box-shadow: 0px 3px 4px #261b7226;
+    height: 49px;
+    position: relative;
+    width: 342px;
+}
+
+.entryscreen .google {
+    height: 32px;
+    left: 8px;
+    position: absolute;
+    top: 9px;
+    width: 32px;
+}
+
+.entryscreen .text-wrapper-4 {
+    color: #280635;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 65px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 15px;
+    white-space: nowrap;
+}
+
+.entryscreen .pointer {
+    height: 14px;
+    left: 308px;
+    position: absolute;
+    top: 16px;
+    width: 18px;
+}
+
+.entryscreen .text-wrapper-5 {
+    color: #ffffff;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 48px;
+    font-weight: 500;
+    left: 29px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 186px;
+    white-space: nowrap;
+}
+
+.entryscreen .div-2 {
+    height: 19px;
+    left: 35px;
+    position: absolute;
+    top: 66px;
+    width: 338px;
+}
+
+.entryscreen .text-wrapper-6 {
+    color: #fefaff;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 233px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+}
+
+.entryscreen .pointer {
+    height: 14px;
+    left: 0px;
+    position: absolute;
+    top: 1px;
+    width: 18px;
+}
+
+.entryscreen .view-2 {
+    height: 100px;
+    left: 192px;
+    position: fixed;
+    top: 131px;
+    width: 164px;
+}
+
+.entryscreen .overlap-3 {
+    height: 100px;
+    position: relative;
+}
+
+.entryscreen .left-eye {
+    height: 91px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 91px;
+}
+
+.entryscreen .right-eye {
+    height: 83px;
+    left: 81px;
+    position: absolute;
+    top: 17px;
+    width: 83px;
+}
