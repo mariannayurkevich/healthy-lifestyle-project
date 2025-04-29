@@ -21,7 +21,7 @@ html, body {
     height: 874px;
     overflow: hidden;
     position: relative;
-    width: 401px;
+    width: 402px;
 }
 
 .entryscreen .overlap {
@@ -133,7 +133,7 @@ html, body {
 .entryscreen .input-email,
 .entryscreen .input-password {
   background-color: #ECECEC;
-  width: 100%;
+  width: 325px;
   height: 100%;
   border: none;
   border-radius: 28px;
@@ -259,7 +259,7 @@ html, body {
 
 .entryscreen .right-eye {
     height: 83px;
-    left: 81px;
+    left: 75px;
     position: absolute;
     top: 17px;
     width: 83px;

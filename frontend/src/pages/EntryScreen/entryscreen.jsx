@@ -90,9 +90,7 @@ export const EntryScreen = () => {
         <div className="div-2">
           <div className="text-wrapper-6" onClick={handleRedirect3}>Регистрация</div>
 
-          <div className="button" onClick={handleRedirect2}>
-             <img className="pointer" alt="Ponter" src={ponter2} />
-          </div>
+          <img className="pointer" alt="Ponter" src={ponter2} onClick={handleRedirect2}/>
         </div>
 
         <div className="view-2">

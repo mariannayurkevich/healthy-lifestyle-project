@@ -5,7 +5,7 @@ html, body {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-  }
+}
 
 .registrationfirst {
     background-color: #ff5151;
@@ -14,16 +14,17 @@ html, body {
     justify-content: center;
     width: 100vw;
     height: 100vh;
-  }
+}
   
-  .registrationfirst .div {
+.registrationfirst .div {
     background-color: #ff5151;
     height: 874px;
     position: relative;
+    overflow: hidden;
     width: 402px;
-  }
+}
   
-  .registrationfirst .overlap {
+.registrationfirst .overlap {
     background-color: #fefaff;
     border-radius: 54px;
     height: 597px;
@@ -31,25 +32,51 @@ html, body {
     position: absolute;
     top: 277px;
     width: 402px;
-  }
+}
   
-  .registrationfirst .overlap-group-wrapper {
+.registrationfirst .overlap-group-wrapper {
     height: 49px;
     left: 30px;
     position: absolute;
     top: 76px;
     width: 344px;
-  }
+}
   
-  .registrationfirst .overlap-group {
+.registrationfirst .overlap-group {
     background-color: #ececec;
     border-radius: 28px;
     height: 49px;
     position: relative;
     width: 342px;
-  }
+}
+
+.registrationfirst .input-email,
+.registrationfirst .input-password,
+.registrationfirst .input-repeat-password {
+  background-color: #ECECEC;
+  width: 325px;
+  height: 100%;
+  border: none;
+  border-radius: 28px;
+  padding: 0 10px;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  outline: none;
+}
+
+.registrationfirst .error-message {
+  position: absolute;
+  left: 50px;
+  top: 300px;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #FF5252;
+  white-space: nowrap;
+}
   
-  .registrationfirst .text-wrapper {
+.registrationfirst .text-wrapper {
     color: #28063533;
     font-family: "Rubik-Medium", Helvetica;
     font-size: 16px;
@@ -60,38 +87,46 @@ html, body {
     position: absolute;
     top: 15px;
     white-space: nowrap;
-  }
+}
   
-  .registrationfirst .overlap-wrapper {
+.registrationfirst .overlap-wrapper {
     height: 49px;
     left: 29px;
     position: absolute;
     top: 146px;
     width: 344px;
-  }
+}
+
+.registrationfirst .overlap-wrapper-2 {
+  height: 49px;
+  left: 29px;
+  position: absolute;
+  top: 246px;
+  width: 344px;
+}
   
-  .registrationfirst .div-wrapper {
+.registrationfirst .div-wrapper {
     height: 49px;
     left: 29px;
     position: absolute;
     top: 237px;
     width: 344px;
-  }
+}
   
-  .registrationfirst .view {
+.registrationfirst .view {
     height: 16px;
     left: 177px;
     position: absolute;
     top: 27px;
     width: 48px;
-  }
+}
   
-  .registrationfirst .overlap-2 {
+.registrationfirst .overlap-2 {
     height: 16px;
     position: relative;
-  }
+}
   
-  .registrationfirst .ellipse {
+.registrationfirst .ellipse {
     background-color: #28063533;
     border: 1px solid;
     border-color: #d3c9d7;
@@ -101,17 +136,17 @@ html, body {
     position: absolute;
     top: 0;
     width: 16px;
-  }
+}
   
-  .registrationfirst .line {
+.registrationfirst .line {
     height: 4px;
     left: 8px;
     position: absolute;
     top: 6px;
     width: 30px;
-  }
+}
   
-  .registrationfirst .ellipse-2 {
+.registrationfirst .ellipse-2 {
     background-color: #280635;
     border: 1px solid;
     border-radius: 8px;
@@ -120,25 +155,25 @@ html, body {
     position: absolute;
     top: 0;
     width: 16px;
-  }
+}
   
-  .registrationfirst .button-next {
+.registrationfirst .button-next {
     height: 49px;
     left: 30px;
     position: absolute;
     top: 448px;
     width: 344px;
-  }
+}
   
-  .registrationfirst .overlap-3 {
+.registrationfirst .overlap-3 {
     background-color: #280636;
     border-radius: 28px;
     height: 49px;
     position: relative;
     width: 342px;
-  }
+}
   
-  .registrationfirst .text-wrapper-2 {
+.registrationfirst .text-wrapper-2 {
     color: #ffffff;
     font-family: "Rubik-Medium", Helvetica;
     font-size: 16px;
@@ -149,17 +184,17 @@ html, body {
     position: absolute;
     top: 15px;
     width: 54px;
-  }
+}
   
-  .registrationfirst .vector-next {
+.registrationfirst .vector-next {
     height: 14px;
     left: 308px;
     position: absolute;
     top: 17px;
     width: 18px;
-  }
+}
   
-  .registrationfirst .text-wrapper-3 {
+.registrationfirst .text-wrapper-3 {
     color: #ffffff;
     font-family: "Rubik-Medium", Helvetica;
     font-size: 48px;
@@ -170,17 +205,17 @@ html, body {
     position: absolute;
     top: 186px;
     white-space: nowrap;
-  }
+}
   
-  .registrationfirst .div-2 {
+.registrationfirst .div-2 {
     height: 19px;
-    left: 31px;
+    left: 35px;
     position: absolute;
-    top: 59px;
-    width: 339px;
-  }
+    top: 66px;
+    width: 338px;
+}
   
-  .registrationfirst .text-wrapper-4 {
+.registrationfirst .text-wrapper-4 {
     color: #fefaff;
     font-family: "Rubik-Medium", Helvetica;
     font-size: 16px;
@@ -191,54 +226,55 @@ html, body {
     position: absolute;
     top: 0;
     white-space: nowrap;
-  }
+}
   
-  .registrationfirst .vector-prev {
+.registrationfirst .vector-prev {
     height: 14px;
-    left: 0;
+    left: 0px;
     position: absolute;
-    top: 5px;
+    top: 1px;
     width: 18px;
-  }
+}
   
-  .registrationfirst .view-2 {
+.registrationfirst .view-2 {
     height: 98px;
     left: 61px;
     position: absolute;
     top: 86px;
     width: 160px;
-  }
+}
   
-  .registrationfirst .overlap-4 {
+.registrationfirst .overlap-4 {
     height: 98px;
     position: relative;
-  }
+}
   
-  .registrationfirst .left-eye {
-    height: 76px;
+.registrationfirst .left-eye {
+    height: 83px;
     left: 0;
     position: absolute;
     top: 22px;
-    width: 76px;
-  }
+    width: 83px;
+}
   
-  .registrationfirst .right-eye {
-    height: 93px;
-    left: 67px;
+.registrationfirst .right-eye {
+    height: 83px;
+    left: 80px;
     position: absolute;
-    top: 0;
-    width: 93px;
-  }
+    top: 5px;
+    width: 83px;
+}
   
-  .registrationfirst .text-wrapper-5 {
-    color: #ff5151;
+.registrationfirst .text-wrapper-5 {
+    color: #9e9e9e;
     font-family: "Rubik-Medium", Helvetica;
     font-size: 14px;
     font-weight: 500;
-    left: 55px;
     letter-spacing: 0;
     line-height: normal;
-    position: fixed;
-    top: 475px;
-  }
+    position: relative;
+    left: 50px;
+    top: 200px;
+
+}
   

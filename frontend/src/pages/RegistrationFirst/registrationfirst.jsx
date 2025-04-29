@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import leftEye from "./src/left-eye.svg";
 import line101 from "./src/line-101.svg";
 import rightEye from "./src/left-eye.svg";
@@ -11,13 +11,22 @@ import { useNavigate } from "react-router-dom";
 export const RegistrationFirstScreen = () => {
 
     const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [repeatPassword, setRepeatPassword] = useState("");
+    const [error, setError] = useState(false);
         
           const handleClick = () => {
             navigate('/entry');
           };
 
           const handleClick2 = () => {
-            navigate('/registrationsecond');
+            if (email.trim() === "" || password.trim() === "" || repeatPassword.trim() === "") {
+              setError(true);
+            } else {
+              setError(false);
+              navigate('/registrationsecond');
+            }
           };
 
           const handleClick3 = () => {
@@ -30,21 +39,47 @@ return(
         <div className="overlap">
           <div className="overlap-group-wrapper">
             <div className="overlap-group">
-                <div className="text-wrapper">Электронная почта</div>
+              <input
+                type="email"
+                placeholder="Электронная почта"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="input-email"
+              />
             </div>
           </div>
 
           <div className="overlap-wrapper">
             <div className="overlap-group">
-              <div className="text-wrapper">Пароль</div>
+              <input
+                type="password"
+                placeholder="Пароль"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="input-password"
+              />
             </div>
           </div>
 
-          <div className="overlap-wrapper">
+          <div className="overlap-wrapper-2">
             <div className="overlap-group">
-              <div className="text-wrapper">Повторите пароль</div>
+              <input
+                type="password"
+                placeholder="Повторите пароль"
+                value={repeatPassword}
+                onChange={(e) => setRepeatPassword(e.target.value)}
+                className="input-repeat-password"
+              />
             </div>
           </div>
+
+          {error && (
+            <div className="error-message">
+              Заполните все поля для регистрации*
+            </div>
+          )}
+
+          <div className="text-wrapper-5">Пароль должен содержать...</div>
 
           <div className="view">
             <div className="overlap-2">
@@ -81,7 +116,7 @@ return(
           </div>
         </div>
         
-        <div className="text-wrapper-5">Пароль должен содержать...</div>
+        
       </div>
     </div>
   );

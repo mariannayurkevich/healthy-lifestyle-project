@@ -14,16 +14,17 @@ html, body {
     justify-content: center;
     width: 100vw;
     height: 100vh;
-  }
+}
   
-  .registrationsecond .div {
+.registrationsecond .div {
     background-color: #ff5151;
     height: 874px;
     position: relative;
+    overflow: hidden;
     width: 402px;
-  }
+}
   
-  .registrationsecond .overlap {
+.registrationsecond .overlap {
     background-color: #fefaff;
     border-radius: 54px;
     height: 597px;
@@ -31,25 +32,25 @@ html, body {
     position: absolute;
     top: 277px;
     width: 402px;
-  }
+}
   
-  .registrationsecond .overlap-group-wrapper {
+.registrationsecond .overlap-group-wrapper {
     height: 49px;
     left: 30px;
     position: absolute;
     top: 181px;
     width: 344px;
-  }
+}
   
-  .registrationsecond .overlap-group {
+.registrationsecond .overlap-group {
     background-color: #ececec;
     border-radius: 28px;
     height: 49px;
     position: relative;
     width: 342px;
-  }
+}
   
-  .registrationsecond .text-wrapper {
+.registrationsecond .text-wrapper {
     color: #28063533;
     font-family: "Rubik-Medium", Helvetica;
     font-size: 16px;
@@ -60,22 +61,22 @@ html, body {
     position: absolute;
     top: 15px;
     white-space: nowrap;
-  }
+}
   
-  .registrationsecond .view {
+.registrationsecond .view {
     height: 16px;
     left: 177px;
     position: absolute;
     top: 27px;
     width: 48px;
-  }
+}
   
-  .registrationsecond .overlap-2 {
+.registrationsecond .overlap-2 {
     height: 16px;
     position: relative;
-  }
+}
   
-  .registrationsecond .ellipse {
+.registrationsecond .ellipse {
     background-color: #280635;
     border: 1px solid;
     border-radius: 8px;
@@ -84,17 +85,17 @@ html, body {
     position: absolute;
     top: 0;
     width: 16px;
-  }
+}
   
-  .registrationsecond .line {
+.registrationsecond .line {
     height: 4px;
     left: 8px;
     position: absolute;
     top: 6px;
     width: 30px;
-  }
+}
   
-  .registrationsecond .ellipse-2 {
+.registrationsecond .ellipse-2 {
     background-color: #280635;
     border: 1px solid;
     border-radius: 8px;
@@ -103,9 +104,9 @@ html, body {
     position: absolute;
     top: 0;
     width: 16px;
-  }
+}
   
-  .registrationsecond .button {
+.registrationsecond .button {
     all: unset;
     box-sizing: border-box;
     height: 49px;
@@ -113,17 +114,17 @@ html, body {
     position: absolute;
     top: 448px;
     width: 344px;
-  }
+}
   
-  .registrationsecond .div-wrapper {
+.registrationsecond .div-wrapper {
     background-color: #280636;
     border-radius: 28px;
     height: 49px;
     position: relative;
     width: 342px;
-  }
+}
   
-  .registrationsecond .text-wrapper-2 {
+.registrationsecond .text-wrapper-2 {
     color: #ffffff;
     font-family: "Rubik-Medium", Helvetica;
     font-size: 16px;
@@ -134,17 +135,17 @@ html, body {
     position: absolute;
     top: 15px;
     width: 105px;
-  }
+}
   
-  .registrationsecond .div-2 {
+.registrationsecond .div-2 {
     height: 91px;
     left: 45px;
     position: absolute;
     top: 69px;
     width: 235px;
-  }
+}
   
-  .registrationsecond .ellipse-3 {
+.registrationsecond .ellipse-3 {
     background-color: #ececec;
     border-radius: 45.5px;
     height: 91px;
@@ -152,9 +153,9 @@ html, body {
     position: absolute;
     top: 0;
     width: 91px;
-  }
+}
   
-  .registrationsecond .text-wrapper-3 {
+.registrationsecond .text-wrapper-3 {
     color: #280635;
     font-family: "Rubik-Medium", Helvetica;
     font-size: 16px;
@@ -165,9 +166,9 @@ html, body {
     position: absolute;
     top: 25px;
     white-space: nowrap;
-  }
+}
   
-  .registrationsecond .text-wrapper-4 {
+.registrationsecond .text-wrapper-4 {
     color: #280635;
     font-family: "Rubik-Medium", Helvetica;
     font-size: 16px;
@@ -178,9 +179,9 @@ html, body {
     position: absolute;
     top: 47px;
     white-space: nowrap;
-  }
+}
   
-  .registrationsecond .text-wrapper-5 {
+.registrationsecond .text-wrapper-5 {
     color: #ffffff;
     font-family: "Rubik-Medium", Helvetica;
     font-size: 48px;
@@ -191,25 +192,25 @@ html, body {
     position: absolute;
     top: 186px;
     white-space: nowrap;
-  }
+ }
   
-  .registrationsecond .overlap-3 {
+.registrationsecond .overlap-3 {
     height: 112px;
     left: 31px;
     position: absolute;
     top: 63px;
     width: 339px;
-  }
+}
   
-  .registrationsecond .div-3 {
+.registrationsecond .div-3 {
     height: 19px;
-    left: 0;
+    left: 35px;
     position: absolute;
-    top: 0;
-    width: 339px;
-  }
+    top: 66px;
+    width: 338px;
+}
   
-  .registrationsecond .text-wrapper-6 {
+.registrationsecond .text-wrapper-6 {
     color: #fefaff;
     font-family: "Rubik-Medium", Helvetica;
     font-size: 16px;
@@ -220,54 +221,62 @@ html, body {
     position: absolute;
     top: 0;
     white-space: nowrap;
-  }
+}
   
-  .registrationsecond .vector-prev {
+.registrationsecond .vector-prev {
     height: 14px;
     left: 0;
     position: absolute;
-    top: 5px;
+    top: 1px;
     width: 18px;
-  }
+}
   
-  .registrationsecond .overlap-wrapper {
+.registrationsecond .overlap-wrapper {
     height: 93px;
     left: 97px;
     position: absolute;
     top: 19px;
     width: 163px;
-  }
+}
+
+.registrationsecond .view-2 {
+    height: 98px;
+    left: 150px;
+    position: absolute;
+    top: 85px;
+    width: 160px;
+}
   
-  .registrationsecond .overlap-4 {
-    height: 93px;
+.registrationsecond .overlap-4 {
+    height: 98px;
     position: relative;
-  }
+}
   
-  .registrationsecond .left-eye {
-    height: 89px;
-    left: 0;
+.registrationsecond .left-eye {
+    height: 91px;
+    left: 0px;
     position: absolute;
-    top: 0;
-    width: 89px;
-  }
+    top: 0px;
+    width: 91px;
+}
   
-  .registrationsecond .right-eye {
-    height: 81px;
-    left: 83px;
+.registrationsecond .right-eye {
+    height: 83px;
+    left: 80px;
     position: absolute;
-    top: 12px;
-    width: 81px;
-  }
+    top: 15px;
+    width: 83px;
+}
   
-  .registrationsecond .p {
+.registrationsecond .p {
     color: #ff5151;
     font-family: "Rubik-Medium", Helvetica;
     font-size: 14px;
     font-weight: 500;
-    left: 56px;
+    left: 45px;
     letter-spacing: 0;
     line-height: normal;
-    position: fixed;
-    top: 513px;
-  }
+    position: relative;
+    top: 235px;
+}
   

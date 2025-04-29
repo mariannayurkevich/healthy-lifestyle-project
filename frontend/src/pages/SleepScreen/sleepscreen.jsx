@@ -18,33 +18,18 @@ export const SleepScreen = () => {
     delta: 50,
   });
 
-  // Обработчик клика по меню, который также ведёт на страницу /main
-  const handleMenuClick = () => {
-    navigate("/main");
-  };
+  // Обработчики кликов для меню
+  const handleMenuClick = () => navigate("/main");
+  const handleMenuClick2 = () => navigate("/statistic");
+  const handleMenuClick3 = () => navigate("/chat");
+  const handleMenuClick4 = () => navigate("/account");
+  const handleMenuClick5 = () => navigate("/sleep");
 
-  const handleMenuClick2 = () => {
-    navigate("/statistic");
-  };
-
-  const handleMenuClick3 = () => {
-    navigate("/chat");
-  };
-
-  const handleMenuClick4 = () => {
-    navigate("/account");
-  };
-
-  const handleMenuClick5 = () => {
-    navigate("/sleep");
-  };
-
-  // Задаём вариант анимации выхода: экран уходит влево с плавным снижением прозрачности
+  // Варианты анимации сдвига экрана:
   const pageVariants = {
-    out: {
-      opacity: 0,
-      x: "-100vw",
-    },
+    initial: { x: "100%", opacity: 0 },
+    animate: { x: "0%", opacity: 1 },
+    exit: { x: "-100%", opacity: 0 },
   };
 
   const pageTransition = {
@@ -54,24 +39,18 @@ export const SleepScreen = () => {
   };
 
   return (
-    // Распространяем обработчики свайпа на корневой motion.div
     <motion.div
       className="sleepscreen"
-      exit="out"
+      initial="initial"
+      animate="animate"
+      exit="exit"
       variants={pageVariants}
       transition={pageTransition}
       {...swipeHandlers}
     >
-      {/* Фоновая группа – все декоративные изображения */}
       <BackgroundGroup />
-      
-      {/* Группа с текстом "Сладких снов" */}
       <SleepText />
-      
-      {/* Группа с таймером: кнопка и отображение времени */}
       <SleepTimer />
-      
-      {/* Группа меню, отвечающая за переключение экранов */}
       <MenuGroup 
         onMenuClickAccount={handleMenuClick4}
         onMenuClickSleep={handleMenuClick5}

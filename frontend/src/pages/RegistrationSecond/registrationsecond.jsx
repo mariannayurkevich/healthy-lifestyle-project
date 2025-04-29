@@ -9,19 +9,19 @@ import { useNavigate } from "react-router-dom";
 
 export const RegistrationSecondScreen = () => {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
         
-          const handleClick = () => {
-            navigate('/entry');
-          };
+        const handleClick = () => {
+          navigate('/entry');
+        };
 
-          const handleClick2 = () => {
-            navigate('/main');
-          };
+        const handleClick2 = () => {
+          navigate('/main');
+        };
 
-          const handleClick3 = () => {
-            navigate('/regisrtationfirst');
-          };
+        const handleClick3 = () => {
+          navigate('/registrationfirst');
+        };
 
 return(
     <div className="registrationsecond">
@@ -56,6 +56,11 @@ return(
 
             <div className="text-wrapper-4">Выбрать аватар</div>
           </div>
+
+          <p className="p">
+            Введите имя, чтобы мы могли к Вам обращаться*
+          </p>
+
         </div>
 
         <div className="text-wrapper-5">Регистрация</div>
@@ -73,10 +78,6 @@ return(
             <img className="right-eye" alt="Right eye" src={rightEye} />
           </div>
         </div>
-
-        <p className="p">
-          Введите имя, чтобы мы могли к Вам обращаться*
-        </p>
 
       </div>
     </div>
