@@ -1,6 +1,7 @@
 package marianna.yurk.fitness_app.registration;
 
 import lombok.AllArgsConstructor;
+import marianna.yurk.fitness_app.email.EmailRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,12 +25,18 @@ public class RegistrationController {
         return registrationService.confirmToken(token);
     }
 
-    @GetMapping("/google")
-    public ResponseEntity<?> currentUser(@AuthenticationPrincipal OAuth2AuthenticationToken token) {
-        if (token == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not authenticated via OAuth2");
-        }
-        return ResponseEntity.ok(token.getPrincipal().getAttributes());
+    @PostMapping("/resend-activation")
+    public String resendActivationEmail(@RequestBody EmailRequest request) {
+        return registrationService.resendActivationEmail(request.getEmail());
     }
+
+
+//    @GetMapping("/google")
+//    public ResponseEntity<?> currentUser(@AuthenticationPrincipal OAuth2AuthenticationToken token) {
+//        if (token == null) {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not authenticated via OAuth2");
+//        }
+//        return ResponseEntity.ok(token.getPrincipal().getAttributes());
+//    }
 
 }

@@ -5,9 +5,12 @@ import lombok.AllArgsConstructor;
 import marianna.yurk.fitness_app.email.EmailSender;
 import marianna.yurk.fitness_app.registration.token.*;
 import marianna.yurk.fitness_app.user.*;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -17,6 +20,7 @@ public class RegistrationService {
     private final EmailValidator emailValidator;
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailSender emailSender;
+    private final UserRepository userRepository;
 
 
     public String register(RegistrationRequest request) {
@@ -134,4 +138,49 @@ public class RegistrationService {
                 "\n" +
                 "</div></div>";
     }
+
+    public String resendActivationEmail(String email) {
+        Optional<User> userOpt = userRepository.findByEmail(email);
+        if (userOpt.isEmpty()) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        User user = userOpt.get();
+
+        if (user.isEnabled()) {
+            return "User already activated";
+        }
+
+        String token = UUID.randomUUID().toString();
+        ConfirmationToken confirmationToken = new ConfirmationToken(
+                token,
+                LocalDateTime.now(),
+                LocalDateTime.now().plusMinutes(15),
+                user
+        );
+        confirmationTokenService.save(confirmationToken);
+
+        String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
+        emailSender.send(email, buildActivationEmail(user.getFirstName(), link));
+
+        return "Activation email sent";
+    }
+
+    private String buildActivationEmail(String name, String link) {
+        return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
+                "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" +
+                "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n" +
+                "  <tbody><tr>\n" +
+                "    <td>\n" +
+                "      <h1 style=\"color:#0b0c0c\">Email confirmation reminder</h1>\n" +
+                "      <p>Hi " + name + ",</p>\n" +
+                "      <p>It looks like you haven’t confirmed your email yet. Click the link below to activate your account:</p>\n" +
+                "      <a href=\"" + link + "\">Activate Now</a>\n" +
+                "      <p>The link will expire in 15 minutes.</p>\n" +
+                "      <p>Thanks,<br/>The Fitness App Team</p>\n" +
+                "    </td>\n" +
+                "  </tr></tbody>\n" +
+                "</table>\n" +
+                "</div>";
+    }
+
 }
