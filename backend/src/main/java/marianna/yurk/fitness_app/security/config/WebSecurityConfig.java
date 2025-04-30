@@ -1,11 +1,11 @@
 package marianna.yurk.fitness_app.security.config;
 
 import lombok.AllArgsConstructor;
+import marianna.yurk.fitness_app.security.oauth.CustomOAuth2UserService;
 import marianna.yurk.fitness_app.user.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,6 +19,8 @@ public class WebSecurityConfig{
 
     private final UserService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final CustomOAuth2UserService customOAuth2UserService;
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -38,7 +40,23 @@ public class WebSecurityConfig{
                         .defaultSuccessUrl("/")  // Перенаправление после успешного входа
                         .permitAll()
                 )
-                .oauth2Login(Customizer.withDefaults());
+                .oauth2Login(oauth -> oauth
+                        .userInfoEndpoint(userInfo -> userInfo
+                                .userService(customOAuth2UserService)
+                        )
+                        .defaultSuccessUrl("/")
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .deleteCookies("JSESSIONID")
+                        .permitAll()
+                )
+                .sessionManagement(session -> session
+                        .maximumSessions(1)  // только одна активная сессия на пользователя
+                );
 
         return http.build();
     }
