@@ -35,7 +35,7 @@ spring:
           google:
             client-id: 117546400267-uvopeqam0le84p72cb13bh34kdg01c5f.apps.googleusercontent.com
             client-secret: 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
-            scope: openid,profile
+            scope: openid,profile,email
         provider:
           google:
             issuer-uri: https://accounts.google.com
