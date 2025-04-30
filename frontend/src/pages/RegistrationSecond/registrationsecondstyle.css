@@ -49,6 +49,30 @@ html, body {
     position: relative;
     width: 342px;
 }
+
+.registrationsecond .input-name {
+  background-color: #ECECEC;
+  width: 325px;
+  height: 100%;
+  border: none;
+  border-radius: 28px;
+  padding: 0 10px;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  outline: none;
+}
+
+.registrationsecond .error-message {
+  position: absolute;
+  left: 45px;
+  top: 245px;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #FF5252;
+  white-space: nowrap;
+}
   
 .registrationsecond .text-wrapper {
     color: #28063533;
@@ -266,17 +290,5 @@ html, body {
     position: absolute;
     top: 15px;
     width: 83px;
-}
-  
-.registrationsecond .p {
-    color: #ff5151;
-    font-family: "Rubik-Medium", Helvetica;
-    font-size: 14px;
-    font-weight: 500;
-    left: 45px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: relative;
-    top: 235px;
 }
   

@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -7,178 +8,293 @@ html, body {
 }
 
 .chatscreen {
-  background-color: #fdfaff;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  position: relative;
   width: 100vw;
   height: 100vh;
-}
-
-.chatscreen .div {
-  background-color: #fdfaff;
-  height: 100%;
   overflow: hidden;
-  position: relative;
-  width: 100%;
+  background-color: #fdfaff;
 }
 
-.chatscreen .overlap-group {
-  -webkit-backdrop-filter: blur(25.35px) brightness(100%);
-  backdrop-filter: blur(25.35px) brightness(100%);
-  height: 928px;
-  left: 0;
-  position: absolute;
-  bottom: -50px;
-  width: 402px;
-  z-index: 2;
-}
-
-.chatscreen .rectangle {
-  background-color: #fffcff99;
-  border-radius: 22px;
-  height: 51px;
-  left: 29px;
-  position: absolute;
-  top: 691px;
-  width: 341px;
-}
-
-.chatscreen .vector {
-  height: 27px;
-  left: 324px;
-  position: absolute;
-  top: 703px;
-  width: 27px;
-}
-
-.chatscreen .text-wrapper {
-  color: #000000;
-  font-family: "Rubik-Medium", Helvetica;
-  font-size: 16px;
-  font-weight: 500;
-  left: 85px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 706px;
-  white-space: nowrap;
-}
-
-.chatscreen .menu {
-  height: 20px;
-  left: 47px;
+/* Фон с градиентами (фиксированный и отцентрированный) */
+.background-colors {
   position: fixed;
-  top: 703px;
-  width: 25px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
 }
 
-.chatscreen .buttons {
+.background-colors > div {
   position: absolute;
-  z-index: 2;
+  border-radius: 50%;
 }
 
-.chatscreen .background-colors {
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.chatscreen .blue-gradient {
-  position: absolute;
+.blue-gradient {
   width: 350px;
   height: 350px;
-  border-radius: 50%;
   background: radial-gradient(
     rgba(72, 185, 255, 0.6) 20%,
     rgba(255, 255, 255, 1) 100%
   );
-  filter: blur(60px); /* добавляет размытие */
   top: 150px;
-  left: -50px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  filter: blur(60px);
 }
 
-.chatscreen .red-gradient {
-  position: absolute;
+.red-gradient {
   width: 400px;
   height: 400px;
-  border-radius: 50%;
   background: radial-gradient(
     rgba(255, 82, 82, 0.6) 0%,
     rgba(255, 255, 255, 1) 100%
   );
-  filter: blur(80px); /* добавляет размытие */
   top: -100px;
-  left: -100px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  filter: blur(80px);
 }
 
-.chatscreen .pirple-gradient {
-  position: absolute;
+.pirple-gradient {
   width: 500px;
   height: 500px;
-  border-radius: 50%;
   background: radial-gradient(
     rgba(27, 30, 140, 0.6) 0%,
     rgba(255, 255, 255, 1) 100%
   );
-  filter: blur(120px); /* добавляет размытие */
   top: 600px;
-  left: 90px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  filter: blur(120px);
 }
 
-.chatscreen .yellow-gradient {
-  position: absolute;
+.yellow-gradient {
   width: 400px;
   height: 400px;
-  border-radius: 50%;
   background: radial-gradient(
     rgba(255, 220, 78, 0.6) 0%,
     rgba(255, 255, 255, 1) 100%
   );
-  filter: blur(80px); /* добавляет размытие */
   top: 420px;
-  left: -80px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  filter: blur(80px);
 }
 
-.chatscreen .green-gradient {
-  position: absolute;
+.green-gradient {
   width: 550px;
   height: 550px;
-  border-radius: 50%;
   background: radial-gradient(
     rgba(172, 255, 101, 0.6) 0%,
     rgba(255, 255, 255, 1) 100%
   );
-  filter: blur(90px); /* добавляет размытие */
   top: 100px;
-  left: 150px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  filter: blur(90px);
 }
 
-.chatscreen .yellow-gradient2 {
-  position: absolute;
+.yellow-gradient2 {
   width: 400px;
   height: 400px;
-  border-radius: 50%;
   background: radial-gradient(
     rgba(255, 235, 81, 0.6) 0%,
     rgba(255, 255, 255, 1) 100%
   );
-  filter: blur(120px); /* добавляет размытие */
   top: -120px;
-  left: 110px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  filter: blur(120px);
 }
 
-.chatscreen .green-gradient2 {
-  position: absolute;
+.green-gradient2 {
   width: 300px;
   height: 300px;
-  border-radius: 50%;
   background: radial-gradient(
     rgba(172, 255, 101, 0.6) 0%,
     rgba(255, 255, 255, 1) 100%
   );
-  filter: blur(70px); /* добавляет размытие */
   top: 700px;
-  left: -60px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  filter: blur(70px);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 1px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  z-index: 3;
+  height: 45px;
+  position: relative;
+}
+
+.header-title {
+  color: rgba(40, 6, 54, 0.5);
+  font-family: "Rubik-Semibold", Helvetica;
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Стили для кнопок в шапке */
+.vector-prev {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 27px;
+  height: 27px;
+  cursor: pointer;
+}
+
+.vector-ai {
+  position: absolute;
+  right: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 120px;
+  height: 120px;
+}
+
+/* Контейнер чата (поверх фона) */
+.chat-container {
+  position: relative;
+  z-index: 2;
+  height: calc(100% - 55px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Область сообщений */
+.messages-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Псевдоэлемент для "отталкивания" сообщений вниз */
+.messages-container::before {
+  content: "";
+  flex-grow: 1;
+}
+
+.messages-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Панель ввода */
+.input-area {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  border-top: 1px solid #ddd;
+  position: relative;
+  z-index: 2;
+}
+
+/* Обёртка для кнопки дропдауна (расположена слева) */
+.dropdown-wrapper {
+  position: relative;
+  margin-right: 10px;
+}
+
+.vector {
+  width: 27px;
+  height: 27px;
+  cursor: pointer;
+}
+
+/* Выпадающее меню, которое появляется над полем ввода */
+.dropdown-menu {
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  padding: 5px 0;
+  min-width: 220px;
+}
+
+.dropdown-item {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #f2f2f2;
+}
+
+/* Текстовое поле ввода сообщения */
+.message-input {
+  flex-grow: 1;
+  resize: none;
+  padding: 8px;
+  font-size: 16px;
+  font-family: "Rubik-Medium", Helvetica;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  height: 24px;
+  outline: none;
+}
+
+/* Кнопка отправки сообщения */
+.send-icon {
+  width: 27px;
+  height: 27px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+/* Контейнер для нижнего меню */
+.menu-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.message-bubble {
+  align-self: flex-end;
+  background-color: #dcf8c6;
+  padding: 10px 15px;
+  border-radius: 15px;
+  max-width: 70%;
+  word-wrap: break-word;
+  font-family: "Rubik-Medium", Helvetica;
+  font-size: 16px;
+}
+
+.assistant-bubble {
+  align-self: flex-start;
+  background-color: #f0f0ff;
+  padding: 10px 15px;
+  border-radius: 15px;
+  max-width: 70%;
+  word-wrap: break-word;
+  font-family: "Rubik-Medium", Helvetica;
+  font-size: 16px;
 }

@@ -1,0 +1,22 @@
+.message-bubble {
+    align-self: flex-end;
+    background-color: #dcf8c6;
+    padding: 10px 15px;
+    border-radius: 15px;
+    max-width: 70%;
+    word-wrap: break-word;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+  }
+  
+  .assistant-bubble {
+    align-self: flex-start;
+    background-color: #f0f0ff;
+    padding: 10px 15px;
+    border-radius: 15px;
+    max-width: 70%;
+    word-wrap: break-word;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+  }
+  

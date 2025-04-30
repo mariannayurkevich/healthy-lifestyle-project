@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import leftEye from "./src/left-eye.svg";
 import line102 from "./src/line-102.svg";
 import rightEye from "./src/right-eye.svg";
@@ -10,13 +10,20 @@ import { useNavigate } from "react-router-dom";
 export const RegistrationSecondScreen = () => {
 
   const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [error, setError] = useState(false);
         
         const handleClick = () => {
           navigate('/entry');
         };
 
         const handleClick2 = () => {
-          navigate('/main');
+          if (name.trim() === "") {
+            setError(true);
+          } else {
+            setError(false);
+            navigate('/main');
+          }
         };
 
         const handleClick3 = () => {
@@ -29,7 +36,13 @@ return(
         <div className="overlap">
           <div className="overlap-group-wrapper">
             <div className="overlap-group">
-                <div className="text-wrapper">Имя пользователя</div>
+              <input
+                type="name"
+                placeholder="Имя пользователя"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="input-name"
+              />
             </div>
           </div>
 
@@ -57,9 +70,11 @@ return(
             <div className="text-wrapper-4">Выбрать аватар</div>
           </div>
 
-          <p className="p">
-            Введите имя, чтобы мы могли к Вам обращаться*
-          </p>
+          {error && (
+            <div className="error-message">
+              Введите имя, чтобы мы могли к Вам обращаться*
+            </div>
+          )}
 
         </div>
 
