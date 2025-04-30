@@ -1,6 +1,7 @@
 package marianna.yurk.fitness_app.registration.password_reset;
 
 import lombok.RequiredArgsConstructor;
+import marianna.yurk.fitness_app.email.EmailSender;
 import marianna.yurk.fitness_app.registration.token.*;
 import marianna.yurk.fitness_app.user.*;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,6 +19,7 @@ public class PasswordResetService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder encoder;
     private final ConfirmationTokenService tokenService;
+    private final EmailSender emailSender;
 
     public String sendResetToken(String email) {
         Optional<User> userOpt = userRepository.findByEmail(email);
@@ -28,8 +30,25 @@ public class PasswordResetService {
         String token = UUID.randomUUID().toString();
         ConfirmationToken resetToken = new ConfirmationToken(token, LocalDateTime.now(), LocalDateTime.now().plusMinutes(15), user);
         tokenService.save(resetToken);
-        // TODO: отправить email пользователю
+
+        String resetLink = "http://localhost:8080/api/v1/password/reset?token=" + token;
+
+        String emailContent = buildResetEmail(user.getFirstName(), resetLink);
+
+        emailSender.send(user.getEmail(), emailContent);
+
         return token;
+    }
+
+    private String buildResetEmail(String name, String link) {
+        return "Привет, " + name + "!\n\n"
+                + "Ты запросил(а) сброс пароля.\n"
+                + "Нажми на ссылку ниже, чтобы установить новый пароль:\n"
+                + link + "\n\n"
+                + "Срок действия ссылки — 15 минут.\n"
+                + "Если ты не запрашивал(а) сброс пароля, просто проигнорируй это письмо.\n\n"
+                + "С уважением,\n"
+                + "Команда поддержки";
     }
 
     public String resetPassword(NewPasswordRequest request) {

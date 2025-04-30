@@ -1,10 +1,11 @@
 package marianna.yurk.fitness_app.registration.password_reset;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import marianna.yurk.fitness_app.registration.token.ConfirmationToken;
+import marianna.yurk.fitness_app.registration.token.ConfirmationTokenService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/password")
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PasswordResetController {
 
     private final PasswordResetService passwordResetService;
+    private final ConfirmationTokenService confirmationTokenService;
 
     @PostMapping("/forgot")
     public String forgotPassword(@RequestBody PasswordResetRequest request) {
@@ -24,5 +26,14 @@ public class PasswordResetController {
             throw new IllegalArgumentException("Passwords do not match");
         }
         return passwordResetService.resetPassword(request);
+    }
+
+    @GetMapping("/reset")
+    public String showResetForm(@RequestParam("token") String token) {
+        Optional<ConfirmationToken> tokenOpt = confirmationTokenService.getToken(token);
+        if (tokenOpt.isEmpty()) {
+            throw new IllegalStateException("Invalid token");
+        }
+        return "Please enter your new password.";
     }
 }
