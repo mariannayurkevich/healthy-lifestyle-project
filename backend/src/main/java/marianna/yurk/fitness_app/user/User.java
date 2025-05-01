@@ -3,8 +3,6 @@ package marianna.yurk.fitness_app.user;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -50,25 +48,13 @@ public class User implements UserDetails {
         @NotEmpty(message = "Пароль обязателен")
         private String password;
 
-        // @NotEmpty(message = "Пол обязателен")
         private String gender;
-
-        // @NotNull(message = "Дата рождения обязательна")
         private LocalDate birthDate;
-
-        // @NotNull(message = "Рост обязателен")
-        // @Positive(message = "Рост должен быть положительным числом")
         private Double height; // в сантиметрах
-
-        // @NotNull(message = "Вес обязателен")
-        // @Positive(message = "Вес должен быть положительным числом")
         private Double weight; // в килограммах
-
         private String allergies;
         private String intolerances;
-
         private Double dailyCalorieNorm;
-
         private String activityLevel;
 
         @Enumerated(EnumType.STRING)
@@ -79,6 +65,11 @@ public class User implements UserDetails {
 
         private Boolean locked = false;
         private Boolean enabled = false;
+
+        @Enumerated(EnumType.STRING)
+        private AuthProvider provider;
+
+        private String imageUrl;
 
         public User(String firstName,
                     String lastName,
