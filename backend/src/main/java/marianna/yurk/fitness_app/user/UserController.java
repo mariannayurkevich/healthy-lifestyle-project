@@ -1,5 +1,7 @@
 package marianna.yurk.fitness_app.user;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,7 @@ import java.util.UUID;
 public class UserController {
 
     private final UserService userService;
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -52,7 +55,7 @@ public class UserController {
         return ResponseEntity.ok("Пользователь удалён");
     }
 
-    @PostMapping("/users/{id}/upload-photo")
+    @PostMapping("/{id}/upload-photo")
     public ResponseEntity<?> uploadPhoto(
             @PathVariable Long id,
             @RequestParam("file") MultipartFile file) {
@@ -76,8 +79,10 @@ public class UserController {
             user.setImageUrl("/" + uploadDir + filename);
             userService.updateUser(id, user);
 
+            logger.info("Photo uploaded successfully for user id {}", id);
             return ResponseEntity.ok("Фото успешно загружено");
         } catch (IOException e) {
+            logger.error("Error while uploading photo for user id {}", id, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ошибка при загрузке");
         }
     }

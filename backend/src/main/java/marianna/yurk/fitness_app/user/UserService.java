@@ -69,55 +69,127 @@ public class UserService implements UserDetailsService {
 
     public User updateUser(Long id, User updatedUser) {
         return userRepository.findById(id).map(user -> {
-            if (!user.getEmail().equals(updatedUser.getEmail())) {
+            // Обновляем только измененные поля
+            boolean isUpdated = false;
+
+            // Обновление email, если он изменился
+            if (updatedUser.getEmail() != null && !updatedUser.getEmail().equals(user.getEmail())) {
                 if (userRepository.findByEmail(updatedUser.getEmail()).isPresent()) {
                     throw new IllegalStateException("Email already taken");
                 }
                 user.setEmail(updatedUser.getEmail());
+                isUpdated = true;
             }
 
-            user.setFirstName(updatedUser.getFirstName());
-            user.setLastName(updatedUser.getLastName());
-            user.setGender(updatedUser.getGender());
-            user.setBirthDate(updatedUser.getBirthDate());
-            user.setHeight(updatedUser.getHeight());
-            user.setWeight(updatedUser.getWeight());
-            user.setAllergies(updatedUser.getAllergies());
-            user.setIntolerances(updatedUser.getIntolerances());
-            user.setActivityLevel(updatedUser.getActivityLevel());
-            user.setGoal(updatedUser.getGoal());
+            // Обновление имени
+            if (updatedUser.getFirstName() != null && !updatedUser.getFirstName().equals(user.getFirstName())) {
+                user.setFirstName(updatedUser.getFirstName());
+                isUpdated = true;
+            }
 
+            // Обновление фамилии
+            if (updatedUser.getLastName() != null && !updatedUser.getLastName().equals(user.getLastName())) {
+                user.setLastName(updatedUser.getLastName());
+                isUpdated = true;
+            }
+
+            // Обновление пола
+            if (updatedUser.getGender() != null && !updatedUser.getGender().equals(user.getGender())) {
+                user.setGender(updatedUser.getGender());
+                isUpdated = true;
+            }
+
+            // Обновление даты рождения
+            if (updatedUser.getBirthDate() != null && !updatedUser.getBirthDate().equals(user.getBirthDate())) {
+                user.setBirthDate(updatedUser.getBirthDate());
+                isUpdated = true;
+            }
+
+            // Обновление роста
+            if (updatedUser.getHeight() != null && !updatedUser.getHeight().equals(user.getHeight())) {
+                user.setHeight(updatedUser.getHeight());
+                isUpdated = true;
+            }
+
+            // Обновление веса
+            if (updatedUser.getWeight() != null && !updatedUser.getWeight().equals(user.getWeight())) {
+                user.setWeight(updatedUser.getWeight());
+                isUpdated = true;
+            }
+
+            // Обновление аллергий
+            if (updatedUser.getAllergies() != null && !updatedUser.getAllergies().equals(user.getAllergies())) {
+                user.setAllergies(updatedUser.getAllergies());
+                isUpdated = true;
+            }
+
+            // Обновление непереносимостей
+            if (updatedUser.getIntolerances() != null && !updatedUser.getIntolerances().equals(user.getIntolerances())) {
+                user.setIntolerances(updatedUser.getIntolerances());
+                isUpdated = true;
+            }
+
+            // Обновление уровня активности
+            if (updatedUser.getActivityLevel() != null && !updatedUser.getActivityLevel().equals(user.getActivityLevel())) {
+                user.setActivityLevel(updatedUser.getActivityLevel());
+                isUpdated = true;
+            }
+
+            // Обновление цели
+            if (updatedUser.getGoal() != null && !updatedUser.getGoal().equals(user.getGoal())) {
+                user.setGoal(updatedUser.getGoal());
+                isUpdated = true;
+            }
+
+            // Обновление пароля
             if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
                 user.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
+                isUpdated = true;
             }
 
-            if (updatedUser.getUserRole() != null) {
+            // Обновление роли пользователя
+            if (updatedUser.getUserRole() != null && !updatedUser.getUserRole().equals(user.getUserRole())) {
                 user.setUserRole(updatedUser.getUserRole());
-            }
-            if (updatedUser.getLocked() != null) {
-                user.setLocked(updatedUser.getLocked());
-            }
-            if (updatedUser.getEnabled() != null) {
-                user.setEnabled(updatedUser.getEnabled());
+                isUpdated = true;
             }
 
+            // Обновление заблокированности
+            if (updatedUser.getLocked() != null && !updatedUser.getLocked().equals(user.getLocked())) {
+                user.setLocked(updatedUser.getLocked());
+                isUpdated = true;
+            }
+
+            // Обновление состояния включения
+            if (updatedUser.getEnabled() != null && !updatedUser.getEnabled().equals(user.getEnabled())) {
+                user.setEnabled(updatedUser.getEnabled());
+                isUpdated = true;
+            }
+
+            // Обновление нормы калорий
             if (updatedUser.getBirthDate() != null
                     && updatedUser.getHeight() != null
                     && updatedUser.getWeight() != null
                     && updatedUser.getGender() != null
                     && updatedUser.getActivityLevel() != null) {
                 user.setDailyCalorieNorm(calculateCalorieNorm(updatedUser));
-            } else {
-                user.setDailyCalorieNorm(null);
+                isUpdated = true;
             }
 
-            if (updatedUser.getImageUrl() != null) {
+            // Обновление изображения
+            if (updatedUser.getImageUrl() != null && !updatedUser.getImageUrl().equals(user.getImageUrl())) {
                 user.setImageUrl(updatedUser.getImageUrl());
+                isUpdated = true;
             }
 
-            return userRepository.save(user);
+            // Сохраняем пользователя, если были изменения
+            if (isUpdated) {
+                return userRepository.save(user);
+            } else {
+                return user;
+            }
         }).orElseThrow(() -> new RuntimeException("The user was not found with the id " + id));
     }
+
 
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
