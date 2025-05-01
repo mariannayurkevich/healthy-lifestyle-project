@@ -6,6 +6,7 @@ import marianna.yurk.fitness_app.user.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -36,15 +37,13 @@ public class WebSecurityConfig{
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
+                .oauth2Login(oauth -> oauth
+                        .userInfoEndpoint(userInfo -> userInfo
+                                .userService(customOAuth2UserService))
+                )
                 .formLogin(form -> form
                         .defaultSuccessUrl("/")  // Перенаправление после успешного входа
                         .permitAll()
-                )
-                .oauth2Login(oauth -> oauth
-                        .userInfoEndpoint(userInfo -> userInfo
-                                .userService(customOAuth2UserService)
-                        )
-                        .defaultSuccessUrl("/")
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
