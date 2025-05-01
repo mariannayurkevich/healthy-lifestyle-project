@@ -87,7 +87,6 @@ public class UserService implements UserDetailsService {
             user.setActivityLevel(updatedUser.getActivityLevel());
             user.setGoal(updatedUser.getGoal());
 
-
             if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
                 user.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
             }
@@ -110,6 +109,10 @@ public class UserService implements UserDetailsService {
                 user.setDailyCalorieNorm(calculateCalorieNorm(updatedUser));
             } else {
                 user.setDailyCalorieNorm(null);
+            }
+
+            if (updatedUser.getImageUrl() != null) {
+                user.setImageUrl(updatedUser.getImageUrl());
             }
 
             return userRepository.save(user);
@@ -163,4 +166,9 @@ public class UserService implements UserDetailsService {
     public int enableUser(String email) {
         return userRepository.enableUser(email);
     }
+
+    public Optional<User> getUserById(Long id) {
+        return userRepository.findById(id);
+    }
+
 }

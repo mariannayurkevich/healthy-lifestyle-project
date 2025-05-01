@@ -1,8 +1,17 @@
 package marianna.yurk.fitness_app.user;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/users")
@@ -42,4 +51,35 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.ok("Пользователь удалён");
     }
+
+    @PostMapping("/users/{id}/upload-photo")
+    public ResponseEntity<?> uploadPhoto(
+            @PathVariable Long id,
+            @RequestParam("file") MultipartFile file) {
+
+        Optional<User> optionalUser = userService.getUserById(id);
+
+        if (optionalUser.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Пользователь не найден");
+        }
+
+        User user = optionalUser.get();
+
+        String uploadDir = "uploads/";
+        String filename = UUID.randomUUID() + "_" + file.getOriginalFilename();
+        Path filepath = Paths.get(uploadDir + filename);
+
+        try {
+            Files.createDirectories(filepath.getParent());
+            Files.write(filepath, file.getBytes());
+
+            user.setImageUrl("/" + uploadDir + filename);
+            userService.updateUser(id, user);
+
+            return ResponseEntity.ok("Фото успешно загружено");
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ошибка при загрузке");
+        }
+    }
+
 }
