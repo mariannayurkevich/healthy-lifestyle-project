@@ -12,6 +12,7 @@ import { RegistrationFirstScreen } from "./pages/RegistrationFirst/registrationf
 import { RegistrationSecondScreen } from "./pages/RegistrationSecond/registrationsecond";
 import { StatisticScreen } from "./pages/StatisticScreen/statisticscreen";
 import { ChatScreen } from "./pages/ChatScreen/chatscreen";
+import { AccountScreen } from "./pages/AccountScreen/accountscreen";
 
 // Оборачиваем маршруты в компонент с анимацией
 const AnimatedRoutes = () => {
@@ -28,6 +29,7 @@ const AnimatedRoutes = () => {
         <Route path="/registrationsecond" element={<RegistrationSecondScreen />} />
         <Route path="/statistic" element={<StatisticScreen />} />
         <Route path="/chat" element={<ChatScreen />} />
+        <Route path="/account" element={<AccountScreen />} />
       </Routes>
     </AnimatePresence>
   );

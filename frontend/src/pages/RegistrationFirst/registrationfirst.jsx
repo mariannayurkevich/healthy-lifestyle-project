@@ -15,6 +15,7 @@ export const RegistrationFirstScreen = () => {
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
     const [error, setError] = useState(false);
+    const [error2, setError2] = useState(false);
         
           const handleClick = () => {
             navigate('/entry');
@@ -23,8 +24,13 @@ export const RegistrationFirstScreen = () => {
           const handleClick2 = () => {
             if (email.trim() === "" || password.trim() === "" || repeatPassword.trim() === "") {
               setError(true);
+              setError2(false);
+            } else if (password.trim() !== repeatPassword.trim()) {
+              setError(false);
+              setError2(true);
             } else {
               setError(false);
+              setError2(false);
               navigate('/registrationsecond');
             }
           };
@@ -79,6 +85,12 @@ return(
             </div>
           )}
 
+          {error2 && (
+            <div className="error-message">
+              Пароли должны совпадать*
+            </div>
+          )}
+
           <div className="text-wrapper-5">Пароль должен содержать...</div>
 
           <div className="view">
@@ -115,7 +127,6 @@ return(
             <img className="right-eye" alt="Right eye" src={rightEye} />
           </div>
         </div>
-        
         
       </div>
     </div>

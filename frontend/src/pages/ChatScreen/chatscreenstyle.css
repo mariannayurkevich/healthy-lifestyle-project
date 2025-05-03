@@ -33,16 +33,16 @@ body {
 }
 
 .blue-gradient {
-  width: 350px;
-  height: 350px;
+  width: 450px;
+  height: 450px;
   background: radial-gradient(
-    rgba(72, 185, 255, 0.6) 20%,
+    rgba(72, 185, 255, 0.8) 40%,
     rgba(255, 255, 255, 1) 100%
   );
   top: 150px;
-  left: 50%;
+  left: 47%;
   transform: translate(-50%, 0);
-  filter: blur(60px);
+  filter: blur(40px);
 }
 
 .red-gradient {
@@ -62,13 +62,13 @@ body {
   width: 500px;
   height: 500px;
   background: radial-gradient(
-    rgba(27, 30, 140, 0.6) 0%,
+    rgba(27, 30, 140, 0.8) 10%,
     rgba(255, 255, 255, 1) 100%
   );
-  top: 600px;
+  top: 400px;
   left: 50%;
   transform: translate(-50%, 0);
-  filter: blur(120px);
+  filter: blur(100px);
 }
 
 .yellow-gradient {
@@ -79,33 +79,33 @@ body {
     rgba(255, 255, 255, 1) 100%
   );
   top: 420px;
-  left: 50%;
+  left: 40%;
   transform: translate(-50%, 0);
   filter: blur(80px);
 }
 
 .green-gradient {
-  width: 550px;
-  height: 550px;
+  width: 500px;
+  height: 500px;
   background: radial-gradient(
     rgba(172, 255, 101, 0.6) 0%,
     rgba(255, 255, 255, 1) 100%
   );
   top: 100px;
-  left: 50%;
+  left: 60%;
   transform: translate(-50%, 0);
   filter: blur(90px);
 }
 
 .yellow-gradient2 {
-  width: 400px;
-  height: 400px;
+  width: 200px;
+  height: 200px;
   background: radial-gradient(
-    rgba(255, 235, 81, 0.6) 0%,
+    rgba(255, 235, 81, 0.6) 40%,
     rgba(255, 255, 255, 1) 100%
   );
-  top: -120px;
-  left: 50%;
+  top: -100px;
+  left: 57%;
   transform: translate(-50%, 0);
   filter: blur(120px);
 }
@@ -141,6 +141,7 @@ body {
   font-size: 22px;
   font-weight: 600;
   text-align: center;
+  cursor: context-menu;
 }
 
 /* Стили для кнопок в шапке */
@@ -207,6 +208,7 @@ body {
   border-top: 1px solid #ddd;
   position: relative;
   z-index: 2;
+  margin-bottom: 10px;
 }
 
 /* Обёртка для кнопки дропдауна (расположена слева) */
@@ -232,7 +234,7 @@ body {
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 10;
   padding: 5px 0;
-  min-width: 220px;
+  min-width: 300px;
 }
 
 .dropdown-item {
@@ -253,7 +255,7 @@ body {
   font-family: "Rubik-Medium", Helvetica;
   border: 1px solid #ccc;
   border-radius: 15px;
-  height: 24px;
+  height: 20px;
   outline: none;
 }
 
@@ -265,21 +267,9 @@ body {
   cursor: pointer;
 }
 
-/* Контейнер для нижнего меню */
-.menu-container {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.9);
-}
-
 .message-bubble {
   align-self: flex-end;
-  background-color: #dcf8c6;
+  background-color: #edf1cb;
   padding: 10px 15px;
   border-radius: 15px;
   max-width: 70%;
@@ -290,7 +280,7 @@ body {
 
 .assistant-bubble {
   align-self: flex-start;
-  background-color: #f0f0ff;
+  background-color: #fefaff;
   padding: 10px 15px;
   border-radius: 15px;
   max-width: 70%;

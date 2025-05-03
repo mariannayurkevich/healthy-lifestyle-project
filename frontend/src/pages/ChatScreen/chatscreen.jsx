@@ -24,7 +24,7 @@ export const ChatScreen = () => {
   const adjustTextAreaHeight = () => {
     if (textAreaRef.current) {
       textAreaRef.current.style.height = "auto";
-      const maxHeight = 120; // например, 24px * 5 строк = 120px
+      const maxHeight = 80; // например, 24px * 5 строк = 120px
       textAreaRef.current.style.height =
         Math.min(textAreaRef.current.scrollHeight, maxHeight) + "px";
     }
