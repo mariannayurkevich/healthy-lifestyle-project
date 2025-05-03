@@ -16,23 +16,72 @@ body {
 }
 
 /* Фон с градиентами (фиксированный и отцентрированный) */
-.background-colors {
+.chatscreen .background-colors {
   position: fixed;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 100%;
+  width: 425px;
   height: 100%;
   z-index: 0;
   pointer-events: none;
 }
 
-.background-colors > div {
+.chatscreen .background-colors2 {
+  position: fixed;
+  top: 0;
+  left: 30%;
+  transform: translateX(-50%);
+  width: 425px;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.chatscreen .background-colors3 {
+  position: fixed;
+  top: 0;
+  left: 70%;
+  transform: translateX(-50%);
+  width: 425px;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.chatscreen .background-colors4 {
+  position: fixed;
+  top: 0;
+  left: 90%;
+  transform: translateX(-50%);
+  width: 425px;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.chatscreen .background-colors5 {
+  position: fixed;
+  top: 0;
+  left: 10%;
+  transform: translateX(-50%);
+  width: 425px;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+
+.chatscreen .background-colors > div, 
+.chatscreen .background-colors2 > div, 
+.chatscreen .background-colors3 > div, 
+.chatscreen .background-colors4 > div,
+.chatscreen .background-colors5 > div{
   position: absolute;
   border-radius: 50%;
 }
 
-.blue-gradient {
+.chatscreen .blue-gradient {
   width: 450px;
   height: 450px;
   background: radial-gradient(
@@ -45,7 +94,7 @@ body {
   filter: blur(40px);
 }
 
-.red-gradient {
+.chatscreen .red-gradient {
   width: 400px;
   height: 400px;
   background: radial-gradient(
@@ -58,7 +107,7 @@ body {
   filter: blur(80px);
 }
 
-.pirple-gradient {
+.chatscreen .pirple-gradient {
   width: 500px;
   height: 500px;
   background: radial-gradient(
@@ -71,7 +120,7 @@ body {
   filter: blur(100px);
 }
 
-.yellow-gradient {
+.chatscreen .yellow-gradient {
   width: 400px;
   height: 400px;
   background: radial-gradient(
@@ -84,9 +133,9 @@ body {
   filter: blur(80px);
 }
 
-.green-gradient {
-  width: 500px;
-  height: 500px;
+.chatscreen .green-gradient {
+  width: 400px;
+  height: 400px;
   background: radial-gradient(
     rgba(172, 255, 101, 0.6) 0%,
     rgba(255, 255, 255, 1) 100%
@@ -97,7 +146,7 @@ body {
   filter: blur(90px);
 }
 
-.yellow-gradient2 {
+.chatscreen .yellow-gradient2 {
   width: 200px;
   height: 200px;
   background: radial-gradient(
@@ -110,7 +159,7 @@ body {
   filter: blur(120px);
 }
 
-.green-gradient2 {
+.chatscreen .green-gradient2 {
   width: 300px;
   height: 300px;
   background: radial-gradient(
@@ -123,7 +172,7 @@ body {
   filter: blur(70px);
 }
 
-.header {
+.chatscreen .header {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -135,7 +184,7 @@ body {
   position: relative;
 }
 
-.header-title {
+.chatscreen .header-title {
   color: rgba(40, 6, 54, 0.5);
   font-family: "Rubik-Semibold", Helvetica;
   font-size: 22px;
@@ -145,7 +194,7 @@ body {
 }
 
 /* Стили для кнопок в шапке */
-.vector-prev {
+.chatscreen .vector-prev {
   position: absolute;
   left: 20px;
   top: 50%;
@@ -155,7 +204,7 @@ body {
   cursor: pointer;
 }
 
-.vector-ai {
+.chatscreen .vector-ai {
   position: absolute;
   right: -15px;
   top: 50%;
@@ -165,7 +214,7 @@ body {
 }
 
 /* Контейнер чата (поверх фона) */
-.chat-container {
+.chatscreen .chat-container {
   position: relative;
   z-index: 2;
   height: calc(100% - 55px);
@@ -175,7 +224,7 @@ body {
 }
 
 /* Область сообщений */
-.messages-container {
+.chatscreen .messages-container {
   flex-grow: 1;
   overflow-y: auto;
   padding: 16px;
@@ -185,12 +234,12 @@ body {
 }
 
 /* Псевдоэлемент для "отталкивания" сообщений вниз */
-.messages-container::before {
+.chatscreen .messages-container::before {
   content: "";
   flex-grow: 1;
 }
 
-.messages-container {
+.chatscreen .messages-container {
   flex-grow: 1;
   overflow-y: auto;
   padding: 16px;
@@ -200,7 +249,7 @@ body {
 }
 
 /* Панель ввода */
-.input-area {
+.chatscreen .input-area {
   display: flex;
   align-items: center;
   padding: 10px;
@@ -212,19 +261,19 @@ body {
 }
 
 /* Обёртка для кнопки дропдауна (расположена слева) */
-.dropdown-wrapper {
+.chatscreen .dropdown-wrapper {
   position: relative;
   margin-right: 10px;
 }
 
-.vector {
+.chatscreen .vector {
   width: 27px;
   height: 27px;
   cursor: pointer;
 }
 
 /* Выпадающее меню, которое появляется над полем ввода */
-.dropdown-menu {
+.chatscreen .dropdown-menu {
   position: absolute;
   bottom: calc(100% + 5px);
   left: 0;
@@ -237,17 +286,17 @@ body {
   min-width: 300px;
 }
 
-.dropdown-item {
+.chatscreen .dropdown-item {
   padding: 8px 12px;
   cursor: pointer;
 }
 
-.dropdown-item:hover {
+.chatscreen .dropdown-item:hover {
   background-color: #f2f2f2;
 }
 
 /* Текстовое поле ввода сообщения */
-.message-input {
+.chatscreen .message-input {
   flex-grow: 1;
   resize: none;
   padding: 8px;
@@ -260,14 +309,14 @@ body {
 }
 
 /* Кнопка отправки сообщения */
-.send-icon {
+.chatscreen .send-icon {
   width: 27px;
   height: 27px;
   margin-left: 10px;
   cursor: pointer;
 }
 
-.message-bubble {
+.chatscreen .message-bubble {
   align-self: flex-end;
   background-color: #edf1cb;
   padding: 10px 15px;
@@ -278,7 +327,7 @@ body {
   font-size: 16px;
 }
 
-.assistant-bubble {
+.chatscreen .assistant-bubble {
   align-self: flex-start;
   background-color: #fefaff;
   padding: 10px 15px;

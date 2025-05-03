@@ -111,6 +111,47 @@ export const ChatScreen = () => {
         <div className="green-gradient2" />
       </div>
 
+      {/* Фон с градиентами. Благодаря position: fixed и центровке они остаются на месте */}
+      <div className="background-colors2">
+        <div className="blue-gradient" />
+        <div className="red-gradient" />
+        <div className="pirple-gradient" />
+        <div className="yellow-gradient" />
+        <div className="green-gradient" />
+        <div className="yellow-gradient2" />
+        <div className="green-gradient2" />
+      </div>
+
+      <div className="background-colors3">
+        <div className="blue-gradient" />
+        <div className="red-gradient" />
+        <div className="pirple-gradient" />
+        <div className="yellow-gradient" />
+        <div className="green-gradient" />
+        <div className="yellow-gradient2" />
+        <div className="green-gradient2" />
+      </div>
+
+      <div className="background-colors4">
+        <div className="blue-gradient" />
+        <div className="red-gradient" />
+        <div className="pirple-gradient" />
+        <div className="yellow-gradient" />
+        <div className="green-gradient" />
+        <div className="yellow-gradient2" />
+        <div className="green-gradient2" />
+      </div>
+
+      <div className="background-colors5">
+        <div className="blue-gradient" />
+        <div className="red-gradient" />
+        <div className="pirple-gradient" />
+        <div className="yellow-gradient" />
+        <div className="green-gradient" />
+        <div className="yellow-gradient2" />
+        <div className="green-gradient2" />
+      </div>
+
       <div className="header">
         <img
           className="vector-prev"
