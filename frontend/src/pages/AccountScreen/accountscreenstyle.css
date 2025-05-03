@@ -34,7 +34,13 @@
     font-weight: 700;
     color: #280635;
     top:30%;
-    left:30%;
+    left:29%;
+  }
+
+  .accountscreen .vector-add{
+    position: absolute;
+    top:31.5%;
+    left:82%;
   }
 
   .accountscreen .chart-point {

@@ -6,6 +6,7 @@ import line98 from "./src/line-98.svg";
 import line99 from "./src/line-98.svg";
 import "./accountscreenstyle.css";
 import vectorAi from "./src/vector-ai.svg";
+import vectorAdd from "./src/vector-add.svg";
 import vectorNext from "./src/pointer.svg";
 import MenuGroup from "../../components/PageMenu/pagemenu";
 
@@ -41,42 +42,47 @@ export const AccountScreen = () => {
         {/* График "Дневник веса" */}
         <div className="weight-chart">
           <div className="chart-title">Дневник веса</div>
+          <img className="vector-add" alt="Vector" src={vectorAdd}/>
           <svg
             className="chart-svg"
             viewBox="0 0 400 220"
             xmlns="http://www.w3.org/2000/svg"
           >
+            <line x1="50" y1="250" x2="370" y2="250" stroke="#ccc" strokeWidth="1" />
+            <line x1="50" y1="190" x2="370" y2="190" stroke="#ccc" strokeWidth="1" />
+            <line x1="50" y1="130" x2="370" y2="130" stroke="#ccc" strokeWidth="1" />
+
             {/* Линия графика (пример; координаты можно менять в зависимости от данных) */}
             <polyline
               className="chart-line"
               fill="none"
               stroke="#68ff32"  /* зеленый цвет линии */
-              strokeWidth="2"
+              strokeWidth="4"
               points="60,170 110,160 160,130 210,190 260,150 310,230 360,180"
             />
 
             {/* Точки графика с единым стилем */}
-            <circle className="chart-point" cx="60" cy="170" r="4" />
-            <circle className="chart-point" cx="110" cy="160" r="4" />
-            <circle className="chart-point" cx="160" cy="130" r="4" />
-            <circle className="chart-point" cx="210" cy="190" r="4" />
-            <circle className="chart-point" cx="260" cy="150" r="4" />
-            <circle className="chart-point" cx="310" cy="230" r="4" />
-            <circle className="chart-point" cx="360" cy="180" r="4" />
+            <circle className="chart-point" cx="60" cy="170" r="6" />
+            <circle className="chart-point" cx="110" cy="160" r="6" />
+            <circle className="chart-point" cx="160" cy="130" r="6" />
+            <circle className="chart-point" cx="210" cy="190" r="6" />
+            <circle className="chart-point" cx="260" cy="150" r="6" />
+            <circle className="chart-point" cx="310" cy="230" r="6" />
+            <circle className="chart-point" cx="360" cy="180" r="6" />
 
             {/* Подписи по оси X */}
-            <text x="60" y="280" textAnchor="middle" fontSize="14">П</text>
-            <text x="110" y="280" textAnchor="middle" fontSize="14">В</text>
-            <text x="160" y="280" textAnchor="middle" fontSize="14">С</text>
-            <text x="210" y="280" textAnchor="middle" fontSize="14">Ч</text>
-            <text x="260" y="280" textAnchor="middle" fontSize="14">П</text>
-            <text x="310" y="280" textAnchor="middle" fontSize="14">С</text>
-            <text x="360" y="280" textAnchor="middle" fontSize="14">В</text>
+            <text x="60" y="280" textAnchor="middle" fontSize="16" fontFamily="Rubik-Medium" fontWeight={600} color="#280635">П</text>
+            <text x="110" y="280" textAnchor="middle" fontSize="16"fontFamily="Rubik-Medium" fontWeight={600} color="#280635">В</text>
+            <text x="160" y="280" textAnchor="middle" fontSize="16"fontFamily="Rubik-Medium" fontWeight={600} color="#280635">С</text>
+            <text x="210" y="280" textAnchor="middle" fontSize="16"fontFamily="Rubik-Medium" fontWeight={600} color="#280635">Ч</text>
+            <text x="260" y="280" textAnchor="middle" fontSize="16"fontFamily="Rubik-Medium" fontWeight={600} color="#280635">П</text>
+            <text x="310" y="280" textAnchor="middle" fontSize="16"fontFamily="Rubik-Medium" fontWeight={600} color="#280635">С</text>
+            <text x="360" y="280" textAnchor="middle" fontSize="16"fontFamily="Rubik-Medium" fontWeight={600} color="#280635">В</text>
 
             {/* Подписи по оси Y */}
-            <text x="40" y="250" textAnchor="end" fontSize="14">0 кг</text>
-            <text x="40" y="190" textAnchor="end" fontSize="14">50 кг</text>
-            <text x="40" y="130" textAnchor="end" fontSize="14">100 кг</text>
+            <text x="45" y="250" textAnchor="end" fontSize="14"fontFamily="Rubik-Medium" fontWeight={600} color="#280635">0 кг</text>
+            <text x="45" y="190" textAnchor="end" fontSize="14"fontFamily="Rubik-Medium" fontWeight={600} color="#280635">50 кг</text>
+            <text x="45" y="130" textAnchor="end" fontSize="14"fontFamily="Rubik-Medium" fontWeight={600} color="#280635">100 кг</text>
           </svg>
         </div>
 
