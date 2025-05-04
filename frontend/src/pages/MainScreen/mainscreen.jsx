@@ -1,18 +1,14 @@
 import React from "react";
-import group35 from "./src/group-35.png";
+import water from "./src/water-tracker.svg";
+import food from "./src/food-tracker.svg";
 //import image2 from "./src/image-2.png";
 //import image from "./src/image.png";
 //import image1 from "./src/image.svg";
-import line87 from "./src/line-87.svg";
-import line88 from "./src/line-88.svg";
+import groupCloud from "./src/group-cloud.svg";
 import line89 from "./src/line-89.svg";
+import activeAi from "./src/active-ai.svg";
 //import maskGroup from "./src/mask-group.png";
-import star2 from "./src/star-2.svg";
-import star3 from "./src/star-2.svg";
-import star4 from "./src/star-2.svg";
-import star5 from "./src/star-2.svg";
 import "./mainscreenstyle.css";
-import subtract from "./src/subtract.svg";
 //import union2 from "./src/union-2.svg";
 //import union from "./src/union.svg";
 //import vector5 from './src/vector-3.svg';
@@ -63,12 +59,23 @@ export const MainScreen = () => {
        />
 
         <div className="overlap">
-          <img className="group" alt="Group" src={group35} />
-{/*}
-          <img className="image" alt="Image" src={image} />
-*/}
-          <div className="view">
-            <div className="overlap-group">
+          <div className="group">
+            <img className="water" alt="Group" src={water} />
+
+            <div className="text-wrapper-9">Вода</div>
+
+            <div className="text-wrapper-10">1.0 л</div>
+          </div>
+         
+         <div className="image">
+          <img className="food" alt="Image" src={food} />
+
+          <div className="text-wrapper-11">Питание</div>
+
+          <div className="text-wrapper-12">255 Ккал</div>
+         </div>
+
+         <div className="overlap-group">
               <div className="rectangle" />
 
               <div className="ellipse" />
@@ -76,24 +83,8 @@ export const MainScreen = () => {
               <img className="line" alt="Line" src={line89} />
 
               <div className="overlap-group-wrapper">
-                <div className="mask-group-wrapper">
-                {/*
-                  <img
-                    className="mask-group"
-                    alt="Mask group"
-                    src={maskGroup}
-                  />
-                  */}
-                </div>
+                <img className="activeAi" alt="Group" src={activeAi}/>
               </div>
-
-              <p className="element">
-                <span className="span">
-                  4<br />
-                </span>
-
-                <span className="text-wrapper-3">КМ</span>
-              </p>
 
               <p className="p">
                 <span className="text-wrapper-4">Активность </span>
@@ -101,7 +92,6 @@ export const MainScreen = () => {
                 <span className="text-wrapper-5">50 мин</span>
               </p>
             </div>
-          </div>
 
           <div className="overlap-wrapper">
             <div className="overlap-2">
@@ -119,31 +109,7 @@ export const MainScreen = () => {
 
               <div className="div-wrapper">
                 <div className="overlap-3">
-                  <img className="subtract" alt="Subtract" src={subtract} />
-
-                  <img className="star" alt="Star" src={star2} />
-
-                  <img className="img" alt="Star" src={star5} />
-
-                  <img className="star-2" alt="Star" src={star3} />
-
-                  <img className="star-3" alt="Star" src={star4} />
-
-                  <div className="view-2">
-                    <div className="overlap-group-2">
-                        {/*}
-                      <img className="union" alt="Union" src={union} />
-
-                      <img className="union-2" alt="Union" src={image1} />
-
-                      <img className="union-3" alt="Union" src={union2} />
-                      */}
-
-                      <img className="line-2" alt="Line" src={line87} />
-
-                      <img className="line-3" alt="Line" src={line88} />
-                    </div>
-                  </div>
+                  <img className="group-cloud" alt="Group" src={groupCloud}/>
                 </div>
               </div>
             </div>
