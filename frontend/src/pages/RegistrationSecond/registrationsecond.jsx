@@ -22,7 +22,7 @@ export const RegistrationSecondScreen = () => {
             setError(true);
           } else {
             setError(false);
-            navigate('/main');
+            navigate("/main", { state: { fromRegistrationSecond: true } });
           }
         };
 

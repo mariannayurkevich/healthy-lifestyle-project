@@ -13,6 +13,7 @@ import { RegistrationSecondScreen } from "./pages/RegistrationSecond/registratio
 import { StatisticScreen } from "./pages/StatisticScreen/statisticscreen";
 import { ChatScreen } from "./pages/ChatScreen/chatscreen";
 import { AccountScreen } from "./pages/AccountScreen/accountscreen";
+import { QuestionnaireScreen } from "./pages/QuestionnaireScreen/questionnairescreen";
 
 // Оборачиваем маршруты в компонент с анимацией
 const AnimatedRoutes = () => {
@@ -35,10 +36,25 @@ const AnimatedRoutes = () => {
   );
 };
 
+const RoutesWrapper = () => {
+  const location = useLocation();
+
+  // Отображаем оверлей, если в location.state установлен флаг fromRegistrationSecond
+  const showOverlay = location.state?.fromRegistrationSecond === true;
+
+  return (
+    <>
+      <AnimatedRoutes />
+      {showOverlay && <QuestionnaireScreen />}
+    </>
+  );
+};
+
 function App() {
   return (
     <Router>
       <AnimatedRoutes />
+      <RoutesWrapper />
     </Router>
   );
 }

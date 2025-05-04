@@ -68,7 +68,7 @@ export const MainScreen = () => {
           </div>
          
          <div className="image">
-          <img className="food" alt="Image" src={food} />
+          <img className="food" alt="Vector" src={food} />
 
           <div className="text-wrapper-11">Питание</div>
 
