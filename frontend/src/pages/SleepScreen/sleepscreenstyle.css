@@ -1,5 +1,6 @@
 /* Сброс отступов и отключение прокрутки */
 html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -46,7 +47,7 @@ html, body {
 .background-group .overlap {
   height: 597px;
   position: absolute;
-  top: 74px;
+  top: 0px;
   width: 95%;
   left: 2.5%;
 }
@@ -55,13 +56,14 @@ html, body {
   height: 555px;
   left: 0;
   position: absolute;
-  top: 42px;
+  left: 38%;
   width: 414px;
 }
 
 .background-group .overlap-group {
   height: 555px;
   position: relative;
+  top: 30%;
 }
 
 .background-group .group {
@@ -328,12 +330,12 @@ background-group .star-3 {
 /* ===== SleepText (Текст "Спокойной ночи") ===== */
 .sleep-text-group {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 10%;
+  left: 40%;
   z-index: 100;
   margin: 10px;
   /* Смещаем немного вниз и вправо – без поворота */
-  transform: translate(40px, 40px);
+  transform: translate(-50%, -50%);
   cursor: context-menu;
 }
 
@@ -348,8 +350,8 @@ background-group .star-3 {
 
 /* ===== SleepTimer (Таймер: vector-4 и текст 00:00:00 на одном уровне) ===== */
 .sleep-timer-group {
-  position: fixed;
-  bottom: 100px;
+  position: relative;
+  bottom: 150px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -375,6 +377,7 @@ background-group .star-3 {
   line-height: normal;
   margin-top: -5px;
   cursor: context-menu;
+  
 }
 
 /* ===== MenuGroup (Меню страниц) ===== */
