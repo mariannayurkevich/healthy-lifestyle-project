@@ -91,3 +91,217 @@
 .text-wrapper-card-2 {
     color: #FF5252;
 }
+
+/* Стили для контейнера выпадающего меню */
+.gender-dropdown {
+  position: absolute;
+  bottom: 20px; /* отступ от нижнего края карточки */
+  left: 50%;
+  background-color: none;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 60px;
+  top: 50%;
+}
+
+/* Стили для самого выпадающего списка */
+.gender-dropdown select {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: none;
+  font-size: 16px;
+  font-family: "Rubik-SemiBold", Helvetica;
+  color: #280636;
+}
+
+/* Контейнер для выпадающих списков даты */
+.birthday-dropdowns {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  position: absolute;
+  bottom: 20px;  /* отступ от нижнего края карточки – можно скорректировать */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: none;
+  height: 70px;
+  top: 50%;
+}
+
+/* Стили для выпадающих списков */
+.birthday-dropdowns select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: "Rubik-SemiBold", Helvetica;
+  height: 40px;
+  color: #280636;
+}
+
+/* Группа ввода веса, позиционированная по центру карточки */
+.weight-input-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: absolute;
+  background-color: none;
+  bottom: 20px; /* Отступ от нижнего края карточки – можно скорректировать */
+  left: 50%;
+  top: 37%;
+  transform: translateX(-50%);
+  height: 150px;
+  width: 100%;
+}
+
+/* Стили для поля ввода */
+.weight-input-wrapper input {
+  width: 100px; /* Примерная ширина, можно изменить */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #280636;
+  height: 20px;
+}
+
+/* Стили для отображения единицы измерения */
+.weight-unit-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #280636;
+  font-family: "Rubik-SemiBold", Helvetica;
+}
+
+.height-input-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: absolute;
+  background-color: none;
+  bottom: 20px; /* Отступ от нижнего края карточки – можно скорректировать */
+  left: 50%;
+  top: 37%;
+  transform: translateX(-50%);
+  height: 150px;
+  width: 100%;
+}
+
+/* Стили для поля ввода */
+.height-input-wrapper input {
+  width: 100px; /* Примерная ширина, можно изменить */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #280636;
+  height: 20px;
+}
+
+/* Стили для отображения единицы измерения */
+.height-unit-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #280636;
+  font-family: "Rubik-SemiBold", Helvetica;
+}
+
+/* Контейнер для выпадающего списка цели */
+.aim-dropdown {
+  position: absolute;
+  bottom: 20px;  /* Отступ от нижнего края карточки */
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 50px;
+  text-align: center;
+}
+
+/* Стили для выпадающего списка */
+.aim-dropdown select {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: none;
+  font-family: "Rubik-SemiBold", Helvetica;
+  font-size: 16px;
+  color: #280636;
+}
+
+/* Контейнер для выпадающего списка уровня активности */
+.activity-dropdown {
+  position: absolute;
+  bottom: 20px; /* отступ от нижнего края карточки – можно настроить по необходимости */
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 50px;
+  text-align: center;
+}
+
+/* Стили для выпадающего списка */
+.activity-dropdown select {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fdfefd;
+  font-size: 16px;
+  color: #280636;
+}
+
+/* Контейнер для поля ввода аллергии — 80% ширины, центрирован */
+.allergy-input-wrapper, 
+.intolerance-input-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: absolute;
+  background-color: none;
+  bottom: 20px; /* Отступ от нижнего края карточки – можно скорректировать */
+  left: 50%;
+  top: 40%;
+  transform: translateX(-50%);
+  height: 200px;
+  width: 100%;
+}
+
+/* Стили для самого поля ввода */
+.allergy-input,
+.intolerance-input {
+  width: 80%; /* Примерная ширина, можно изменить */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #280636;
+  height: 120px;
+  text-align: left; 
+  font-family: "Rubik-SemiBold", Helvetica;
+}
+
+
+.error-message {
+  position: absolute;
+  color: #FF5252;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+  font-family: "Rubik-SemiBold", Helvetica;
+  top: 64%;
+  left: 35%;
+  width: 100%;
+  transform: translateX(-50%);
+}
+
+
+
+
