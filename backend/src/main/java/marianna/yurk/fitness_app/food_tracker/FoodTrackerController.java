@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/food")
+@CrossOrigin(origins = "http://localhost:3000")
 public class FoodTrackerController {
     private final FoodTrackerRepository foodTrackerRepository;
 

@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/water")
+@CrossOrigin(origins = "http://localhost:3000")
 public class WaterTrackerController {
     private final WaterTrackerRepository waterTrackerRepository;
 

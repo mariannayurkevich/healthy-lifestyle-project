@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/sleep")
+@CrossOrigin(origins = "http://localhost:3000")
 public class SleepTrackerController {
     private final SleepTrackerRepository sleepTrackerRepository;
 

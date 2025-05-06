@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/activity")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ActivityTrackerController {
     private final ActivityTrackerRepository activityTrackerRepository;
 

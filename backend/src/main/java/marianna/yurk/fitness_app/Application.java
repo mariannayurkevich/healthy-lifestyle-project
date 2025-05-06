@@ -14,13 +14,4 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 		log.info("Something changed!");
 	}
-
-//	@Bean
-//	CommandLineRunner runner(UserRestClient client) {
-//		return args -> {
-//			List<User> users = client.findAll();
-//			System.out.println(users);
-//
-//		};
-//	}
 }
