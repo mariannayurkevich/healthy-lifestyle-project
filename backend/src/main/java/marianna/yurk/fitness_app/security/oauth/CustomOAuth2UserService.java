@@ -44,8 +44,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         logger.info("Looking for user with email: {}", email);
         Optional<User> userOptional = userRepository.findByEmail(email);
 
-        // TODO: а нужна ли вообще строчка выше?
-
         User user = userOptional.orElseGet(() -> {
             logger.info("Creating new user for email: {}", email);
             User newUser = new User();
