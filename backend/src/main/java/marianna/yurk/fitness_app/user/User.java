@@ -35,9 +35,10 @@ public class User implements UserDetails {
         )
         private Long id;
 
+        @NotEmpty(message = "Имя пользователя обязательно")
         private String firstName;
 
-        @NotEmpty(message = "Имя пользователя обязательно")
+        @NotEmpty(message = "Фамилия пользователя обязательно")
         private String lastName;
 
         @NotEmpty(message = "Электронная почта обязательна")
@@ -45,7 +46,6 @@ public class User implements UserDetails {
         @Column(unique = true)
         private String email;
 
-        @NotEmpty(message = "Пароль обязателен")
         private String password;
 
         private String gender;
