@@ -1,5 +1,7 @@
 package marianna.yurk.fitness_app.sleep_tracker;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Positive;
 
@@ -8,6 +10,7 @@ import java.time.LocalTime;
 
 public record SleepTracker(
         @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         int id,
         LocalDate date,
         LocalTime bedtime,
