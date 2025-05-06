@@ -60,6 +60,7 @@ html, body {
     position: absolute;
     top: 358px;
     width: 154px;
+    cursor: pointer;
   }
   
   .mainscreen .image {
@@ -68,6 +69,7 @@ html, body {
     position: absolute;
     top: 29px;
     width: 179px;
+    cursor: pointer;
   }
   
   .mainscreen .view {
@@ -94,6 +96,7 @@ html, body {
     position: absolute;
     top: 0;
     width: 154px;
+    cursor: pointer;
   }
   
   .mainscreen .ellipse {
@@ -105,6 +108,7 @@ html, body {
     position: absolute;
     top: 259px;
     width: 15px;
+    pointer-events: none;
   }
   
   .mainscreen .line {
@@ -113,6 +117,7 @@ html, body {
     position: absolute;
     top: 15px;
     width: 210px;
+    pointer-events: none;
   }
   
   .mainscreen .overlap-group-wrapper {
@@ -121,6 +126,7 @@ html, body {
     position: absolute;
     top: 221px;
     width: 31px;
+    pointer-events: none;
   }
   
   .mainscreen .mask-group {
@@ -162,6 +168,7 @@ html, body {
     left: 25px;
     bottom: 35px;
     letter-spacing: 0;
+    pointer-events: none;
   }
   
   .mainscreen .p {
@@ -176,6 +183,7 @@ html, body {
     text-align: right;
     top: 14px;
     width: 100px;
+    pointer-events: none;
   }
   
   .mainscreen .text-wrapper-4 {
@@ -187,10 +195,12 @@ html, body {
     left: -5%;
     top: -60%;
     letter-spacing: 0;
+    pointer-events: none;
   }
   
   .mainscreen .text-wrapper-5 {
     font-size: 24px;
+    pointer-events: none;
   }
   
   .mainscreen .overlap-wrapper {
@@ -215,6 +225,7 @@ html, body {
     position: absolute;
     top: 0;
     width: 178px;
+    cursor: pointer;
   }
   
   .mainscreen .element-2 {
@@ -240,6 +251,7 @@ html, body {
     left: 0px;
     bottom: 30px;
     letter-spacing: 0;
+    pointer-events: none;
   }
   
   .mainscreen .text-wrapper-7 {
@@ -257,6 +269,7 @@ html, body {
     position: absolute;
     top: 213px;
     width: 67px;
+    pointer-events: none;
   }
 
   .mainscreen .text-wrapper-9 {
@@ -309,6 +322,7 @@ html, body {
     position: absolute;
     top: 26px;
     width: 192px;
+    pointer-events: none;
   }
   
   .mainscreen .overlap-3 {
@@ -317,6 +331,7 @@ html, body {
     position: relative;
     top: -4px;
     width: 189px;
+    pointer-events: none;
   }
   
   .mainscreen .subtract {
@@ -482,4 +497,13 @@ html, body {
     top: 20px;
     width: 26px;
   }
+
+  .mainscreen .group-cloud {
+    pointer-events: none;
+  }
+
+  .mainscreen .activeAi {
+    pointer-events: none;
+  }
+  
   

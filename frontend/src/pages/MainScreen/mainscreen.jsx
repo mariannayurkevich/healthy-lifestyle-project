@@ -93,9 +93,9 @@ export const MainScreen = () => {
               </p>
             </div>
 
-          <div className="overlap-wrapper">
-            <div className="overlap-2">
-              <div className="rectangle-2" />
+          <div className="overlap-wrapper" >
+            <div className="overlap-2" >
+              <div className="rectangle-2" onClick={handleMenuClick5}/>
 
               <p className="element-2">
                 <span className="text-wrapper-6">8</span>
