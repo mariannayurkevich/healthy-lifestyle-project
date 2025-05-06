@@ -1,0 +1,248 @@
+/* Глобальный сброс */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Основной контейнер, занимающий весь экран */
+.firstscreen {
+  background-color: #fdfaff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.firstscreen .div {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== ДЕФОЛТНЫЕ СТИЛИ (горизонтальный экран — для компьютера) ===== */
+.firstscreen .overlap-group {
+  position: relative;
+  justify-content: center;
+  top: 25%;
+  display: flex;
+}
+
+/* Красный круг */
+.firstscreen .overlap-group-wrapper {
+  background-color: #ff5151;
+  border-radius: 50%;
+  position: absolute;
+  width: 675px;
+  height: 675px;
+  transform: rotate(46.21deg);
+}
+
+.firstscreen .red-circle-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Группа для изображений внутри красного круга */
+.firstscreen .overlap-group-2 {
+  position: relative;
+  top: 1px;
+  left: 53px;
+  width: 251px;
+  height: 230px;
+}
+
+.firstscreen .mask-group {
+  position: absolute;
+  left: 25px;
+  top: 82px;
+  width: 122px;
+  height: 122px;
+  transform: rotate(-46.21deg);
+}
+
+.firstscreen .img {
+  position: absolute;
+  left: 115px;
+  top: 23px;
+  width: 113px;
+  height: 113px;
+  transform: rotate(-46.21deg);
+}
+
+.firstscreen .buttons {
+  position: relative;
+  justify-content: center;
+  top: 80%;
+  display: flex;
+}
+
+/* Кнопка "Зарегестрироваться" */
+.firstscreen .overlap-wrapper {
+  position: absolute;
+  right: 39%;
+  width: 212px;
+  height: 49px;
+}
+
+.firstscreen .overlap-2 {
+  background-color: #fefaff;
+  border-radius: 28px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.firstscreen .text-wrapper {
+  color: #000000;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Кнопка "Войти" */
+.firstscreen .overlap-wrapper-2 {
+  position: absolute;
+  left: 40%;
+  width: 120px;
+  height: 49px;
+}
+
+.firstscreen .overlap-3 {
+  background-color: #280636;
+  border-radius: 28px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.firstscreen .text-wrapper-2 {
+  color: #ffffff;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Заголовок FRENDZY: центрирован по горизонтали, уменьшенный межбуквенный интервал */
+.firstscreen .text-wrapper-3 {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #280636;
+  font-family: "Rubik-Black", Helvetica, sans-serif;
+  font-size: 80px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+/* Текст под основными элементами */
+.firstscreen .p {
+  position: fixed;
+  left: 50%;
+  bottom: 40%;
+  transform: translateX(-50%);
+  color: #ffffff;
+  font-family: "Rubik-SemiBold", Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  text-align: center;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* ===== Media Queries: Стили для вертикального экрана (телефона) ===== */
+@media screen and (orientation: portrait) {
+  .firstscreen .overlap-group {
+    width: 100vw;
+    height: 100vw;
+    max-width: none;
+    max-height: none;
+  }
+  /* Переопределяем размеры и позиционирование красного круга */
+  .firstscreen .overlap-group-wrapper {
+    left: -38%;
+    top: 20%;
+    width: 160%;
+    height: 160%;
+    transform: rotate(46.21deg);
+  }
+  /* Корректируем позицию и размеры группы изображений */
+  .firstscreen .overlap-group-2 {
+    top: 5%;
+    left: 5%;
+    width: 40%;
+    height: 40%;
+  }
+  .firstscreen .mask-group {
+    left: 27%;
+    top: 6%;
+    width: 47%;
+    height: 47%;
+    transform: rotate(-46.21deg);
+  }
+  .firstscreen .img {
+    left: 65%;
+    top: -8%;
+    width: 43%;
+    height: 43%;
+    transform: rotate(-46.21deg);
+  }
+  /* Корректируем кнопки так, чтобы они находились на top: 90% и на расстоянии 10% от границ экрана */
+.firstscreen .overlap-wrapper {
+  position: fixed; 
+  top: 90%;           
+  right: 10%;        
+  width: 40%;
+  height: 10%;
+  max-width: 200px;
+  max-height: 50px;
+  min-width: 165px;
+  min-height: 45px;
+}
+
+.firstscreen .overlap-wrapper-2 {
+  position: fixed;
+  top: 90%;   
+  left: 10%;      
+  width: 25%;
+  height: 10%;
+  max-width: 145px;
+  max-height: 50px;
+  min-width: 130px;
+  min-height: 45px;
+}
+
+  /* Заголовок: уменьшаем размер шрифта и немного уменьшаем межбуквенный интервал */
+  .firstscreen .text-wrapper-3 {
+    position: fixed;
+    left: 50%;
+    top: 10%;
+    font-size: clamp(70px, 7vw, 80px);
+    letter-spacing: 0.3px;
+  }  
+  /* Текст под элементами */
+  .firstscreen .p {
+    left: 50%;
+    font-size: 25px;
+    bottom: 20%;
+  }
+}
+
+/* ===== Media Queries: Стили для вертикального экрана (компьютера) ===== */
+/* При необходимости можно добавлять дополнительные корректировки для десктопной версии.
+   Здесь можно оставить дефолтные значения, либо внести свои изменения. */

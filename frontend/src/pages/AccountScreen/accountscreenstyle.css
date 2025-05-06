@@ -1,0 +1,252 @@
+.accountscreen {
+    background-color: #fefaff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .accountscreen .div {
+    background-color: #fefaff;
+    height: 874px;
+    position: relative;
+    width: 402px;
+  }
+
+  /* Стиль для контейнера графика */
+  .accountscreen .weight-chart {
+    position: absolute;
+    top: 190px;  /* расположение можно регулировать */
+    left: 10px;
+    width: 385px;
+    height: 400px;
+    border: none;
+    background-color: none;
+    margin-bottom: 2px;
+  }
+  
+  /* Заголовок графика */
+  .accountscreen .chart-title {
+    position: absolute;
+    text-align: center;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 24px;
+    font-weight: 700;
+    color: #280635;
+    top:30%;
+    left:29%;
+  }
+
+  .accountscreen .vector-add{
+    position: absolute;
+    top:31.5%;
+    left:82%;
+  }
+
+  .accountscreen .chart-point {
+    fill: #69E200;      /* Цвет заливки */
+    stroke:  #fefaff;       /* Цвет обводки */
+    stroke-width: 1px;  /* Толщина обводки */
+  }
+  
+  /* Стили для svg */
+  .accountscreen .chart-svg {
+    width: 100%;
+    height: calc(100% - 30px); /* с учетом отступов и заголовка */
+  }
+  
+  .accountscreen .overlap-group-wrapper {
+    border-radius: 53px;
+    box-shadow: 0px 4px 59.4px #992598;
+    background: radial-gradient(
+      rgba(248, 12, 232, 1) 0%,
+      rgba(42, 31, 141, 1) 100%
+    );
+    height: 106px;
+    left: 148px;
+    position: absolute;
+    top: 77px;
+    width: 106px;
+  }
+  
+  .accountscreen .overlap-group {
+    height: 58px;
+    left: 2px;
+    position: relative;
+    top: 24px;
+    width: 102px;
+  }
+  
+  .accountscreen .element {
+    height: 58px;
+    left: 44px;
+    position: absolute;
+    top: 0;
+    width: 58px;
+  }
+  
+  .accountscreen .img {
+    height: 58px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 58px;
+  }
+  
+  .accountscreen .text-wrapper {
+    color: #280635;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 40px;
+    font-weight: 700;
+    left: 79px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 193px;
+    white-space: nowrap;
+  }
+  
+  .accountscreen .text-wrapper-2 {
+    color: #280635;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    left: 57px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 251px;
+    white-space: nowrap;
+  }
+  
+  .accountscreen .text-wrapper-3 {
+    color: #280635;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    left: 162px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 251px;
+    white-space: nowrap;
+  }
+  
+  .accountscreen .text-wrapper-4 {
+    color: #280635;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    left: 283px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 251px;
+    white-space: nowrap;
+  }
+  
+  .accountscreen .text-wrapper-5 {
+    color: #280635;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 54px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 735px;
+    white-space: nowrap;
+  }
+  
+  .accountscreen .vector {
+    height: 14px;
+    left: 339px;
+    position: absolute;
+    top: 740px;
+    width: 18px;
+  }
+  
+  .accountscreen .view {
+    background-color: #f0f0f0;
+    height: 9px;
+    left: 0;
+    position: absolute;
+    top: 702px;
+    width: 100%;
+  }
+  
+  .accountscreen .overlap {
+    height: 134px;
+    left: 30px;
+    position: absolute;
+    top: 551px;
+    width: 356px;
+  }
+  
+  .accountscreen .rectangle {
+    background-color: #68ff3233;
+    border-radius: 33px;
+    height: 121px;
+    left: 0;
+    position: absolute;
+    top: 13px;
+    width: 342px;
+  }
+  
+  .accountscreen .text-wrapper-6 {
+    color: #280635;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 14px;
+    font-weight: 600;
+    left: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 43px;
+    white-space: nowrap;
+  }
+  
+  .accountscreen .text-wrapper-7 {
+    color: #280635;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 600;
+    left: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 65px;
+  }
+  
+  .accountscreen .vector-ai {
+    height: 107px;
+    left: 251px;
+    position: absolute;
+    top: 0px;
+    width: 106px;
+  }
+  
+  .accountscreen .line {
+    height: 29px;
+    left: 140px;
+    position: absolute;
+    top: 252px;
+    width: 3px;
+  }
+  
+  .accountscreen .line-2 {
+    height: 29px;
+    left: 258px;
+    position: absolute;
+    top: 252px;
+    width: 3px;
+  }
+  
+  .accountscreen .vector-2 {
+    height: 26px;
+    left: 329px;
+    position: fixed;
+    top: 51px;
+    width: 26px;
+  }
+  

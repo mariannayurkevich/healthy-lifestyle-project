@@ -1,0 +1,509 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.mainscreen {
+    background-color: #fdfaff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .mainscreen .div {
+    background-color: #fdfaff;
+    height: 874px;
+    overflow: hidden;
+    position: relative;
+    width: 402px;
+  }
+  
+  .mainscreen .text-wrapper {
+    color: #280635;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 24px;
+    font-weight: 500;
+    left: 30px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 82px;
+    white-space: nowrap;
+  }
+  
+  .mainscreen .text-wrapper-2 {
+    color: #280635;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 48px;
+    font-weight: 600;
+    left: 30px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 110px;
+    white-space: nowrap;
+  }
+  
+  .mainscreen .overlap {
+    height: 558px;
+    left: -43px;
+    position: absolute;
+    top: 180px;
+    width: 502px;
+  }
+  
+  .mainscreen .group {
+    height: 200px;
+    left: 261px;
+    position: absolute;
+    top: 358px;
+    width: 154px;
+    cursor: pointer;
+  }
+  
+  .mainscreen .image {
+    height: 238px;
+    left: 73px;
+    position: absolute;
+    top: 29px;
+    width: 179px;
+    cursor: pointer;
+  }
+  
+  .mainscreen .view {
+    height: 367px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 502px;
+  }
+  
+  .mainscreen .overlap-group {
+    height: 320px;
+    left: 233px;
+    position: relative;
+    top: 29px;
+    width: 210px;
+  }
+  
+  .mainscreen .rectangle {
+    background-color: #acff64;
+    border-radius: 24px;
+    height: 320px;
+    left: 28px;
+    position: absolute;
+    top: 0;
+    width: 154px;
+    cursor: pointer;
+  }
+  
+  .mainscreen .ellipse {
+    border: 4px solid;
+    border-color: #f59f00;
+    border-radius: 11.12px / 9.54px;
+    height: 15px;
+    left: 91px;
+    position: absolute;
+    top: 259px;
+    width: 15px;
+    pointer-events: none;
+  }
+  
+  .mainscreen .line {
+    height: 262px;
+    left: 0;
+    position: absolute;
+    top: 15px;
+    width: 210px;
+    pointer-events: none;
+  }
+  
+  .mainscreen .overlap-group-wrapper {
+    height: 52px;
+    left: 87px;
+    position: absolute;
+    top: 221px;
+    width: 31px;
+    pointer-events: none;
+  }
+  
+  .mainscreen .mask-group {
+    height: 16px;
+    left: 8px;
+    position: absolute;
+    top: 5px;
+    width: 16px;
+  }
+  
+  .mainscreen .element {
+    color: #280635;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    left: 144px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: right;
+    top: 254px;
+    width: 27px;
+  }
+  
+  .mainscreen .span {
+    color: #280635;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+  
+  .mainscreen .text-wrapper-3 {
+    position: absolute;
+    color: #fdfaff;
+    font-family: "Rubik-Bold", Helvetica;
+    font-size: 16px;
+    font-weight: 700;
+    left: 25px;
+    bottom: 35px;
+    letter-spacing: 0;
+    pointer-events: none;
+  }
+  
+  .mainscreen .p {
+    color: #280635;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 16px;
+    font-weight: 600;
+    left: 71px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: right;
+    top: 14px;
+    width: 100px;
+    pointer-events: none;
+  }
+  
+  .mainscreen .text-wrapper-4 {
+    position: absolute;
+    color: #280635;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 18px;
+    font-weight: 600;
+    left: -5%;
+    top: -60%;
+    letter-spacing: 0;
+    pointer-events: none;
+  }
+  
+  .mainscreen .text-wrapper-5 {
+    font-size: 24px;
+    pointer-events: none;
+  }
+  
+  .mainscreen .overlap-wrapper {
+    height: 282px;
+    left: 73px;
+    position: absolute;
+    top: 276px;
+    width: 202px;
+  }
+  
+  .mainscreen .overlap-2 {
+    height: 282px;
+    position: relative;
+    width: 198px;
+  }
+  
+  .mainscreen .rectangle-2 {
+    background-color: #4532c7;
+    border-radius: 24px;
+    height: 282px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 178px;
+    cursor: pointer;
+  }
+  
+  .mainscreen .element-2 {
+    color: #fdfaff;
+    font-family: "Rubik-Bold", Helvetica;
+    font-size: 32px;
+    font-weight: 700;
+    left: 17px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 235px;
+    white-space: nowrap;
+    width: 85px;
+  }
+  
+  .mainscreen .text-wrapper-6 {
+    position: absolute;
+    color: #fdfaff;
+    font-family: "Rubik-Bold", Helvetica;
+    font-size: 38px;
+    font-weight: 700;
+    left: 0px;
+    bottom: 30px;
+    letter-spacing: 0;
+    pointer-events: none;
+  }
+  
+  .mainscreen .text-wrapper-7 {
+    font-size: 20px;
+  }
+  
+  .mainscreen .text-wrapper-8 {
+    color: #fdfaff;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 32px;
+    font-weight: 600;
+    left: 40px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 213px;
+    width: 67px;
+    pointer-events: none;
+  }
+
+  .mainscreen .text-wrapper-9 {
+    position: absolute;
+    color: #280635;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 32px;
+    font-weight: 600;
+    bottom: 10px;
+    left: 26%;
+    letter-spacing: 0;
+  }
+
+  .mainscreen .text-wrapper-10 {
+    position: absolute;
+    color: #280635;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 28px;
+    font-weight: 780;
+    bottom: 157px;
+    left: 30%;
+    letter-spacing: 0;
+  }
+
+  .mainscreen .text-wrapper-11 {
+    position: absolute;
+    color: #280635;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 32px;
+    font-weight: 780;
+    bottom: 10px;
+    left: 7%;
+    letter-spacing: 0;
+  }
+
+  .mainscreen .text-wrapper-12 {
+    position: absolute;
+    color: #280635;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 20px;
+    font-weight: 780;
+    bottom: 45px;
+    left: 7%;
+    letter-spacing: 0;
+  }
+  
+  .mainscreen .div-wrapper {
+    height: 194px;
+    left: 6px;
+    position: absolute;
+    top: 26px;
+    width: 192px;
+    pointer-events: none;
+  }
+  
+  .mainscreen .overlap-3 {
+    height: 197px;
+    left: 3px;
+    position: relative;
+    top: -4px;
+    width: 189px;
+    pointer-events: none;
+  }
+  
+  .mainscreen .subtract {
+    height: 133px;
+    left: 0;
+    position: absolute;
+    top: 4px;
+    width: 148px;
+  }
+  
+  .mainscreen .star {
+    height: 32px;
+    left: 49px;
+    position: absolute;
+    top: 0;
+    width: 33px;
+  }
+  
+  .mainscreen .img {
+    height: 35px;
+    left: 9px;
+    position: absolute;
+    top: 17px;
+    width: 35px;
+  }
+  
+  .mainscreen .star-2 {
+    height: 39px;
+    left: 31px;
+    position: absolute;
+    top: 51px;
+    width: 41px;
+  }
+  
+  .mainscreen .star-3 {
+    height: 34px;
+    left: 74px;
+    position: absolute;
+    top: 31px;
+    width: 34px;
+  }
+  
+  .mainscreen .view-2 {
+    box-shadow: 0px 3px 4px #261b7226;
+    height: 115px;
+    left: 31px;
+    position: absolute;
+    top: 83px;
+    width: 158px;
+  }
+  
+  .mainscreen .overlap-group-2 {
+    height: 115px;
+    position: relative;
+  }
+  
+  .mainscreen .union {
+    height: 109px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 155px;
+  }
+  
+  .mainscreen .union-2 {
+    height: 109px;
+    left: 3px;
+    position: absolute;
+    top: 6px;
+    width: 155px;
+  }
+  
+  .mainscreen .union-3 {
+    height: 107px;
+    left: 13px;
+    position: absolute;
+    top: 5px;
+    width: 137px;
+  }
+  
+  .mainscreen .line-2 {
+    height: 9px;
+    left: 48px;
+    position: absolute;
+    top: 53px;
+    width: 25px;
+  }
+  
+  .mainscreen .line-3 {
+    height: 9px;
+    left: 84px;
+    position: absolute;
+    top: 53px;
+    width: 25px;
+  }
+  
+  .mainscreen .img-2 {
+    height: 843px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 402px;
+  }
+
+  .mainscreen .view-3 {
+    background-color: #FEFAFF;
+    border-radius: 58px;
+    box-shadow: 0px 3px 4px rgba(38, 27, 114, 0.15);
+    height: 66px;
+    left: 50px;
+    position: absolute;
+    top: 750px;
+    width: 342px;
+  }
+  
+  .mainscreen .vector-5 {
+    height: 24px;
+    left: 227px;
+    position: absolute;
+    top: 21px;
+    width: 33px;
+  }
+  
+  .mainscreen .group-wrapper {
+    background-color: #FEFAFF;
+    border-radius: 27px;
+    box-shadow: 0px 3px 4px rgba(38, 27, 114, 0.15);
+    height: 54px;
+    left: 145px;
+    position: absolute;
+    top: 6px;
+    width: 54px;
+  }
+  
+  .mainscreen .group-3 {
+    height: 24px;
+    left: 88px;
+    position: absolute;
+    top: 21px;
+    width: 32px;
+  }
+  
+  .mainscreen .vector-6 {
+    height: 32px;
+    left: 11px;
+    position: absolute;
+    top: 11px;
+    width: 32px;
+  }
+  
+  .mainscreen .vector-7 {
+    height: 24px;
+    left: 36px;
+    position: absolute;
+    top: 21px;
+    width: 24px;
+  }
+  
+  .mainscreen .group-4 {
+    height: 26px;
+    left: 286px;
+    position: absolute;
+    top: 20px;
+    width: 26px;
+  }
+
+  .mainscreen .group-cloud {
+    pointer-events: none;
+  }
+
+  .mainscreen .activeAi {
+    pointer-events: none;
+  }
+  
+  

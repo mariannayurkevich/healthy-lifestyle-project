@@ -1,0 +1,508 @@
+/* Сброс отступов и отключение прокрутки */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ===== ГЛОБАЛЬНЫЙ КОНТЕЙНЕР (SleepScreen) ===== */
+.sleepscreen {
+  background-color: #170255;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+/* ===== BACKGROUND GROUP (Декоративные элементы) ===== */
+.background-group {
+  position: relative;
+  width: 100%;
+}
+
+/* Пропорциональное масштабирование всей декоративной группы */
+/* Эталонная ширина: 414px. Масштабируем, ориентируясь на правую сторону */
+.background-group .responsive {
+  transform: scale(calc(100vw / 414px));
+  transform-origin: top right;
+  right: 20px;   /* отступ от правого края */
+  left: auto;
+}
+
+/* Стили содержимого группы (на основе абсолютного позиционирования) */
+.background-group .div {
+  background-color: #170255;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.background-group .overlap {
+  height: 597px;
+  position: absolute;
+  top: 0px;
+  width: 95%;
+  left: 2.5%;
+}
+
+.background-group .view {
+  height: 555px;
+  left: 0;
+  position: absolute;
+  left: 38%;
+  width: 414px;
+}
+
+.background-group .overlap-group {
+  height: 555px;
+  position: relative;
+  top: 30%;
+}
+
+.background-group .group {
+  height: 555px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 414px;
+}
+
+.background-group .overlap-2 {
+  height: 550px;
+  left: 3px;
+  position: relative;
+  top: 2px;
+  width: 411px;
+}
+
+.background-group .overlap-3 {
+  height: 447px;
+  left: 15px;
+  position: absolute;
+  top: 39px;
+  width: 396px;
+}
+
+.background-group .subtract {
+  height: 241px;
+  left: 18px;
+  position: absolute;
+  top: 6px;
+  width: 267px;
+}
+
+.background-group .star {
+  height: 45px;
+  left: 3px;
+  position: absolute;
+  top: 256px;
+  width: 47px;
+}
+
+.background-group .img {
+  height: 54px;
+  left: 0;
+  position: absolute;
+  top: 43px;
+  width: 55px;
+}
+
+.background-group .star-2 {
+  height: 65px;
+  left: 83px;
+  position: absolute;
+  top: 91px;
+  width: 69px;
+}
+
+background-group .star-3 {
+  height: 44px;
+  left: 118px;
+  position: absolute;
+  top: 396px;
+  width: 45px;
+}
+
+.background-group .star-4 {
+  height: 67px;
+  left: 145px;
+  position: absolute;
+  top: 0;
+  width: 71px;
+}
+
+.background-group .line {
+  height: 212px;
+  left: 48px;
+  position: absolute;
+  top: 164px;
+  width: 6px;
+}
+
+.background-group .line-2 {
+  height: 273px;
+  left: 104px;
+  position: absolute;
+  top: 174px;
+  width: 6px;
+}
+
+.background-group .overlap-group-wrapper {
+  box-shadow: 0px 3px 4px #261b7226;
+  height: 220px;
+  left: 92px;
+  position: absolute;
+  top: 178px;
+  width: 304px;
+}
+
+.background-group .overlap-group-2 {
+  height: 220px;
+  position: relative;
+  width: 281px;
+}
+
+.background-group .union {
+  height: 209px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 281px;
+}
+
+.background-group .union-2 {
+  height: 209px;
+  left: 7px;
+  position: absolute;
+  top: 11px;
+  width: 274px;
+}
+
+.background-group .union-3 {
+  height: 201px;
+  left: 27px;
+  position: absolute;
+  top: 11px;
+  width: 254px;
+}
+
+.background-group .line-3 {
+  height: 22px;
+  left: 92px;
+  position: absolute;
+  top: 101px;
+  width: 48px;
+}
+
+.background-group .line-4 {
+  height: 22px;
+  left: 161px;
+  position: absolute;
+  top: 101px;
+  width: 48px;
+}
+
+.background-group .star-5 {
+  height: 51px;
+  left: 306px;
+  position: absolute;
+  top: 0;
+  width: 50px;
+}
+
+.background-group .star-6 {
+  height: 51px;
+  left: 0;
+  position: absolute;
+  top: 457px;
+  width: 50px;
+}
+
+.background-group .star-7 {
+  height: 85px;
+  left: 267px;
+  position: absolute;
+  top: 465px;
+  width: 89px;
+}
+
+.background-group .overlap-wrapper {
+  background-color: #b71d49;
+  border-radius: 40.53px;
+  height: 81px;
+  left: 36px;
+  position: absolute;
+  top: 398px;
+  transform: rotate(99.32deg);
+  width: 81px;
+}
+
+.background-group .overlap-4 {
+  height: 29px;
+  left: 15px;
+  position: relative;
+  top: 5px;
+  width: 30px;
+}
+
+.background-group .mask-group-left {
+  height: 16px;
+  left: -2px;
+  position: absolute;
+  top: 8px;
+  transform: rotate(-99.32deg);
+  width: 16px;
+}
+
+.background-group .mask-group-right {
+  height: 15px;
+  left: 11px;
+  position: absolute;
+  top: -1px;
+  transform: rotate(-99.32deg);
+  width: 15px;
+}
+
+.background-group .line-5 {
+  height: 83px;
+  left: 72px;
+  position: absolute;
+  top: 396px;
+  width: 28px;
+}
+
+.background-group .vector {
+  height: 16px;
+  left: 57px;
+  position: absolute;
+  top: 385px;
+  width: 19px;
+}
+
+.background-group .div-wrapper {
+  height: 52px;
+  left: 110px;
+  position: absolute;
+  top: 480px;
+  transform: rotate(179.95deg);
+  width: 31px;
+}
+
+.background-group .overlap-5 {
+  height: 49px;
+  left: -10px;
+  position: relative;
+}
+
+.background-group .vector-2 {
+  height: 49px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: rotate(-179.95deg);
+  width: 31px;
+}
+
+.background-group .mask-group-3 {
+  height: 16px;
+  left: 8px;
+  position: absolute;
+  top: 5px;
+  transform: rotate(-179.95deg);
+  width: 16px;
+}
+
+.background-group .vector-3 {
+  height: 13px;
+  left: 121px;
+  position: absolute;
+  top: 479px;
+  width: 18px;
+}
+
+/* ===== SleepText (Текст "Спокойной ночи") ===== */
+.sleep-text-group {
+  position: fixed;
+  top: 10%;
+  left: 40%;
+  z-index: 100;
+  margin: 10px;
+  /* Смещаем немного вниз и вправо – без поворота */
+  transform: translate(-50%, -50%);
+  cursor: context-menu;
+}
+
+.sleep-text-group .text-wrapper {
+  color: #cabbff;
+  font-family: "Rubik-SemiBold", Helvetica;
+  font-size: 48px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 44.3px;
+}
+
+/* ===== SleepTimer (Таймер: vector-4 и текст 00:00:00 на одном уровне) ===== */
+.sleep-timer-group {
+  position: relative;
+  bottom: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 90;
+  gap: 1px;
+}
+
+.sleep-timer-group .vector-4 {
+  height: 76px;
+  width: 70px;
+  display: block;
+}
+
+.sleep-timer-group .text-wrapper-2 {
+  color: #cabbff;
+  font-family: "Roboto-Medium", Helvetica;
+  font-size: 40px;
+  font-weight: 500;
+  margin: 0;
+  white-space: nowrap;
+  line-height: normal;
+  margin-top: -5px;
+  cursor: context-menu;
+  
+}
+
+/* ===== MenuGroup (Меню страниц) ===== */
+.menu-group {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80vw;
+  max-width: 500px;
+  padding: 10px 0;
+  background-color: transparent;
+}
+
+/* Для пропорционального масштабирования меню создаём внутренний wrapper */
+.menu-inner {
+  transform: scale(calc(100vw / 500px));
+  transform-origin: center bottom;
+  width: 500px;
+}
+
+/* Закругленный прямоугольник (фон панели меню) */
+.menu-group .view-2 {
+  background-color: #170255;
+  border-radius: 58px;
+  box-shadow: 0px 3px 4px #ffdc4e;
+  height: 66px;
+  width: 100%;
+  max-width: 342px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Новый вложенный контейнер для позиционирования иконок меню */
+.menu-group .menu-icons {
+  position: relative;
+  width: 100%;
+  height: 68px; /* Высота панели меню */
+}
+
+/* --- Выравнивание иконок на панели меню --- */
+
+/* vector-7 — слева, отступ 20px */
+.menu-group .vector-7 {
+  position: absolute;
+  left: 30px;
+  top: 21px;
+  height: 26px;
+  width: 26px;
+  cursor: pointer;
+}
+
+/* vector-6 — по центру меню */
+.menu-group .vector-6 {
+  position: absolute;
+  left: 50%;
+  top: 21px;
+  transform: translateX(-50%);
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+}
+
+/* group-4 — справа, отступ 20px */
+.menu-group .group-4 {
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  height: 26px;
+  width: 26px;
+  cursor: pointer;
+}
+
+/* vector-5 — между vector-6 и group-4 */
+.menu-group .vector-5 {
+  position: absolute;
+  left: calc((50% + (100% - 30px)) / 2);
+  top: 21px;
+  transform: translateX(-50%);
+  height: 24px;
+  width: 33px;
+  cursor: pointer;
+}
+
+/* group-3 — между vector-6 и vector-7 */
+.menu-group .group-3 {
+  position: absolute;
+  left: calc((50% + 30px) / 2);
+  top: 16px;
+  transform: translateX(-50%);
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+}
+
+/* ===== АДАПТИВНЫЕ СТИЛИ (Медиа-запросы) ===== */
+@media (max-width: 600px) {
+  /* Фоновые элементы */
+  .background-group .div {
+    width: 95%;
+    max-width: none;
+    margin: 0 auto;
+  }
+  .background-group .overlap,
+  .background-group .view,
+  .background-group .group {
+    width: 95%;
+    left: 2.5%;
+  }
+
+  /* Изменение размера текста */
+  .sleep-text-group .text-wrapper {
+    font-size: 40px;
+  }
+
+  /* Изменение размера таймера */
+  .sleep-timer-group .text-wrapper-2 {
+    font-size: 32px;
+  }
+
+  /* Меню */
+  .menu-group {
+    width: 90vw;
+  }
+  .menu-group .menu-icons {
+    height: 68px;
+  }
+}

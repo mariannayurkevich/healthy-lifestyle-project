@@ -1,0 +1,64 @@
+/* Закругленный прямоугольник (фон панели меню) */
+.menu-group .view-menu {
+    background-color: #FEFAFF;
+    border-radius: 58px;
+    box-shadow: 0px 3px 4px #261B7226;
+    height: 66px;
+    width: 100%;
+    max-width: 342px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* vector-5 — между vector-6 и group-4 */
+.menu-group .vector-fourth {
+    position: absolute;
+    left: calc((50% + (100% - 30px)) / 2);
+    top: 21px;
+    transform: translateX(-50%);
+    height: 24px;
+    width: 33px;
+    cursor: pointer;
+  }
+
+  /* group-3 — между vector-6 и vector-7 */
+.menu-group .group-second {
+    position: absolute;
+    left: calc((50% + 30px) / 2);
+    top: 20px;
+    transform: translateX(-50%);
+    height: 28px;
+    width: 28px;
+    cursor: pointer;
+  }
+
+/* vector-6 — по центру меню */
+.menu-group .vector-center {
+    position: absolute;
+    left: 50%;
+    top: 21px;
+    transform: translateX(-50%);
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+  }
+
+/* vector-7 — слева, отступ 20px */
+.menu-group .vector-left {
+    position: absolute;
+    left: 30px;
+    top: 21px;
+    height: 26px;
+    width: 26px;
+    cursor: pointer;
+  }
+
+/* group-4 — справа, отступ 20px */
+.menu-group .group-right {
+    position: absolute;
+    right: 30px;
+    top: 20px;
+    height: 26px;
+    width: 26px;
+    cursor: pointer;
+  }
