@@ -6,9 +6,13 @@ import marianna.yurk.fitness_app.food_tracker.FoodTracker;
 import marianna.yurk.fitness_app.food_tracker.FoodTrackerRepository;
 import marianna.yurk.fitness_app.sleep_tracker.SleepTracker;
 import marianna.yurk.fitness_app.sleep_tracker.SleepTrackerRepository;
+import marianna.yurk.fitness_app.stats.DailyReportService;
+import marianna.yurk.fitness_app.stats.DailySummaryDTO;
 import marianna.yurk.fitness_app.user.Goal;
 import marianna.yurk.fitness_app.user.User;
 import marianna.yurk.fitness_app.user.UserService;
+import marianna.yurk.fitness_app.water_tracker.WaterTracker;
+import marianna.yurk.fitness_app.water_tracker.WaterTrackerRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
@@ -30,23 +34,17 @@ public class ChatController {
 
     private final WebClient webClient;
     private final UserService userService;
-    private final ActivityTrackerRepository activityTrackerRepository;
-    private final FoodTrackerRepository foodTrackerRepository;
-    private final SleepTrackerRepository sleepTrackerRepository;
+    private final DailyReportService dailyReportService;
 
     @Value("${together.api.key}")
     private String apiKey;
 
     public ChatController(WebClient.Builder webClientBuilder,
                           UserService userService,
-                          ActivityTrackerRepository activityTrackerRepository,
-                          FoodTrackerRepository foodTrackerRepository,
-                          SleepTrackerRepository sleepTrackerRepository) {
+                          DailyReportService dailyReportService) {
         this.webClient = webClientBuilder.baseUrl("https://api.together.xyz/v1").build();
         this.userService = userService;
-        this.activityTrackerRepository = activityTrackerRepository;
-        this.foodTrackerRepository = foodTrackerRepository;
-        this.sleepTrackerRepository = sleepTrackerRepository;
+        this.dailyReportService = dailyReportService;
     }
 
     @PostMapping
@@ -58,47 +56,47 @@ public class ChatController {
         User user = userService.getUserByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        List<ActivityTracker> activities = activityTrackerRepository.findByUserId(user.getId());
-        List<FoodTracker> foodEntries = foodTrackerRepository.findByUserId(user.getId());
-        List<SleepTracker> sleepEntries = sleepTrackerRepository.findByUserId(user.getId());
+        DailySummaryDTO report = dailyReportService.generateReport(user.getId(), LocalDate.now());
 
         StringBuilder trackersInfo = new StringBuilder("\n\nДанные трекеров:");
 
         // Активность
-        if (!activities.isEmpty()) {
-            trackersInfo.append("\n- Активность за сегодня:");
-            activities.forEach(activity -> trackersInfo.append(
-                    String.format("\n  • %s: %d мин, %d ккал",
-                            activity.activityType(),
-                            activity.duration(),
-                            activity.caloriesBurned())
-            ));
+        if (report.getActivityDurationMinutes() > 0) {
+            trackersInfo.append("\n- Активность за сегодня:")
+                    .append(String.format("\n  • Общая продолжительность: %d мин",
+                            report.getActivityDurationMinutes()));
         }
 
         // Питание
-        if (!foodEntries.isEmpty()) {
-            trackersInfo.append("\n- Питание за сегодня:");
-            foodEntries.forEach(food -> trackersInfo.append(
-                    String.format("\n  • %s: %.1f ккал (Б:%.1f, Ж:%.1f, У:%.1f)",
-                            food.date(),
-                            food.totalCalories(),
-                            food.totalProteins(),
-                            food.totalFats(),
-                            food.totalCarbs())
-            ));
+        if (report.getTotalCalories() > 0) {
+            trackersInfo.append("\n- Питание за сегодня:")
+                    .append(String.format("\n  • Калории: %.1f (Б:%.1f, Ж:%.1f, У:%.1f)",
+                            report.getTotalCalories(),
+                            report.getTotalProteins(),
+                            report.getTotalFats(),
+                            report.getTotalCarbs()));
         }
 
         // Сон
-        if (!sleepEntries.isEmpty()) {
-            trackersInfo.append("\n- Сон за сегодня:");
-            sleepEntries.forEach(sleep -> trackersInfo.append(
-                    String.format("\n  • %s: %s - %s (%.1f ч), качество: %d/5",
-                            sleep.date(),
-                            sleep.bedtime(),
-                            sleep.wakeupTime(),
-                            sleep.sleepDuration(),
-                            sleep.sleepQuality())
-            ));
+        if (report.getSleepDuration() > 0) {
+            trackersInfo.append("\n- Сон за сегодня:")
+                    .append(String.format("\n  • Продолжительность: %.1f ч",
+                            report.getSleepDuration()));
+        }
+
+        // Вода
+        if (report.getGoalMl() > 0) {
+            double percentage = (report.getTotalIntakeMl() / report.getGoalMl()) * 100;
+            trackersInfo.append("\n- Потребление воды за сегодня:")
+                    .append(String.format("\n  • %.0f/%.0f мл (%.0f%%)",
+                            report.getTotalIntakeMl(),
+                            report.getGoalMl(),
+                            percentage));
+        }
+
+        // Добавляем анализ из отчета
+        if (report.getAnalysis() != null && !report.getAnalysis().isEmpty()) {
+            trackersInfo.append("\n\nАнализ: ").append(report.getAnalysis());
         }
 
         StringBuilder userProfileBuilder = new StringBuilder();
