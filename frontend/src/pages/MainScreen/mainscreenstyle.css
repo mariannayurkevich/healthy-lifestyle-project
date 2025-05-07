@@ -283,6 +283,7 @@ html, body {
     bottom: 10px;
     left: 26%;
     letter-spacing: 0;
+    pointer-events: none;
   }
 
   .mainscreen .text-wrapper-10 {
@@ -294,6 +295,7 @@ html, body {
     bottom: 157px;
     left: 30%;
     letter-spacing: 0;
+    pointer-events: none;
   }
 
   .mainscreen .text-wrapper-11 {

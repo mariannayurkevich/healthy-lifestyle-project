@@ -39,6 +39,10 @@ export const MainScreen = () => {
     setShowAddMenu(true);
   };
 
+  const handleMenuClick7 = () => {
+    navigate("/water");
+  };
+
   return (
     <div className="mainscreen">
       <div className="div">
@@ -54,7 +58,7 @@ export const MainScreen = () => {
 
         <div className="overlap">
           <div className="group">
-            <img className="water" alt="Group" src={water} />
+            <img className="water" alt="Group" src={water} onClick={handleMenuClick7}/>
             <div className="text-wrapper-9">Вода</div>
             <div className="text-wrapper-10">1.0 л</div>
           </div>
