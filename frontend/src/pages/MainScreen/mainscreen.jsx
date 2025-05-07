@@ -47,6 +47,10 @@ export const MainScreen = () => {
     navigate("/activity");
   };
 
+  const handleMenuClick9 = () => {
+    navigate("/food");
+  };
+
   return (
     <div className="mainscreen">
       <div className="div">
@@ -68,7 +72,7 @@ export const MainScreen = () => {
           </div>
           
           <div className="image">
-            <img className="food" alt="Vector" src={food} />
+            <img className="food" alt="Vector" src={food} onClick={handleMenuClick9}/>
             <div className="text-wrapper-11">Питание</div>
             <div className="text-wrapper-12">255 Ккал</div>
           </div>

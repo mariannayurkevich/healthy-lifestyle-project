@@ -1,6 +1,6 @@
 import React from "react";
-//import image1 from "./src/image.png";
-//import line89 from "./src/line-89.svg";
+import vector5 from "./src/vector-5.svg";
+import line89 from "./src/line-89.svg";
 import line100 from "./src/line-100.svg";
 import maskGroup2 from "./src/mask-group-2.svg";
 import maskGroup from "./src/mask-group.svg";
@@ -26,22 +26,20 @@ export const ActivityScreen = () => {
             <div className="overlap-group">
               <img className="mask-group" alt="Mask group" src={maskGroup} />
               
-              {/* 
-              <img className="img" alt="Mask group" src={image1} />
-              */}
-              
+              <img className="img" alt="Mask group" src={vector5} />
+
             </div>
           </div>
 
           <div className="text-wrapper">Сегодня</div> 
-          
+
           <img className="union" alt="Union" src={union} />
           
 
           <div className="ellipse" />
-          {/* 
+
           <img className="line" alt="Line" src={line89} />
-          */}
+
           
 
           <div className="text-wrapper-2">Активность</div>
