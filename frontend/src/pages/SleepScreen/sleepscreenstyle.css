@@ -473,6 +473,117 @@ background-group .star-3 {
   cursor: pointer;
 }
 
+/* Стили для окна AddMenu */
+.add-sleep-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Контейнер для карточки (окна) */
+.add-sleep-menu .add-sleep-menu-container {
+  position: relative;
+  width: 300px;
+  height: 350px;
+  background-color: #fff;
+  border-radius: 25px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовок окна */
+.add-sleep-menu .add-sleep-menu-header {
+  position: relative;
+  font-size: 28px;
+  font-weight: bold;
+  color: #280636;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  margin-bottom: 20px;
+  text-align: center;
+  top: 5px;
+  left: 0%;
+}
+
+.add-sleep-menu .sleep-data-form {
+  position: relative;
+  top: 25px;
+  left: 5%;
+}
+
+/* Стили для формы с данными о сне */
+.add-sleep-menu .sleep-data-form label {
+  display: block;
+  font-size: 18px;
+  font-weight: 500;
+  color: #280636;
+  font-family: "Rubik", Helvetica, sans-serif;
+  margin-bottom: 8px;
+}
+
+.add-sleep-menu .sleep-data-form input {
+  position: relative;
+  width: 80%;
+  padding: 10px;
+  font-size: 18px;
+  color: #280636;
+  border: 1px solid #ccc;
+  font-family: "Rubik", Helvetica, sans-serif;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+/* Стили для кнопки "Сохранить" */
+.add-sleep-menu .button-save {
+  margin-top: 20px;
+  position: absolute;
+  display: flex;
+  top: 75%;
+  left: 7%;
+  width: 100%;
+}
+
+.add-sleep-menu .div-wrapper-save {
+  width: 80%;
+  background-color: #280636;
+  border-radius: 28px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.add-sleep-menu .text-wrapper-22 {
+  color: #ffffff;
+  font-size: 16px;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-weight: 500;
+}
+
+.add-sleep-menu .star-icon {
+  height: 90px;
+  left: 1%;
+  position: absolute;
+  top: 65%;
+  width: 90px;
+  z-index: 2;
+}
+
+.moon-icon {
+  position: absolute;
+  top: 20%;   
+  right: -7%;  
+  z-index: 2;
+}
+
+
 /* ===== АДАПТИВНЫЕ СТИЛИ (Медиа-запросы) ===== */
 @media (max-width: 600px) {
   /* Фоновые элементы */
