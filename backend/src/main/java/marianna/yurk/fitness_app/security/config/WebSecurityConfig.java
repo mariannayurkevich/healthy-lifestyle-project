@@ -38,7 +38,8 @@ public class WebSecurityConfig{
                                 "/api/v*/registration/**",  // Регистрация
                                 "/error",              // Страницы ошибок
                                 "/favicon.ico",         // Иконка сайта
-                                "/api/v1/password/**"
+                                "/api/v1/password/**",
+                                "/oauth2/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
@@ -47,6 +48,12 @@ public class WebSecurityConfig{
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(customOAuth2UserService)
                         )
+                        .successHandler((request, response, authentication) -> {
+                            response.sendRedirect("http://localhost:3000/main");
+                        })
+                        .failureHandler((request, response, exception) -> {
+                            response.sendRedirect("http://localhost:3000/login?error");
+                        })
                 )
                 .formLogin(form -> form
                         .successHandler((request, response, authentication) -> {

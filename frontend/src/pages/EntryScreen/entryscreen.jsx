@@ -51,12 +51,12 @@ export const EntryScreen = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = "/login/oauth2/code/google";
+    window.location.href = "http://localhost:8080/oauth2/authorization/google";
   };
 
 
   const handleRedirectToRegistration = () => {
-    navigate("/api/v1/registration");
+    navigate("/registrationfirst");
   };
 
   return (
