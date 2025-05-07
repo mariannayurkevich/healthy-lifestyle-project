@@ -35,10 +35,8 @@ public class User implements UserDetails {
         )
         private Long id;
 
-        @NotEmpty(message = "Имя пользователя обязательно")
         private String firstName;
 
-        @NotEmpty(message = "Фамилия пользователя обязательно")
         private String lastName;
 
         @NotEmpty(message = "Электронная почта обязательна")

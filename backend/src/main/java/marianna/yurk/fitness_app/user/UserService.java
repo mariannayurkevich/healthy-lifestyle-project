@@ -190,6 +190,18 @@ public class UserService implements UserDetailsService {
         }).orElseThrow(() -> new RuntimeException("The user was not found with the id " + id));
     }
 
+    public User updateUserByEmail(String email, User updatedUserData) {
+        return userRepository.findByEmail(email).map(user -> {
+            if (updatedUserData.getFirstName() != null) {
+                user.setFirstName(updatedUserData.getFirstName());
+            }
+            if (updatedUserData.getImageUrl() != null) {
+                user.setImageUrl(updatedUserData.getImageUrl());
+            }
+            return userRepository.save(user);
+        }).orElseThrow(() -> new RuntimeException("User not found with email " + email));
+    }
+
 
     public void deleteUser(Long id) {
         userRepository.deleteById(id);

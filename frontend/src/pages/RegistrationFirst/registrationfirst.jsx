@@ -21,19 +21,41 @@ export const RegistrationFirstScreen = () => {
             navigate('/entry');
           };
 
-          const handleClick2 = () => {
-            if (email.trim() === "" || password.trim() === "" || repeatPassword.trim() === "") {
-              setError(true);
-              setError2(false);
-            } else if (password.trim() !== repeatPassword.trim()) {
-              setError(false);
-              setError2(true);
-            } else {
-              setError(false);
-              setError2(false);
-              navigate('/registrationsecond');
+    const handleClick2 = async () => {
+        if (email.trim() === "" || password.trim() === "" || repeatPassword.trim() === "") {
+            setError(true);
+            setError2(false);
+        } else if (password.trim() !== repeatPassword.trim()) {
+            setError(false);
+            setError2(true);
+        } else {
+            setError(false);
+            setError2(false);
+            try {
+                const response = await fetch("http://localhost:8080/api/v1/registration", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password,
+                        confirmPassword: repeatPassword,
+                        firstName: "", // Пока пустое, будет заполнено на втором шаге
+                        lastName: "",  // Пока пустое
+                    }),
+                });
+                if (response.ok) {
+                    navigate('/registrationsecond', { state: { email } });
+                } else {
+                    const errorData = await response.json();
+                    alert(`Ошибка регистрации: ${errorData.message || "Неизвестная ошибка"}`);
+                }
+            } catch (error) {
+                alert("Ошибка при отправке запроса: " + error.message);
             }
-          };
+        }
+    };
 
           const handleClick3 = () => {
             navigate('/first');

@@ -13,20 +13,18 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class RegistrationRequest {
-    @NotEmpty(message = "The name is required")
-    private final String firstName;
-    @NotEmpty(message = "Last name is required")
-    private final String lastName;
+    private String firstName;
+    private String lastName;
 
     @NotEmpty(message = "A password is required")
     @Pattern(
             regexp = "^(?=.*[A-Z])(?=.*\\d).{8,}$",
             message = "The password must contain at least 8 characters, at least one digit and one capital letter."
     )
-    private final String password;
+    private String password;
     @NotEmpty(message = "Password confirmation is required")
     private String confirmPassword;
     @NotEmpty(message = "Email is required")
     @Email(message = "Incorrect email format")
-    private final String email;
+    private String email;
 }
