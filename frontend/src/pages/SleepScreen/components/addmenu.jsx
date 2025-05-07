@@ -73,9 +73,12 @@ const AddMenu = ({ onClose }) => {
 
   return (
     <div className="add-sleep-menu">
-        <img className="star-icon" src={star} alt="Star" />
+        <div className="background-group-sleep">
+          <img className="star-icon" src={star} alt="Star" />
 
-        <img className="moon-icon" src={moon} alt="Moon" /> 
+          <img className="moon-icon" src={moon} alt="Moon" /> 
+        </div>
+        
 
       <div className="add-sleep-menu-container">
         {/* Изображения для звезды и луны */}

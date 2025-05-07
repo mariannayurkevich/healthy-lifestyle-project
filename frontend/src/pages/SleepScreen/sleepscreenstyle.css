@@ -505,7 +505,7 @@ background-group .star-3 {
   position: relative;
   font-size: 28px;
   font-weight: bold;
-  color: #280636;
+  color: #401255;
   font-family: "Rubik-Medium", Helvetica, sans-serif;
   margin-bottom: 20px;
   text-align: center;
@@ -524,7 +524,7 @@ background-group .star-3 {
   display: block;
   font-size: 18px;
   font-weight: 500;
-  color: #280636;
+  color: #401255;
   font-family: "Rubik", Helvetica, sans-serif;
   margin-bottom: 8px;
 }
@@ -534,7 +534,7 @@ background-group .star-3 {
   width: 80%;
   padding: 10px;
   font-size: 18px;
-  color: #280636;
+  color: #401255;
   border: 1px solid #ccc;
   font-family: "Rubik", Helvetica, sans-serif;
   border-radius: 8px;
@@ -553,7 +553,7 @@ background-group .star-3 {
 
 .add-sleep-menu .div-wrapper-save {
   width: 80%;
-  background-color: #280636;
+  background-color: #401255;
   border-radius: 28px;
   padding: 12px;
   text-align: center;
@@ -567,19 +567,26 @@ background-group .star-3 {
   font-weight: 500;
 }
 
-.add-sleep-menu .star-icon {
-  height: 90px;
-  left: 1%;
+.add-sleep-menu .background-group-sleep {
   position: absolute;
-  top: 65%;
-  width: 90px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-sleep-menu .star-icon {
+  left: -8%;
+  position: relative;
+  top: 20%;
   z-index: 2;
 }
 
-.moon-icon {
+.add-sleep-menu .moon-icon {
   position: absolute;
-  top: 20%;   
-  right: -7%;  
+  top: 15%;   
+  left: 48%;  
   z-index: 2;
 }
 
@@ -616,4 +623,13 @@ background-group .star-3 {
   .menu-group .menu-icons {
     height: 68px;
   }
+
+  .add-sleep-menu .moon-icon {
+    left: 40%;  
+  }
+
+  .add-sleep-menu .star-icon {
+    left: -40%;
+  }
+
 }
