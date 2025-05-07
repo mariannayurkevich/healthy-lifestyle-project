@@ -15,6 +15,7 @@ import { ChatScreen } from "./pages/ChatScreen/chatscreen";
 import { AccountScreen } from "./pages/AccountScreen/accountscreen";
 import { QuestionnaireScreen } from "./pages/QuestionnaireScreen/questionnairescreen";
 import { WaterScreen } from "./pages/WaterScreen/waterscreen";
+import { ActivityScreen } from "./pages/ActivityScreen/activityscreen";
 
 // Оборачиваем маршруты в компонент с анимацией
 const AnimatedRoutes = () => {
@@ -33,6 +34,7 @@ const AnimatedRoutes = () => {
         <Route path="/chat" element={<ChatScreen />} />
         <Route path="/account" element={<AccountScreen />} />
         <Route path="/water" element={<WaterScreen />} />
+        <Route path="/activity" element={<ActivityScreen />} />
       </Routes>
     </AnimatePresence>
   );

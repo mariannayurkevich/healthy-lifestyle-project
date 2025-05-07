@@ -43,6 +43,10 @@ export const MainScreen = () => {
     navigate("/water");
   };
 
+  const handleMenuClick8 = () => {
+    navigate("/activity");
+  };
+
   return (
     <div className="mainscreen">
       <div className="div">
@@ -70,12 +74,14 @@ export const MainScreen = () => {
           </div>
 
           <div className="overlap-group">
-            <div className="rectangle" />
+            <div className="rectangle" onClick={handleMenuClick8} />
             <div className="ellipse" />
             <img className="line" alt="Line" src={line89} />
+
             <div className="overlap-group-wrapper">
               <img className="activeAi" alt="Group" src={activeAi} />
             </div>
+
             <p className="p">
               <span className="text-wrapper-4">Активность </span>
               <span className="text-wrapper-5">50 мин</span>
