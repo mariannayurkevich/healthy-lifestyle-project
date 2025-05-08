@@ -32,18 +32,21 @@ const AnimatedRoutes = () => {
         <Route path="/first" element={<FirstScreen />} />
         <Route path="/entry" element={<EntryScreen />} />
         <Route path="/registrationfirst" element={<RegistrationFirstScreen />} />
+
+        {/* Переместить в защищённые маршруты */}
+        <Route path="/registrationsecond" element={<RegistrationSecondScreen />} />
+        <Route path="/main" element={<MainScreen />} />
+        <Route path="/sleep" element={<SleepScreen />} />
+        <Route path="/statistic" element={<StatisticScreen />} />
+        <Route path="/chat" element={<ChatScreen />} />
+        <Route path="/account" element={<AccountScreen />} />
+        <Route path="/water" element={<WaterScreen />} />
+        <Route path="/activity" element={<ActivityScreen />} />
+        <Route path="/food" element={<FoodScreen />} />
         
         {/* Защищённые маршруты */}
         <Route element={<ProtectedRoute isAuthenticated={Boolean(localStorage.getItem("authToken"))} />}>
-          <Route path="/registrationsecond" element={<RegistrationSecondScreen />} />
-          <Route path="/main" element={<MainScreen />} />
-          <Route path="/sleep" element={<SleepScreen />} />
-          <Route path="/statistic" element={<StatisticScreen />} />
-          <Route path="/chat" element={<ChatScreen />} />
-          <Route path="/account" element={<AccountScreen />} />
-          <Route path="/water" element={<WaterScreen />} />
-          <Route path="/activity" element={<ActivityScreen />} />
-          <Route path="/food" element={<FoodScreen />} />
+          
         </Route>
       </Routes>
     </AnimatePresence>
