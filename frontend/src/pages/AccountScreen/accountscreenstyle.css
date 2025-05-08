@@ -165,6 +165,28 @@
     top: 740px;
     width: 18px;
   }
+
+  .accountscreen .text-wrapper-8 {
+    color: #280635;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 54px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 775px;
+    white-space: nowrap;
+  }
+  
+  .accountscreen .vector-3 {
+    display: flex;
+    height: 14px;
+    left: 339px;
+    position: absolute;
+    top: 780px;
+    width: 18px;
+  }
   
   .accountscreen .view {
     background-color: #f0f0f0;

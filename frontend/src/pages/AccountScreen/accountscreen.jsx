@@ -8,6 +8,7 @@ import "./accountscreenstyle.css";
 import vectorAi from "./src/vector-ai.svg";
 import vectorAdd from "./src/vector-add.svg";
 import vectorNext from "./src/pointer.svg";
+import vectorNext2 from "./src/Vector-2.svg";
 import MenuGroup from "../../components/PageMenu/pagemenu";
 
 import { useNavigate } from "react-router-dom";
@@ -33,6 +34,10 @@ export const AccountScreen = () => {
   
     const handleMenuClick5 = () => {
       navigate("/sleep");
+    };
+
+    const handleMenuClick6 = () => {
+      navigate("/first");
     };
 
   return(
@@ -114,6 +119,12 @@ export const AccountScreen = () => {
           <div className="text-wrapper-5">Настроить цели</div>
 
           <img className="vector" alt="Vector" src={vectorNext} />
+        </div>
+
+        <div className="overlap-group-3" >
+          <div className="text-wrapper-8" onClick={handleMenuClick6}>Выйти из аккаута</div>
+
+          <img className="vector-3" alt="Vector" src={vectorNext} onClick={handleMenuClick6}/>
         </div>
 
         <div className="view" />
