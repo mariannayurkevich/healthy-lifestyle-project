@@ -181,6 +181,11 @@ public class UserService implements UserDetailsService {
                 isUpdated = true;
             }
 
+            if (updatedUser.getProfileCompleted() != null) {
+                user.setProfileCompleted(updatedUser.getProfileCompleted());
+                isUpdated = true;
+            }
+
             // Сохраняем пользователя, если были изменения
             if (isUpdated) {
                 return userRepository.save(user);

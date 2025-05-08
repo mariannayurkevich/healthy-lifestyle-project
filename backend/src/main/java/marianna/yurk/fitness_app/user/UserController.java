@@ -51,10 +51,17 @@ public class UserController {
     }
 
     // Получение пользователя по email
-    @GetMapping("/{email}")
+    @GetMapping("/by-email")
     public ResponseEntity<?> getUserByEmail(@RequestParam String email) {
         return userService.getUserByEmail(email)
                 .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/check-profile/{userId}")
+    public ResponseEntity<Boolean> checkProfileCompleted(@PathVariable Long userId) {
+        return userService.getUserById(userId)
+                .map(user -> ResponseEntity.ok(user.getProfileCompleted()))
                 .orElse(ResponseEntity.notFound().build());
     }
 

@@ -69,6 +69,8 @@ public class User implements UserDetails {
 
         private String imageUrl;
 
+        private Boolean profileCompleted = false;
+
         public User(String firstName,
                     String lastName,
                     String email,
