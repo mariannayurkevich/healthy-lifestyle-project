@@ -25,7 +25,7 @@ export const RegistrationFirstScreen = () => {
     navigate('/first');
   };
 
-  const handleRegistration = () => {
+  const handleRegistration = async () => {
     if (
       name.trim() === "" ||
       email.trim() === "" ||
@@ -40,7 +40,29 @@ export const RegistrationFirstScreen = () => {
     } else {
       setError(false);
       setError2(false);
-      navigate('/registrationsecond');
+      try {
+        const response = await fetch("/api/v1/registration", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+            confirmPassword: repeatPassword,
+            firstName: name,
+            lastName: "",  // Пока пустое
+          }),
+        });
+        if (response.ok) {
+          navigate('/registrationsecond', { state: { email } });
+        } else {
+          const errorData = await response.json();
+          alert(`Ошибка регистрации: ${errorData.message || "Неизвестная ошибка"}`);
+        }
+      } catch (error) {
+        alert("Ошибка при отправке запроса: " + error.message);
+      }
     }
   };
 
