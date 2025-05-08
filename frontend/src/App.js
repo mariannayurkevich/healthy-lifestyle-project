@@ -37,6 +37,7 @@ const AnimatedRoutes = () => {
         <Route path="/water" element={<WaterScreen />} />
         <Route path="/activity" element={<ActivityScreen />} />
         <Route path="/food" element={<FoodScreen />} />
+        <Route path="/questionnaire" element={<QuestionnaireScreen />} />
       </Routes>
     </AnimatePresence>
   );
@@ -59,7 +60,6 @@ const RoutesWrapper = () => {
 function App() {
   return (
     <Router>
-      <AnimatedRoutes />
       <RoutesWrapper />
     </Router>
   );
