@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import vectorPrev from "../../src/left.svg";
 import vectorNext from "../../src/right.svg";
 import "../../questionnairescreenstyle.css";
 
-export const WeightCard = ({ onPrev, onNext }) => {
+export const WeightCard = ({ onPrev, onNext, onDataUpdate }) => {
   // Состояние для хранения веса и сообщения об ошибке
   const [weight, setWeight] = useState("");
   const [error, setError] = useState("");
@@ -30,6 +30,7 @@ export const WeightCard = ({ onPrev, onNext }) => {
       return;
     }
     setError("");
+    onDataUpdate({ weight:weight }); // Передаем данные в родительский компонент
     onNext();
   };
 
