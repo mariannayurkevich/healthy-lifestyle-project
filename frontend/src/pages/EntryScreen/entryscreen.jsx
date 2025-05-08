@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 
 export const EntryScreen = () => {
   const navigate = useNavigate();
-  // Состояния для полей ввода и ошибки
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -19,7 +18,6 @@ export const EntryScreen = () => {
     e.preventDefault();
     setError("");
 
-    // Валидация полей
     if (!email.trim() || !password.trim()) {
       setError("Все поля обязательны для заполнения");
       return;
@@ -39,7 +37,6 @@ export const EntryScreen = () => {
       });
 
       if (response.ok) {
-        // Получаем данные пользователя
         const userResponse = await fetch("/api/users/me", {
           credentials: "include"
         });
@@ -47,6 +44,17 @@ export const EntryScreen = () => {
         if (userResponse.ok) {
           const userData = await userResponse.json();
           localStorage.setItem("userId", userData.id); // Сохраняем ID
+
+          /*
+          const profileCheck = await fetch(`/api/users/check-profile/${userData.id}`);
+          if (!profileCheck.ok) {
+            console.error("Ошибка проверки профиля");
+            return;
+          }
+          const profileCompleted = await profileCheck.json();
+          localStorage.setItem("profileCompleted", JSON.stringify(profileCompleted));
+          navigate(profileCompleted ? "/main" : "/questionnaire");
+          */
           navigate("/main");
         } else {
           setError("Не удалось получить данные пользователя");
