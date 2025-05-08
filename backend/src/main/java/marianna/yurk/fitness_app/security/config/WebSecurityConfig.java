@@ -42,6 +42,7 @@ public class WebSecurityConfig{
                                 "/oauth2/**",
                                 "/api/users/{id}/upload-photo"
                         ).permitAll()
+                        .requestMatchers("/api/users/me").authenticated()
                         .anyRequest().authenticated()
                 )
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
