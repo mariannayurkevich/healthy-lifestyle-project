@@ -19,7 +19,6 @@ export const MainScreen = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Получаем ID пользователя из хранилища (пример)
         const userId = localStorage.getItem("userId");
 
         // Запрос данных пользователя
