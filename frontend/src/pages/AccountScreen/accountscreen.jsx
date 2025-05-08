@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import x2 from "./src/eye-left.svg";
 import x1 from "./src/eye-right.svg";
 //import image from "./src/Vector.svg";
@@ -14,7 +14,35 @@ import { useNavigate } from "react-router-dom";
 
 export const AccountScreen = () => {
     const navigate = useNavigate();
-    
+    const [userData, setUserData] = useState(null);
+
+    const handleLogout = () => {
+        localStorage.removeItem("userId");
+        window.location.href = "/entry";
+    };
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const userId = localStorage.getItem("userId");
+                if (!userId) {
+                    navigate("/entry");
+                    return;
+                }
+                const response = await fetch(`http://localhost:8080/api/users/id/${userId}`, {
+                    credentials: "include"
+                });
+                if (!response.ok) throw new Error("Ошибка загрузки");
+
+                const data = await response.json();
+                setUserData(data);
+            } catch (error) {
+                console.error("Ошибка загрузки данных:", error);
+            }
+        };
+        fetchUserData();
+    }, [navigate]);
+
     const handleMenuClick = () => {
       navigate("/main");
     };
@@ -102,13 +130,14 @@ export const AccountScreen = () => {
           </div>
         </div>
 
-        <div className="text-wrapper">Малинка Ди</div>
-
-        <div className="text-wrapper-2">42 кг</div>
-
-        <div className="text-wrapper-3">150 см</div>
-
-        <div className="text-wrapper-4">20 лет</div>
+          <div className="text-wrapper">{userData ? `${userData.firstName} ${userData.lastName}` : "Загрузка..."}</div>
+          <div className="text-wrapper-2">{userData?.weight} кг</div>
+          <div className="text-wrapper-3">{userData?.height} см</div>
+          <div className="text-wrapper-4">
+              {userData?.birthDate
+                  ? new Date().getFullYear() - new Date(userData.birthDate).getFullYear()
+                  : "—"}
+          </div>
 
         <div className="overlap-group-2">
           <div className="text-wrapper-5">Настроить цели</div>
