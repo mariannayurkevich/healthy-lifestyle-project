@@ -5,26 +5,28 @@ html, body {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-}
-
-.registrationfirst {
+  }
+  
+  /* Контейнер объединённого окна регистрации */
+  .registrationCombined {
     background-color: #ff5151;
     display: flex;
     flex-direction: row;
     justify-content: center;
     width: 100vw;
     height: 100vh;
-}
+  }
   
-.registrationfirst .div {
+  .registrationCombined .div {
     background-color: #ff5151;
     height: 874px;
     position: relative;
     overflow: hidden;
     width: 402px;
-}
+  }
   
-.registrationfirst .overlap {
+  /* Белый блок с закруглёнными углами для формы */
+  .registrationCombined .overlap {
     background-color: #fefaff;
     border-radius: 54px;
     height: 597px;
@@ -32,121 +34,141 @@ html, body {
     position: absolute;
     top: 277px;
     width: 402px;
-}
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 8%;
+    left:8%;
+    width: 344px;
+    gap: 20px;         /* для равномерного расстояния между полями */
+    width: 90%;
+    max-width: 344px;
+  }
   
-.registrationfirst .overlap-group-wrapper {
+  /* Обёртки для полей ввода — четыре поля (Имя, email, пароль, повтор пароля) */
+  /* Имя пользователя (первое поле, занимает место старого email) */
+  .registrationCombined .group-wrapper.name {
     height: 49px;
     left: 30px;
     position: absolute;
     top: 76px;
     width: 344px;
-}
+  }
   
-.registrationfirst .overlap-group {
+  /* Email (второе поле) */
+  .registrationCombined .group-wrapper.email {
+    height: 49px;
+    left: 30px;
+    position: absolute;
+    top: 136px;
+    width: 344px;
+  }
+  
+  /* Пароль (третье поле) */
+  .registrationCombined .group-wrapper.password {
+    height: 49px;
+    left: 30px;
+    position: absolute;
+    top: 196px;
+    width: 344px;
+  }
+  
+  /* Повтор пароля (четвёртое поле) */
+  .registrationCombined .group-wrapper.repeatPassword {
+    height: 49px;
+    left: 30px;
+    position: absolute;
+    top: 256px;
+    width: 344px;
+  }
+
+  
+  /* Общая обёртка для каждого поля ввода */
+  .registrationCombined .overlap-group {
     background-color: #ececec;
     border-radius: 28px;
     height: 49px;
     position: relative;
     width: 342px;
-}
-
-.registrationfirst .input-email,
-.registrationfirst .input-password,
-.registrationfirst .input-repeat-password {
-  background-color: #ECECEC;
-  width: 325px;
-  height: 100%;
-  border: none;
-  border-radius: 28px;
-  padding: 0 10px;
-  font-family: "Rubik-Medium", Helvetica, sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  outline: none;
-}
-
-.registrationfirst .error-message {
-  position: absolute;
-  left: 50px;
-  top: 300px;
-  font-family: "Rubik-Medium", Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: #FF5252;
-  white-space: nowrap;
-}
+  }
   
-.registrationfirst .text-wrapper {
-    color: #28063533;
-    font-family: "Rubik-Medium", Helvetica;
-    font-size: 16px;
+  /* Стили для полей ввода (применяются для всех типов) */
+  .registrationCombined .input-name,
+  .registrationCombined .input-email,
+  .registrationCombined .input-password,
+  .registrationCombined .input-repeat-password {
+    background-color: #ECECEC;
+    width: 325px;
+    height: 100%;
+    border: none;
+    border-radius: 28px;
+    padding: 0 10px;
+    font-family: "Rubik-Medium", Helvetica, sans-serif;
     font-weight: 500;
-    left: 26px;
-    letter-spacing: 0;
-    line-height: normal;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  /* Сообщение об ошибке */
+  .registrationCombined .error-message {
     position: absolute;
-    top: 15px;
+    left: 50px;
+    top: 316px;
+    font-family: "Rubik-Medium", Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #FF5252;
     white-space: nowrap;
-}
+  }
   
-.registrationfirst .overlap-wrapper {
-    height: 49px;
-    left: 29px;
+  /* Текст с инструкциями (например, "Пароль должен содержать...") */
+  .registrationCombined .text-wrapper-5 {
+    color: #9e9e9e;
+    font-family: "Rubik-Medium", Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
     position: absolute;
-    top: 146px;
-    width: 344px;
-}
-
-.registrationfirst .overlap-wrapper-2 {
-  height: 49px;
-  left: 29px;
-  position: absolute;
-  top: 246px;
-  width: 344px;
-}
+    left: 50px;
+    top: 340px;
+  }
   
-.registrationfirst .div-wrapper {
-    height: 49px;
-    left: 29px;
-    position: absolute;
-    top: 237px;
-    width: 344px;
-}
-  
-.registrationfirst .view {
+  /* Декоративный элемент (индикатор со стрелками и кругами) */
+  .registrationCombined .view {
     height: 16px;
     left: 177px;
     position: absolute;
-    top: 27px;
+    top: 60px;
     width: 48px;
-}
+  }
   
-.registrationfirst .overlap-2 {
+  .registrationCombined .overlap-2 {
     height: 16px;
     position: relative;
-}
+  }
   
-.registrationfirst .ellipse {
+  .registrationCombined .ellipse {
     background-color: #28063533;
-    border: 1px solid;
-    border-color: #d3c9d7;
+    border: 1px solid #d3c9d7;
     border-radius: 8px;
     height: 16px;
     left: 32px;
     position: absolute;
     top: 0;
     width: 16px;
-}
+  }
   
-.registrationfirst .line {
+  .registrationCombined .line {
     height: 4px;
     left: 8px;
     position: absolute;
     top: 6px;
     width: 30px;
-}
+  }
   
-.registrationfirst .ellipse-2 {
+  .registrationCombined .ellipse-2 {
     background-color: #280635;
     border: 1px solid;
     border-radius: 8px;
@@ -155,126 +177,111 @@ html, body {
     position: absolute;
     top: 0;
     width: 16px;
-}
+  }
   
-.registrationfirst .button-next {
+  /* Кнопка регистрации */
+  .registrationCombined .button-registration {
     height: 49px;
     left: 30px;
     position: absolute;
-    top: 448px;
+    top: 380px;
     width: 344px;
-}
+  }
   
-.registrationfirst .overlap-3 {
+  .registrationCombined .overlap-3 {
     background-color: #280636;
     border-radius: 28px;
     height: 49px;
     position: relative;
     width: 342px;
-}
+  }
   
-.registrationfirst .text-wrapper-2 {
+  .registrationCombined .text-wrapper-2 {
     color: #ffffff;
-    font-family: "Rubik-Medium", Helvetica;
+    font-family: "Rubik-Medium", Helvetica, sans-serif;
     font-size: 16px;
     font-weight: 500;
-    left: 26px;
-    letter-spacing: 0;
-    line-height: normal;
     position: absolute;
+    left: 26px;
     top: 15px;
-    width: 54px;
-}
+    width: 100px;
+  }
   
-.registrationfirst .vector-next {
+  .registrationCombined .vector-next {
     height: 14px;
     left: 308px;
     position: absolute;
     top: 17px;
     width: 18px;
-}
+  }
   
-.registrationfirst .text-wrapper-3 {
+  /* Заголовок "Регистрация" */
+  .registrationCombined .text-wrapper-3 {
     color: #ffffff;
-    font-family: "Rubik-Medium", Helvetica;
+    font-family: "Rubik-Medium", Helvetica, sans-serif;
     font-size: 48px;
     font-weight: 500;
-    left: 29px;
-    letter-spacing: 0;
-    line-height: normal;
     position: absolute;
+    left: 29px;
     top: 186px;
     white-space: nowrap;
-}
+  }
   
-.registrationfirst .div-2 {
+  /* Верхняя панель навигации (текст "Войти" и иконка назад) */
+  .registrationCombined .div-2 {
     height: 19px;
     left: 35px;
     position: absolute;
     top: 66px;
     width: 338px;
-}
+  }
   
-.registrationfirst .text-wrapper-4 {
+  .registrationCombined .text-wrapper-4 {
     color: #fefaff;
-    font-family: "Rubik-Medium", Helvetica;
+    font-family: "Rubik-Medium", Helvetica, sans-serif;
     font-size: 16px;
     font-weight: 500;
-    left: 288px;
-    letter-spacing: 0;
-    line-height: normal;
     position: absolute;
+    left: 288px;
     top: 0;
     white-space: nowrap;
-}
+  }
   
-.registrationfirst .vector-prev {
+  .registrationCombined .vector-prev {
     height: 14px;
-    left: 0px;
+    left: 0;
     position: absolute;
     top: 1px;
     width: 18px;
-}
+  }
   
-.registrationfirst .view-2 {
+  /* Декоративная область с глазками */
+  .registrationCombined .view-2 {
     height: 98px;
     left: 61px;
     position: absolute;
     top: 86px;
     width: 160px;
-}
+  }
   
-.registrationfirst .overlap-4 {
+  .registrationCombined .overlap-4 {
     height: 98px;
     position: relative;
-}
+  }
   
-.registrationfirst .left-eye {
+  .registrationCombined .left-eye {
     height: 83px;
     left: 0;
     position: absolute;
     top: 22px;
     width: 83px;
-}
+  }
   
-.registrationfirst .right-eye {
+  .registrationCombined .right-eye {
     height: 83px;
     left: 80px;
     position: absolute;
     top: 5px;
     width: 83px;
-}
-  
-.registrationfirst .text-wrapper-5 {
-    color: #9e9e9e;
-    font-family: "Rubik-Medium", Helvetica;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0;
-    line-height: normal;
-    position: relative;
-    left: 50px;
-    top: 200px;
-
-}
+  }
   
