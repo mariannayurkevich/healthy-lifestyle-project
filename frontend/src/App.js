@@ -44,17 +44,7 @@ const AnimatedRoutes = () => {
 };
 
 const RoutesWrapper = () => {
-  const location = useLocation();
-
-  // Отображаем оверлей, если в location.state установлен флаг fromRegistrationSecond
-  const showOverlay = location.state?.fromRegistrationSecond === true;
-
-  return (
-    <>
-      <AnimatedRoutes />
-      {showOverlay && <QuestionnaireScreen />}
-    </>
-  );
+  return <AnimatedRoutes />;
 };
 
 function App() {

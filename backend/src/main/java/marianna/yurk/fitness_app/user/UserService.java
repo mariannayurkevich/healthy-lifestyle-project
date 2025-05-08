@@ -159,12 +159,6 @@ public class UserService implements UserDetailsService {
                 isUpdated = true;
             }
 
-            // Обновление состояния включения
-            if (updatedUser.getEnabled() != null && !updatedUser.getEnabled().equals(user.getEnabled())) {
-                user.setEnabled(updatedUser.getEnabled());
-                isUpdated = true;
-            }
-
             // Обновление нормы калорий
             if (updatedUser.getBirthDate() != null
                     && updatedUser.getHeight() != null

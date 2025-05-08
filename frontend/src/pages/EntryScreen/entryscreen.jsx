@@ -45,17 +45,24 @@ export const EntryScreen = () => {
           const userData = await userResponse.json();
           localStorage.setItem("userId", userData.id); // Сохраняем ID
 
-          /*
           const profileCheck = await fetch(`/api/users/check-profile/${userData.id}`);
           if (!profileCheck.ok) {
-            console.error("Ошибка проверки профиля");
+            console.error("Ошибка проверки профиля:", profileCheck.status);
+            setError("Ошибка проверки профиля");
             return;
           }
-          const profileCompleted = await profileCheck.json();
-          localStorage.setItem("profileCompleted", JSON.stringify(profileCompleted));
+
+          const responseText = await profileCheck.text();
+          let profileCompleted;
+          try {
+            profileCompleted = responseText ? JSON.parse(responseText) : false;
+          } catch (e) {
+            console.error("Ошибка парсинга JSON:", e);
+            setError("Некорректный ответ сервера");
+            return;
+          }
+
           navigate(profileCompleted ? "/main" : "/questionnaire");
-          */
-          navigate("/main");
         } else {
           setError("Не удалось получить данные пользователя");
         }
