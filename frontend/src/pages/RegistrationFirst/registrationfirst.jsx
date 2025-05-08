@@ -16,10 +16,10 @@ export const RegistrationFirstScreen = () => {
     const [repeatPassword, setRepeatPassword] = useState("");
     const [error, setError] = useState(false);
     const [error2, setError2] = useState(false);
-        
-          const handleClick = () => {
-            navigate('/entry');
-          };
+
+    const handleClick = () => {
+        navigate('/entry');
+    };
 
     const handleClick2 = async () => {
         if (email.trim() === "" || password.trim() === "" || repeatPassword.trim() === "") {
@@ -57,100 +57,100 @@ export const RegistrationFirstScreen = () => {
         }
     };
 
-          const handleClick3 = () => {
-            navigate('/first');
-          };
+    const handleClick3 = () => {
+        navigate('/first');
+    };
 
-return(
-    <div className="registrationfirst">
-      <div className="div">
-        <div className="overlap">
-          <div className="overlap-group-wrapper">
-            <div className="overlap-group">
-              <input
-                type="email"
-                placeholder="Электронная почта"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="input-email"
-              />
+    return(
+        <div className="registrationfirst">
+            <div className="div">
+                <div className="overlap">
+                    <div className="overlap-group-wrapper">
+                        <div className="overlap-group">
+                            <input
+                                type="email"
+                                placeholder="Электронная почта"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="input-email"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="overlap-wrapper">
+                        <div className="overlap-group">
+                            <input
+                                type="password"
+                                placeholder="Пароль"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="input-password"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="overlap-wrapper-2">
+                        <div className="overlap-group">
+                            <input
+                                type="password"
+                                placeholder="Повторите пароль"
+                                value={repeatPassword}
+                                onChange={(e) => setRepeatPassword(e.target.value)}
+                                className="input-repeat-password"
+                            />
+                        </div>
+                    </div>
+
+                    {error && (
+                        <div className="error-message">
+                            Заполните все поля для регистрации*
+                        </div>
+                    )}
+
+                    {error2 && (
+                        <div className="error-message">
+                            Пароли должны совпадать*
+                        </div>
+                    )}
+
+                    <div className="text-wrapper-5">Пароль должен содержать...</div>
+
+                    <div className="view">
+                        <div className="overlap-2">
+                            <div className="ellipse" />
+
+                            <img className="line" alt="Line" src={line101} />
+
+                            <div className="ellipse-2" />
+                        </div>
+                    </div>
+
+                    <div className="button-next">
+                        <div className="overlap-3" onClick={handleClick2}>
+                            <div className="text-wrapper-2">Далее</div>
+
+                            <img className="vector-next" alt="Vector next" src={vectorNext}/>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="text-wrapper-3">Регистрация</div>
+
+                <div className="div-2">
+                    <div className="text-wrapper-4" onClick={handleClick}>Войти</div>
+
+                    <img className="vector-prev" alt="Vector prev" src={vectorPrev} onClick={handleClick3} />
+                </div>
+
+                <div className="view-2">
+                    <div className="overlap-4">
+                        <img className="left-eye" alt="Left eye" src={leftEye} />
+
+                        <img className="right-eye" alt="Right eye" src={rightEye} />
+                    </div>
+                </div>
+
             </div>
-          </div>
-
-          <div className="overlap-wrapper">
-            <div className="overlap-group">
-              <input
-                type="password"
-                placeholder="Пароль"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="input-password"
-              />
-            </div>
-          </div>
-
-          <div className="overlap-wrapper-2">
-            <div className="overlap-group">
-              <input
-                type="password"
-                placeholder="Повторите пароль"
-                value={repeatPassword}
-                onChange={(e) => setRepeatPassword(e.target.value)}
-                className="input-repeat-password"
-              />
-            </div>
-          </div>
-
-          {error && (
-            <div className="error-message">
-              Заполните все поля для регистрации*
-            </div>
-          )}
-
-          {error2 && (
-            <div className="error-message">
-              Пароли должны совпадать*
-            </div>
-          )}
-
-          <div className="text-wrapper-5">Пароль должен содержать...</div>
-
-          <div className="view">
-            <div className="overlap-2">
-                <div className="ellipse" />
-
-                <img className="line" alt="Line" src={line101} />
-
-                <div className="ellipse-2" />
-            </div>
-          </div>
-
-          <div className="button-next">
-            <div className="overlap-3" onClick={handleClick2}>
-              <div className="text-wrapper-2">Далее</div>
-
-              <img className="vector-next" alt="Vector next" src={vectorNext}/>
-            </div>
-          </div>
         </div>
-
-        <div className="text-wrapper-3">Регистрация</div>
-
-        <div className="div-2">
-            <div className="text-wrapper-4" onClick={handleClick}>Войти</div>
-
-            <img className="vector-prev" alt="Vector prev" src={vectorPrev} onClick={handleClick3} />
-        </div>
-
-        <div className="view-2">
-          <div className="overlap-4">
-            <img className="left-eye" alt="Left eye" src={leftEye} />
-
-            <img className="right-eye" alt="Right eye" src={rightEye} />
-          </div>
-        </div>
-        
-      </div>
-    </div>
-  );
+    );
 };

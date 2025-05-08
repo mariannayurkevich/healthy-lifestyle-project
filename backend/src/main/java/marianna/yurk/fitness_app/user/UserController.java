@@ -40,16 +40,6 @@ public class UserController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/by-email/{email}")
-    public ResponseEntity<?> updateUserByEmail(@PathVariable String email, @RequestBody User user) {
-        try {
-            User updatedUser = userService.updateUserByEmail(email, user);
-            return ResponseEntity.ok(updatedUser);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody User user) {
         try {
