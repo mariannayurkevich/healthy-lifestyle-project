@@ -32,7 +32,7 @@ export const RegistrationFirstScreen = () => {
             setError(false);
             setError2(false);
             try {
-                const response = await fetch("http://localhost:8080/api/v1/registration", {
+                const response = await fetch("/api/v1/registration", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
