@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import vectorPrev from "../../src/left.svg";
 import vectorNext from "../../src/right.svg";
 import "../../questionnairescreenstyle.css";
 
-export const BirthdayCard = ({ onPrev, onNext }) => {
+export const BirthdayCard = ({ onPrev, onNext, onDataUpdate }) => {
   // Состояния для дня, месяца, года и сообщения об ошибке
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
   const [error, setError] = useState("");
+
 
   // Функция для получения количества дней в заданном месяце и году
   const getDaysInMonth = (month, year) => {
@@ -84,6 +85,8 @@ export const BirthdayCard = ({ onPrev, onNext }) => {
   // Обертка для навигации: если дата корректна, вызываем переданный callback (напр., onNext или onPrev)
   const handleNavigation = (callback) => {
     if (validateDate()) {
+      const formattedDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+      onDataUpdate({ birthDate: formattedDate });
       callback();
     }
   };

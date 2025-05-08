@@ -3,7 +3,7 @@ import vectorPrev from "../../src/left.svg";
 import vectorNext from "../../src/right.svg";
 import "../../questionnairescreenstyle.css";
 
-export const AimCard = ({ onPrev, onNext }) => {
+export const AimCard = ({ onPrev, onNext, onDataUpdate }) => {
   // Состояние для выбранной цели и сообщения об ошибке
   const [selectedAim, setSelectedAim] = useState("");
   const [error, setError] = useState("");
@@ -19,13 +19,14 @@ export const AimCard = ({ onPrev, onNext }) => {
   // Функция для проверки, что выбран один из вариантов
   const handleNavigation = (callback) => {
     if (
-      selectedAim !== "потеря веса" &&
-      selectedAim !== "поддержание веса" &&
-      selectedAim !== "набор веса"
+      selectedAim !== "MAINTAIN" &&
+      selectedAim !== "LOSE" &&
+      selectedAim !== "GAIN"
     ) {
       setError("Выберите одну из целей*");
     } else {
       setError("");
+      onDataUpdate({goal:selectedAim});
       callback();
     }
   };
@@ -60,9 +61,9 @@ export const AimCard = ({ onPrev, onNext }) => {
           <option value="" disabled>
             Выбрать
           </option>
-          <option value="потеря веса">Потеря веса</option>
-          <option value="поддержание веса">Поддержание веса</option>
-          <option value="набор веса">Набор веса</option>
+          <option value="LOSE">Потеря веса</option>
+          <option value="MAINTAIN">Поддержание веса</option>
+          <option value="GAIN">Набор веса</option>
         </select>
       </div>
 

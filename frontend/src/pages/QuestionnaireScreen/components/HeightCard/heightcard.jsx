@@ -3,7 +3,7 @@ import vectorPrev from "../../src/left.svg";
 import vectorNext from "../../src/right.svg";
 import "../../questionnairescreenstyle.css";
 
-export const HeightCard = ({ onPrev, onNext }) => {
+export const HeightCard = ({ onPrev, onNext, onDataUpdate }) => {
   // Состояния для хранения роста и сообщения об ошибке
   const [height, setHeight] = useState("");
   const [error, setError] = useState("");
@@ -30,6 +30,7 @@ export const HeightCard = ({ onPrev, onNext }) => {
       return;
     }
     setError("");
+    onDataUpdate({ height:height });
     onNext();
   };
 

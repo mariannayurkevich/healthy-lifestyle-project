@@ -3,8 +3,29 @@ import vectorPrev from "../../src/left.svg";
 import vectorNext from "../../src/right.svg";
 import "../../questionnairescreenstyle.css";
 
-export const AllergiesCard = ({ onPrev, onNext }) => {
+export const AllergiesCard = ({ onPrev, onNext, onDataUpdate}) => {
   const [allergy, setAllergy] = useState("");
+    const [error, setError] = useState("");
+
+    // Обработчик изменения поля ввода
+    const handleChange = (e) => {
+        setAllergy(e.target.value);
+        if (e.target.value) {
+            setError("");
+        }
+    };
+
+    // Функция для проверки корректности ввода веса и перехода к следующей карточке
+    const handleNext = () => {
+        // Проверка на пустое значение
+        if (!allergy.trim()) {
+            setError("Пожалуйста, введите ваши аллергии");
+            return;
+        }
+        setError("");
+        onDataUpdate({ allergies:allergy }); // Передаем данные в родительский компонент
+        onNext();
+    };
 
   return (
     <div className="questionnaire-cards">
@@ -19,7 +40,7 @@ export const AllergiesCard = ({ onPrev, onNext }) => {
         className="vectorNextCard"
         alt="Vector"
         src={vectorNext}
-        onClick={onNext}
+        onClick={handleNext}
       />
 
       <p className="textCard">
@@ -38,7 +59,7 @@ export const AllergiesCard = ({ onPrev, onNext }) => {
       <div className="allergy-input-wrapper">
         <textarea
           value={allergy}
-          onChange={(e) => setAllergy(e.target.value)}
+          onChange={handleChange}
           placeholder="Аллергия на ..."
           className="allergy-input"
           rows="4" /* Количество строк по умолчанию */

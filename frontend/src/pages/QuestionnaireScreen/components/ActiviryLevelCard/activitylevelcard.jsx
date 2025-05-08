@@ -3,7 +3,7 @@ import vectorPrev from "../../src/left.svg";
 import vectorNext from "../../src/right.svg";
 import "../../questionnairescreenstyle.css";
 
-export const ActivityLevelCard = ({ onPrev, onNext }) => {
+export const ActivityLevelCard = ({ onPrev, onNext,onDataUpdate }) => {
   // Состояние для выбранного уровня активности и сообщения об ошибке
   const [selectedActivity, setSelectedActivity] = useState("");
   const [error, setError] = useState("");
@@ -19,15 +19,16 @@ export const ActivityLevelCard = ({ onPrev, onNext }) => {
   // Функция навигации с проверкой корректного выбора
   const handleNavigation = (callback) => {
     if (
-      selectedActivity !== "сидячий образ жизни" &&
-      selectedActivity !== "низкая физическая активность" &&
-      selectedActivity !== "умеренная физическая активность" &&
-      selectedActivity !== "интенсивная физическая активность" &&
-      selectedActivity !== "очень интенсивная физическая активность"
+      selectedActivity !== "sedentary" &&
+      selectedActivity !== "light" &&
+      selectedActivity !== "moderate" &&
+      selectedActivity !== "active" &&
+      selectedActivity !== "very_active"
     ) {
       setError("Выберите уровень активности");
     } else {
       setError("");
+      onDataUpdate({activityLevel: selectedActivity});
       callback();
     }
   };
@@ -62,11 +63,11 @@ export const ActivityLevelCard = ({ onPrev, onNext }) => {
           <option value="" disabled>
             Выбрать
           </option>
-          <option value="сидячий образ жизни">сидячий образ жизни</option>
-          <option value="низкая физическая активность">низкая физическая активность</option>
-          <option value="умеренная физическая активность">умеренная физическая активность</option>
-          <option value="интенсивная физическая активность">интенсивная физическая активность</option>
-          <option value="очень интенсивная физическая активность">
+          <option value="sedentary">сидячий образ жизни</option>
+          <option value="light">низкая физическая активность</option>
+          <option value="moderate">умеренная физическая активность</option>
+          <option value="active">интенсивная физическая активность</option>
+          <option value="very_active">
             очень интенсивная физическая активность
           </option>
         </select>

@@ -3,9 +3,30 @@ import vectorPrev from "../../src/left.svg";
 import vectorNext from "../../src/right.svg";
 import "../../questionnairescreenstyle.css";
 
-export const IntolerancesCard = ({ onPrev, onNext }) => {
+export const IntolerancesCard = ({ onPrev, onNext, onDataUpdate }) => {
   // Состояние для хранения введённых непереносимостей
   const [intolerance, setIntolerance] = useState("");
+    const [error, setError] = useState("");
+
+    // Обработчик изменения поля ввода
+    const handleChange = (e) => {
+        setIntolerance(e.target.value);
+        if (e.target.value) {
+            setError("");
+        }
+    };
+
+    // Функция для проверки корректности ввода веса и перехода к следующей карточке
+    const handleNext = () => {
+        // Проверка на пустое значение
+        if (!intolerance.trim()) {
+            setError("Пожалуйста, введите ваши непереносимости");
+            return;
+        }
+        setError("");
+        onDataUpdate({ intolerances:intolerance }); // Передаем данные в родительский компонент
+        onNext();
+    };
 
   return (
     <div className="questionnaire-cards">
@@ -20,7 +41,7 @@ export const IntolerancesCard = ({ onPrev, onNext }) => {
         className="vectorNextCard"
         alt="Vector"
         src={vectorNext}
-        onClick={onNext}
+        onClick={handleNext}
       />
 
       <p className="textCard">
@@ -40,7 +61,7 @@ export const IntolerancesCard = ({ onPrev, onNext }) => {
       <div className="intolerance-input-wrapper">
         <textarea
           value={intolerance}
-          onChange={(e) => setIntolerance(e.target.value)}
+          onChange={handleChange}
           placeholder="Непереносимость ..."
           className="intolerance-input"
           rows="4"  /* Количество строк по умолчанию */

@@ -3,7 +3,7 @@ import vectorPrev from "../../src/left.svg";
 import vectorNext from "../../src/right.svg";
 import "../../questionnairescreenstyle.css";
 
-export const GenderCard = ({ onPrev, onNext }) => {
+export const GenderCard = ({ onPrev, onNext, onDataUpdate }) => {
   // Инициализируем состояние для выбранного пола
   const [selectedGender, setSelectedGender] = useState("");
   const [error, setError] = useState("");
@@ -22,6 +22,7 @@ export const GenderCard = ({ onPrev, onNext }) => {
       setError("Выберите Ваш пол*");
     } else {
       setError("");
+      onDataUpdate({gender: selectedGender });
       callback();
     }
   };
