@@ -1,5 +1,5 @@
 // MainScreen.jsx
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import water from "./src/water-tracker.svg";
 import food from "./src/food-tracker.svg";
 import groupCloud from "./src/group-cloud.svg";
@@ -12,7 +12,32 @@ import { useNavigate } from "react-router-dom";
 
 export const MainScreen = () => {
   const navigate = useNavigate();
+  const [userData, setUserData] = useState(null);
+  const [dailyReport, setDailyReport] = useState(null);
   const [showAddMenu, setShowAddMenu] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Получаем ID пользователя из хранилища (пример)
+        const userId = localStorage.getItem("userId");
+
+        // Запрос данных пользователя
+        const userResponse = await fetch(`/api/users/id/${userId}`);
+        const user = await userResponse.json();
+        setUserData(user);
+
+        // Запрос ежедневного отчета
+        const reportResponse = await fetch(`/report/today?userId=${userId}`);
+        const report = await reportResponse.json();
+        setDailyReport(report);
+      } catch (error) {
+        console.error("Ошибка загрузки данных:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleMenuClick = () => {
     navigate("/main");
@@ -55,7 +80,9 @@ export const MainScreen = () => {
     <div className="mainscreen">
       <div className="div">
         <div className="text-wrapper">Привет,</div>
-        <div className="text-wrapper-2">Малинка Ди</div>
+        <div className="text-wrapper-2">
+          {userData ? `${userData.firstName} ${userData.lastName}` : "Загрузка..."}
+        </div>
         <MenuGroup 
           onMenuClickAccount={handleMenuClick4}
           onMenuClickSleep={handleMenuClick5}
@@ -68,13 +95,17 @@ export const MainScreen = () => {
           <div className="group">
             <img className="water" alt="Group" src={water} onClick={handleMenuClick7}/>
             <div className="text-wrapper-9">Вода</div>
-            <div className="text-wrapper-10">1.0 л</div>
+            <div className="text-wrapper-10">
+              {dailyReport ? `${(dailyReport.totalIntakeMl / 1000).toFixed(1)} л` : "0.0 л"}
+            </div>
           </div>
           
           <div className="image">
             <img className="food" alt="Vector" src={food} onClick={handleMenuClick9}/>
             <div className="text-wrapper-11">Питание</div>
-            <div className="text-wrapper-12">255 Ккал</div>
+            <div className="text-wrapper-12">
+              {dailyReport ? `${Math.round(dailyReport.totalCalories)} Ккал` : "0 Ккал"}
+            </div>
           </div>
 
           <div className="overlap-group">
@@ -88,7 +119,9 @@ export const MainScreen = () => {
 
             <p className="p">
               <span className="text-wrapper-4">Активность </span>
-              <span className="text-wrapper-5">50 мин</span>
+              <span className="text-wrapper-5">
+            {dailyReport ? `${dailyReport.activityDurationMinutes} мин` : "0 мин"}
+          </span>
             </p>
           </div>
 
@@ -97,7 +130,9 @@ export const MainScreen = () => {
               {/* При клике по этому элементу открывается AddMenu */}
               <div className="rectangle-2" onClick={handleMenuClick6} />
               <p className="element-2">
-                <span className="text-wrapper-6">8</span>
+                <span className="text-wrapper-6">
+            {dailyReport ? Math.round(dailyReport.sleepDuration) : "0"}
+          </span>
                 <span className="text-wrapper-7">&nbsp;</span>
                 <span className="text-wrapper-3">ЧАСОВ</span>
               </p>
