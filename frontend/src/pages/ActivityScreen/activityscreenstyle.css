@@ -1,0 +1,251 @@
+.activityscreen  {
+    background-color: #fdfaff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .activityscreen  .div {
+    background-color: #fdfaff;
+    height: 874px;
+    position: relative;
+    width: 402px;
+  }
+  
+  .activityscreen  .union {
+    height: 469px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 402px;
+  }
+  
+  .activityscreen  .group {
+    height: 109px;
+    left: 93px;
+    position: absolute;
+    top: 167px;
+    transform: rotate(-156.63deg);
+    width: 112px;
+  }
+  
+  .activityscreen  .overlap-group {
+    height: 116px;
+    left: -4px;
+    position: relative;
+    top: -3px;
+    width: 118px;
+  }
+  
+  .activityscreen  .mask-group {
+    height: 56px;
+    left: 9px;
+    position: absolute;
+    top: 51px;
+    transform: rotate(156.63deg);
+    width: 56px;
+  }
+  
+  .activityscreen  .img {
+    height: 58px;
+    left: 52px;
+    position: absolute;
+    top: 9px;
+    transform: rotate(156.63deg);
+    width: 58px;
+  }
+  
+  .activityscreen  .text-wrapper {
+    color: #280635;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 32px;
+    font-weight: 600;
+    left: 233px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 267px;
+    white-space: nowrap;
+  }
+  
+  .activityscreen  .ellipse {
+    border: 4px solid;
+    border-color: #ffcc6d;
+    border-radius: 11.12px / 9.54px;
+    height: 19px;
+    left: 64px;
+    position: absolute;
+    top: 333px;
+    width: 22px;
+  }
+  
+  .activityscreen  .line {
+    height: 352px;
+    left: 8px;
+    position: absolute;
+    top: 0;
+    width: 290px;
+  }
+  
+  .activityscreen  .text-wrapper-2 {
+    color: #ffffff;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 48px;
+    font-weight: 600;
+    left: 14px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: right;
+    top: 374px;
+    white-space: nowrap;
+  }
+  
+  .activityscreen  .div-2 {
+    height: 19px;
+    left: 30px;
+    position: absolute;
+    top: 59px;
+    width: 339px;
+  }
+  
+  .activityscreen  .text-wrapper-3 {
+    color: #280635;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 288px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+  }
+  
+  .activityscreen  .vector {
+    height: 14px;
+    left: 0;
+    position: absolute;
+    top: 5px;
+    width: 18px;
+  }
+  
+  .activityscreen  .overlap-wrapper {
+    height: 86px;
+    left: 49px;
+    position: absolute;
+    top: 260px;
+    width: 52px;
+  }
+
+  .activityscreen  .overlap {
+    background-image: url(./src/vector-5.svg);
+    background-size: 100% 100%;
+    height: 83px;
+    position: relative;
+  }
+  
+  .activityscreen  .mask-group-2 {
+    height: 27px;
+    left: 13px;
+    position: absolute;
+    top: 8px;
+    width: 27px;
+  }
+  
+  .activityscreen  .text-wrapper-4 {
+    color: #280636;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 56px;
+    font-weight: 600;
+    left: 167px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 114px;
+    white-space: nowrap;
+  }
+  
+  .activityscreen  .text-wrapper-5 {
+    color: #280635;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 276px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 497px;
+    white-space: nowrap;
+  }
+  
+  .activityscreen  .element {
+    color: #280635;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 30px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 489px;
+  }
+  
+  .activityscreen  .span {
+    color: #280635;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  
+  .activityscreen  .text-wrapper-6 {
+    font-size: 14px;
+  }
+  
+  .activityscreen  .line-2 {
+    height: 3px;
+    left: 28px;
+    position: absolute;
+    top: 528px;
+    width: 345px;
+  }
+  
+  .activityscreen  .overlap-group-wrapper {
+    height: 49px;
+    left: 86px;
+    position: absolute;
+    top: 770px;
+    width: 232px;
+  }
+  
+  .activityscreen  .div-wrapper {
+    background-color: #280636;
+    border-radius: 28px;
+    height: 49px;
+    position: relative;
+    width: 230px;
+  }
+  
+  .activityscreen  .text-wrapper-7 {
+    color: #ffffff;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 65px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 15px;
+    width: 120px;
+  }
+  
+  .activityscreen  .vector-2 {
+    height: 26px;
+    left: 353px;
+    position: absolute;
+    top: 492px;
+    width: 27px;
+  }
+  

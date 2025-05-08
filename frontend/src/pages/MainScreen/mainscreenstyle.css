@@ -31,6 +31,7 @@ html, body {
     position: absolute;
     top: 82px;
     white-space: nowrap;
+    cursor: context-menu;
   }
   
   .mainscreen .text-wrapper-2 {
@@ -44,6 +45,7 @@ html, body {
     position: absolute;
     top: 110px;
     white-space: nowrap;
+    cursor: context-menu;
   }
   
   .mainscreen .overlap {
@@ -281,6 +283,7 @@ html, body {
     bottom: 10px;
     left: 26%;
     letter-spacing: 0;
+    pointer-events: none;
   }
 
   .mainscreen .text-wrapper-10 {
@@ -292,6 +295,7 @@ html, body {
     bottom: 157px;
     left: 30%;
     letter-spacing: 0;
+    pointer-events: none;
   }
 
   .mainscreen .text-wrapper-11 {

@@ -1,0 +1,219 @@
+.foodscreen  {
+    background-color: #fdfaff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .foodscreen  .div {
+    background-color: #fdfaff;
+    height: 874px;
+    overflow: hidden;
+    position: relative;
+    width: 402px;
+  }
+  
+  .foodscreen  .overlap {
+    height: 512px;
+    left: -123px;
+    position: absolute;
+    top: -89px;
+    width: 508px;
+  }
+  
+  .foodscreen  .overlap-group {
+    height: 508px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 508px;
+  }
+  
+  .foodscreen  .group {
+    background-color: #ff5151;
+    border-radius: 193.26px;
+    height: 387px;
+    left: 61px;
+    position: absolute;
+    top: 61px;
+    transform: rotate(-156.63deg);
+    width: 387px;
+  }
+  
+  .foodscreen  .overlap-group-2 {
+    height: 141px;
+    left: 37px;
+    position: relative;
+    top: 26px;
+    width: 144px;
+  }
+  
+  .foodscreen  .mask-group {
+    height: 68px;
+    left: 11px;
+    position: absolute;
+    top: 62px;
+    transform: rotate(156.63deg);
+    width: 68px;
+  }
+  
+  .foodscreen  .img {
+    height: 70px;
+    left: 63px;
+    position: absolute;
+    top: 11px;
+    transform: rotate(156.63deg);
+    width: 70px;
+  }
+  
+  .foodscreen  .text-wrapper {
+    color: #fefaff;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 48px;
+    font-weight: 600;
+    left: 142px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 260px;
+    white-space: nowrap;
+  }
+  
+  .foodscreen  .text-wrapper-2 {
+    color: #280635;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 32px;
+    font-weight: 600;
+    left: 374px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 404px;
+    white-space: nowrap;
+  }
+  
+  .foodscreen  .div-2 {
+    height: 19px;
+    left: 153px;
+    position: absolute;
+    top: 148px;
+    width: 339px;
+  }
+  
+  .foodscreen  .text-wrapper-3 {
+    color: #280635;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 288px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+  }
+  
+  .foodscreen  .vector {
+    height: 14px;
+    left: 0;
+    position: absolute;
+    top: 5px;
+    width: 18px;
+  }
+  
+  .foodscreen  .text-wrapper-4 {
+    color: #280636;
+    font-family: "Rubik-SemiBold", Helvetica;
+    font-size: 56px;
+    font-weight: 600;
+    left: 142px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 191px;
+    white-space: nowrap;
+  }
+  
+  .foodscreen  .text-wrapper-5 {
+    color: #280635;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 407px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 484px;
+    white-space: nowrap;
+  }
+  
+  .foodscreen  .element {
+    color: #280635;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 154px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 476px;
+  }
+  
+  .foodscreen  .span {
+    color: #280635;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  
+  .foodscreen  .text-wrapper-6 {
+    font-size: 14px;
+  }
+  
+  .foodscreen  .vector-2 {
+    height: 26px;
+    left: 474px;
+    position: absolute;
+    top: 482px;
+    width: 27px;
+  }
+  
+  .foodscreen  .line {
+    height: 3px;
+    left: 30px;
+    position: absolute;
+    top: 426px;
+    width: 345px;
+  }
+  
+  .foodscreen  .overlap-wrapper {
+    height: 49px;
+    left: 90px;
+    position: absolute;
+    top: 770px;
+    width: 232px;
+  }
+  
+  .foodscreen  .div-wrapper {
+    background-color: #280636;
+    border-radius: 28px;
+    height: 49px;
+    position: relative;
+    width: 230px;
+  }
+  
+  .foodscreen  .text-wrapper-7 {
+    color: #ffffff;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 94px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 15px;
+    width: 51px;
+  }
+  
