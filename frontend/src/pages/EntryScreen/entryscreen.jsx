@@ -39,7 +39,18 @@ export const EntryScreen = () => {
       });
 
       if (response.ok) {
-        navigate("/main");
+        // Получаем данные пользователя
+        const userResponse = await fetch("/api/users/me", {
+          credentials: "include"
+        });
+
+        if (userResponse.ok) {
+          const userData = await userResponse.json();
+          localStorage.setItem("userId", userData.id); // Сохраняем ID
+          navigate("/main");
+        } else {
+          setError("Не удалось получить данные пользователя");
+        }
       } else {
         const errorText = await response.text();
         setError(errorText || "Ошибка авторизации");
