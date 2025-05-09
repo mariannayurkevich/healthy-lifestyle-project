@@ -7,7 +7,7 @@ import line89 from "./src/line-89.svg";
 import activeAi from "./src/active-ai.svg";
 import "./mainscreenstyle.css";
 import MenuGroup from "../../components/PageMenu/pagemenu";
-import AddMenu from "../SleepScreen/components/addmenu"
+import AddMenu from "../SleepScreen/components/addsleepmenu"
 import { useNavigate } from "react-router-dom";
 
 export const MainScreen = () => {
