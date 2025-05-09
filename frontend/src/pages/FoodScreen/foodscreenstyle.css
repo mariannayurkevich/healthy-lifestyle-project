@@ -7,7 +7,6 @@
   }
   
   .foodscreen  .div {
-    background-color: #fdfaff;
     height: 874px;
     overflow: hidden;
     position: relative;
@@ -34,9 +33,9 @@
     background-color: #ff5151;
     border-radius: 193.26px;
     height: 387px;
-    left: 61px;
+    left: -20%;
     position: absolute;
-    top: 61px;
+    top: -5%;
     transform: rotate(-156.63deg);
     width: 387px;
   }

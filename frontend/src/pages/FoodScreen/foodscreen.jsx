@@ -17,16 +17,17 @@ export const FoodScreen = () => {
 
   return (
     <div className="foodscreen">
-      <div className="div">
-        <div className="overlap">
-          <div className="overlap-group">
-            <div className="group">
+      <div className="group">
               <div className="overlap-group-2">
                 <img className="mask-group" alt="Mask group" src={maskGroup2} />
 
                 <img className="img" alt="Mask group" src={maskGroup} />
               </div>
             </div>
+      <div className="div">
+        <div className="overlap">
+          <div className="overlap-group">
+            
 
             <div className="text-wrapper">Питание</div>
 
@@ -38,9 +39,10 @@ export const FoodScreen = () => {
               <img className="vector" alt="Vector" src={vector} onClick={handleClick}/>
             </div>
 
-            <div className="text-wrapper-4">1800 ККал</div>
+            <div className="text-wrapper-4">0 ККал</div>
           </div>
 
+          {/*
           <div className="text-wrapper-5">50 ккал</div>
 
           <p className="element">
@@ -53,9 +55,13 @@ export const FoodScreen = () => {
           </p>
 
           <img className="vector-2" alt="Vector" src={vector5} />
+
+           <img className="line" alt="Line" src={line100} />
+          */}
+          
         </div>
 
-        <img className="line" alt="Line" src={line100} />
+       
 
         <div className="overlap-wrapper">
           <div className="div-wrapper">

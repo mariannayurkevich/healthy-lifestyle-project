@@ -33,7 +33,7 @@ export const ActivityScreen = () => {
 
           <div className="text-wrapper">Сегодня</div> 
 
-          <img className="union" alt="Union" src={union} />
+          <img className="union-2" alt="Union" src={union} />
           
 
           <div className="ellipse" />
@@ -56,9 +56,9 @@ export const ActivityScreen = () => {
             </div>
           </div>
 
-          <div className="text-wrapper-4">18 мин</div>
+          <div className="text-wrapper-4">0 мин</div>
         </div>
-
+        {/*
         <div className="text-wrapper-5">150 ккал</div>
 
         <p className="element">
@@ -72,13 +72,17 @@ export const ActivityScreen = () => {
 
         <img className="line-2" alt="Line" src={line100} />
 
+        <img className="vector-2" alt="Vector" src={vector6} />
+        */}
+        
+
         <div className="overlap-group-wrapper">
           <div className="div-wrapper">
             <div className="text-wrapper-7">+ Активность</div>
           </div>
         </div>
 
-        <img className="vector-2" alt="Vector" src={vector6} />
+        
       </div>
     </div>
   );

@@ -20,6 +20,15 @@
     top: 0;
     width: 402px;
   }
+
+  .activityscreen  .union-2 {
+    width: 145%;
+    height: 125%;
+    display: flex;
+    left: -28%;
+    position: absolute;
+    top: -25%;
+  }
   
   .activityscreen  .group {
     height: 109px;

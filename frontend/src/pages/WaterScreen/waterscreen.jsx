@@ -54,7 +54,7 @@ export const WaterScreen = () => {
               </div>
             </div>
             <div className="text-wrapper-2">Вода</div>
-            <div className="text-wrapper-3">1800 мл</div>
+            <div className="text-wrapper-3">0 мл</div>
             <div className="text-wrapper-4">Сегодня</div>
 
             {/* Контейнер для списка записей с скроллом */}
