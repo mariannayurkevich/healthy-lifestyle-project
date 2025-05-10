@@ -1,5 +1,4 @@
 import React from "react";
-import "../../../QuestionnaireScreen/questionnairescreenstyle.css";
 import "../../waterscreenstyle.css";
 
 export const AddWaterMenu = ({ onClose }) => {
@@ -40,15 +39,13 @@ export const AddWaterMenu = ({ onClose }) => {
             </div>
           </div>
 
-          <div className="button-save" onClick={onClose}>
+        <div className="button-save" onClick={onClose}>
           <div className="div-wrapper-save">
             <div className="text-wrapper-22">Сохранить</div>
           </div>
         </div>
 
         </div>
-
-        
 
       </div>
     </div>

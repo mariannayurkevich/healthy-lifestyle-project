@@ -215,4 +215,73 @@
     top: 15px;
     width: 51px;
   }
+
+    /* Стили для кнопки "Сохранить" */
+.add-food-menu .button-save {
+  margin-top: 20px;
+  position: absolute;
+  display: flex;
+  top: 70%;
+  left: 7%;
+  width: 100%;
+}
+
+.add-food-menu .div-wrapper-save {
+  width: 80%;
+  background-color: #280635;
+  border-radius: 28px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.add-food-menu .text-wrapper-22 {
+  color: #ffffff;
+  font-size: 16px;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-weight: 500;
+}
+
+.add-food-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Контейнер для карточек (одного размера) */
+.add-food-menu-cards-container {
+  position: relative;
+  width: 300px;
+  height: 380px;
+}
+
+/* Общие стили карточек */
+.add-food-menu-cards {
+position: absolute;
+top: 50%;
+left: 50%;
+width: 300px;
+height: 280px;
+border-radius: 25px;
+padding: 20px;
+background-color: rgba(254, 250, 255, 1);
+transform: translate(-50%, -50%);
+}
+
+.add-food-menu-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
   
