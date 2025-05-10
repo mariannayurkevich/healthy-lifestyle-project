@@ -1,18 +1,31 @@
-import React from "react";
-import vector5 from "./src/vector-5.svg";
+import React, { useState } from "react";
 import line89 from "./src/line-89.svg";
-import line100 from "./src/line-100.svg";
 import maskGroup2 from "./src/mask-group-2.svg";
-import maskGroup from "./src/mask-group.svg";
 import "./activityscreenstyle.css";
 import union from "./src/union.svg";
-import vector6 from "./src/vector-6.svg";
 import vector from "./src/vector.svg";
+import { AddActivityMenu } from "./components/AddActivityMenu/addactivitymenu";
+import ActivityRecord from "./components/ActivityRecord/activityrecord";
 
 import { useNavigate } from "react-router-dom";
 
 export const ActivityScreen = () => {
     const navigate = useNavigate();
+        const [records, setRecords] = useState([
+          { id: 1, volume: "500 ккал", label: "Активность", grams: "30 мин" },
+          { id: 2, volume: "500 ккал", label: "Активность", grams: "10 мин" }
+        ]);
+    const [showAddMenu, setShowAddMenu] = useState(false);
+
+  // При нажатии на кнопку открываем меню
+  const handleActivityClick = () => {
+    setShowAddMenu(true);
+  };
+
+  // Функция для закрытия AddActivityMenu (ее можно передать для обработки закрытия в этом компоненте)
+  const handleCloseAddMenu = () => {
+    setShowAddMenu(false);
+  };
 
     const handleClick = () => {
       navigate('/main');
@@ -22,25 +35,15 @@ export const ActivityScreen = () => {
     <div className="activityscreen">
       <div className="div">
         <div className="union">
-          <div className="group">
-            <div className="overlap-group">
-              <img className="mask-group" alt="Mask group" src={maskGroup} />
-              
-              <img className="img" alt="Mask group" src={vector5} />
-
-            </div>
-          </div>
+          <img className="union-2" alt="Union" src={union} />
 
           <div className="text-wrapper">Сегодня</div> 
-
-          <img className="union" alt="Union" src={union} />
           
 
           <div className="ellipse" />
 
           <img className="line" alt="Line" src={line89} />
 
-          
 
           <div className="text-wrapper-2">Активность</div>
 
@@ -56,9 +59,21 @@ export const ActivityScreen = () => {
             </div>
           </div>
 
-          <div className="text-wrapper-4">18 мин</div>
+          <div className="text-wrapper-4">0 мин</div>
         </div>
 
+        {/* Контейнер для списка записей с скроллом */}
+          <div className="activity-records-container">
+              {records.map((record) => (
+                <ActivityRecord
+                  key={record.id}
+                  volume={record.volume}
+                  label={record.label}
+                  grams= {record.grams}
+                />
+              ))}
+            </div>
+        {/*
         <div className="text-wrapper-5">150 ккал</div>
 
         <p className="element">
@@ -72,14 +87,25 @@ export const ActivityScreen = () => {
 
         <img className="line-2" alt="Line" src={line100} />
 
+        <img className="vector-2" alt="Vector" src={vector6} />
+        */}
+        
+
         <div className="overlap-group-wrapper">
-          <div className="div-wrapper">
+          <div className="div-wrapper" onClick={handleActivityClick}>
             <div className="text-wrapper-7">+ Активность</div>
           </div>
         </div>
 
-        <img className="vector-2" alt="Vector" src={vector6} />
+        
       </div>
+            {/* Условная отрисовка компонента AddWaterMenu */}
+            {showAddMenu && (
+              <div className="add-activity-menu-container">
+                {/* Можно передать функцию закрытия в AddWaterMenu, чтобы он сам мог закрываться */}
+                <AddActivityMenu onClose={handleCloseAddMenu} />
+              </div>
+            )}
     </div>
   );
 };

@@ -20,6 +20,15 @@
     top: 0;
     width: 402px;
   }
+
+  .activityscreen  .union-2 {
+    width: 145%;
+    height: 125%;
+    display: flex;
+    left: -28%;
+    position: absolute;
+    top: -25%;
+  }
   
   .activityscreen  .group {
     height: 109px;
@@ -70,14 +79,14 @@
   }
   
   .activityscreen  .ellipse {
-    border: 4px solid;
-    border-color: #ffcc6d;
-    border-radius: 11.12px / 9.54px;
-    height: 19px;
+    border: 5px solid;
+    border-color: #FFA600;
+    border-radius: 15px;
+    height: 22px;
     left: 64px;
     position: absolute;
     top: 333px;
-    width: 22px;
+    width: 25px;
   }
   
   .activityscreen  .line {
@@ -143,6 +152,8 @@
     background-image: url(./src/vector-5.svg);
     background-size: 100% 100%;
     height: 83px;
+    left: 5px;
+    top: 3px;
     position: relative;
   }
   
@@ -166,51 +177,7 @@
     top: 114px;
     white-space: nowrap;
   }
-  
-  .activityscreen  .text-wrapper-5 {
-    color: #280635;
-    font-family: "Rubik-Medium", Helvetica;
-    font-size: 16px;
-    font-weight: 500;
-    left: 276px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 497px;
-    white-space: nowrap;
-  }
-  
-  .activityscreen  .element {
-    color: #280635;
-    font-family: "Rubik-Medium", Helvetica;
-    font-size: 16px;
-    font-weight: 500;
-    left: 30px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 489px;
-  }
-  
-  .activityscreen  .span {
-    color: #280635;
-    font-family: "Rubik-Medium", Helvetica;
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: 0;
-  }
-  
-  .activityscreen  .text-wrapper-6 {
-    font-size: 14px;
-  }
-  
-  .activityscreen  .line-2 {
-    height: 3px;
-    left: 28px;
-    position: absolute;
-    top: 528px;
-    width: 345px;
-  }
+
   
   .activityscreen  .overlap-group-wrapper {
     height: 49px;
@@ -241,11 +208,150 @@
     width: 120px;
   }
   
-  .activityscreen  .vector-2 {
-    height: 26px;
-    left: 353px;
-    position: absolute;
-    top: 492px;
-    width: 27px;
-  }
+   /* Стили для кнопки "Сохранить" */
+.add-activity-menu .button-save {
+  margin-top: 20px;
+  position: absolute;
+  display: flex;
+  top: 70%;
+  left: 7%;
+  width: 100%;
+}
+
+.add-activity-menu .div-wrapper-save {
+  width: 80%;
+  background-color: #280635;
+  border-radius: 28px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.add-activity-menu .text-wrapper-22 {
+  color: #ffffff;
+  font-size: 16px;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-weight: 500;
+}
+
+.add-activity-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Контейнер для карточек (одного размера) */
+.add-activity-menu-cards-container {
+  position: relative;
+  width: 300px;
+  height: 380px;
+}
+
+/* Общие стили карточек */
+.add-activity-menu-cards {
+position: absolute;
+top: 50%;
+left: 50%;
+width: 300px;
+height: 280px;
+border-radius: 25px;
+padding: 20px;
+background-color: rgba(254, 250, 255, 1);
+transform: translate(-50%, -50%);
+}
+
+.add-activity-menu-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.activityscreen .activity-record {
+  position: relative;
+}  
+
+.activityscreen .activity-records-container {
+  position: relative;
+  height: 280px;
+  width: 410px;
+  left: 4%;
+  top: 55%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: #FEFAFF;
+  gap: 15px; 
+  z-index: 100;
+}
+
+/* Переопределяем стили для элемента, содержащего label и grams */
+/* Используем относительное позиционирование и флекс-раскладку по колонке */
+.activityscreen .element {
+  position: relative; /* отменяем абсолютное позиционирование */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;  /* выравнивание по левому краю */
+  left: 5px;
+  color: #280635;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: normal;
+  margin: 0; /* можно скорректировать отступы */
+  padding: 0;
+}
+
+/* Для вложенных элементов убираем абсолютное позиционирование, чтобы они располагались по порядку */
+.activityscreen .element .span,
+.activityscreen .element .text-wrapper-6 {
+  position: static; /* либо можно вовсе удалить это свойство */
+  white-space: normal; /* даёт возможность переноса текста */
+  display: block;  /* гарантирует, что элементы займут полную ширину родителя */
+  margin: 0; /* можно добавлять отступы при необходимости */
+}
+
+/* Если нужно добавить немного отступа между строчками, можно добавить margin-bottom для первого блока */
+.activityscreen .element .span {
+  margin-bottom: 5px;
+}
+
+
+.activity-record .text-wrapper-5 {
+  color: #280635;
+  font-family: "Rubik-Medium", Helvetica;
+  font-size: 16px;
+  font-weight: 500;
+  left: 265px;
+  top: 7px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  white-space: nowrap;
+}
+
+.activity-record .line-2 {
+  top: 40px;
+  position: absolute;
+  width: 355px;
+}
+
+.activity-record .vector-2 {
+  top: 0px;
+  height: 26px;
+  left: 338px;
+  position: absolute;
+  width: 27px;
+}
   

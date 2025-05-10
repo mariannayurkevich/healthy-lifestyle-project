@@ -5,7 +5,7 @@ import BackgroundGroup from "./components/background";
 import SleepText from "./components/goodnighttext";
 import SleepTimer from "./components/timer";
 import MenuGroup from "./components/pagemenu";
-import AddMenu from "./components/addmenu";
+import AddMenu from "./components/addsleepmenu";
 import "./sleepscreenstyle.css";
 
 export const SleepScreen = () => {

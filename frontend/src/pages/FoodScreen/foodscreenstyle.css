@@ -7,7 +7,6 @@
   }
   
   .foodscreen  .div {
-    background-color: #fdfaff;
     height: 874px;
     overflow: hidden;
     position: relative;
@@ -34,9 +33,9 @@
     background-color: #ff5151;
     border-radius: 193.26px;
     height: 387px;
-    left: 61px;
+    left: -20%;
     position: absolute;
-    top: 61px;
+    top: -5%;
     transform: rotate(-156.63deg);
     width: 387px;
   }
@@ -135,59 +134,6 @@
     white-space: nowrap;
   }
   
-  .foodscreen  .text-wrapper-5 {
-    color: #280635;
-    font-family: "Rubik-Medium", Helvetica;
-    font-size: 16px;
-    font-weight: 500;
-    left: 407px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 484px;
-    white-space: nowrap;
-  }
-  
-  .foodscreen  .element {
-    color: #280635;
-    font-family: "Rubik-Medium", Helvetica;
-    font-size: 16px;
-    font-weight: 500;
-    left: 154px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 476px;
-  }
-  
-  .foodscreen  .span {
-    color: #280635;
-    font-family: "Rubik-Medium", Helvetica;
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: 0;
-  }
-  
-  .foodscreen  .text-wrapper-6 {
-    font-size: 14px;
-  }
-  
-  .foodscreen  .vector-2 {
-    height: 26px;
-    left: 474px;
-    position: absolute;
-    top: 482px;
-    width: 27px;
-  }
-  
-  .foodscreen  .line {
-    height: 3px;
-    left: 30px;
-    position: absolute;
-    top: 426px;
-    width: 345px;
-  }
-  
   .foodscreen  .overlap-wrapper {
     height: 49px;
     left: 90px;
@@ -216,4 +162,151 @@
     top: 15px;
     width: 51px;
   }
+
+    /* Стили для кнопки "Сохранить" */
+.add-food-menu .button-save {
+  margin-top: 20px;
+  position: absolute;
+  display: flex;
+  top: 70%;
+  left: 7%;
+  width: 100%;
+}
+
+.add-food-menu .div-wrapper-save {
+  width: 80%;
+  background-color: #280635;
+  border-radius: 28px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.add-food-menu .text-wrapper-22 {
+  color: #ffffff;
+  font-size: 16px;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-weight: 500;
+}
+
+.add-food-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Контейнер для карточек (одного размера) */
+.add-food-menu-cards-container {
+  position: relative;
+  width: 300px;
+  height: 380px;
+}
+
+/* Общие стили карточек */
+.add-food-menu-cards {
+position: absolute;
+top: 50%;
+left: 50%;
+width: 300px;
+height: 280px;
+border-radius: 25px;
+padding: 20px;
+background-color: rgba(254, 250, 255, 1);
+transform: translate(-50%, -50%);
+}
+
+.add-food-menu-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.foodscreen .food-record {
+  position: relative;
+}  
+
+.foodscreen .food-records-container {
+  position: relative;
+  height: 360px;
+  width: 410px;
+  left: 28%;
+  margin-top: 90%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: #FEFAFF;
+  gap: 15px; 
+  z-index: 100;
+}
+
+/* Переопределяем стили для элемента, содержащего label и grams */
+/* Используем относительное позиционирование и флекс-раскладку по колонке */
+.foodscreen .element {
+  position: relative; /* отменяем абсолютное позиционирование */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;  /* выравнивание по левому краю */
+  left: 5px;
+  color: #280635;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: normal;
+  margin: 0; /* можно скорректировать отступы */
+  padding: 0;
+}
+
+/* Для вложенных элементов убираем абсолютное позиционирование, чтобы они располагались по порядку */
+.foodscreen .element .span,
+.foodscreen .element .text-wrapper-6 {
+  position: static; /* либо можно вовсе удалить это свойство */
+  white-space: normal; /* даёт возможность переноса текста */
+  display: block;  /* гарантирует, что элементы займут полную ширину родителя */
+  margin: 0; /* можно добавлять отступы при необходимости */
+}
+
+/* Если нужно добавить немного отступа между строчками, можно добавить margin-bottom для первого блока */
+.foodscreen .element .span {
+  margin-bottom: 5px;
+}
+
+
+.food-record .text-wrapper-5 {
+  color: #280635;
+  font-family: "Rubik-Medium", Helvetica;
+  font-size: 16px;
+  font-weight: 500;
+  left: 265px;
+  top: 7px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  white-space: nowrap;
+}
+
+.food-record .line {
+  top: 40px;
+  position: absolute;
+  width: 355px;
+}
+
+.food-record .vector-2 {
+  top: 0px;
+  height: 26px;
+  left: 338px;
+  position: absolute;
+  width: 27px;
+}
   
