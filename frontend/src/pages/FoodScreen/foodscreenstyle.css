@@ -163,32 +163,6 @@
     width: 51px;
   }
 
-    /* Стили для кнопки "Сохранить" */
-.add-food-menu .button-save {
-  margin-top: 20px;
-  position: absolute;
-  display: flex;
-  top: 70%;
-  left: 7%;
-  width: 100%;
-}
-
-.add-food-menu .div-wrapper-save {
-  width: 80%;
-  background-color: #280635;
-  border-radius: 28px;
-  padding: 12px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.add-food-menu .text-wrapper-22 {
-  color: #ffffff;
-  font-size: 16px;
-  font-family: "Rubik-Medium", Helvetica, sans-serif;
-  font-weight: 500;
-}
-
 .add-food-menu {
   position: fixed;
   top: 0;
@@ -213,22 +187,19 @@
 
 /* Общие стили карточек */
 .add-food-menu-cards {
-position: absolute;
-top: 50%;
-left: 50%;
-width: 300px;
-height: 280px;
-border-radius: 25px;
-padding: 20px;
-background-color: rgba(254, 250, 255, 1);
-transform: translate(-50%, -50%);
-}
-
-.add-food-menu-cards {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 400px;
+  border-radius: 25px;
+  padding: 20px;
+  background-color: rgba(254, 250, 255, 1);
+  transform: translate(-50%, -50%);
 }
 
 .foodscreen .food-record {
@@ -309,4 +280,103 @@ transform: translate(-50%, -50%);
   position: absolute;
   width: 27px;
 }
-  
+
+/* Стили для кнопки "Сохранить" */
+.add-food-menu .button-save {
+  margin-top: 20px;   
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: static; /* либо просто полностью удалить свойство position */
+}
+
+.add-food-menu .button-save button {
+  width: 80%;
+  background-color: #280635;
+  border-radius: 28px;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-weight: 500;
+}
+
+/* Контейнер для карточки (окна) */
+.add-food-menu .add-food-menu-container {
+  position: relative;
+ display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 800px;
+  border-radius: 25px;
+  padding: 20px;
+  background-color: rgba(254, 250, 255, 1);
+  transform: translate(-50%, -50%);
+}
+
+/* Форма с данными о еде */
+.add-food-menu .food-data-form {
+  position: relative;
+  left: 0%;
+}
+
+/* Стили для подписей (меток) */
+.add-food-menu .food-data-form label {
+  display: block;
+  font-size: 18px;
+  font-weight: 500;
+  color: #401255;
+  font-family: "Rubik", Helvetica, sans-serif;
+  margin-bottom: 8px;
+}
+
+/* Стили для полей ввода – уменьшены ширина, padding и размер шрифта */
+.add-food-menu .food-data-form input {
+  position: relative;
+  width: 70%;             /* раньше было 80% */
+  padding: 10px;          /* раньше было 14px */
+  font-size: 18px;        /* раньше было 22px */
+  color: #401255;
+  border: 1px solid #ccc;
+  font-family: "Rubik", Helvetica, sans-serif;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+/* Стили для группы ввода с единицами измерения */
+.add-food-menu .input-with-unit {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* выравниваем группу по левому краю */
+  width: 70%;
+  margin-bottom: 15px;
+}
+
+/* Стили для поля ввода внутри группы с единицей измерения */
+.add-food-menu .input-with-unit .input-field {
+  width: 50%;             /* уменьшили ширину ввода */
+  padding: 10px;          /* уменьшен padding */
+  font-size: 18px;        /* уменьшен размер шрифта */
+  color: #401255;
+  border: 1px solid #ccc;
+  font-family: "Rubik", Helvetica, sans-serif;
+  border-radius: 8px;
+  margin-bottom: 0;
+}
+
+/* Стили для единицы измерения (например, «ккал» или «г») */
+.add-food-menu .input-with-unit .unit-label {
+  margin-left: 8px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #401255;
+  font-family: "Rubik", Helvetica, sans-serif;
+}
