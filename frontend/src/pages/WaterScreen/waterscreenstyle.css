@@ -333,7 +333,7 @@ html, body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -436,4 +436,61 @@ transform: translate(-50%, -50%);
   font-weight: 500;
   color: #280635;
   font-family: "Rubik-Medium", Helvetica, sans-serif;
+}
+
+/* Стили для bubble, чтобы они были впреди карточки и не влияли на её расположение */
+.add-water-menu-cards-container img.bubble,
+.add-water-menu-cards-container img.bubble2,
+.add-water-menu-cards-container img.bubble3,
+.add-water-menu-cards-container img.bubble4,
+.add-water-menu-cards-container img.bubble5,
+.add-water-menu-cards-container img.bubble6 {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.add-water-menu-cards-container img.bubble {
+  transform: rotate(30deg);
+  width: 18%;
+  height: 18%;
+  top: 0px;
+  right: 80px;
+}
+
+.add-water-menu-cards-container img.bubble2 {
+  width: 32%;
+  height: 32%;
+  top: 30px;
+  right: -10px;
+}
+
+.add-water-menu-cards-container img.bubble3 {
+  transform: rotate(20deg);
+  width: 12%;
+  height: 12%;
+  top: 60px;
+  right: 110px;
+}
+
+.add-water-menu-cards-container img.bubble4 {
+  transform: rotate(15deg);
+  width: 20%;
+  height: 20%;
+  top: 10px;
+  left: -40px;
+}
+
+.add-water-menu-cards-container img.bubble5 {
+  transform: rotate(15deg);
+  bottom: 0px;
+  left: -30px;
+}
+
+.add-water-menu-cards-container img.bubble6 {
+  transform: rotate(45deg);
+  width: 20%;
+  height: 20%;
+  bottom: 90px;
+  left: -50px;
 }

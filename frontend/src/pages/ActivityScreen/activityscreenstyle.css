@@ -240,7 +240,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -453,6 +453,36 @@ transform: translate(-50%, -50%);
   font-weight: 500;
   color: #401255;
   font-family: "Rubik", Helvetica, sans-serif;
+}
+
+.add-activity-menu .background-group-lines {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-activity-menu .plane-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  top: -65%;
+  left: 65%;
+  align-items: center;
+}
+
+.add-activity-menu .line-999 {
+  z-index: 10;
+  pointer-events: none;
+}
+
+.add-activity-menu .palne {
+  position: absolute;
+  z-index: 10;
+  pointer-events: none;
 }
 
   

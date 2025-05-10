@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import line99 from "../../src/line-99.svg";
+import plane from "../../src/plane.svg";
+import line999 from "../../src/line-999.svg";
 import "../../activityscreenstyle.css";
 
 export const AddActivityMenu = ({ onClose }) => {
@@ -40,9 +43,19 @@ export const AddActivityMenu = ({ onClose }) => {
 
   return (
     <div className="add-activity-menu">
+      <img className="line-99" src={line99} alt="Line" />
       <div className="add-activity-menu-container">
+        
+        <div className="background-group-lines">
+          <img className="line-999" src={line999} alt="Line" />
+        </div>
+
+        <div className="plane-background">
+          <img className="plane" src={plane} alt="Vector" />
+        </div>
+
         <form className="activity-data-form" onSubmit={handleSubmit}>
-          <label htmlFor="activityName">Название активности*</label>
+          <label htmlFor="activityName">Название активности:*</label>
           <input
             type="text"
             id="activityName"
@@ -53,7 +66,7 @@ export const AddActivityMenu = ({ onClose }) => {
             required
           />
 
-          <label htmlFor="datetime">Дата-время*</label>
+          <label htmlFor="datetime">Дата-время:*</label>
           <input
             type="datetime-local"
             id="datetime"
@@ -64,7 +77,7 @@ export const AddActivityMenu = ({ onClose }) => {
             required
           />
 
-          <label htmlFor="duration">Длительность (мин)*</label>
+          <label htmlFor="duration">Длительность:*</label>
           <div className="input-with-unit">
             <input
               type="number"
@@ -78,7 +91,7 @@ export const AddActivityMenu = ({ onClose }) => {
             <span className="unit-label">мин</span>
           </div>
 
-          <label htmlFor="caloriesBurned">Количество сжённых калорий*</label>
+          <label htmlFor="caloriesBurned">Количество калорий:*</label>
           <div className="input-with-unit">
             <input
               type="number"
