@@ -17,9 +17,21 @@ export const AccountScreen = () => {
     const navigate = useNavigate();
     const [userData, setUserData] = useState(null);
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
+        try {
+            // Отправляем запрос на сервер для завершения сессии
+            await fetch("/logout", {
+                method: "POST",
+                credentials: "include" // Для отправки кук
+            });
+        } catch (error) {
+            console.error("Ошибка выхода:", error);
+        }
+
+        // Очищаем клиентские данные
         localStorage.removeItem("userId");
-        window.location.href = "/entry";
+        localStorage.removeItem("profileCompleted");
+        window.location.href = "/entry"; // Перенаправление на страницу входа
     };
 
     useEffect(() => {
@@ -151,9 +163,8 @@ export const AccountScreen = () => {
         </div>
 
         <div className="overlap-group-3" >
-          <div className="text-wrapper-8" onClick={handleMenuClick6}>Выйти из аккаута</div>
-
-          <img className="vector-3" alt="Vector" src={vectorNext} onClick={handleMenuClick6}/>
+            <div className="text-wrapper-8" onClick={handleLogout}>Выйти из аккаунта</div>
+            <img className="vector-3" alt="Vector" src={vectorNext} onClick={handleLogout}/>
         </div>
 
         <div className="view" />
