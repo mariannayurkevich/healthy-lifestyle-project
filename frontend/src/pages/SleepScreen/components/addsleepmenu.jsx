@@ -71,6 +71,37 @@ const AddMenu = ({ onClose }) => {
     }
   }, [sleepStart, sleepEnd, lastChanged]);
 
+    const handleSave = async () => {
+        try {
+            const userId = localStorage.getItem("userId");
+            if (!userId) throw new Error("User not authenticated");
+
+            // Преобразование данных в формат для бэкенда
+            const sleepData = {
+                date: sleepStart.toISOString().split("T")[0], // LocalDate
+                bedtime: sleepStart.toLocaleTimeString("en-GB", {hour12: false}), // LocalTime (HH:mm:ss)
+                wakeupTime: sleepEnd.toLocaleTimeString("en-GB", {hour12: false}),
+                sleepDuration: HMSToSeconds(sleepDurationString) / 3600.0, // в часах (double)
+                sleepQuality: 4, // Пример (можно добавить выбор качества сна)
+                notes: "" // Опционально
+            };
+
+            // Отправка данных
+            const response = await fetch("/api/sleep?userId=" + userId, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(sleepData),
+                credentials: "include"
+            });
+
+            if (!response.ok) throw new Error("Ошибка сохранения");
+            onClose(); // Закрыть меню после успеха
+        } catch (error) {
+            console.error("Ошибка:", error);
+            alert("Не удалось сохранить данные сна");
+        }
+    };
+
   return (
     <div className="add-sleep-menu">
         <div className="background-group-sleep">
@@ -85,7 +116,7 @@ const AddMenu = ({ onClose }) => {
            
         <div className="add-sleep-menu-card">
 
-          <div className="button-save" onClick={onClose}>
+          <div className="button-save" onClick={handleSave}>
             <div className="div-wrapper-save">
               <div className="text-wrapper-22">Сохранить</div>
             </div>

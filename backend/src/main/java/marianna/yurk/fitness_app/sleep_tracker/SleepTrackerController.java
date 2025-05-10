@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,7 +43,7 @@ public class SleepTrackerController {
     @ResponseStatus(HttpStatus.CREATED)
     void create(@Valid @RequestBody SleepTracker sleep, @RequestParam Long userId) {
         sleep = new SleepTracker(
-                sleep.id(),
+                0,
                 sleep.date(),
                 sleep.bedtime(),
                 sleep.wakeupTime(),
@@ -66,4 +67,12 @@ public class SleepTrackerController {
     void delete(@PathVariable int id){
         sleepTrackerRepository.delete(id);
     }
+
+    @GetMapping("/today")
+    public List<SleepTracker> getTodaySleep(@RequestParam Long userId) {
+        LocalDate today = LocalDate.now();
+        return sleepTrackerRepository.findByUserIdAndDate(userId, today);
+    }
 }
+
+

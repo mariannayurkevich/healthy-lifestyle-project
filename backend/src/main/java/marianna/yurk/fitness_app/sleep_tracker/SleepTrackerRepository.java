@@ -43,9 +43,15 @@ public class SleepTrackerRepository {
 
     public List<SleepTracker> findByUserIdAndDate(Long userId, LocalDate date) {
         return jdbcClient.sql("""
-        SELECT * FROM sleep_tracker
-        WHERE user_id = :userId AND date = :date
-    """)
+        SELECT * 
+        FROM sleep_tracker 
+        WHERE user_id = :userId 
+        AND (
+            (wakeup_time >= bedtime AND date = :date) 
+            OR 
+            (wakeup_time < bedtime AND date = :date - INTERVAL '1 day')
+        )
+        """)
                 .param("userId", userId)
                 .param("date", date)
                 .query(SleepTracker.class)
@@ -54,8 +60,8 @@ public class SleepTrackerRepository {
 
 
     public void create(SleepTracker sleepTracker) {
-        var updated = jdbcClient.sql("INSERT INTO Sleep_tracker(id,date,bedtime,wakeup_time,sleep_duration,sleep_quality,notes, user_id) values(?, ?, ?, ?, ?, ?, ?, ?)")
-                .params(List.of(sleepTracker.id(), sleepTracker.date(), sleepTracker.bedtime(), sleepTracker.wakeupTime(), sleepTracker.sleepDuration(), sleepTracker.sleepQuality(),sleepTracker.notes(),sleepTracker.userId()))
+        var updated = jdbcClient.sql("INSERT INTO Sleep_tracker(date,bedtime,wakeup_time,sleep_duration,sleep_quality,notes, user_id) values(?, ?, ?, ?, ?, ?, ?)")
+                .params(List.of(sleepTracker.date(), sleepTracker.bedtime(), sleepTracker.wakeupTime(), sleepTracker.sleepDuration(), sleepTracker.sleepQuality(),sleepTracker.notes(),sleepTracker.userId()))
                 .update();
 
         Assert.state(updated == 1, "Failed to create sleep " + sleepTracker.date());
