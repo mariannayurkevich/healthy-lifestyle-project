@@ -1,19 +1,20 @@
 import React, { useState } from "react";
-import vector5 from "./src/vector-5.svg";
 import line89 from "./src/line-89.svg";
-import line100 from "./src/line-100.svg";
 import maskGroup2 from "./src/mask-group-2.svg";
-import maskGroup from "./src/mask-group.svg";
 import "./activityscreenstyle.css";
 import union from "./src/union.svg";
-import vector6 from "./src/vector-6.svg";
 import vector from "./src/vector.svg";
 import { AddActivityMenu } from "./components/AddActivityMenu/addactivitymenu";
+import ActivityRecord from "./components/ActivityRecord/activityrecord";
 
 import { useNavigate } from "react-router-dom";
 
 export const ActivityScreen = () => {
     const navigate = useNavigate();
+        const [records, setRecords] = useState([
+          { id: 1, volume: "500 ккал", label: "Активность", grams: "30 мин" },
+          { id: 2, volume: "500 ккал", label: "Активность", grams: "10 мин" }
+        ]);
     const [showAddMenu, setShowAddMenu] = useState(false);
 
   // При нажатии на кнопку открываем меню
@@ -60,6 +61,18 @@ export const ActivityScreen = () => {
 
           <div className="text-wrapper-4">0 мин</div>
         </div>
+
+        {/* Контейнер для списка записей с скроллом */}
+          <div className="activity-records-container">
+              {records.map((record) => (
+                <ActivityRecord
+                  key={record.id}
+                  volume={record.volume}
+                  label={record.label}
+                  grams= {record.grams}
+                />
+              ))}
+            </div>
         {/*
         <div className="text-wrapper-5">150 ккал</div>
 

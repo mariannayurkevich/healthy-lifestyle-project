@@ -8,7 +8,10 @@ import { AddWaterMenu } from "./components/AddWaterMenu/addwatermenu"; // Про
 
 export const WaterScreen = () => {
   const navigate = useNavigate();
-  const [records, setRecords] = useState([]);
+  const [records, setRecords] = useState([
+    { id: 1, volume: "500 мл", label: "Вода"},
+    { id: 2, volume: "500 мл", label: "Вода"}
+  ]);
   const [showAddMenu, setShowAddMenu] = useState(false); // новое состояние для управления видимостью меню
 
   // При нажатии на кнопку открываем меню
