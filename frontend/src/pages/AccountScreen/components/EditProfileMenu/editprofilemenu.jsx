@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import x1 from "../../src/eye-right.svg";
 import x2 from "../../src/eye-left.svg";
 import vectorPrev from "../../src/pointer.svg";
 import "../../accountscreenstyle.css"; // можно подключить и отдельный CSS для редактирования профиля
 
-export const EditProfileMenu = ({ onClose }) => {
+export const EditProfileMenu = ({ userData, onClose }) => {
   const [formData, setFormData] = useState({
-    username: "",
-    birthday: "",
+    firstName: "",
+    birthDate: "",
     gender: "",
     height: "",
     weight: "",
@@ -20,6 +20,24 @@ export const EditProfileMenu = ({ onClose }) => {
     confirmPassword: ""
   });
 
+  useEffect(() => {
+    if (userData) {
+      setFormData({
+        firstName: userData.firstName || "",
+        lastName: userData.lastName || "",
+        birthDate: userData.birthDate?.split('T')[0] || "",
+        gender: userData.gender || "",
+        height: userData.height || "",
+        weight: userData.weight || "",
+        goal: userData.goal || "MAINTAIN",
+        activityLevel: userData.activityLevel || "sedentary",
+        allergies: userData.allergies || "",
+        intolerances: userData.intolerances || "",
+        email: userData.email || ""
+      });
+    }
+  }, [userData]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -28,31 +46,49 @@ export const EditProfileMenu = ({ onClose }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Проверка обязательных полей профиля
-    if (
-      !formData.username ||
-      !formData.birthday ||
-      !formData.gender ||
-      !formData.height ||
-      !formData.weight ||
-      !formData.goal ||
-      !formData.activityLevel
-    ) {
-      alert("Пожалуйста, заполните все обязательные поля личных данных.");
-      return;
-    }
-
-    // Если вводится пароль, то проверяем подтверждение
     if (formData.password && formData.password !== formData.confirmPassword) {
-      alert("Пароли не совпадают");
+      alert("Пароли не совпадают!");
       return;
     }
 
-    console.log("Данные профиля", formData);
-    onClose();
+    try {
+      const userId = localStorage.getItem("userId");
+      const updateData = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        birthDate: formData.birthDate,
+        gender: formData.gender,
+        height: Number(formData.height),
+        weight: Number(formData.weight),
+        goal: formData.goal,
+        activityLevel: formData.activityLevel,
+        allergies: formData.allergies,
+        intolerances: formData.intolerances,
+        email: formData.email,
+        password: formData.password
+      };
+
+      const response = await fetch(`http://localhost:8080/api/users/${userId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updateData),
+        credentials: "include"
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "HTTP error " + response.status);
+      }
+
+      onClose(true);
+      alert("Изменения успешно сохранены!");
+    } catch (error) {
+      console.error("Ошибка:", error);
+      alert(error.message || "Не удалось сохранить изменения");
+    }
   };
 
   return (
@@ -82,7 +118,7 @@ export const EditProfileMenu = ({ onClose }) => {
             id="username"
             name="username"
             className="input-field"
-            value={formData.username}
+            value={formData.firstName}
             onChange={handleChange}
             required
           />
@@ -93,7 +129,7 @@ export const EditProfileMenu = ({ onClose }) => {
             id="birthday"
             name="birthday"
             className="input-field"
-            value={formData.birthday}
+            value={formData.birthDate}
             onChange={handleChange}
             required
           />
@@ -121,6 +157,8 @@ export const EditProfileMenu = ({ onClose }) => {
               className="input-field"
               value={formData.height}
               onChange={handleChange}
+              min="100"
+              max="250"
               required
             />
             <span className="unit-label">см</span>
@@ -135,6 +173,8 @@ export const EditProfileMenu = ({ onClose }) => {
               className="input-field"
               value={formData.weight}
               onChange={handleChange}
+              min="30"
+              max="300"
               required
             />
             <span className="unit-label">кг</span>
@@ -150,9 +190,9 @@ export const EditProfileMenu = ({ onClose }) => {
             required
           >
             <option value="">Выберите цель</option>
-            <option value="weight_loss">Потеря веса</option>
-            <option value="maintenance">Поддержание веса</option>
-            <option value="weight_gain">Набор веса</option>
+            <option value="LOSE">Потеря веса</option>
+            <option value="MAINTAIN">Поддержание веса</option>
+            <option value="GAIN">Набор веса</option>
           </select>
 
           <label htmlFor="activityLevel">Уровень активности*</label>
@@ -166,10 +206,10 @@ export const EditProfileMenu = ({ onClose }) => {
           >
             <option value="">Выберите уровень активности</option>
             <option value="sedentary">Сидячий образ жизни</option>
-            <option value="low">Низкая физическая активность</option>
+            <option value="light">Низкая физическая активность</option>
             <option value="moderate">Умеренная физическая активность</option>
-            <option value="high">Интенсивная физическая активность</option>
-            <option value="very_high">
+            <option value="active">Интенсивная физическая активность</option>
+            <option value="very_active">
               Очень интенсивная физическая активность
             </option>
           </select>

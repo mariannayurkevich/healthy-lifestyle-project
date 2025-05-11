@@ -180,6 +180,10 @@ public class UserService implements UserDetailsService {
                 isUpdated = true;
             }
 
+            if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
+                user.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
+            }
+
             // Сохраняем пользователя, если были изменения
             if (isUpdated) {
                 return userRepository.save(user);

@@ -37,7 +37,6 @@ export const AccountScreen = () => {
         window.location.href = "/entry"; // Перенаправление на страницу входа
     };
 
-    useEffect(() => {
         const fetchUserData = async () => {
             try {
                 const userId = localStorage.getItem("userId");
@@ -56,6 +55,8 @@ export const AccountScreen = () => {
                 console.error("Ошибка загрузки данных:", error);
             }
         };
+
+    useEffect(() => {
         fetchUserData();
     }, [navigate]);
 
@@ -89,11 +90,14 @@ export const AccountScreen = () => {
   };
 
   // Функция для закрытия меню редактирования
-  const handleCloseEditing = () => {
-    setIsEditing(false);
-  };
+    const handleCloseEditing = (shouldRefresh) => {
+        setIsEditing(false);
+        if (shouldRefresh) {
+            fetchUserData(); // Повторно загружаем данные
+        }
+    };
 
-  return(
+    return(
     <div className="accountscreen">
       <div className="div">
       
@@ -211,7 +215,12 @@ export const AccountScreen = () => {
       </div>
 
       {/* Если состояние isEditing true, тогда рендерим меню редактирования профиля */}
-      {isEditing && <EditProfileMenu onClose={handleCloseEditing} />}
+        {isEditing && (
+            <EditProfileMenu
+                userData={userData}
+                onClose={handleCloseEditing}
+            />
+        )}
     </div>
   );
 };
