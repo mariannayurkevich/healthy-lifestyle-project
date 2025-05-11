@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import leftEye from "../../src/right-eye.svg";
 import rightEye from "../../src/right-eye.svg";
+import ponter2 from "../../src/pointer-2.svg";
 import "../../entryscreenstyle.css";
 
 import { useNavigate } from "react-router-dom";
@@ -23,6 +24,10 @@ export const ForgotPasswordMenu = () => {
     navigate("/password-reset"); // Предполагается, что роут настроен для второго меню
   };
 
+  const handleRedirect2 = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="entryscreen forgot-password-menu">
       <div className="div">
@@ -31,6 +36,10 @@ export const ForgotPasswordMenu = () => {
             <img className="left-eye" alt="Left eye" src={leftEye} />
             <img className="right-eye" alt="Right eye" src={rightEye} />
           </div>
+        </div>
+
+        <div className="div-2">
+          <img className="pointer" alt="Ponter" src={ponter2} onClick={handleRedirect2}/>
         </div>
 
         <div className="text-wrapper-15">Восставновление<br/>пароля</div>
