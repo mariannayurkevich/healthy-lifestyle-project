@@ -27,16 +27,19 @@ export const WaterScreen = () => {
 
       const data = await response.json();
 
-      // Преобразуем данные бэкенда в формат для фронта
+      const today = new Date().toISOString().split('T')[0]; // "YYYY-MM-DD"
+
       const formattedRecords = data.flatMap(tracker =>
-          tracker.entries.map(entry => ({
-            id: `${tracker.id}-${entry.time}`,
-            volume: `${entry.amountMl} мл`,
-            label: new Date(entry.time).toLocaleTimeString([], {
-              hour: '2-digit',
-              minute: '2-digit'
-            })
-          }))
+          tracker.entries
+              .filter(entry => new Date(entry.time).toISOString().split('T')[0] === today)
+              .map(entry => ({
+                id: `${tracker.id}-${entry.time}`,
+                volume: `${entry.amountMl} мл`,
+                label: new Date(entry.time).toLocaleTimeString([], {
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })
+              }))
       );
 
       setRecords(formattedRecords);
