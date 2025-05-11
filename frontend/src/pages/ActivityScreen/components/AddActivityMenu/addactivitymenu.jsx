@@ -8,7 +8,6 @@ export const AddActivityMenu = ({ onClose }) => {
   // Объект состояния для данных формы активности
   const [formData, setFormData] = useState({
     activityName: "",
-    // Текущее время по формату datetime-local
     datetime: new Date().toISOString().slice(0, 16),
     duration: "",
     caloriesBurned: ""
@@ -24,21 +23,40 @@ export const AddActivityMenu = ({ onClose }) => {
   };
 
   // Отправка данных формы
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Проверяем, чтобы все обязательные поля были заполнены
-    if (
-      !formData.activityName ||
-      !formData.datetime ||
-      !formData.duration ||
-      !formData.caloriesBurned
-    ) {
+    const userId = localStorage.getItem("userId");
+
+    if (!formData.activityName || !formData.datetime || !formData.duration || !formData.caloriesBurned) {
       alert("Пожалуйста, заполните все обязательные поля.");
       return;
     }
-    console.log("Данные формы активности", formData);
-    onClose();
+
+    try {
+      const response = await fetch(`/api/activity?userId=${userId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          activityType: formData.activityName,
+          duration: parseInt(formData.duration),
+          caloriesBurned: parseInt(formData.caloriesBurned),
+          activityTimestamp: formData.datetime,
+          userId: userId
+        }),
+      });
+
+      if (response.ok) {
+        onClose();
+        window.location.reload();
+      } else {
+        alert("Ошибка при сохранении активности");
+      }
+    } catch (error) {
+      console.error("Ошибка:", error);
+    }
   };
 
   return (

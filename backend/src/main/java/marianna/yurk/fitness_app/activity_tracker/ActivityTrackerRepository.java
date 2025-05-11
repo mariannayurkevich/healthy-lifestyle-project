@@ -63,10 +63,9 @@ public class ActivityTrackerRepository {
         Assert.notNull(activityTracker, "ActivityTracker must not be null");
 
         jdbcClient.sql("""
-        INSERT INTO activity_tracker (id, activity_type, duration, calories_burned, activity_timestamp, user_id)
-        VALUES (:id, :activityType, :duration, :caloriesBurned, :activityTimestamp, :userId)
+        INSERT INTO activity_tracker ( activity_type, duration, calories_burned, activity_timestamp, user_id)
+        VALUES ( :activityType, :duration, :caloriesBurned, :activityTimestamp, :userId)
     """)
-                .param("id", activityTracker.id())
                 .param("activityType", activityTracker.activityType())
                 .param("duration", activityTracker.duration())
                 .param("caloriesBurned", activityTracker.caloriesBurned())

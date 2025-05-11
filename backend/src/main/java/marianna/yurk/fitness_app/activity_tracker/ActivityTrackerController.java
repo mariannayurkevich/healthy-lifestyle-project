@@ -42,7 +42,7 @@ public class ActivityTrackerController {
     @ResponseStatus(HttpStatus.CREATED)
     void create(@Valid @RequestBody ActivityTracker activity, @RequestParam Long userId) {
         activity = new ActivityTracker(
-                activity.id(),
+                0,
                 activity.activityType(),
                 activity.duration(),
                 activity.caloriesBurned(),
