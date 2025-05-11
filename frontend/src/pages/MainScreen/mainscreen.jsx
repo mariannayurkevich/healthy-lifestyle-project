@@ -15,6 +15,7 @@ export const MainScreen = () => {
   const [userData, setUserData] = useState(null);
   const [dailyReport, setDailyReport] = useState(null);
   const [showAddMenu, setShowAddMenu] = useState(false);
+  const [totalIntakeMl, setTotalIntakeMl] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {

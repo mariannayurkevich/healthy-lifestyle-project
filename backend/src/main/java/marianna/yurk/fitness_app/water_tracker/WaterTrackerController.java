@@ -48,7 +48,7 @@ public class WaterTrackerController {
     @ResponseStatus(HttpStatus.CREATED)
     void create(@Valid @RequestBody WaterTracker waterTracker, @RequestParam Long userId) {
         waterTracker = new WaterTracker(
-                waterTracker.id(),
+                0,
                 userId,
                 waterTracker.date(),
                 0.0,

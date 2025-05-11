@@ -1,5 +1,5 @@
 // Предположим, что компонент AddWaterMenu экспортируется из нужного файла
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import "./waterscreenstyle.css";
 import vector from "./src/vector.svg";
 import WaterRecord from "./components/WaterRecord/waterrecord";
@@ -8,11 +8,46 @@ import { AddWaterMenu } from "./components/AddWaterMenu/addwatermenu"; // Про
 
 export const WaterScreen = () => {
   const navigate = useNavigate();
-  const [records, setRecords] = useState([
-    { id: 1, volume: "500 мл", label: "Вода"},
-    { id: 2, volume: "500 мл", label: "Вода"}
-  ]);
-  const [showAddMenu, setShowAddMenu] = useState(false); // новое состояние для управления видимостью меню
+  const [records, setRecords] = useState([]);
+  const [showAddMenu, setShowAddMenu] = useState(false);
+  const [totalIntakeMl, setTotalIntakeMl] = useState(0);
+
+  // Функция для загрузки записей
+  const loadWaterData = async () => {
+    try {
+      const userId = localStorage.getItem("userId");
+
+      const reportResponse = await fetch(`/report/today?userId=${userId}`);
+      const report = await reportResponse.json();
+      setTotalIntakeMl(report.totalIntakeMl || 0);
+
+      const response = await fetch(`/api/water/user/${userId}`);
+
+      if (!response.ok) throw new Error("Ошибка загрузки данных");
+
+      const data = await response.json();
+
+      // Преобразуем данные бэкенда в формат для фронта
+      const formattedRecords = data.flatMap(tracker =>
+          tracker.entries.map(entry => ({
+            id: `${tracker.id}-${entry.time}`,
+            volume: `${entry.amountMl} мл`,
+            label: new Date(entry.time).toLocaleTimeString([], {
+              hour: '2-digit',
+              minute: '2-digit'
+            })
+          }))
+      );
+
+      setRecords(formattedRecords);
+    } catch (err) {
+      console.error("Ошибка загрузки:", err);
+    }
+  };
+
+  useEffect(() => {
+    loadWaterData();
+  }, []);
 
   // При нажатии на кнопку открываем меню
   const handleDrinkClick = () => {
@@ -57,7 +92,7 @@ export const WaterScreen = () => {
               </div>
             </div>
             <div className="text-wrapper-2">Вода</div>
-            <div className="text-wrapper-3">0 мл</div>
+            <div className="text-wrapper-3">{totalIntakeMl} мл</div>
             <div className="text-wrapper-4">Сегодня</div>
 
             {/* Контейнер для списка записей с скроллом */}

@@ -43,6 +43,7 @@ export const AddWaterMenu = ({ onClose }) => {
       if (!response.ok) throw new Error("Ошибка при сохранении воды");
 
       onClose();
+      window.location.reload();
     } catch (err) {
       console.error("Ошибка:", err);
       alert("Не удалось сохранить запись о воде");
