@@ -96,6 +96,7 @@ const AddMenu = ({ onClose }) => {
 
             if (!response.ok) throw new Error("Ошибка сохранения");
             onClose(); // Закрыть меню после успеха
+            window.location.reload();
         } catch (error) {
             console.error("Ошибка:", error);
             alert("Не удалось сохранить данные сна");
