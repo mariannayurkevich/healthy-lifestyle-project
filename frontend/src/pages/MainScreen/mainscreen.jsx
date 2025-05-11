@@ -83,6 +83,7 @@ export const MainScreen = () => {
           {userData ? `${userData.firstName} ${userData.lastName}` : "Загрузка..."}
         </div>
         <MenuGroup 
+          activePage={"main"}
           onMenuClickAccount={handleMenuClick4}
           onMenuClickSleep={handleMenuClick5}
           onMenuClickMain={handleMenuClick}

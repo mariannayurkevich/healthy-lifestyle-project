@@ -271,4 +271,176 @@
     top: 51px;
     width: 26px;
   }
+
+  /* Стили для контейнера экрана редактирования профиля */
+.edit-profile-menu {
+  background-color: #fefaff; /* тот же фон, что и на аккаунт-скрине */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding-top: 50px;
+  padding-bottom: 50px; /* новый нижний отступ для предотвращения обрезания */
+}
+
+/* Контейнер карточки редактирования профиля */
+.edit-profile-container {
+  background-color: #fefaff;
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили для формы профиля */
+.edit-profile-menu .profile-form {
+  text-align: left;
+}
+
+/* Стили для подписей (меток) */
+.edit-profile-menu .profile-form label {
+  display: block;
+  font-size: 18px;
+  font-weight: 500;
+  color: #401255;
+  font-family: "Rubik", Helvetica, sans-serif;
+  margin-bottom: 8px;
+}
+
+/* Поля ввода, селекты и textarea — 80% ширины (максимум 600px) */
+.profile-form .input-field {
+  width: 100%;
+  max-width: 600px;
+  padding: 10px;
+  font-size: 18px;
+  color: #401255;
+  border: 1px solid #ccc;
+  font-family: "Rubik", Helvetica, sans-serif;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+/* Группа для ввода с единицами измерения */
+.edit-profile-menu .input-with-unit {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+.input-with-unit .unit-label {
+  margin-left: 8px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #401255;
+  font-family: "Rubik", Helvetica, sans-serif;
+}
+
+/* Горизонтальная линия-сепаратор */
+.edit-profile-menu .separator {
+  border: none;
+  border-top: 1px solid #C5C5C5;
+  width: 100%;
+  max-width: 600px;
+  margin: 20px 0;
+}
+
+/* Кнопка "Сохранить" */
+.edit-profile-menu .button-save {
+  margin-top: 20px;
+  margin-bottom: 60px; /* добавлено для создания дополнительного пространства снизу */
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+
+.button-save button {
+  width: 100%;
+  background-color: #280635;
+  border-radius: 28px;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-weight: 500;
+}
+
+/* Новый вариант для блока фото пользователя внутри формы */
+
+.edit-profile-menu .overlap-group-wrapper-2 {
+  width: 106px;
+  height: 106px;
+  margin: 20px auto; /* центрирование по горизонтали + отступ сверху и снизу */
+  border-radius: 53px;
+  box-shadow: 0px 4px 59.4px #992598;
+  background: radial-gradient(
+    rgba(248, 12, 232, 1) 0%,
+    rgba(42, 31, 141, 1) 100%
+  );
+  position: relative; /* теперь без абсолютного позиционирования */
+}
+
+.overlap-group-wrapper-2 .overlap-group-2 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Если изображения нужны как наложенные элементы, можно задать им размеры и положение. 
+   Здесь я предлагаю, чтобы основное изображение (.img) заполняло контейнер, а дополнительное (.element) 
+   имело меньший размер и располагалось, например, в левом верхнем углу */
+.overlap-group-wrapper-2 .img-2 {
+  height: 58px;
+    left: 2px;
+    position: absolute;
+    top: 25px;
+    width: 58px;
+}
+
+.overlap-group-wrapper-2 .element-2 {
+  height: 58px;
+  left: 46px;
+  position: absolute;
+  top: 25px;
+  width: 58px;
+}
+
+/* Стили для хедера с кнопкой "Назад" */
+.edit-profile-menu .header-back {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.edit-profile-menu .back-text {
+  font-size: 18px;
+  font-weight: 500;
+  color: #401255;
+  font-family: "Rubik", Helvetica, sans-serif;
+  margin-right: 10px;
+}
+
+.edit-profile-menu .back-icon {
+  transform: rotate(180deg);
+  width: 24px;
+  height: 24px;
+}
+
   

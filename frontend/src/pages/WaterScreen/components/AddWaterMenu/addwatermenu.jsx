@@ -1,4 +1,8 @@
 import React from "react";
+import bubble from "../../src/bubble.svg";
+import bubble2 from "../../src/bubble2.svg";
+import bubble3 from "../../src/bubble3.svg";
+import bubble4 from "../../src/bubble4.svg";
 import "../../waterscreenstyle.css";
 
 export const AddWaterMenu = ({ onClose }) => {
@@ -8,8 +12,13 @@ export const AddWaterMenu = ({ onClose }) => {
   return (
     <div className="add-water-menu">
       <div className="add-water-menu-cards-container">
+        <img className="bubble" src={bubble} alt="image" />
+        <img className="bubble2" src={bubble2} alt="image" />
+        <img className="bubble3" src={bubble3} alt="image" />
+        <img className="bubble4" src={bubble4} alt="image" />
+        <img className="bubble5" src={bubble2} alt="image" />
+        <img className="bubble6" src={bubble3} alt="image" />
         <div className="add-water-menu-cards">
-
           {/* Поле для даты приема */}
           <div className="input-group date-group">
             <label htmlFor="date-input" className="input-label">

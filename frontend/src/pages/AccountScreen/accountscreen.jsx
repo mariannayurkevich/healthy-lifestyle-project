@@ -7,14 +7,17 @@ import line99 from "./src/line-98.svg";
 import "./accountscreenstyle.css";
 import vectorAi from "./src/vector-ai.svg";
 import vectorAdd from "./src/vector-add.svg";
+import vector5 from "./src/vector-5.svg";
 import vectorNext from "./src/pointer.svg";
-import vectorNext2 from "./src/Vector-2.svg";
 import MenuGroup from "../../components/PageMenu/pagemenu";
+import { EditProfileMenu } from "./components/EditProfileMenu/editprofilemenu";
 
 import { useNavigate } from "react-router-dom";
 
 export const AccountScreen = () => {
     const navigate = useNavigate();
+    const [isEditing, setIsEditing] = useState(false);
+
     const [userData, setUserData] = useState(null);
 
     const handleLogout = async () => {
@@ -80,6 +83,16 @@ export const AccountScreen = () => {
       navigate("/first");
     };
 
+      // Функция для открытия меню редактирования
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  // Функция для закрытия меню редактирования
+  const handleCloseEditing = () => {
+    setIsEditing(false);
+  };
+
   return(
     <div className="accountscreen">
       <div className="div">
@@ -131,7 +144,8 @@ export const AccountScreen = () => {
           </svg>
         </div>
 
-      <MenuGroup 
+      <MenuGroup
+        activePage={"account"}
         onMenuClickAccount={handleMenuClick4}
         onMenuClickSleep={handleMenuClick5}
         onMenuClickMain={handleMenuClick}
@@ -186,11 +200,18 @@ export const AccountScreen = () => {
         <img className="line" alt="Line" src={line98} />
 
         <img className="line-2" alt="Line" src={line99} />
-        
-        {/* 
-          <img className="vector-2" alt="Vector" src={image} />
-        */}
+
+        {/* Клик по vector5 открывает меню редактирования */}
+        <img
+          className="vector-2"
+          alt="Vector"
+          src={vector5}
+          onClick={handleEditClick}
+        />
       </div>
+
+      {/* Если состояние isEditing true, тогда рендерим меню редактирования профиля */}
+      {isEditing && <EditProfileMenu onClose={handleCloseEditing} />}
     </div>
   );
 };
