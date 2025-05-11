@@ -8,6 +8,8 @@ import { SleepScreen } from "./pages/SleepScreen/sleepscreen";
 import { MainScreen } from "./pages/MainScreen/mainscreen";
 import { FirstScreen } from "./pages/FirstScreen/firstscreen"; 
 import { EntryScreen } from "./pages/EntryScreen/entryscreen";
+import { ForgotPasswordMenu } from "./pages/EntryScreen/components/ForgotPasswordMenu/forgotpasswordmenu";
+import { ResetPasswordCodeMenu } from "./pages/EntryScreen/components/ResetPasswordMenu/resetpasswordmenu";
 import { RegistrationFirstScreen } from "./pages/RegistrationFirst/registrationfirst";
 import { RegistrationSecondScreen } from "./pages/RegistrationSecond/registrationsecond";
 import { StatisticScreen } from "./pages/StatisticScreen/statisticscreen";
@@ -43,6 +45,8 @@ const AnimatedRoutes = () => {
         <Route path="/water" element={<WaterScreen />} />
         <Route path="/activity" element={<ActivityScreen />} />
         <Route path="/food" element={<FoodScreen />} />
+        <Route path="/password-forgot" element={<ForgotPasswordMenu />} />
+        <Route path="/password-reset" element={<ResetPasswordCodeMenu />} />
         
         {/* Защищённые маршруты */}
         <Route element={<ProtectedRoute isAuthenticated={Boolean(localStorage.getItem("authToken"))} />}>
