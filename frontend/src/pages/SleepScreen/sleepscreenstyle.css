@@ -377,7 +377,7 @@ background-group .star-3 {
   line-height: normal;
   margin-top: -5px;
   cursor: context-menu;
-  
+
 }
 
 /* ===== MenuGroup (Меню страниц) ===== */
@@ -572,8 +572,8 @@ background-group .star-3 {
 
 .add-sleep-menu .moon-icon {
   position: absolute;
-  top: 15%;   
-  left: 48%;  
+  top: 15%;
+  left: 48%;
   z-index: 2;
 }
 
@@ -612,7 +612,7 @@ background-group .star-3 {
   }
 
   .add-sleep-menu .moon-icon {
-    left: 40%;  
+    left: 40%;
   }
 
   .add-sleep-menu .star-icon {
