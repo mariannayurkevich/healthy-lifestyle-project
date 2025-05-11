@@ -5,9 +5,11 @@ import vector from "./src/vector.svg";
 import vectorPrev from "./src/vector-prev.svg";
 import vectorAI from "./src/vector-ai.svg";
 import "./chatscreenstyle.css";
+import axios from 'axios';
 
 export const ChatScreen = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const backgroundSuffixes = ["", "2", "3", "4", "5"];
 
@@ -38,35 +40,46 @@ export const ChatScreen = () => {
   };
 
   // Отправка сообщения: добавляем новое сообщение и очищаем поле ввода  
-  const handleSend = () => {
-    if (inputValue.trim() !== "") {
+  const handleSend = async () => {
+    if (inputValue.trim() === "" || isLoading) return;
+
+    try {
+      setIsLoading(true);
+
+      // Добавляем сообщение пользователя
       const userMessage = {
         id: Date.now(),
         text: inputValue,
         sender: "user"
       };
       setMessages((prev) => [...prev, userMessage]);
+
+      // Отправка запроса на бэкенд
+      const response = await axios.post(
+          "/api/chat",
+          { message: inputValue },
+          { withCredentials: true } // Для передачи кук аутентификации
+      );
+
+      // Получаем ответ от бэкенда
+      const assistantMessage = {
+        id: Date.now() + 1,
+        text: response.data.choices[0].message.content, // Путь может отличаться в зависимости от ответа API
+        sender: "assistant"
+      };
+
+      setMessages((prev) => [...prev, assistantMessage]);
+
+    } catch (error) {
+      console.error("Ошибка:", error);
+      // Добавьте обработку ошибки (например, уведомление)
+    } finally {
+      setIsLoading(false);
       setInputValue("");
-      if (textAreaRef.current) {
-        textAreaRef.current.style.height = "auto";
-      }
-      if (messagesRef.current) {
-        messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
-      }
-      // Автоматический ответ ассистента через 500мс
-      setTimeout(() => {
-        const assistantMessage = {
-          id: Date.now() + 1,
-          text: "Ответ от ии-ассистента",
-          sender: "assistant"
-        };
-        setMessages((prev) => [...prev, assistantMessage]);
-        if (messagesRef.current) {
-          messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
-        }
-      }, 500);
+      if (textAreaRef.current) textAreaRef.current.style.height = "auto";
+      if (messagesRef.current) messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
     }
-  };  
+  };
 
   const toggleDropdown = () => {
     setDropdownOpen((prev) => !prev);

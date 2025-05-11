@@ -1,18 +1,10 @@
 package marianna.yurk.fitness_app.chat;
 
-import marianna.yurk.fitness_app.activity_tracker.ActivityTracker;
-import marianna.yurk.fitness_app.activity_tracker.ActivityTrackerRepository;
-import marianna.yurk.fitness_app.food_tracker.FoodTracker;
-import marianna.yurk.fitness_app.food_tracker.FoodTrackerRepository;
-import marianna.yurk.fitness_app.sleep_tracker.SleepTracker;
-import marianna.yurk.fitness_app.sleep_tracker.SleepTrackerRepository;
 import marianna.yurk.fitness_app.stats.DailyReportService;
 import marianna.yurk.fitness_app.stats.DailySummaryDTO;
 import marianna.yurk.fitness_app.user.Goal;
 import marianna.yurk.fitness_app.user.User;
 import marianna.yurk.fitness_app.user.UserService;
-import marianna.yurk.fitness_app.water_tracker.WaterTracker;
-import marianna.yurk.fitness_app.water_tracker.WaterTrackerRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
@@ -25,8 +17,10 @@ import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/chat")
@@ -36,16 +30,19 @@ public class ChatController {
     private final WebClient webClient;
     private final UserService userService;
     private final DailyReportService dailyReportService;
+    private final ChatHistoryRepository chatHistoryRepository;
 
     @Value("${together.api.key}")
     private String apiKey;
 
     public ChatController(WebClient.Builder webClientBuilder,
                           UserService userService,
-                          DailyReportService dailyReportService) {
+                          DailyReportService dailyReportService,
+                          ChatHistoryRepository chatHistoryRepository) {
         this.webClient = webClientBuilder.baseUrl("https://api.together.xyz/v1").build();
         this.userService = userService;
         this.dailyReportService = dailyReportService;
+        this.chatHistoryRepository = chatHistoryRepository;
     }
 
     @PostMapping
@@ -129,11 +126,27 @@ public class ChatController {
             userProfileBuilder.append(". ").append(additionalInfo);
         }
 
+
         String userMessage = payload.get("message");
 
         String prompt = "Ты — помощник по здоровью. Пользователь: " + userProfileBuilder.toString() + trackersInfo.toString() +
                 "\n\nВопрос пользователя: " + userMessage +
                 "\n\nОтветь дружелюбно, кратко и с эмодзи.";
+
+        List<ChatHistory> history = chatHistoryRepository
+                .findTop20ByUserOrderByTimestampDesc(user);
+
+        Collections.reverse(history); // чтобы было в правильном порядке
+
+        List<Map<String, String>> messageHistory = history.stream()
+                .map(msg -> Map.of(
+                        "role", msg.getRole(),
+                        "content", msg.getContent()
+                ))
+                .collect(Collectors.toList());
+
+        messageHistory.add(Map.of("role", "user", "content", userMessage));
+
 
         return webClient.post()
                 .uri("/chat/completions")
@@ -155,6 +168,7 @@ public class ChatController {
                 )
                 .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {});
     }
+
     private String getAdditionalUserInfo(User user) {
         if (user == null) {
             return "";

@@ -87,4 +87,13 @@ CREATE TABLE IF NOT EXISTS users (
                        enabled BOOLEAN
 );
 
+CREATE TABLE IF NOT EXISTS chat_history (
+                              id BIGINT PRIMARY KEY,
+                              user_id BIGINT,
+                              role VARCHAR(20),
+                              content TEXT,
+                              timestamp TIME,
+                              FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
 
