@@ -15,7 +15,7 @@ public record WaterTracker(
         int id,
         Long userId,
         LocalDate date,
-        @Positive double totalIntakeMl,
+        double totalIntakeMl,
         @Positive double goalMl,
         List<WaterEntry> entries,
         LocalDateTime createdAt,
