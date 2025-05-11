@@ -171,7 +171,7 @@ export const AccountScreen = () => {
           <div className="text-wrapper-4">
               {userData?.birthDate
                   ? new Date().getFullYear() - new Date(userData.birthDate).getFullYear()
-                  : "—"}
+                  : "—"} лет
           </div>
 
         <div className="overlap-group-2">
