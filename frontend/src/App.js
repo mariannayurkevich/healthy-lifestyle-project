@@ -8,6 +8,8 @@ import { SleepScreen } from "./pages/SleepScreen/sleepscreen";
 import { MainScreen } from "./pages/MainScreen/mainscreen";
 import { FirstScreen } from "./pages/FirstScreen/firstscreen"; 
 import { EntryScreen } from "./pages/EntryScreen/entryscreen";
+import { ForgotPasswordMenu } from "./pages/EntryScreen/components/ForgotPasswordMenu/forgotpasswordmenu";
+import { ResetPasswordCodeMenu } from "./pages/EntryScreen/components/ResetPasswordMenu/resetpasswordmenu";
 import { RegistrationFirstScreen } from "./pages/RegistrationFirst/registrationfirst";
 import { RegistrationSecondScreen } from "./pages/RegistrationSecond/registrationsecond";
 import { StatisticScreen } from "./pages/StatisticScreen/statisticscreen";
@@ -41,6 +43,8 @@ const AnimatedRoutes = () => {
             <Route path="/activity" element={<ActivityScreen />} />
             <Route path="/food" element={<FoodScreen />} />
             <Route path="/questionnaire" element={<QuestionnaireScreen />} />
+            <Route path="/forgotpasswordmenu" element={<ForgotPasswordMenu />} />
+            <Route path="/resetpasswordmenu" element={<ResetPasswordCodeMenu />} />
           </Route>
 
           {/* Резервный маршрут */}

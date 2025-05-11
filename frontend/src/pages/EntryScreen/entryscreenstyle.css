@@ -272,3 +272,132 @@ html, body {
     top: 17px;
     width: 83px;
 }
+
+/* Стили для меню восстановления пароля */
+.forgot-password-menu .forgot-password-form,
+.reset-password-code-menu .reset-code-form {
+  background-color: #fefaff;
+  border-radius: 54px;
+  padding: 20px;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 402px;
+}
+
+.forgot-password-form,
+.reset-code-form {
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+}
+
+
+.forgot-password-menu .header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.forgot-password-menu .header .info-text{
+  font-size: 20px;
+  font-weight: 500;
+  color: #280636;
+}
+
+.forgot-password-menu .button-send-code,
+.reset-password-code-menu .button-send-code {
+  position: relative;
+  margin-top: auto;
+}
+
+.forgot-password-menu .button-send-code button,
+.reset-password-code-menu .button-send-code button {
+  width: 100%;
+  background-color: #280635;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 15px;
+  border: none;
+  border-radius: 28px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+/* Информационный текст для меню ввода кода */
+.reset-password-code-menu .info-text {
+  text-align: center;
+  font-size: 16px;
+  color: #280636;
+  margin-bottom: 20px;
+}
+
+/* Используем существующий стиль для полей ввода */
+.forgot-password-form .input-email,
+.reset-code-form .input-email {
+  background-color: #ECECEC;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 28px;
+  padding: 0 10px;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  outline: none;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+.reset-code-form .input-password {
+  background-color: #ECECEC;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 28px;
+  padding: 0 10px;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  outline: none;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+.entryscreen .overlap-wrapper-7 {
+    height: 49px;
+    left: 30px;
+    position: absolute;
+    top: 217px;
+    width: 344px;
+}
+
+/* Если нужно задать отдельные отступы для контейнеров, например overlap-wrapper-2 */
+.overlap-wrapper,
+.overlap-wrapper-2, 
+.overlap-wrapper-7 {
+  margin-bottom: 15px;
+}
+
+.entryscreen .view-5 {
+    transform: rotate(-30deg);
+    display: flex;
+    height: 100px;
+    left: 40%;
+    position: fixed;
+    top: 8%;
+    width: 164px;
+}
+
+.entryscreen .text-wrapper-15 {
+    color: #ffffff;
+    font-family: "Rubik-Medium", Helvetica;
+    font-size: 42px;
+    font-weight: 500;
+    left: 29px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 176px;
+    white-space: nowrap;
+    cursor:context-menu;
+}

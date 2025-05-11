@@ -85,6 +85,12 @@ export const EntryScreen = () => {
     navigate("/registrationfirst");
   };
 
+  const handleForgotPassword = () => {
+  // Пример: переход к маршруту восстановления пароля
+  navigate("/password-forgot");
+  };
+
+
   return (
       <div className="entryscreen">
         <div className="div">
@@ -98,6 +104,8 @@ export const EntryScreen = () => {
 
               <div className="text-wrapper-2">Забыли пароль?</div>
               <div className="view" />
+          <div className="text-wrapper-2" onClick={handleForgotPassword}>Забыли пароль?</div>
+          <div className="view" />
 
               {/* Поле ввода "Электронная почта" */}
               <div className="overlap-wrapper">
