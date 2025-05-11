@@ -1,5 +1,5 @@
 import React from "react";
-import group34 from "../src/group-34.png";
+import group34 from "../src/vector-sleep-active.svg";
 import group from "../src/group.png";
 import vector5 from "../src/vector-5.svg";
 import vector6 from "../src/vector-6.svg";

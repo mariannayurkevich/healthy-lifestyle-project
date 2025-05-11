@@ -57,6 +57,7 @@ export const MainScreen = () => {
         <div className="text-wrapper">Привет,</div>
         <div className="text-wrapper-2">Малинка Ди</div>
         <MenuGroup 
+          activePage={"main"}
           onMenuClickAccount={handleMenuClick4}
           onMenuClickSleep={handleMenuClick5}
           onMenuClickMain={handleMenuClick}

@@ -62,3 +62,23 @@
     width: 26px;
     cursor: pointer;
   }
+
+  /* Активированное состояние — увеличенный размер */
+.menu-group .vector-fourth.active {
+    top: 10px;
+    height: 50px;
+    width: 50px;
+}
+
+.menu-group .vector-center.active {
+    top: 10px;
+    height: 50px;
+    width: 50px;
+}
+
+.menu-group .vector-left.active {
+    left: 15px;
+    top: 10px;
+    height: 50px;
+    width: 50px;
+}

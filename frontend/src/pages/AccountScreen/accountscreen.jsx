@@ -103,7 +103,8 @@ export const AccountScreen = () => {
           </svg>
         </div>
 
-      <MenuGroup 
+      <MenuGroup
+        activePage={"account"}
         onMenuClickAccount={handleMenuClick4}
         onMenuClickSleep={handleMenuClick5}
         onMenuClickMain={handleMenuClick}

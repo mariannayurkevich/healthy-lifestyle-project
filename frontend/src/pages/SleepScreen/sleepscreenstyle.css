@@ -466,10 +466,10 @@ background-group .star-3 {
 .menu-group .group-3 {
   position: absolute;
   left: calc((50% + 30px) / 2);
-  top: 16px;
+  top: 10px;
   transform: translateX(-50%);
-  height: 32px;
-  width: 32px;
+  height: 50px;
+  width: 50px;
   cursor: pointer;
 }
 

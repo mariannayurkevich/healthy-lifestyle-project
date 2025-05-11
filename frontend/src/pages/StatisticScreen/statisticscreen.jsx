@@ -70,6 +70,7 @@ export const StatisticScreen = () => {
         </p>
       </div>
       <MenuGroup 
+        activePage={"statistic"}
         onMenuClickAccount={handleMenuClick4}
         onMenuClickSleep={handleMenuClick5}
         onMenuClickMain={handleMenuClick}
