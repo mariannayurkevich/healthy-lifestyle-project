@@ -297,12 +297,12 @@
 }
 
 /* Стили для формы профиля */
-.profile-form {
+.edit-profile-menu .profile-form {
   text-align: left;
 }
 
 /* Стили для подписей (меток) */
-.profile-form label {
+.edit-profile-menu .profile-form label {
   display: block;
   font-size: 18px;
   font-weight: 500;
@@ -326,7 +326,7 @@
 }
 
 /* Группа для ввода с единицами измерения */
-.input-with-unit {
+.edit-profile-menu .input-with-unit {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -345,7 +345,7 @@
 }
 
 /* Горизонтальная линия-сепаратор */
-.separator {
+.edit-profile-menu .separator {
   border: none;
   border-top: 1px solid #C5C5C5;
   width: 100%;
@@ -354,7 +354,7 @@
 }
 
 /* Кнопка "Сохранить" */
-.button-save {
+.edit-profile-menu .button-save {
   margin-top: 20px;
   margin-bottom: 60px; /* добавлено для создания дополнительного пространства снизу */
   display: flex;
@@ -380,7 +380,7 @@
 
 /* Новый вариант для блока фото пользователя внутри формы */
 
-.overlap-group-wrapper-2 {
+.edit-profile-menu .overlap-group-wrapper-2 {
   width: 106px;
   height: 106px;
   margin: 20px auto; /* центрирование по горизонтали + отступ сверху и снизу */
@@ -400,7 +400,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 50px;
 }
 
 /* Если изображения нужны как наложенные элементы, можно задать им размеры и положение. 
@@ -408,29 +407,29 @@
    имело меньший размер и располагалось, например, в левом верхнем углу */
 .overlap-group-wrapper-2 .img-2 {
   height: 58px;
-    left: 0;
+    left: 2px;
     position: absolute;
-    top: 20px;
+    top: 25px;
     width: 58px;
 }
 
 .overlap-group-wrapper-2 .element-2 {
   height: 58px;
-  left: 44px;
+  left: 46px;
   position: absolute;
-  top: 20px;
+  top: 25px;
   width: 58px;
 }
 
 /* Стили для хедера с кнопкой "Назад" */
-.header-back {
+.edit-profile-menu .header-back {
   display: flex;
   align-items: center;
   cursor: pointer;
   margin-bottom: 20px;
 }
 
-.back-text {
+.edit-profile-menu .back-text {
   font-size: 18px;
   font-weight: 500;
   color: #401255;
@@ -438,7 +437,7 @@
   margin-right: 10px;
 }
 
-.back-icon {
+.edit-profile-menu .back-icon {
   transform: rotate(180deg);
   width: 24px;
   height: 24px;
