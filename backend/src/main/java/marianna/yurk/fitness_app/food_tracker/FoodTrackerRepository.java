@@ -219,10 +219,9 @@ public class FoodTrackerRepository {
 
         for (FoodEntry entry : entries) {
             jdbcClient.sql("""
-                INSERT INTO food_entries (id, tracker_id, time, food_name, calories, proteins, fats, carbs, fiber, sugar)
-                VALUES (:id, :trackerId, :time, :foodName, :calories, :proteins, :fats, :carbs, :fiber, :sugar)
+                INSERT INTO food_entries (tracker_id, time, food_name, calories, proteins, fats, carbs, fiber, sugar)
+                VALUES ( :trackerId, :time, :foodName, :calories, :proteins, :fats, :carbs, :fiber, :sugar)
             """)
-                    .param("id", entry.id())
                     .param("trackerId", trackerId)
                     .param("time", entry.time())
                     .param("foodName", entry.foodName())

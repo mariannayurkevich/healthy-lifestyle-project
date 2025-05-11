@@ -48,7 +48,7 @@ public class FoodTrackerController {
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@Valid @RequestBody FoodTracker foodTracker, @RequestParam Long userId) {
         foodTracker = new FoodTracker(
-                foodTracker.id(),
+                0,
                 userId,
                 foodTracker.date(),
                 0.0,
@@ -79,4 +79,8 @@ public class FoodTrackerController {
     public void delete(@PathVariable int id) {
         foodTrackerRepository.delete(id);
     }
+
+
+
 }
+

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import line100 from "./src/line-100.svg";
 import maskGroup2 from "./src/mask-group-2.svg";
 import maskGroup from "./src/mask-group.svg";
@@ -12,21 +12,61 @@ import { useNavigate } from "react-router-dom";
 
 export const FoodScreen = () => {
     const navigate = useNavigate();
-    const [records, setRecords] = useState([
-      { id: 1, volume: "500 ккал", label: "Еда", grams: "100 г" },
-      { id: 2, volume: "500 ккал", label: "Еда", grams: "100 г" }
-    ]);
+    const [records, setRecords] = useState([ ]);
     const [showAddMenu, setShowAddMenu] = useState(false);
+    const [totalCalories, setTotalCalories] = useState(0);
+    const userId = localStorage.getItem("userId");
+
+    const loadFoodData = async () => {
+        try {
+
+            const reportResponse = await fetch(`/report/today?userId=${userId}`);
+
+            if (!reportResponse.ok) {
+                const errorText = await reportResponse.text();
+                throw new Error(`HTTP error! status: ${reportResponse.status}. Response: ${errorText}`);
+            }
+            const report = await reportResponse.json();
+            setTotalCalories(report.totalCalories || 0);
+
+            const response = await fetch(`/api/food/user/${userId}`);
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`HTTP error! status: ${response.status}. Response: ${errorText}`);
+            }
+
+            const data = await response.json();
+
+            const formattedData = data.flatMap(tracker =>
+                tracker.entries.map(entry => ({
+                    id: entry.id,
+                    label: entry.foodName,
+                    volume: `${entry.calories} ккал`,
+                    grams: `${entry.proteins} г белков`
+                }))
+            );
+
+            setRecords(formattedData);
+        } catch (err) {
+            console.error("Ошибка загрузки:", err);
+
+        }
+    };
+
+    useEffect(() => {
+        loadFoodData();
+    }, []);
 
   // При нажатии на кнопку открываем меню
   const handleFoodClick = () => {
     setShowAddMenu(true);
   };
 
-  // Функция для закрытия AddActivityMenu (ее можно передать для обработки закрытия в этом компоненте)
-  const handleCloseAddMenu = () => {
-    setShowAddMenu(false);
-  };
+    const handleActivityAdd = async () => {
+        await loadFoodData();
+        setShowAddMenu(false);
+    };
     
       const handleClick = () => {
         navigate('/main');
@@ -56,7 +96,7 @@ export const FoodScreen = () => {
               <img className="vector" alt="Vector" src={vector} onClick={handleClick}/>
             </div>
 
-            <div className="text-wrapper-4">0 ККал</div>
+            <div className="text-wrapper-4">{totalCalories} ККал</div>
           </div>
 
           {/* Контейнер для списка записей с скроллом */}
@@ -85,7 +125,10 @@ export const FoodScreen = () => {
                   {showAddMenu && (
                     <div className="add-food-menu-container">
                       {/* Можно передать функцию закрытия в AddWaterMenu, чтобы он сам мог закрываться */}
-                      <AddFoodMenu onClose={handleCloseAddMenu} />
+                        <AddFoodMenu
+                            onClose={() => setShowAddMenu(false)}
+                            onSuccess={handleActivityAdd} // Передайте этот пропс
+                        />
                     </div>
                   )}
     </div>

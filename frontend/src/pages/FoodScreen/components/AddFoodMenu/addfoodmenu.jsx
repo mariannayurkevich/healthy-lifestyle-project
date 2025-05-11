@@ -10,7 +10,7 @@ export const AddFoodMenu = ({ onClose }) => {
     calories: "",
     proteins: "",
     fats: "",
-    carbohydrates: "",
+    carbs: "",
     fiber: "",
     sugar: ""
   });
@@ -24,18 +24,57 @@ export const AddFoodMenu = ({ onClose }) => {
     }));
   };
 
-  // Обработка отправки формы
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Проверка обязательных полей
+
     if (!formData.productName || !formData.datetime || !formData.calories) {
       alert("Пожалуйста, заполните обязательные поля: название продукта, дату-время и количество калорий.");
       return;
     }
-    // Здесь можно добавить отправку данных на сервер или любое другое действие.
-    console.log("Данные формы", formData);
-    // Закрываем меню после сохранения
-    onClose();
+
+    try {
+      const userId = localStorage.getItem("userId");
+      if (!userId) throw new Error("Пользователь не авторизован");
+
+      // Преобразование даты и времени
+      const entryTime = new Date(formData.datetime).toISOString();
+      const trackerDate = formData.datetime.slice(0, 10);
+
+      // Формируем запись о еде
+      const foodEntry = {
+        time: entryTime,
+        foodName: formData.productName,
+        calories: parseFloat(formData.calories),
+        proteins: parseFloat(formData.proteins) || 0,
+        fats: parseFloat(formData.fats) || 0,
+        carbs: parseFloat(formData.carbs) || 0,
+        fiber: parseFloat(formData.fiber) || 0,
+        sugar: parseFloat(formData.sugar) || 0
+    };
+
+      const foodTracker = {
+        date: trackerDate,
+        entries: [foodEntry],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+
+      // Отправка данных
+      const response = await fetch(`/api/food?userId=${userId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(foodTracker),
+        credentials: "include"
+      });
+
+      if (!response.ok) throw new Error("Ошибка сохранения данных");
+
+      onClose();
+      window.location.reload();
+    } catch (err) {
+      console.error("Ошибка:", err);
+      alert("Не удалось сохранить запись о питании");
+    }
   };
 
   return (
@@ -111,7 +150,7 @@ export const AddFoodMenu = ({ onClose }) => {
           id="carbohydrates"
           name="carbohydrates"
           className="input-field"
-          value={formData.carbohydrates}
+          value={formData.carbs}
           onChange={handleChange}
         />
         <span className="unit-label">г</span>

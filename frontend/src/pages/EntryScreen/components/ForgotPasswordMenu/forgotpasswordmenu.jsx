@@ -21,7 +21,7 @@ export const ForgotPasswordMenu = () => {
     }
     // Здесь должна быть логика отправки кода на почту.
     // После успешной отправки переходим к следующему меню.
-    navigate("/password-reset"); // Предполагается, что роут настроен для второго меню
+    navigate("/resetpasswordmenu");
   };
 
   const handleRedirect2 = () => {

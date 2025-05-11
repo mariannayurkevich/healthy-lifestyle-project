@@ -10,11 +10,11 @@ public record FoodEntry(
         Integer trackerId,
         LocalDateTime time,
         String foodName,
-        @Positive double calories,
-        @Positive double proteins,
-        @Positive double fats,
-        @Positive double carbs,
-        @Positive double fiber,
-        @Positive double sugar
+        double calories,
+        double proteins,
+        double fats,
+        double carbs,
+        double fiber,
+        double sugar
 ) {
 }

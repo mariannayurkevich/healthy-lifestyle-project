@@ -86,8 +86,7 @@ export const EntryScreen = () => {
   };
 
   const handleForgotPassword = () => {
-  // Пример: переход к маршруту восстановления пароля
-  navigate("/password-forgot");
+  navigate("/forgotpasswordmenu");
   };
 
 

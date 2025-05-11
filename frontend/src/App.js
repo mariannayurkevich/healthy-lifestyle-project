@@ -31,6 +31,8 @@ const AnimatedRoutes = () => {
           <Route path="/entry" element={<EntryScreen />} />
           <Route path="/registrationfirst" element={<RegistrationFirstScreen />} />
           <Route path="/registrationsecond" element={<RegistrationSecondScreen />} />
+          <Route path="/forgotpasswordmenu" element={<ForgotPasswordMenu />} />
+          <Route path="/resetpasswordmenu" element={<ResetPasswordCodeMenu />} />
 
           {/* Защищенные маршруты */}
           <Route element={<ProtectedRoute />}>
@@ -43,8 +45,6 @@ const AnimatedRoutes = () => {
             <Route path="/activity" element={<ActivityScreen />} />
             <Route path="/food" element={<FoodScreen />} />
             <Route path="/questionnaire" element={<QuestionnaireScreen />} />
-            <Route path="/forgotpasswordmenu" element={<ForgotPasswordMenu />} />
-            <Route path="/resetpasswordmenu" element={<ResetPasswordCodeMenu />} />
           </Route>
 
           {/* Резервный маршрут */}
