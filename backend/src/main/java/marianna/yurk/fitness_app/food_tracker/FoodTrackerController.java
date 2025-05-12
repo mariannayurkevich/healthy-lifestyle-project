@@ -43,6 +43,11 @@ public class FoodTrackerController {
         return foodTrackerRepository.findByDate(localDate);
     }
 
+    @GetMapping("/user/{userId}/today")
+    public List<FoodTracker> findByUserIdAndToday(@PathVariable Long userId) {
+        return foodTrackerRepository.findByUserIdAndDate(userId, LocalDate.now());
+    }
+
     // Создание новой записи
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)

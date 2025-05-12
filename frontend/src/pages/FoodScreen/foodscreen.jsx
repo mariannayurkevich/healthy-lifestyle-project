@@ -29,7 +29,7 @@ export const FoodScreen = () => {
             const report = await reportResponse.json();
             setTotalCalories(report.totalCalories || 0);
 
-            const response = await fetch(`/api/food/user/${userId}`);
+            const response = await fetch(`/api/food/user/${userId}/today`);
 
             if (!response.ok) {
                 const errorText = await response.text();
