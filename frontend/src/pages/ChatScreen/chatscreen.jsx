@@ -64,7 +64,7 @@ export const ChatScreen = () => {
       // Получаем ответ от бэкенда
       const assistantMessage = {
         id: Date.now() + 1,
-        text: response.data.choices[0].message.content, // Путь может отличаться в зависимости от ответа API
+        text: response.data.reply,
         sender: "assistant"
       };
 

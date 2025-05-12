@@ -88,11 +88,11 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS chat_history (
-                              id BIGINT PRIMARY KEY,
-                              user_id BIGINT,
-                              role VARCHAR(20),
+                              id SERIAL PRIMARY KEY,
+                              user_id BIGINT NOT NULL,
+                              role VARCHAR(255),
                               content TEXT,
-                              timestamp TIME,
+                              timestamp TIMESTAMP,
                               FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
