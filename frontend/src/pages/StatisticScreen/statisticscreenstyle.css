@@ -10,7 +10,7 @@
   
   .statisticscreen .div {
     background-color: #fdfaff;
-    height: 1434px;
+    height: 1534px;
     overflow: hidden;
     position: relative;
     width: 402px;
@@ -30,7 +30,6 @@
   }
   
   .statisticscreen .view {
-    background-color: #ff5151;
     border-radius: 89.15px;
     height: 178px;
     left: 253px;
@@ -47,6 +46,27 @@
     top: 26px;
     width: 75px;
   }
+
+  .statisticscreen .ai {
+  position: absolute;
+  top: -5px;       /* Смещает картинку выше; значение можно настроить */
+  left: 50px;
+  width: 127%;
+  z-index: 0;      /* Размещает картинку позади графиков и других элементов */
+  pointer-events: none; /* Картинка не будет перехватывать клики */
+}
+
+  /* Новый класс для совета, который располагается в фоне рядом с ai */
+  .advice {
+  position: absolute;
+  top: 180px;        /* Подвиньте по вертикали по вашему усмотрению */
+  left: 40px;       /* Настройте отступ от левого края */
+  z-index: 0;      /* На заднем плане */
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-size: 15px;
+  color: #280635;
+  pointer-events: none;
+}
   
   .statisticscreen .mask-group {
     height: 41px;
@@ -160,4 +180,66 @@
     font-family: "Rubik-Medium", Helvetica;
     font-weight: 500;
   }
+
+  /* Стили для контейнера графиков */
+.charts-container {
+  position: absolute;
+  /* Расположение контейнера графиков ниже основных элементов страницы.
+     Отрегулируйте значение top по необходимости, чтобы графики не пересекались с другими элементами. */
+  top: 320px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px; /* Вертикальный промежуток между графиками */
+  padding: 10px;
+  margin-left: -10px;
+}
+
+/* Стили для каждого отдельного графика (при необходимости можно обернуть график в дополнительный div с классом .chart) */
+.charts-container .chart {
+  width: 100%;
+  max-width: 350px;
+  /* Если понадобится фон и рамка для визуального отделения графика: */
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+/* Заголовки графиков */
+.charts-container h3 {
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  color: #280635;
+  font-size: 16px;
+  margin: 0 0 10px 0;
+  text-align: center;
+}
+
+/* Общие стили для SVG графиков внутри контейнера (если потребуется) */
+.charts-container svg {
+  display: block;
+  background: transparent;
+}
+
+.chart-title {
+  color: #280635;
+  font-family: "Rubik-Medium", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 10px 0;
+}
+
+.chart-text {
+  fill: #280635;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+
+
   
