@@ -4,6 +4,7 @@ import { Navigate, Outlet } from "react-router-dom";
 const ProtectedRoute = () => {
     const [isValidSession, setIsValidSession] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [isValid, setIsValid] = useState({ auth: false, completed: false });
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -24,6 +25,11 @@ const ProtectedRoute = () => {
                 // 3. Если ответ успешный - сессия действительна
                 if (response.ok) {
                     setIsValidSession(true);
+                    const userData = await response.json();
+                    setIsValid({
+                        auth: true,
+                        completed: userData.profileCompleted
+                    });
                 } else {
                     localStorage.removeItem("userId"); // Чистим невалидный ID
                 }
