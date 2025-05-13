@@ -40,7 +40,8 @@ public class WebSecurityConfig{
                                 "/favicon.ico",         // Иконка сайта
                                 "/api/v1/password/**",
                                 "/oauth2/**",
-                                "/api/users/{id}/upload-photo"
+                                "/api/users/{id}/upload-photo",
+                                "report/week"
                         ).permitAll()
                         .requestMatchers("/api/users/me").authenticated()
                         .anyRequest().authenticated()

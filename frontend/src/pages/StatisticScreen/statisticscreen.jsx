@@ -1,15 +1,52 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import leftEye from "./src/left-eye.svg";
 import rightEye from "./src/right-eye.svg";
 import ai from "./src/ai.svg";
 import "./statisticscreenstyle.css";
 import MenuGroup from "../../components/PageMenu/pagemenu";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+const API_URL = "http://localhost:8080/report";
+
+const useWeeklyData = (userId) => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userId = localStorage.getItem("userId");
+        const response = await axios.get(`${API_URL}/week`, {
+          params: {
+            userId: userId,
+            startDate: new Date().toISOString().split('T')[0].trim()
+          }
+        });
+        setData(response.data.reverse());
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [userId]);
+
+  return { data, loading, error };
+};
+
+const formatDay = (dateString) => {
+  const date = new Date(dateString);
+  const days = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
+  return days[date.getDay()];
+};
 
 // График питания (сглаженная кривая) с дополнительной осью (y-ось)
-const NutritionChart = () => {
-  const data = [300, 500, 450, 600, 550, 400, 650]; // калории
-  const days = ["П", "В", "С", "Ч", "П", "С", "В"];
+const NutritionChart = ({ weeklyData }) => {
+  const data = weeklyData.map(d => d.totalCalories); // калории
+  const days = weeklyData.map(d => formatDay(d.date));
   const svgWidth = 350;
   const svgHeight = 150;
   const margin = { left: 60, right: 20, top: 20, bottom: 20 };
@@ -98,9 +135,9 @@ const NutritionChart = () => {
 };
 
 // График воды (вертикальная гистограмма) с дополнительной y-осью
-const WaterChart = () => {
-  const data = [2000, 1800, 2100, 1900, 2200, 2000, 2300]; // мл
-  const days = ["П", "В", "С", "Ч", "П", "С", "В"];
+const WaterChart = ({ weeklyData }) => {
+  const data = weeklyData.map(d => d.totalIntakeMl); // мл
+  const days = weeklyData.map(d => formatDay(d.date));
   const svgWidth = 350;
   const svgHeight = 150;
   const margin = { left: 60, right: 20, top: 20, bottom: 20 };
@@ -169,9 +206,9 @@ const WaterChart = () => {
 };
 
 // График сна (горизонтальная гистограмма) с дополнительной x-осью для числовых значений
-const SleepChart = () => {
-  const data = [7, 6.5, 8, 7.5, 7, 6, 8]; // часы сна
-  const days = ["П", "В", "С", "Ч", "П", "С", "В"];
+const SleepChart = ({ weeklyData }) => {
+  const data = weeklyData.map(d => d.sleepDuration);
+  const days = weeklyData.map(d => formatDay(d.date));
   const baseSvgWidth = 350;
   const margin = { left: 50, right: 20, top: 20, bottom: 40 };
   const fixedBarThickness = ((baseSvgWidth - margin.left - margin.right) / 7) - 10; // ≈34px
@@ -250,9 +287,9 @@ const SleepChart = () => {
 };
 
 // График активности (ломаная кривая) с дополнительной осью (y-ось)
-const ActivityChart = () => {
-  const data = [30, 45, 20, 60, 40, 50, 55]; // минуты
-  const days = ["П", "В", "С", "Ч", "П", "С", "В"];
+const ActivityChart = ({ weeklyData }) => {
+  const data = weeklyData.map(d => d.activityDurationMinutes);
+  const days = weeklyData.map(d => formatDay(d.date));
   const svgWidth = 350;
   const svgHeight = 150;
   const margin = { left: 40, right: 20, top: 20, bottom: 20 };
@@ -333,6 +370,12 @@ const ActivityChart = () => {
 
 export const StatisticScreen = () => {
   const navigate = useNavigate();
+  const userId = localStorage.getItem("userId");
+
+  const { data: weeklyData, loading, error } = useWeeklyData(userId);
+
+  if (loading) return <div className="loading">Загрузка данных...</div>;
+  if (error) return <div className="error">Ошибка: {error}</div>;
 
   const handleMenuClick = () => {
     navigate("/main");
@@ -392,10 +435,10 @@ export const StatisticScreen = () => {
         </p>
 
         <div className="charts-container">
-          <NutritionChart />
-          <WaterChart />
-          <SleepChart />
-          <ActivityChart />
+          <NutritionChart weeklyData={weeklyData} />
+          <WaterChart weeklyData={weeklyData} />
+          <SleepChart weeklyData={weeklyData} />
+          <ActivityChart weeklyData={weeklyData} />
         </div>
       </div>
       <MenuGroup

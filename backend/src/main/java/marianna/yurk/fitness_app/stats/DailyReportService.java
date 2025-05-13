@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -96,5 +97,14 @@ public class DailyReportService {
 
         return new DailySummaryDTO(userId,date, totalCalories, totalProteins, totalFats, totalCarbs, activityDurationMinutes,
         sleepDuration, totalIntakeMl, goalMl, analysis.toString());
+    }
+
+    public List<DailySummaryDTO> generateWeeklyReport(Long userId, LocalDate startDate) {
+        List<DailySummaryDTO> weeklyData = new ArrayList<>();
+        for (int i = 0; i < 7; i++) {
+            LocalDate date = startDate.minusDays(i);
+            weeklyData.add(generateReport(userId, date));
+        }
+        return weeklyData;
     }
 }
