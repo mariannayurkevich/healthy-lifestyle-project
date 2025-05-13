@@ -11,17 +11,33 @@ export const ForgotPasswordMenu = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
 
-  const handleSendCode = (e) => {
+  const handleSendCode = async (e) => {
     e.preventDefault();
 
-    // Если поле пустое – можно показывать сообщение об ошибке
-    if (email.trim() === "") {
-      alert("Введите, пожалуйста, адрес электронной почты.");
+    if (!email.trim()) {
+      alert("Введите email");
       return;
     }
-    // Здесь должна быть логика отправки кода на почту.
-    // После успешной отправки переходим к следующему меню.
-    navigate("/resetpasswordmenu");
+
+    try {
+      const response = await fetch("api/v1/password/forgot", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: email })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Ошибка сервера");
+      }
+
+      navigate("/resetpasswordmenu?email=" + encodeURIComponent(email));
+
+    } catch (error) {
+      alert("Ошибка: " + error.message);
+    }
   };
 
   const handleRedirect2 = () => {

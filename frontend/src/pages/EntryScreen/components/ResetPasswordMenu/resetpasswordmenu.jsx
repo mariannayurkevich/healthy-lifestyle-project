@@ -23,27 +23,39 @@ export const ResetPasswordCodeMenu = () => {
     setShowPasswordFields(value.trim().length >= 4);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!code.trim()) {
-      alert("Введите, пожалуйста, полученный код.");
+    if (newPassword !== confirmNewPassword) {
+      alert("Пароли не совпадают");
       return;
     }
-    if (showPasswordFields) {
-      if (!newPassword || !confirmNewPassword) {
-        alert("Введите новый пароль и его подтверждение.");
-        return;
+
+    try {
+      const response = await fetch("/api/v1/password/reset", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token: code,
+          newPassword: newPassword,
+          confirmPassword: confirmNewPassword
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Ошибка сброса пароля");
       }
-      if (newPassword !== confirmNewPassword) {
-        alert("Пароли не совпадают");
-        return;
+
+      const result = await response.text();
+      if (result === "Password successfully reset") {
+        navigate("/entry");
       }
-      // Здесь можно добавить логику обновления пароля (например, вызов API)
-      console.log("Новый пароль установлен. Код:", code, "Новый пароль:", newPassword);
-      navigate("/entry"); // После сброса пароля можно переходить на страницу входа
-    } else {
-      alert("Введите корректный код.");
+
+    } catch (error) {
+      alert("Ошибка: " + error.message);
     }
   };
 

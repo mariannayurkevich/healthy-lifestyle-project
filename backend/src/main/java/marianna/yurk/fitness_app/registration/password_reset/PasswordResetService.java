@@ -31,7 +31,7 @@ public class PasswordResetService {
         ConfirmationToken resetToken = new ConfirmationToken(token, LocalDateTime.now(), LocalDateTime.now().plusMinutes(15), user);
         tokenService.save(resetToken);
 
-        String resetLink = "http://localhost:8080/api/v1/password/reset?token=" + token;
+        String resetLink = "http://localhost:3000/resetpasswordmenu?token=" + token;
 
         String emailContent = buildResetEmail(user.getFirstName(), resetLink);
 

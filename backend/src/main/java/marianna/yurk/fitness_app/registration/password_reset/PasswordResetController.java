@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/password")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
 public class PasswordResetController {
 
