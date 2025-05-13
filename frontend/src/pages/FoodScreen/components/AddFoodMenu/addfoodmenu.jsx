@@ -143,12 +143,12 @@ export const AddFoodMenu = ({ onClose }) => {
         <span className="unit-label">г</span>
       </div>
 
-      <label htmlFor="carbohydrates">Углеводы:</label>
+      <label htmlFor="carbs">Углеводы:</label>
       <div className="input-with-unit">
         <input
           type="number"
-          id="carbohydrates"
-          name="carbohydrates"
+          id="carbs"
+          name="carbs"
           className="input-field"
           value={formData.carbs}
           onChange={handleChange}
