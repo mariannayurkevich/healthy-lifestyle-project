@@ -3,7 +3,7 @@ services:
     image: postgres:latest
     environment:
       - POSTGRES_DB=fitness_app
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_USER=${DB_USER}
     ports:
       - "5432:5432"
