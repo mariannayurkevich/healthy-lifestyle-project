@@ -84,8 +84,4 @@ public class FoodTrackerController {
     public void delete(@PathVariable int id) {
         foodTrackerRepository.delete(id);
     }
-
-
-
 }
-
