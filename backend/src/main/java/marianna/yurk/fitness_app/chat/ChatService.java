@@ -11,6 +11,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
@@ -237,7 +238,7 @@ public class ChatService {
         };
     }
 
-    private Mono<Throwable> handleAPIError(org.springframework.web.reactive.function.client.ClientResponse response) {
+    private Mono<Throwable> handleAPIError(ClientResponse response) {
         return response.bodyToMono(String.class)
                 .flatMap(body -> {
                     String errorMsg = "Ошибка API: " + response.statusCode() + " - " + body;
