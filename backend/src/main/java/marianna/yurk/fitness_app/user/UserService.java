@@ -1,12 +1,17 @@
 package marianna.yurk.fitness_app.user;
 
 import lombok.AllArgsConstructor;
-import marianna.yurk.fitness_app.registration.token.ConfirmationToken;import marianna.yurk.fitness_app.registration.token.ConfirmationTokenService;
+import marianna.yurk.fitness_app.registration.token.ConfirmationToken;
+import marianna.yurk.fitness_app.registration.token.ConfirmationTokenService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -23,6 +28,13 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
+
+    @Autowired
+    private final RedisTemplate<String, Object> redisTemplate;
+
+    private static final String USER_CACHE_KEY = "user:";
+    private static final String USER_EMAIL_CACHE_KEY = "user_email:";
+    private static final String ALL_USERS_CACHE_KEY = "all_users";
 
     private double calculateCalorieNorm(User user) {
         int age = Period.between(user.getBirthDate(), LocalDate.now()).getYears();
@@ -60,19 +72,37 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        List<User> cachedUsers = (List<User>) redisTemplate.opsForValue().get(ALL_USERS_CACHE_KEY);
+        if (cachedUsers != null) {
+            return cachedUsers;
+        }
+
+        List<User> users = userRepository.findAll();
+        redisTemplate.opsForValue().set(ALL_USERS_CACHE_KEY, users, Duration.ofMinutes(30));
+        return users;
     }
 
     public Optional<User> getUserByEmail(String email) {
-        return userRepository.findByEmail(email);
+        String cacheKey = USER_EMAIL_CACHE_KEY + email;
+
+        User cachedUser = (User) redisTemplate.opsForValue().get(cacheKey);
+        if (cachedUser != null) {
+            return Optional.of(cachedUser);
+        }
+
+        Optional<User> user = userRepository.findByEmail(email);
+        user.ifPresent(u -> {
+            redisTemplate.opsForValue().set(cacheKey, u, Duration.ofMinutes(30));
+            redisTemplate.opsForValue().set(USER_CACHE_KEY + u.getId(), u, Duration.ofMinutes(30));
+        });
+
+        return user;
     }
 
     public User updateUser(Long id, User updatedUser) {
         return userRepository.findById(id).map(user -> {
-            // Обновляем только измененные поля
             boolean isUpdated = false;
 
-            // Обновление email, если он изменился
             if (updatedUser.getEmail() != null && !updatedUser.getEmail().equals(user.getEmail())) {
                 if (userRepository.findByEmail(updatedUser.getEmail()).isPresent()) {
                     throw new IllegalStateException("Email already taken");
@@ -81,85 +111,71 @@ public class UserService implements UserDetailsService {
                 isUpdated = true;
             }
 
-            // Обновление имени
             if (updatedUser.getFirstName() != null && !updatedUser.getFirstName().equals(user.getFirstName())) {
                 user.setFirstName(updatedUser.getFirstName());
                 isUpdated = true;
             }
 
-            // Обновление фамилии
             if (updatedUser.getLastName() != null && !updatedUser.getLastName().equals(user.getLastName())) {
                 user.setLastName(updatedUser.getLastName());
                 isUpdated = true;
             }
 
-            // Обновление пола
             if (updatedUser.getGender() != null && !updatedUser.getGender().equals(user.getGender())) {
                 user.setGender(updatedUser.getGender());
                 isUpdated = true;
             }
 
-            // Обновление даты рождения
             if (updatedUser.getBirthDate() != null && !updatedUser.getBirthDate().equals(user.getBirthDate())) {
                 user.setBirthDate(updatedUser.getBirthDate());
                 isUpdated = true;
             }
 
-            // Обновление роста
             if (updatedUser.getHeight() != null && !updatedUser.getHeight().equals(user.getHeight())) {
                 user.setHeight(updatedUser.getHeight());
                 isUpdated = true;
             }
 
-            // Обновление веса
             if (updatedUser.getWeight() != null && !updatedUser.getWeight().equals(user.getWeight())) {
                 user.setWeight(updatedUser.getWeight());
                 isUpdated = true;
             }
 
-            // Обновление аллергий
             if (updatedUser.getAllergies() != null && !updatedUser.getAllergies().equals(user.getAllergies())) {
                 user.setAllergies(updatedUser.getAllergies());
                 isUpdated = true;
             }
 
-            // Обновление непереносимостей
             if (updatedUser.getIntolerances() != null && !updatedUser.getIntolerances().equals(user.getIntolerances())) {
                 user.setIntolerances(updatedUser.getIntolerances());
                 isUpdated = true;
             }
 
-            // Обновление уровня активности
             if (updatedUser.getActivityLevel() != null && !updatedUser.getActivityLevel().equals(user.getActivityLevel())) {
                 user.setActivityLevel(updatedUser.getActivityLevel());
                 isUpdated = true;
             }
 
-            // Обновление цели
             if (updatedUser.getGoal() != null && !updatedUser.getGoal().equals(user.getGoal())) {
                 user.setGoal(updatedUser.getGoal());
                 isUpdated = true;
             }
 
-            // Обновление пароля
             if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
                 user.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
                 isUpdated = true;
             }
 
-            // Обновление роли пользователя
             if (updatedUser.getUserRole() != null && !updatedUser.getUserRole().equals(user.getUserRole())) {
                 user.setUserRole(updatedUser.getUserRole());
                 isUpdated = true;
             }
 
-            // Обновление заблокированности
             if (updatedUser.getLocked() != null && !updatedUser.getLocked().equals(user.getLocked())) {
                 user.setLocked(updatedUser.getLocked());
                 isUpdated = true;
             }
 
-            // Обновление нормы калорий
             if (updatedUser.getBirthDate() != null
                     && updatedUser.getHeight() != null
                     && updatedUser.getWeight() != null
@@ -169,7 +185,6 @@ public class UserService implements UserDetailsService {
                 isUpdated = true;
             }
 
-            // Обновление изображения
             if (updatedUser.getImageUrl() != null && !updatedUser.getImageUrl().equals(user.getImageUrl())) {
                 user.setImageUrl(updatedUser.getImageUrl());
                 isUpdated = true;
@@ -184,17 +199,39 @@ public class UserService implements UserDetailsService {
                 user.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
             }
 
-            // Сохраняем пользователя, если были изменения
             if (isUpdated) {
-                return userRepository.save(user);
+                User savedUser = userRepository.save(user);
+                updateUserCache(savedUser);
+                return savedUser;
             } else {
                 return user;
             }
         }).orElseThrow(() -> new RuntimeException("The user was not found with the id " + id));
     }
 
+    private void updateUserCache(User user) {
+        String userCacheKey = USER_CACHE_KEY + user.getId();
+        String emailCacheKey = USER_EMAIL_CACHE_KEY + user.getEmail();
+
+        redisTemplate.opsForValue().set(userCacheKey, user, Duration.ofMinutes(30));
+        redisTemplate.opsForValue().set(emailCacheKey, user, Duration.ofMinutes(30));
+
+        redisTemplate.delete(ALL_USERS_CACHE_KEY);
+    }
+
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+
+        String userCacheKey = USER_CACHE_KEY + id;
+        redisTemplate.delete(userCacheKey);
+
+        redisTemplate.delete(ALL_USERS_CACHE_KEY);
+
+        Optional<User> user = userRepository.findById(id);
+        user.ifPresent(u -> {
+            String emailCacheKey = USER_EMAIL_CACHE_KEY + u.getEmail();
+            redisTemplate.delete(emailCacheKey);
+        });
     }
 
     @Override
@@ -232,17 +269,31 @@ public class UserService implements UserDetailsService {
 
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
+
+        updateUserCache(savedUser);
 
         return createAndSaveConfirmationToken(user);
     }
 
     public int enableUser(String email) {
+        int result = userRepository.enableUser(email);
         return userRepository.enableUser(email);
     }
 
     public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
+        String cacheKey = USER_CACHE_KEY + id;
+
+        User cachedUser = (User) redisTemplate.opsForValue().get(cacheKey);
+        if (cachedUser != null) {
+            return Optional.of(cachedUser);
+        }
+
+        Optional<User> user = userRepository.findById(id);
+        user.ifPresent(u -> {
+            redisTemplate.opsForValue().set(cacheKey, u, Duration.ofMinutes(30));
+        });
+        return user;
     }
 
 }
