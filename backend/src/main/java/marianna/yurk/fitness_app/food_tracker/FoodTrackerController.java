@@ -11,77 +11,60 @@ import java.util.List;
 @RequestMapping("/api/food")
 @CrossOrigin(origins = "http://localhost:3000")
 public class FoodTrackerController {
-    private final FoodTrackerRepository foodTrackerRepository;
+    private final FoodTrackerService foodTrackerService;
 
-    public FoodTrackerController(FoodTrackerRepository foodTrackerRepository) {
-        this.foodTrackerRepository = foodTrackerRepository;
+    public FoodTrackerController(FoodTrackerService foodTrackerService) {
+        this.foodTrackerService = foodTrackerService;
     }
 
-    // Получение всех записей
     @GetMapping("")
     public List<FoodTracker> findAll() {
-        return foodTrackerRepository.findAll();
+        return foodTrackerService.findAll();
     }
 
-    // Получение записи по ID
     @GetMapping("/{id}")
     public FoodTracker findById(@PathVariable int id) {
-        return foodTrackerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Food not found with id " + id));
+        return foodTrackerService.findById(id)
+                .orElseThrow(() -> new FoodNotFoundException(id));
     }
 
-    // Получение записей по userId
     @GetMapping("/user/{userId}")
     public List<FoodTracker> findByUserId(@PathVariable Long userId) {
-        return foodTrackerRepository.findByUserId(userId);
+        return foodTrackerService.findByUserId(userId);
     }
 
-    // Получение записей по дате
     @GetMapping("/date/{date}")
     public List<FoodTracker> findByDate(@PathVariable String date) {
         LocalDate localDate = LocalDate.parse(date);
-        return foodTrackerRepository.findByDate(localDate);
+        return foodTrackerService.findByDate(localDate);
+    }
+
+    @GetMapping("/user/{userId}/date/{date}")
+    public List<FoodTracker> findByUserIdAndDate(@PathVariable Long userId, @PathVariable String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        return foodTrackerService.findByUserIdAndDate(userId, localDate);
     }
 
     @GetMapping("/user/{userId}/today")
     public List<FoodTracker> findByUserIdAndToday(@PathVariable Long userId) {
-        return foodTrackerRepository.findByUserIdAndDate(userId, LocalDate.now());
+        return foodTrackerService.findByUserIdAndToday(userId);
     }
 
-    // Создание новой записи
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@Valid @RequestBody FoodTracker foodTracker, @RequestParam Long userId) {
-        foodTracker = new FoodTracker(
-                0,
-                userId,
-                foodTracker.date(),
-                0.0,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
-                foodTracker.entries(),
-                foodTracker.createdAt(),
-                foodTracker.updatedAt()
-        );
-
-        foodTrackerRepository.create(foodTracker);
+    public FoodTracker create(@Valid @RequestBody FoodTrackerRequest request) {
+        return foodTrackerService.create(request);
     }
 
-    // Обновление записи по ID
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable int id, @Valid @RequestBody FoodTracker foodTracker) {
-        foodTrackerRepository.update(foodTracker, id);
-
+    public void update(@PathVariable int id, @Valid @RequestBody FoodTrackerRequest request) {
+        foodTrackerService.update(id, request);
     }
 
-    // Удаление записи по ID
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
-        foodTrackerRepository.delete(id);
+        foodTrackerService.delete(id);
     }
 }
