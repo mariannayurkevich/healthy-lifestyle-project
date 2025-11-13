@@ -20,9 +20,7 @@ public class WaterTrackerJsonDataLoader implements CommandLineRunner {
     public WaterTrackerJsonDataLoader(WaterTrackerRepository waterTrackerRepository) {
         this.waterTrackerRepository = waterTrackerRepository;
         this.objectMapper = new ObjectMapper();
-        // Регистрируем модуль для поддержки LocalDateTime и других типов из java.time
         this.objectMapper.registerModule(new JavaTimeModule());
-        // Отключаем запись дат в виде числовых таймстампов, чтобы использовать строковое представление ISO-8601
         this.objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     }
 
