@@ -1,7 +1,5 @@
 package marianna.yurk.fitness_app.sleep_tracker;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
@@ -14,7 +12,6 @@ import java.util.Optional;
 @Repository
 public class SleepTrackerRepository {
 
-    private static final Logger log = LoggerFactory.getLogger(SleepTrackerRepository.class);
     private final JdbcClient jdbcClient;
 
     public SleepTrackerRepository(JdbcClient jdbcClient) {
