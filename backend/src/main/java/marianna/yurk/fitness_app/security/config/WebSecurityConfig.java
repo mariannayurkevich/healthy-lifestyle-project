@@ -39,9 +39,7 @@ public class WebSecurityConfig{
                                 "/error",              // Страницы ошибок
                                 "/favicon.ico",         // Иконка сайта
                                 "/api/v1/password/**",
-                                "/oauth2/**",
-                                "/api/users/{id}/upload-photo",
-                                "report/week"
+                                "/oauth2/**"
                         ).permitAll()
                         .requestMatchers("/api/users/me").authenticated()
                         .anyRequest().authenticated()
