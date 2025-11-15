@@ -56,25 +56,46 @@ public class SleepTrackerRepository {
     }
 
 
-    public void create(SleepTracker sleepTracker) {
-        var updated = jdbcClient.sql("INSERT INTO Sleep_tracker(date,bedtime,wakeup_time,sleep_duration,sleep_quality,notes, user_id) values(?, ?, ?, ?, ?, ?, ?)")
-                .params(List.of(sleepTracker.date(), sleepTracker.bedtime(), sleepTracker.wakeupTime(), sleepTracker.sleepDuration(), sleepTracker.sleepQuality(),sleepTracker.notes(),sleepTracker.userId()))
-                .update();
+    public SleepTracker create(SleepTracker sleepTracker) {
+        Integer generatedId = jdbcClient.sql("""
+            INSERT INTO sleep_tracker (date, bedtime, wakeup_time, sleep_duration, sleep_quality, notes, user_id)
+            VALUES (:date, :bedtime, :wakeupTime, :sleepDuration, :sleepQuality, :notes, :userId)
+            RETURNING id
+        """)
+                .param("date", sleepTracker.date())
+                .param("bedtime", sleepTracker.bedtime())
+                .param("wakeupTime", sleepTracker.wakeupTime())
+                .param("sleepDuration", sleepTracker.sleepDuration())
+                .param("sleepQuality", sleepTracker.sleepQuality())
+                .param("notes", sleepTracker.notes())
+                .param("userId", sleepTracker.userId())
+                .query(Integer.class)
+                .single();
 
-        Assert.state(updated == 1, "Failed to create sleep " + sleepTracker.date());
+        return new SleepTracker(
+                generatedId,
+                sleepTracker.date(),
+                sleepTracker.bedtime(),
+                sleepTracker.wakeupTime(),
+                sleepTracker.sleepDuration(),
+                sleepTracker.sleepQuality(),
+                sleepTracker.notes(),
+                sleepTracker.userId()
+        );
+
     }
 
-    public void update(SleepTracker sleepTracker, Integer id) {
+    public SleepTracker update(SleepTracker sleepTracker, Integer id) {
         var updated = jdbcClient.sql("""
-    UPDATE SLEEP_TRACKER 
-    SET date = :date,
-        bedtime = :bedtime,
-        wakeup_time = :wakeup_time,
-        sleep_duration = :sleep_duration,
-        sleep_quality = :sleep_quality,
-        notes = :notes,
-        user_id = :user_id
-    WHERE id = :id
+        UPDATE SLEEP_TRACKER 
+        SET date = :date,
+            bedtime = :bedtime,
+            wakeup_time = :wakeup_time,
+            sleep_duration = :sleep_duration,
+            sleep_quality = :sleep_quality,
+            notes = :notes,
+            user_id = :user_id
+        WHERE id = :id
     """)
                 .param("id", id)
                 .param("date", sleepTracker.date())
@@ -86,7 +107,7 @@ public class SleepTrackerRepository {
                 .param("user_id", sleepTracker.userId())
                 .update();
 
-        Assert.state(updated == 1, "Failed to update sleep " + sleepTracker.date());
+        return sleepTracker;
     }
 
 
