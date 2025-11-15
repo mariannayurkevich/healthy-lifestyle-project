@@ -1,7 +1,5 @@
 package marianna.yurk.fitness_app.food_tracker;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
@@ -12,7 +10,6 @@ import java.util.Optional;
 
 @Repository
 public class FoodTrackerRepository {
-    private static final Logger log = LoggerFactory.getLogger(FoodTrackerRepository.class);
     private final JdbcClient jdbcClient;
 
     public FoodTrackerRepository(JdbcClient jdbcClient) {
@@ -158,8 +155,8 @@ public class FoodTrackerRepository {
     }
 
 
-    public void create(FoodTracker foodTracker) {
-        int trackerId = jdbcClient.sql("""
+    public FoodTracker create(FoodTracker foodTracker) {
+        Integer generatedId = jdbcClient.sql("""
             INSERT INTO food_tracker (user_id, date, total_calories, total_proteins, total_fats, total_carbs, total_fiber, total_sugar, created_at, updated_at)
             VALUES (:userId, :date, :totalCalories, :totalProteins, :totalFats, :totalCarbs, :totalFiber, :totalSugar, :createdAt, :updatedAt)
             RETURNING id
@@ -177,10 +174,25 @@ public class FoodTrackerRepository {
                 .query(Integer.class)
                 .single();
 
-        saveEntries(trackerId, foodTracker.entries());
+        saveEntries(generatedId, foodTracker.entries());
+
+        return new FoodTracker(
+                generatedId,
+                foodTracker.userId(),
+                foodTracker.date(),
+                calculateTotalCalories(foodTracker.entries()),
+                calculateTotalProteins(foodTracker.entries()),
+                calculateTotalFats(foodTracker.entries()),
+                calculateTotalCarbs(foodTracker.entries()),
+                calculateTotalFiber(foodTracker.entries()),
+                calculateTotalSugar(foodTracker.entries()),
+                foodTracker.entries(),
+                foodTracker.createdAt(),
+                foodTracker.updatedAt()
+        );
     }
 
-    public void update(FoodTracker foodTracker, int id) {
+    public FoodTracker update(FoodTracker foodTracker, int id) {
         int updated = jdbcClient.sql("""
             UPDATE food_tracker SET 
                 user_id = :userId,
@@ -206,10 +218,10 @@ public class FoodTrackerRepository {
                 .param("id", id)
                 .update();
 
-        Assert.state(updated == 1, "Failed to update food tracker record with ID " + id);
-
         deleteEntries(id);
         saveEntries(id, foodTracker.entries());
+
+        return foodTracker;
     }
 
     private void saveEntries(int trackerId, List<FoodEntry> entries) {
