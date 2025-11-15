@@ -56,24 +56,34 @@ public class ActivityTrackerRepository {
     }
 
 
-    public void create(ActivityTracker activityTracker) {
-        Assert.notNull(activityTracker, "ActivityTracker must not be null");
+    public ActivityTracker create(ActivityTracker activityTracker) {
 
-        jdbcClient.sql("""
+        Integer generatedId = jdbcClient.sql("""
         INSERT INTO activity_tracker ( activity_type, duration, calories_burned, activity_timestamp, user_id)
         VALUES ( :activityType, :duration, :caloriesBurned, :activityTimestamp, :userId)
+        RETURNING id
     """)
                 .param("activityType", activityTracker.activityType())
                 .param("duration", activityTracker.duration())
                 .param("caloriesBurned", activityTracker.caloriesBurned())
                 .param("activityTimestamp", activityTracker.activityTimestamp())
                 .param("userId", activityTracker.userId())
-                .update();
+                .query(Integer.class)
+                .single();
+
+        return new ActivityTracker(
+                generatedId,
+                activityTracker.activityType(),
+                activityTracker.duration(),
+                activityTracker.caloriesBurned(),
+                activityTracker.activityTimestamp(),
+                activityTracker.userId()
+        );
     }
 
 
 
-    public void update(ActivityTracker activityTracker, Integer id) {
+    public ActivityTracker update(ActivityTracker activityTracker, Integer id) {
         var updated = jdbcClient.sql("""
     UPDATE ACTIVITY_TRACKER 
     SET activity_type = :activity_type, 
@@ -91,7 +101,7 @@ public class ActivityTrackerRepository {
                 .param("user_id", activityTracker.userId())
                 .update();
 
-        Assert.state(updated == 1, "Failed to update activity " + activityTracker.activityType());
+        return activityTracker;
     }
 
 

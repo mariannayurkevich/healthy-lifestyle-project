@@ -53,8 +53,8 @@ public class ActivityTrackerController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void update(@Valid @RequestBody ActivityTrackerRequest request, @PathVariable int id){
-        activityTrackerService.update(id, request);
+    ActivityTracker update(@Valid @RequestBody ActivityTrackerRequest request, @PathVariable int id){
+        return activityTrackerService.update(id, request);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
