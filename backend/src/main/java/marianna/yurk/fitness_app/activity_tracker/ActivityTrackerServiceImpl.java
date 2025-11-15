@@ -142,14 +142,7 @@ public class ActivityTrackerServiceImpl implements ActivityTrackerService {
 
     @Override
     public int count() {
-        Integer cachedCount = (Integer) redisTemplate.opsForValue().get("activities_count");
-        if (cachedCount != null) {
-            return cachedCount;
-        }
-
-        int count = activityTrackerRepository.count();
-        redisTemplate.opsForValue().set("activities_count", count, Duration.ofMinutes(30));
-        return count;
+        return activityTrackerRepository.count();
     }
 
     @Override
@@ -157,7 +150,6 @@ public class ActivityTrackerServiceImpl implements ActivityTrackerService {
         activityTrackerRepository.saveAll(activityTrackers);
 
         redisTemplate.delete(ALL_ACTIVITIES_KEY);
-        redisTemplate.delete("activities_count");
 
         activityTrackers.forEach(this::invalidateUserActivityCaches);
     }

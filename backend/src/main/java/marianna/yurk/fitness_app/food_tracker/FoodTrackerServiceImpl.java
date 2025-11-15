@@ -22,7 +22,6 @@ public class FoodTrackerServiceImpl implements FoodTrackerService {
     private static final String FOOD_TRACKERS_BY_USER_DATE_KEY = "food_trackers_user_date:";
     private static final String ALL_FOOD_TRACKERS_KEY = "all_food_trackers";
     private static final String FOOD_TRACKERS_BY_DATE_KEY = "food_trackers_date:";
-    private static final String FOOD_TRACKERS_COUNT_KEY = "food_trackers_count";
 
     public FoodTrackerServiceImpl(FoodTrackerRepository foodTrackerRepository, RedisTemplate<String, Object> redisTemplate) {
         this.foodTrackerRepository = foodTrackerRepository;
@@ -117,7 +116,6 @@ public class FoodTrackerServiceImpl implements FoodTrackerService {
         invalidateUserFoodTrackerCaches(tracker);
 
         redisTemplate.delete(ALL_FOOD_TRACKERS_KEY);
-        redisTemplate.delete(FOOD_TRACKERS_COUNT_KEY);
 
         redisTemplate.delete(FOOD_TRACKERS_BY_DATE_KEY + tracker.date());
     }
@@ -170,14 +168,7 @@ public class FoodTrackerServiceImpl implements FoodTrackerService {
 
     @Override
     public long count() {
-        Long cachedCount = (Long) redisTemplate.opsForValue().get(FOOD_TRACKERS_COUNT_KEY);
-        if (cachedCount != null) {
-            return cachedCount;
-        }
-
-        long count = foodTrackerRepository.count();
-        redisTemplate.opsForValue().set(FOOD_TRACKERS_COUNT_KEY, count, Duration.ofMinutes(30));
-        return count;
+        return foodTrackerRepository.count();
     }
 
     @Override
@@ -185,7 +176,6 @@ public class FoodTrackerServiceImpl implements FoodTrackerService {
         foodTrackerRepository.saveAll(foodTrackers);
 
         redisTemplate.delete(ALL_FOOD_TRACKERS_KEY);
-        redisTemplate.delete(FOOD_TRACKERS_COUNT_KEY);
 
         foodTrackers.forEach(this::invalidateUserFoodTrackerCaches);
     }
