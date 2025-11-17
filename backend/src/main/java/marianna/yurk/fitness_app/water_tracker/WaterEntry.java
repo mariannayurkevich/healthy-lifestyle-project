@@ -14,6 +14,6 @@ public record WaterEntry(
         Integer trackerId,
         LocalDateTime time,
         @Positive
-        double amountMl // Количество выпитой воды (мл)
+        double amountMl
 ) {
 }

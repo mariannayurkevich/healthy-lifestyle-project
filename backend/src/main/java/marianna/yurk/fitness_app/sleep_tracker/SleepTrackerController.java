@@ -2,76 +2,67 @@ package marianna.yurk.fitness_app.sleep_tracker;
 
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/sleep")
 @CrossOrigin(origins = "http://localhost:3000")
 public class SleepTrackerController {
-    private final SleepTrackerRepository sleepTrackerRepository;
+    private final SleepTrackerService sleepTrackerService;
 
-    public SleepTrackerController(SleepTrackerRepository sleepTrackerRepository) {
-        this.sleepTrackerRepository = sleepTrackerRepository;
+    public SleepTrackerController(SleepTrackerService sleepTrackerService) {
+        this.sleepTrackerService = sleepTrackerService;
     }
 
-    // get
     @GetMapping("")
-    List<SleepTracker> findAll(){
-        return sleepTrackerRepository.findAll();
+    public List<SleepTracker> findAll(){
+        return sleepTrackerService.findAll();
     }
 
     @GetMapping("/user/{userId}")
-    List<SleepTracker> findByUserId(@PathVariable Long userId) {
-        return sleepTrackerRepository.findByUserId(userId);
+    public List<SleepTracker> findByUserId(@PathVariable Long userId) {
+        return sleepTrackerService.findByUserId(userId);
     }
 
     @GetMapping("/{id}")
-    SleepTracker findByID(@PathVariable int id){
-        Optional<SleepTracker> sleep = sleepTrackerRepository.findById(id);
-        if (sleep.isEmpty()){
-            throw new SleepNotFoundException();
-        }
-        return sleep.get();
+    public SleepTracker findByID(@PathVariable int id){
+        return sleepTrackerService.findById(id)
+                .orElseThrow(() -> new SleepNotFoundException(id));
     }
 
-    // post
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    void create(@Valid @RequestBody SleepTracker sleep, @RequestParam Long userId) {
-        sleep = new SleepTracker(
-                0,
-                sleep.date(),
-                sleep.bedtime(),
-                sleep.wakeupTime(),
-                sleep.sleepDuration(),
-                sleep.sleepQuality(),
-                sleep.notes(),
-                userId
-        );
-        sleepTrackerRepository.create(sleep);
-    }
-    // put
-    @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    void update(@Valid @RequestBody SleepTracker sleep, @PathVariable int id){
-        sleepTrackerRepository.update(sleep, id);
+    public SleepTracker create(@Valid @RequestBody SleepTrackerRequest request) {
+        return sleepTrackerService.create(request);
     }
 
-    // delete
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public SleepTracker update(@Valid @RequestBody SleepTrackerRequest request, @PathVariable int id){
+        return sleepTrackerService.update(id, request);
+    }
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    void delete(@PathVariable int id){
-        sleepTrackerRepository.delete(id);
+    public void delete(@PathVariable int id){
+        sleepTrackerService.delete(id);
     }
 
     @GetMapping("/today")
     public List<SleepTracker> getTodaySleep(@RequestParam Long userId) {
-        LocalDate today = LocalDate.now();
-        return sleepTrackerRepository.findByUserIdAndDate(userId, today);
+        return sleepTrackerService.getTodaySleep(userId);
     }
 }
 

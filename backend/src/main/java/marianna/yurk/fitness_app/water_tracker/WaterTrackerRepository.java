@@ -1,8 +1,5 @@
 package marianna.yurk.fitness_app.water_tracker;
 
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
@@ -14,10 +11,10 @@ import java.util.Optional;
 @Repository
 public class WaterTrackerRepository {
 
-    private static final Logger log = LoggerFactory.getLogger(WaterTrackerRepository.class);
     private final JdbcClient jdbcClient;
 
     public WaterTrackerRepository(JdbcClient jdbcClient) {
+
         this.jdbcClient = jdbcClient;
     }
 
@@ -32,7 +29,7 @@ public class WaterTrackerRepository {
                         rs.getDate("date").toLocalDate(),
                         rs.getDouble("total_intake_ml"),
                         rs.getDouble("goal_ml"),
-                        findEntriesByTrackerId(rs.getInt("id")), // Подгрузка списка entries
+                        findEntriesByTrackerId(rs.getInt("id")),
                         rs.getTimestamp("created_at").toLocalDateTime(),
                         rs.getTimestamp("updated_at").toLocalDateTime()
                 ))
@@ -116,8 +113,8 @@ public class WaterTrackerRepository {
                 .list();
     }
 
-    public void create(WaterTracker waterTracker) {
-        int trackerId = jdbcClient.sql("""
+    public WaterTracker create(WaterTracker waterTracker) {
+        Integer generatedId = jdbcClient.sql("""
         INSERT INTO water_tracker (user_id, date, total_intake_ml, goal_ml, created_at, updated_at)
         VALUES (:userId, :date, :totalIntakeMl, :goalMl, :createdAt, :updatedAt)
         RETURNING id
@@ -131,11 +128,21 @@ public class WaterTrackerRepository {
                 .query(Integer.class)
                 .single();
 
-        // Сохраняем записи entries (без id)
-        saveEntries(trackerId, waterTracker.entries());
+        saveEntries(generatedId, waterTracker.entries());
+
+        return new WaterTracker(
+                generatedId,
+                waterTracker.userId(),
+                waterTracker.date(),
+                calculateTotalIntake(waterTracker.entries()),
+                waterTracker.goalMl(),
+                waterTracker.entries(),
+                waterTracker.createdAt(),
+                waterTracker.updatedAt()
+        );
     }
 
-    public void update(WaterTracker waterTracker, int id) {
+    public WaterTracker update(WaterTracker waterTracker, int id) {
         int updated = jdbcClient.sql("""
         UPDATE water_tracker SET 
             user_id = :userId,
@@ -153,14 +160,11 @@ public class WaterTrackerRepository {
                 .param("id", id)
                 .update();
 
-        Assert.state(updated == 1, "Failed to update water tracker record with ID " + id);
-
-        // Удаляем старые entries и вставляем новые без id
         deleteEntries(id);
         saveEntries(id, waterTracker.entries());
+
+        return waterTracker;
     }
-
-
 
     public void delete(Integer id) {
         deleteEntries(id);
@@ -172,10 +176,12 @@ public class WaterTrackerRepository {
     }
 
     public int count() {
+
         return jdbcClient.sql("select * from water_tracker").query().listOfRows().size();
     }
 
     public void saveAll(List<WaterTracker> waterEntries) {
+
         waterEntries.forEach(this::create);
     }
 
@@ -201,7 +207,7 @@ public class WaterTrackerRepository {
 
     private void saveEntries(int trackerId, List<WaterEntry> entries) {
         if (entries == null || entries.isEmpty()) {
-            return; // Если нет записей, выходим
+            return;
         }
 
         for (WaterEntry entry : entries) {
