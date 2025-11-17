@@ -27,36 +27,36 @@ public class SleepTrackerController {
     }
 
     @GetMapping("")
-    List<SleepTracker> findAll(){
+    public List<SleepTracker> findAll(){
         return sleepTrackerService.findAll();
     }
 
     @GetMapping("/user/{userId}")
-    List<SleepTracker> findByUserId(@PathVariable Long userId) {
+    public List<SleepTracker> findByUserId(@PathVariable Long userId) {
         return sleepTrackerService.findByUserId(userId);
     }
 
     @GetMapping("/{id}")
-    SleepTracker findByID(@PathVariable int id){
+    public SleepTracker findByID(@PathVariable int id){
         return sleepTrackerService.findById(id)
                 .orElseThrow(() -> new SleepNotFoundException(id));
     }
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    SleepTracker create(@Valid @RequestBody SleepTrackerRequest request) {
+    public SleepTracker create(@Valid @RequestBody SleepTrackerRequest request) {
         return sleepTrackerService.create(request);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void update(@Valid @RequestBody SleepTrackerRequest request, @PathVariable int id){
-        sleepTrackerService.update(id, request);
+    public SleepTracker update(@Valid @RequestBody SleepTrackerRequest request, @PathVariable int id){
+        return sleepTrackerService.update(id, request);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    void delete(@PathVariable int id){
+    public void delete(@PathVariable int id){
         sleepTrackerService.delete(id);
     }
 
