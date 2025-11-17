@@ -58,8 +58,8 @@ public class FoodTrackerController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable int id, @Valid @RequestBody FoodTrackerRequest request) {
-        foodTrackerService.update(id, request);
+    public FoodTracker update(@PathVariable int id, @Valid @RequestBody FoodTrackerRequest request) {
+        return foodTrackerService.update(id, request);
     }
 
     @DeleteMapping("/{id}")
