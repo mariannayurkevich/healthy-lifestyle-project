@@ -113,8 +113,8 @@ public class WaterTrackerRepository {
                 .list();
     }
 
-    public void create(WaterTracker waterTracker) {
-        int trackerId = jdbcClient.sql("""
+    public WaterTracker create(WaterTracker waterTracker) {
+        Integer generatedId = jdbcClient.sql("""
         INSERT INTO water_tracker (user_id, date, total_intake_ml, goal_ml, created_at, updated_at)
         VALUES (:userId, :date, :totalIntakeMl, :goalMl, :createdAt, :updatedAt)
         RETURNING id
@@ -128,10 +128,21 @@ public class WaterTrackerRepository {
                 .query(Integer.class)
                 .single();
 
-        saveEntries(trackerId, waterTracker.entries());
+        saveEntries(generatedId, waterTracker.entries());
+
+        return new WaterTracker(
+                generatedId,
+                waterTracker.userId(),
+                waterTracker.date(),
+                calculateTotalIntake(waterTracker.entries()),
+                waterTracker.goalMl(),
+                waterTracker.entries(),
+                waterTracker.createdAt(),
+                waterTracker.updatedAt()
+        );
     }
 
-    public void update(WaterTracker waterTracker, int id) {
+    public WaterTracker update(WaterTracker waterTracker, int id) {
         int updated = jdbcClient.sql("""
         UPDATE water_tracker SET 
             user_id = :userId,
@@ -149,10 +160,10 @@ public class WaterTrackerRepository {
                 .param("id", id)
                 .update();
 
-        Assert.state(updated == 1, "Failed to update water tracker record with ID " + id);
-
         deleteEntries(id);
         saveEntries(id, waterTracker.entries());
+
+        return waterTracker;
     }
 
     public void delete(Integer id) {
