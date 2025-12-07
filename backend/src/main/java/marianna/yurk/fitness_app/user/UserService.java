@@ -1,5 +1,6 @@
 package marianna.yurk.fitness_app.user;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import marianna.yurk.fitness_app.registration.token.ConfirmationToken;
 import marianna.yurk.fitness_app.registration.token.ConfirmationTokenService;
@@ -31,6 +32,8 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private final RedisTemplate<String, Object> redisTemplate;
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     private static final String USER_CACHE_KEY = "user:";
     private static final String USER_EMAIL_CACHE_KEY = "user_email:";
@@ -71,10 +74,15 @@ public class UserService implements UserDetailsService {
         };
     }
 
+    @SuppressWarnings("unchecked")
     public List<User> getAllUsers() {
-        List<User> cachedUsers = (List<User>) redisTemplate.opsForValue().get(ALL_USERS_CACHE_KEY);
-        if (cachedUsers != null) {
-            return cachedUsers;
+        Object cachedObject = redisTemplate.opsForValue().get(ALL_USERS_CACHE_KEY);
+        if (cachedObject != null) {
+            try {
+                return (List<User>) cachedObject;
+            } catch (ClassCastException e) {
+                redisTemplate.delete(ALL_USERS_CACHE_KEY);
+            }
         }
 
         List<User> users = userRepository.findAll();
@@ -85,9 +93,15 @@ public class UserService implements UserDetailsService {
     public Optional<User> getUserByEmail(String email) {
         String cacheKey = USER_EMAIL_CACHE_KEY + email;
 
-        User cachedUser = (User) redisTemplate.opsForValue().get(cacheKey);
-        if (cachedUser != null) {
-            return Optional.of(cachedUser);
+        Object cachedObject = redisTemplate.opsForValue().get(cacheKey);
+        if (cachedObject != null) {
+            try {
+                User cachedUser = (User) cachedObject;
+                return Optional.of(cachedUser);
+            } catch (ClassCastException e) {
+                // Если в кэше неверный тип, удаляем его
+                redisTemplate.delete(cacheKey);
+            }
         }
 
         Optional<User> user = userRepository.findByEmail(email);
@@ -195,10 +209,6 @@ public class UserService implements UserDetailsService {
                 isUpdated = true;
             }
 
-            if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
-                user.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
-            }
-
             if (isUpdated) {
                 User savedUser = userRepository.save(user);
                 updateUserCache(savedUser);
@@ -284,9 +294,14 @@ public class UserService implements UserDetailsService {
     public Optional<User> getUserById(Long id) {
         String cacheKey = USER_CACHE_KEY + id;
 
-        User cachedUser = (User) redisTemplate.opsForValue().get(cacheKey);
-        if (cachedUser != null) {
-            return Optional.of(cachedUser);
+        Object cachedObject = redisTemplate.opsForValue().get(cacheKey);
+        if (cachedObject != null) {
+            try {
+                User cachedUser = (User) cachedObject;
+                return Optional.of(cachedUser);
+            } catch (ClassCastException e) {
+                redisTemplate.delete(cacheKey);
+            }
         }
 
         Optional<User> user = userRepository.findById(id);

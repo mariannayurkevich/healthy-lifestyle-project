@@ -1,5 +1,7 @@
 package marianna.yurk.fitness_app.water_tracker;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import java.util.Optional;
 @Service
 public class WaterTrackerServiceImpl implements WaterTrackerService {
     private final WaterTrackerRepository waterTrackerRepository;
+    private static final Logger logger = LoggerFactory.getLogger(WaterTrackerServiceImpl.class);
 
     private static final String WATER_TRACKER_BY_ID_KEY = "water_tracker:";
     private static final String WATER_TRACKERS_BY_USER_KEY = "water_trackers_user:";
@@ -30,160 +33,227 @@ public class WaterTrackerServiceImpl implements WaterTrackerService {
 
     @Override
     public List<WaterTracker> findAll() {
-        List<WaterTracker> cachedTrackers = (List<WaterTracker>) redisTemplate.opsForValue().get(ALL_WATER_TRACKERS_KEY);
-        if (cachedTrackers != null) {
-            return cachedTrackers;
-        }
+        try {
+            List<WaterTracker> cachedTrackers = (List<WaterTracker>) redisTemplate.opsForValue().get(ALL_WATER_TRACKERS_KEY);
+            if (cachedTrackers != null) {
+                return cachedTrackers;
+            }
 
-        List<WaterTracker> trackers = waterTrackerRepository.findAll();
-        redisTemplate.opsForValue().set(ALL_WATER_TRACKERS_KEY, trackers, Duration.ofMinutes(30));
-        return trackers;
+            List<WaterTracker> trackers = waterTrackerRepository.findAll();
+            redisTemplate.opsForValue().set(ALL_WATER_TRACKERS_KEY, trackers, Duration.ofMinutes(30));
+            return trackers;
+        } catch (Exception e) {
+            logger.error("Error in findAll", e);
+            throw e;
+        }
     }
 
     @Override
     public Optional<WaterTracker> findById(int id) {
-        String cacheKey = WATER_TRACKER_BY_ID_KEY + id;
+        try {
+            String cacheKey = WATER_TRACKER_BY_ID_KEY + id;
 
-        WaterTracker cachedTracker = (WaterTracker) redisTemplate.opsForValue().get(cacheKey);
-        if (cachedTracker != null) {
-            return Optional.of(cachedTracker);
+            WaterTracker cachedTracker = (WaterTracker) redisTemplate.opsForValue().get(cacheKey);
+            if (cachedTracker != null) {
+                return Optional.of(cachedTracker);
+            }
+
+            Optional<WaterTracker> tracker = waterTrackerRepository.findById(id);
+            tracker.ifPresent(t ->
+                    redisTemplate.opsForValue().set(cacheKey, t, Duration.ofMinutes(30))
+            );
+
+            return tracker;
+        } catch (Exception e) {
+            logger.error("Error in findById: {}", id, e);
+            throw e;
         }
-
-        Optional<WaterTracker> tracker = waterTrackerRepository.findById(id);
-        tracker.ifPresent(t ->
-                redisTemplate.opsForValue().set(cacheKey, t, Duration.ofMinutes(30))
-        );
-
-        return tracker;
     }
 
     @Override
     public List<WaterTracker> findByUserId(Long userId) {
-        String cacheKey = WATER_TRACKERS_BY_USER_KEY + userId;
+        try {
+            String cacheKey = WATER_TRACKERS_BY_USER_KEY + userId;
 
-        List<WaterTracker> cachedTrackers = (List<WaterTracker>) redisTemplate.opsForValue().get(cacheKey);
-        if (cachedTrackers != null) {
-            return cachedTrackers;
+            List<WaterTracker> cachedTrackers = (List<WaterTracker>) redisTemplate.opsForValue().get(cacheKey);
+            if (cachedTrackers != null) {
+                return cachedTrackers;
+            }
+
+            List<WaterTracker> trackers = waterTrackerRepository.findByUserId(userId);
+            redisTemplate.opsForValue().set(cacheKey, trackers, Duration.ofMinutes(30));
+            return trackers;
+        } catch (Exception e) {
+            logger.error("Error in findByUserId: {}", userId, e);
+            throw e;
         }
-
-        List<WaterTracker> trackers = waterTrackerRepository.findByUserId(userId);
-        redisTemplate.opsForValue().set(cacheKey, trackers, Duration.ofMinutes(30));
-        return trackers;
     }
 
     @Override
     public List<WaterTracker> findByUserIdAndDate(Long userId, LocalDate date) {
-        String cacheKey = WATER_TRACKERS_BY_USER_DATE_KEY + userId + ":" + date;
+        try {
+            String cacheKey = WATER_TRACKERS_BY_USER_DATE_KEY + userId + ":" + date;
 
-        List<WaterTracker> cachedTrackers = (List<WaterTracker>) redisTemplate.opsForValue().get(cacheKey);
-        if (cachedTrackers != null) {
-            return cachedTrackers;
+            List<WaterTracker> cachedTrackers = (List<WaterTracker>) redisTemplate.opsForValue().get(cacheKey);
+            if (cachedTrackers != null) {
+                return cachedTrackers;
+            }
+
+            List<WaterTracker> trackers = waterTrackerRepository.findByUserIdAndDate(userId, date);
+            redisTemplate.opsForValue().set(cacheKey, trackers, Duration.ofMinutes(30));
+            return trackers;
+        } catch (Exception e) {
+            logger.error("Error in findByUserIdAndDate: {}, {}", userId, date, e);
+            throw e;
         }
-
-        List<WaterTracker> trackers = waterTrackerRepository.findByUserIdAndDate(userId, date);
-        redisTemplate.opsForValue().set(cacheKey, trackers, Duration.ofMinutes(30));
-        return trackers;
     }
 
     @Override
     public WaterTracker create(WaterTrackerRequest request) {
+        try {
+            // Проверяем, что userId не null
+            if (request.userId() == null) {
+                throw new IllegalArgumentException("User ID is required");
+            }
 
-        LocalDateTime now = LocalDateTime.now();
-        WaterTracker waterTracker = new WaterTracker(
-                0,
-                request.userId(),
-                request.date(),
-                0.0,
-                request.goalMl(),
-                request.entries() != null ? request.entries() : List.of(),
-                now,
-                now
-        );
+            LocalDateTime now = LocalDateTime.now();
+            WaterTracker waterTracker = new WaterTracker(
+                    0,
+                    request.userId(),
+                    request.date() != null ? request.date() : LocalDate.now(),
+                    0.0,
+                    request.goalMl(),
+                    request.entries() != null ? request.entries() : List.of(),
+                    now,
+                    now
+            );
 
-        WaterTracker createdTracker = waterTrackerRepository.create(waterTracker);
+            WaterTracker createdTracker = waterTrackerRepository.create(waterTracker);
 
-        invalidateWaterTrackerCaches(createdTracker);
+            invalidateWaterTrackerCaches(createdTracker);
 
-        return createdTracker;
+            return createdTracker;
+        } catch (Exception e) {
+            logger.error("Error in create", e);
+            throw e;
+        }
     }
 
     @Override
     public WaterTracker update(int id, WaterTrackerRequest request) {
-        WaterTracker existingTracker = waterTrackerRepository.findById(id)
-                .orElseThrow(() -> new WaterNotFoundException(id));
+        try {
+            // Проверяем, что userId не null
+            if (request.userId() == null) {
+                throw new IllegalArgumentException("User ID is required");
+            }
 
-        LocalDateTime now = LocalDateTime.now();
-        WaterTracker waterTracker = new WaterTracker(
-                id,
-                request.userId(),
-                request.date(),
-                0.0,
-                request.goalMl(),
-                request.entries() != null ? request.entries() : List.of(),
-                existingTracker.createdAt(),
-                now
-        );
+            WaterTracker existingTracker = waterTrackerRepository.findById(id)
+                    .orElseThrow(() -> new WaterNotFoundException(id));
 
-        WaterTracker updatedTracker = waterTrackerRepository.update(waterTracker, id);
+            LocalDateTime now = LocalDateTime.now();
+            WaterTracker waterTracker = new WaterTracker(
+                    id,
+                    request.userId(),
+                    request.date() != null ? request.date() : existingTracker.date(),
+                    0.0,
+                    request.goalMl(),
+                    request.entries() != null ? request.entries() : List.of(),
+                    existingTracker.createdAt(),
+                    now
+            );
 
-        invalidateWaterTrackerCaches(updatedTracker);
-        invalidateWaterTrackerCaches(existingTracker);
+            WaterTracker updatedTracker = waterTrackerRepository.update(waterTracker, id);
 
-        return updatedTracker;
+            invalidateWaterTrackerCaches(updatedTracker);
+            invalidateWaterTrackerCaches(existingTracker);
+
+            return updatedTracker;
+        } catch (Exception e) {
+            logger.error("Error in update: {}", id, e);
+            throw e;
+        }
     }
 
     @Override
     public void delete(Integer id) {
-        WaterTracker existingTracker = waterTrackerRepository.findById(id)
-                .orElseThrow(() -> new WaterNotFoundException(id));
+        try {
+            WaterTracker existingTracker = waterTrackerRepository.findById(id)
+                    .orElseThrow(() -> new WaterNotFoundException(id));
 
-        waterTrackerRepository.delete(id);
+            waterTrackerRepository.delete(id);
 
-        invalidateWaterTrackerCaches(existingTracker);
+            invalidateWaterTrackerCaches(existingTracker);
+        } catch (Exception e) {
+            logger.error("Error in delete: {}", id, e);
+            throw e;
+        }
     }
 
     @Override
     public int count() {
-        return waterTrackerRepository.count();
+        try {
+            return waterTrackerRepository.count();
+        } catch (Exception e) {
+            logger.error("Error in count", e);
+            throw e;
+        }
     }
 
     @Override
     public void saveAll(List<WaterTracker> waterTrackers) {
-        waterTrackerRepository.saveAll(waterTrackers);
+        try {
+            waterTrackerRepository.saveAll(waterTrackers);
 
-        redisTemplate.delete(ALL_WATER_TRACKERS_KEY);
+            redisTemplate.delete(ALL_WATER_TRACKERS_KEY);
 
-        waterTrackers.forEach(this::invalidateUserWaterTrackerCaches);
+            waterTrackers.forEach(this::invalidateUserWaterTrackerCaches);
+        } catch (Exception e) {
+            logger.error("Error in saveAll", e);
+            throw e;
+        }
     }
 
     private void invalidateWaterTrackerCaches(WaterTracker tracker) {
-        redisTemplate.delete(WATER_TRACKER_BY_ID_KEY + tracker.id());
+        try {
+            redisTemplate.delete(WATER_TRACKER_BY_ID_KEY + tracker.id());
 
-        invalidateUserWaterTrackerCaches(tracker);
+            invalidateUserWaterTrackerCaches(tracker);
 
-        redisTemplate.delete(ALL_WATER_TRACKERS_KEY);
-        redisTemplate.delete(WATER_TRACKERS_BY_DATE_KEY + tracker.date());
+            redisTemplate.delete(ALL_WATER_TRACKERS_KEY);
+            redisTemplate.delete(WATER_TRACKERS_BY_DATE_KEY + tracker.date());
+        } catch (Exception e) {
+            logger.error("Error invalidating water tracker caches", e);
+        }
     }
 
     private void invalidateUserWaterTrackerCaches(WaterTracker tracker) {
-        Long userId = tracker.userId();
-        LocalDate trackerDate = tracker.date();
+        try {
+            Long userId = tracker.userId();
+            LocalDate trackerDate = tracker.date();
 
-        redisTemplate.delete(WATER_TRACKERS_BY_USER_KEY + userId);
-        redisTemplate.delete(WATER_TRACKERS_BY_USER_DATE_KEY + userId + ":" + trackerDate);
+            redisTemplate.delete(WATER_TRACKERS_BY_USER_KEY + userId);
+            redisTemplate.delete(WATER_TRACKERS_BY_USER_DATE_KEY + userId + ":" + trackerDate);
+        } catch (Exception e) {
+            logger.error("Error invalidating user water tracker caches", e);
+        }
     }
 
     @Override
     public List<WaterTracker> findByDate(LocalDate date) {
-        String cacheKey = WATER_TRACKERS_BY_DATE_KEY + date;
+        try {
+            String cacheKey = WATER_TRACKERS_BY_DATE_KEY + date;
 
-        List<WaterTracker> cachedTrackers = (List<WaterTracker>) redisTemplate.opsForValue().get(cacheKey);
-        if (cachedTrackers != null) {
-            return cachedTrackers;
+            List<WaterTracker> cachedTrackers = (List<WaterTracker>) redisTemplate.opsForValue().get(cacheKey);
+            if (cachedTrackers != null) {
+                return cachedTrackers;
+            }
+
+            List<WaterTracker> trackers = waterTrackerRepository.findByDate(date);
+            redisTemplate.opsForValue().set(cacheKey, trackers, Duration.ofMinutes(30));
+            return trackers;
+        } catch (Exception e) {
+            logger.error("Error in findByDate: {}", date, e);
+            throw e;
         }
-
-        List<WaterTracker> trackers = waterTrackerRepository.findByDate(date);
-        redisTemplate.opsForValue().set(cacheKey, trackers, Duration.ofMinutes(30));
-        return trackers;
     }
 }

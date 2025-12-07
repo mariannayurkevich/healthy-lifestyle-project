@@ -1,77 +1,146 @@
 package marianna.yurk.fitness_app.water_tracker;
 
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/water")
 @CrossOrigin(origins = "http://localhost:3000")
 public class WaterTrackerController {
     private final WaterTrackerService waterTrackerService;
+    private static final Logger logger = LoggerFactory.getLogger(WaterTrackerController.class);
 
     public WaterTrackerController(WaterTrackerService waterTrackerService) {
         this.waterTrackerService = waterTrackerService;
     }
 
     @GetMapping("")
-    List<WaterTracker> findAll() {
-
-        return waterTrackerService.findAll();
+    public ResponseEntity<List<WaterTracker>> findAll() {
+        try {
+            return ResponseEntity.ok(waterTrackerService.findAll());
+        } catch (Exception e) {
+            logger.error("Error finding all water trackers", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("/{id}")
-    WaterTracker findById(@PathVariable int id) {
-        return waterTrackerService.findById(id)
-                .orElseThrow(() -> new RuntimeException("Water tracker not found with id " + id));
+    public ResponseEntity<?> findById(@PathVariable int id) {
+        try {
+            return waterTrackerService.findById(id)
+                    .map(ResponseEntity::ok)
+                    .orElse(ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            logger.error("Error finding water tracker by id: {}", id, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("/user/{userId}")
-    List<WaterTracker> findByUserId(@PathVariable Long userId) {
-
-        return waterTrackerService.findByUserId(userId);
+    public ResponseEntity<List<WaterTracker>> findByUserId(@PathVariable Long userId) {
+        try {
+            return ResponseEntity.ok(waterTrackerService.findByUserId(userId));
+        } catch (Exception e) {
+            logger.error("Error finding water trackers by user id: {}", userId, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("/user/{userId}/date/{date}")
-    List<WaterTracker> findByUserIdAndDate(@PathVariable Long userId, @PathVariable String date) {
-        LocalDate localDate = LocalDate.parse(date);
-        return waterTrackerService.findByUserIdAndDate(userId, localDate);
+    public ResponseEntity<List<WaterTracker>> findByUserIdAndDate(@PathVariable Long userId, @PathVariable String date) {
+        try {
+            LocalDate localDate = LocalDate.parse(date);
+            return ResponseEntity.ok(waterTrackerService.findByUserIdAndDate(userId, localDate));
+        } catch (Exception e) {
+            logger.error("Error finding water trackers by user id and date: {}, {}", userId, date, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("/date/{date}")
-    List<WaterTracker> findByDate(@PathVariable String date) {
-        LocalDate localDate = LocalDate.parse(date);
-        return waterTrackerService.findByDate(localDate);
+    public ResponseEntity<List<WaterTracker>> findByDate(@PathVariable String date) {
+        try {
+            LocalDate localDate = LocalDate.parse(date);
+            return ResponseEntity.ok(waterTrackerService.findByDate(localDate));
+        } catch (Exception e) {
+            logger.error("Error finding water trackers by date: {}", date, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    WaterTracker create(@Valid @RequestBody WaterTrackerRequest request) {
-        return waterTrackerService.create(request);
+    public ResponseEntity<?> create(@Valid @RequestBody WaterTrackerRequest request) {
+        try {
+            WaterTracker created = waterTrackerService.create(request);
+            return ResponseEntity.status(HttpStatus.CREATED).body(created);
+        } catch (RuntimeException e) {
+            logger.error("Error creating water tracker", e);
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            logger.error("Unexpected error creating water tracker", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    WaterTracker update(@PathVariable int id, @Valid @RequestBody WaterTrackerRequest request) {
-        return waterTrackerService.update(id,request);
+    public ResponseEntity<?> update(@PathVariable int id, @Valid @RequestBody WaterTrackerRequest request) {
+        try {
+            WaterTracker updated = waterTrackerService.update(id, request);
+            return ResponseEntity.ok(updated);
+        } catch (RuntimeException e) {
+            logger.error("Error updating water tracker: {}", id, e);
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            logger.error("Unexpected error updating water tracker: {}", id, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    void delete(@PathVariable int id) {
+    public ResponseEntity<?> delete(@PathVariable int id) {
+        try {
+            waterTrackerService.delete(id);
+            return ResponseEntity.noContent().build();
+        } catch (RuntimeException e) {
+            logger.error("Error deleting water tracker: {}", id, e);
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            logger.error("Unexpected error deleting water tracker: {}", id, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
-        waterTrackerService.delete(id);
+    // Обработчик ошибок валидации
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, Object>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        Map<String, Object> errors = new HashMap<>();
+        errors.put("timestamp", System.currentTimeMillis());
+        errors.put("status", HttpStatus.BAD_REQUEST.value());
+
+        List<String> errorMessages = ex.getBindingResult()
+                .getFieldErrors()
+                .stream()
+                .map(error -> error.getField() + ": " + error.getDefaultMessage())
+                .collect(Collectors.toList());
+
+        errors.put("errors", errorMessages);
+
+        return ResponseEntity.badRequest().body(errors);
     }
 }

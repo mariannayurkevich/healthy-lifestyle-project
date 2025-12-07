@@ -1,5 +1,6 @@
 package marianna.yurk.fitness_app.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -44,12 +45,13 @@ public class User implements UserDetails {
         @Column(unique = true)
         private String email;
 
+        @JsonIgnore // Игнорируем при сериализации
         private String password;
 
         private String gender;
         private LocalDate birthDate;
-        private Double height; // в сантиметрах
-        private Double weight; // в килограммах
+        private Double height;
+        private Double weight;
         private String allergies;
         private String intolerances;
         private Double dailyCalorieNorm;
@@ -85,37 +87,44 @@ public class User implements UserDetails {
         }
 
         @Override
+        @JsonIgnore
         public Collection<? extends GrantedAuthority> getAuthorities() {
                 SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRole.name());
                 return Collections.singletonList(authority);
         }
 
         @Override
+        @JsonIgnore
         public String getPassword() {
                 return password;
         }
 
         @Override
+        @JsonIgnore
         public String getUsername() {
                 return email;
         }
 
         @Override
+        @JsonIgnore
         public boolean isAccountNonExpired() {
                 return true;
         }
 
         @Override
+        @JsonIgnore
         public boolean isAccountNonLocked() {
                 return !locked;
         }
 
         @Override
+        @JsonIgnore
         public boolean isCredentialsNonExpired() {
                 return true;
         }
 
         @Override
+        @JsonIgnore
         public boolean isEnabled() {
                 return enabled;
         }

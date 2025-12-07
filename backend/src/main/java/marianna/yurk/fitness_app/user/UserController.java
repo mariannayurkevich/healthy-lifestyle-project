@@ -31,38 +31,62 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok(userService.getAllUsers());
+        try {
+            return ResponseEntity.ok(userService.getAllUsers());
+        } catch (Exception e) {
+            logger.error("Error getting all users", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("/id/{id}")
     public ResponseEntity<?> getUserById(@PathVariable Long id) {
-        return userService.getUserById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        try {
+            return userService.getUserById(id)
+                    .map(ResponseEntity::ok)
+                    .orElse(ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            logger.error("Error getting user by id: {}", id, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("/me")
     public ResponseEntity<User> getCurrentUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName();
-        return userService.getUserByEmail(email)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String email = authentication.getName();
+            return userService.getUserByEmail(email)
+                    .map(ResponseEntity::ok)
+                    .orElse(ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            logger.error("Error getting current user", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
-    // Получение пользователя по email
     @GetMapping("/by-email")
     public ResponseEntity<?> getUserByEmail(@RequestParam String email) {
-        return userService.getUserByEmail(email)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        try {
+            return userService.getUserByEmail(email)
+                    .map(ResponseEntity::ok)
+                    .orElse(ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            logger.error("Error getting user by email: {}", email, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("/check-profile/{userId}")
     public ResponseEntity<Boolean> checkProfileCompleted(@PathVariable Long userId) {
-        return userService.getUserById(userId)
-                .map(user -> ResponseEntity.ok(user.getProfileCompleted()))
-                .orElse(ResponseEntity.notFound().build());
+        try {
+            return userService.getUserById(userId)
+                    .map(user -> ResponseEntity.ok(user.getProfileCompleted()))
+                    .orElse(ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            logger.error("Error checking profile completion for user: {}", userId, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @PutMapping("/{id}")
@@ -71,14 +95,23 @@ public class UserController {
             User updatedUser = userService.updateUser(id, user);
             return ResponseEntity.ok(updatedUser);
         } catch (RuntimeException e) {
+            logger.error("Error updating user: {}", id, e);
             return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            logger.error("Unexpected error updating user: {}", id, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
-        return ResponseEntity.ok("Пользователь удалён");
+        try {
+            userService.deleteUser(id);
+            return ResponseEntity.ok("Пользователь удалён");
+        } catch (Exception e) {
+            logger.error("Error deleting user: {}", id, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @PostMapping("/{id}/upload-photo")
@@ -86,19 +119,19 @@ public class UserController {
             @PathVariable Long id,
             @RequestParam("file") MultipartFile file) {
 
-        Optional<User> optionalUser = userService.getUserById(id);
-
-        if (optionalUser.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Пользователь не найден");
-        }
-
-        User user = optionalUser.get();
-
-        String uploadDir = "uploads/";
-        String filename = UUID.randomUUID() + "_" + file.getOriginalFilename();
-        Path filepath = Paths.get(uploadDir + filename);
-
         try {
+            Optional<User> optionalUser = userService.getUserById(id);
+
+            if (optionalUser.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Пользователь не найден");
+            }
+
+            User user = optionalUser.get();
+
+            String uploadDir = "uploads/";
+            String filename = UUID.randomUUID() + "_" + file.getOriginalFilename();
+            Path filepath = Paths.get(uploadDir + filename);
+
             Files.createDirectories(filepath.getParent());
             Files.write(filepath, file.getBytes());
 
@@ -110,7 +143,9 @@ public class UserController {
         } catch (IOException e) {
             logger.error("Error while uploading photo for user id {}", id, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ошибка при загрузке");
+        } catch (Exception e) {
+            logger.error("Unexpected error uploading photo for user id {}", id, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Внутренняя ошибка сервера");
         }
     }
-
 }
