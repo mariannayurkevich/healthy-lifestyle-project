@@ -52,8 +52,19 @@ public class FoodTrackerController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public FoodTracker create(@Valid @RequestBody FoodTrackerRequest request) {
-        return foodTrackerService.create(request);
+    public FoodTracker create(@RequestParam Long userId, @Valid @RequestBody FoodTrackerRequest request) {
+        try {
+            FoodTrackerRequest fullRequest = new FoodTrackerRequest(
+                    userId,
+                    request.date(),
+                    request.entries()
+            );
+
+            FoodTracker created = foodTrackerService.create(fullRequest);
+            return created;
+        } catch (Exception e) {
+            throw new RuntimeException("Unexpected error creating food tracker", e);
+        }
     }
 
     @PutMapping("/{id}")

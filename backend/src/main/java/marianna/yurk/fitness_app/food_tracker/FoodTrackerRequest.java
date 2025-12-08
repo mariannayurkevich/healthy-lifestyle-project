@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public record FoodTrackerRequest (
-        @NotNull(message = "User ID must not be null")
         Long userId,
 
         @NotNull(message = "Date must not be null")
