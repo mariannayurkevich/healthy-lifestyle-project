@@ -13,7 +13,7 @@ public interface WaterTrackerService {
 
     List<WaterTracker> findByUserIdAndDate(Long userId, LocalDate date);
 
-    WaterTracker create(WaterTrackerRequest request);
+    WaterTracker create(Long userId, WaterTrackerRequest request);
 
     WaterTracker update(int id, WaterTrackerRequest request);
 

@@ -109,17 +109,12 @@ public class WaterTrackerServiceImpl implements WaterTrackerService {
     }
 
     @Override
-    public WaterTracker create(WaterTrackerRequest request) {
+    public WaterTracker create(Long userId, WaterTrackerRequest request) {
         try {
-            // Проверяем, что userId не null
-            if (request.userId() == null) {
-                throw new IllegalArgumentException("User ID is required");
-            }
-
             LocalDateTime now = LocalDateTime.now();
             WaterTracker waterTracker = new WaterTracker(
                     0,
-                    request.userId(),
+                    userId,
                     request.date() != null ? request.date() : LocalDate.now(),
                     0.0,
                     request.goalMl(),
@@ -129,9 +124,7 @@ public class WaterTrackerServiceImpl implements WaterTrackerService {
             );
 
             WaterTracker createdTracker = waterTrackerRepository.create(waterTracker);
-
             invalidateWaterTrackerCaches(createdTracker);
-
             return createdTracker;
         } catch (Exception e) {
             logger.error("Error in create", e);
@@ -142,18 +135,13 @@ public class WaterTrackerServiceImpl implements WaterTrackerService {
     @Override
     public WaterTracker update(int id, WaterTrackerRequest request) {
         try {
-            // Проверяем, что userId не null
-            if (request.userId() == null) {
-                throw new IllegalArgumentException("User ID is required");
-            }
-
             WaterTracker existingTracker = waterTrackerRepository.findById(id)
                     .orElseThrow(() -> new WaterNotFoundException(id));
 
             LocalDateTime now = LocalDateTime.now();
             WaterTracker waterTracker = new WaterTracker(
                     id,
-                    request.userId(),
+                    existingTracker.userId(),
                     request.date() != null ? request.date() : existingTracker.date(),
                     0.0,
                     request.goalMl(),
@@ -163,10 +151,8 @@ public class WaterTrackerServiceImpl implements WaterTrackerService {
             );
 
             WaterTracker updatedTracker = waterTrackerRepository.update(waterTracker, id);
-
             invalidateWaterTrackerCaches(updatedTracker);
             invalidateWaterTrackerCaches(existingTracker);
-
             return updatedTracker;
         } catch (Exception e) {
             logger.error("Error in update: {}", id, e);

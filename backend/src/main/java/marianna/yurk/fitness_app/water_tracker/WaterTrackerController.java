@@ -85,9 +85,9 @@ public class WaterTrackerController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> create(@Valid @RequestBody WaterTrackerRequest request) {
+    public ResponseEntity<?> create(@RequestParam Long userId, @Valid @RequestBody WaterTrackerRequest request) {
         try {
-            WaterTracker created = waterTrackerService.create(request);
+            WaterTracker created = waterTrackerService.create(userId, request);
             return ResponseEntity.status(HttpStatus.CREATED).body(created);
         } catch (RuntimeException e) {
             logger.error("Error creating water tracker", e);
