@@ -5,14 +5,14 @@
     justify-content: center;
     width: 100%;
   }
-  
+
   .foodscreen  .div {
     height: 874px;
     overflow: hidden;
     position: relative;
     width: 402px;
   }
-  
+
   .foodscreen  .overlap {
     height: 512px;
     left: -123px;
@@ -20,7 +20,7 @@
     top: -89px;
     width: 508px;
   }
-  
+
   .foodscreen  .overlap-group {
     height: 508px;
     left: 0;
@@ -28,7 +28,7 @@
     top: 0;
     width: 508px;
   }
-  
+
   .foodscreen  .group {
     background-color: #ff5151;
     border-radius: 193.26px;
@@ -39,7 +39,7 @@
     transform: rotate(-156.63deg);
     width: 387px;
   }
-  
+
   .foodscreen  .overlap-group-2 {
     height: 141px;
     left: 37px;
@@ -47,7 +47,7 @@
     top: 26px;
     width: 144px;
   }
-  
+
   .foodscreen  .mask-group {
     height: 68px;
     left: 11px;
@@ -56,7 +56,7 @@
     transform: rotate(156.63deg);
     width: 68px;
   }
-  
+
   .foodscreen  .img {
     height: 70px;
     left: 63px;
@@ -65,7 +65,7 @@
     transform: rotate(156.63deg);
     width: 70px;
   }
-  
+
   .foodscreen  .text-wrapper {
     color: #fefaff;
     font-family: "Rubik-SemiBold", Helvetica;
@@ -78,7 +78,7 @@
     top: 260px;
     white-space: nowrap;
   }
-  
+
   .foodscreen  .text-wrapper-2 {
     color: #280635;
     font-family: "Rubik-SemiBold", Helvetica;
@@ -91,7 +91,7 @@
     top: 404px;
     white-space: nowrap;
   }
-  
+
   .foodscreen  .div-2 {
     height: 19px;
     left: 153px;
@@ -99,7 +99,7 @@
     top: 148px;
     width: 339px;
   }
-  
+
   .foodscreen  .text-wrapper-3 {
     color: #280635;
     font-family: "Rubik-Medium", Helvetica;
@@ -112,7 +112,7 @@
     top: 0;
     white-space: nowrap;
   }
-  
+
   .foodscreen  .vector {
     height: 14px;
     left: 0;
@@ -120,7 +120,7 @@
     top: 5px;
     width: 18px;
   }
-  
+
   .foodscreen  .text-wrapper-4 {
     color: #280636;
     font-family: "Rubik-SemiBold", Helvetica;
@@ -133,7 +133,7 @@
     top: 191px;
     white-space: nowrap;
   }
-  
+
   .foodscreen  .overlap-wrapper {
     height: 49px;
     left: 90px;
@@ -141,7 +141,7 @@
     top: 770px;
     width: 232px;
   }
-  
+
   .foodscreen  .div-wrapper {
     background-color: #280636;
     border-radius: 28px;
@@ -149,7 +149,7 @@
     position: relative;
     width: 230px;
   }
-  
+
   .foodscreen  .text-wrapper-7 {
     color: #ffffff;
     font-family: "Rubik-Medium", Helvetica;
@@ -204,7 +204,7 @@
 
 .foodscreen .food-record {
   position: relative;
-}  
+}
 
 .foodscreen .food-records-container {
   position: relative;
@@ -217,7 +217,7 @@
   display: flex;
   flex-direction: column;
   background-color: #FEFAFF;
-  gap: 15px; 
+  gap: 15px;
   z-index: 100;
 }
 
@@ -281,16 +281,95 @@
   width: 27px;
 }
 
-/* Стили для кнопки "Сохранить" */
-.add-food-menu .button-save {
-  margin-top: 20px;   
+/* Контейнер для кнопок в одной строке */
+.add-food-menu .form-actions-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* Общие стили для обеих кнопок */
+.add-food-menu .form-actions-row button {
+  flex: 1; /* Обе кнопки занимают равное пространство */
+  background-color: #280635;
+  border-radius: 28px;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-weight: 500;
+  min-width: 0; /* Позволяет кнопкам сжиматься при необходимости */
+}
+
+/* Специфичный стиль для кнопки "Отмена" */
+.add-food-menu .form-actions-row .button-cancel {
+  background-color: #f0f0f0; /* Светлый фон для отмены */
+  color: #333; /* Темный текст */
+  border: 1px solid #ddd; /* Светлая граница */
+}
+
+/* Специфичный стиль для кнопки "Сохранить" */
+.add-food-menu .form-actions-row .button-save {
+  background-color: #280635; /* Темный фиолетовый фон */
+  color: #ffffff; /* Белый текст */
+}
+
+/* Стили при наведении */
+.add-food-menu .form-actions-row .button-cancel:hover {
+  background-color: #e0e0e0;
+}
+
+.add-food-menu .form-actions-row .button-save:hover {
+  background-color: #3a0d4a; /* Немного светлее при наведении */
+}
+
+/* Стили для неактивной кнопки "Сохранить" */
+.add-food-menu .form-actions-row .button-save:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Стили для кнопки "Выбрать фото" */
+.add-food-menu .button-add-photo {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   width: 100%;
   position: static; /* либо просто полностью удалить свойство position */
 }
 
-.add-food-menu .button-save button {
+.add-food-menu .button-add-photo button {
+  width: 80%;
+  background-color: #280635;
+  border-radius: 28px;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-weight: 500;
+}
+
+/* Подсказка */
+.add-food-menu .photo-hint {
+  font-size: 13px;
+  color: #6c757d;
+  text-align: center;
+  margin-top: 10px;
+  line-height: 1.4;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+}
+
+.add-food-menu .button-cancel button {
   width: 80%;
   background-color: #280635;
   border-radius: 28px;

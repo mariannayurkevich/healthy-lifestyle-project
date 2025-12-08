@@ -58,79 +58,79 @@ export const FoodScreen = () => {
         loadFoodData();
     }, []);
 
-  // При нажатии на кнопку открываем меню
-  const handleFoodClick = () => {
-    setShowAddMenu(true);
-  };
+    // При нажатии на кнопку открываем меню
+    const handleFoodClick = () => {
+        setShowAddMenu(true);
+    };
 
     const handleActivityAdd = async () => {
         await loadFoodData();
         setShowAddMenu(false);
     };
-    
-      const handleClick = () => {
+
+    const handleClick = () => {
         navigate('/main');
-      };
+    };
 
-  return (
-    <div className="foodscreen">
-      <div className="group">
-              <div className="overlap-group-2">
-                <img className="mask-group" alt="Mask group" src={maskGroup2} />
+    return (
+        <div className="foodscreen">
+            <div className="group">
+                <div className="overlap-group-2">
+                    <img className="mask-group" alt="Mask group" src={maskGroup2} />
 
-                <img className="img" alt="Mask group" src={maskGroup} />
-              </div>
+                    <img className="img" alt="Mask group" src={maskGroup} />
+                </div>
             </div>
-      <div className="div">
-        <div className="overlap">
-          <div className="overlap-group">
-            
+            <div className="div">
+                <div className="overlap">
+                    <div className="overlap-group">
 
-            <div className="text-wrapper">Питание</div>
 
-            <div className="text-wrapper-2">Сегодня</div>
+                        <div className="text-wrapper">Питание</div>
 
-            <div className="div-2">
-              <div className="text-wrapper-3">Назад</div>
+                        <div className="text-wrapper-2">Сегодня</div>
 
-              <img className="vector" alt="Vector" src={vector} onClick={handleClick}/>
-            </div>
+                        <div className="div-2">
+                            <div className="text-wrapper-3">Назад</div>
 
-            <div className="text-wrapper-4">{totalCalories} ККал</div>
-          </div>
+                            <img className="vector" alt="Vector" src={vector} onClick={handleClick}/>
+                        </div>
 
-          {/* Контейнер для списка записей с скроллом */}
-          <div className="food-records-container">
-              {records.map((record) => (
-                <FoodRecord
-                  key={record.id}
-                  volume={record.volume}
-                  label={record.label}
-                  grams= {record.grams}
-                />
-              ))}
-            </div>
-          
-        </div>
-
-       
-
-        <div className="overlap-wrapper">
-          <div className="div-wrapper" onClick={handleFoodClick}>
-            <div className="text-wrapper-7">+ Еда</div>
-          </div>
-        </div>
-      </div>
-      {/* Условная отрисовка компонента AddWaterMenu */}
-                  {showAddMenu && (
-                    <div className="add-food-menu-container">
-                      {/* Можно передать функцию закрытия в AddWaterMenu, чтобы он сам мог закрываться */}
-                        <AddFoodMenu
-                            onClose={() => setShowAddMenu(false)}
-                            onSuccess={handleActivityAdd} // Передайте этот пропс
-                        />
+                        <div className="text-wrapper-4">{totalCalories} ККал</div>
                     </div>
-                  )}
-    </div>
-  );
+
+                    {/* Контейнер для списка записей с скроллом */}
+                    <div className="food-records-container">
+                        {records.map((record) => (
+                            <FoodRecord
+                                key={record.id}
+                                volume={record.volume}
+                                label={record.label}
+                                grams= {record.grams}
+                            />
+                        ))}
+                    </div>
+
+                </div>
+
+
+
+                <div className="overlap-wrapper">
+                    <div className="div-wrapper" onClick={handleFoodClick}>
+                        <div className="text-wrapper-7">+ Еда</div>
+                    </div>
+                </div>
+            </div>
+            {/* Условная отрисовка компонента AddWaterMenu */}
+            {showAddMenu && (
+                <div className="add-food-menu-container">
+                    {/* Можно передать функцию закрытия в AddWaterMenu, чтобы он сам мог закрываться */}
+                    <AddFoodMenu
+                        onClose={() => setShowAddMenu(false)}
+                        onSuccess={handleActivityAdd} // Передайте этот пропс
+                    />
+                </div>
+            )}
+        </div>
+    );
 };

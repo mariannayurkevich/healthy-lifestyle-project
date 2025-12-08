@@ -123,8 +123,20 @@ export const AddActivityMenu = ({ onClose }) => {
             <span className="unit-label">ккал</span>
           </div>
 
-          <div className="button-save">
-            <button type="submit">Сохранить</button>
+          <div className="form-actions-row">
+            <button
+                type="button"
+                className="button-cancel"
+                onClick={onClose}
+            >
+              Отмена
+            </button>
+            <button
+                type="submit"
+                className="button-save"
+            >
+              Сохранить
+            </button>
           </div>
         </form>
       </div>

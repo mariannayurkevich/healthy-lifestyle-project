@@ -207,15 +207,60 @@
     top: 15px;
     width: 120px;
   }
-  
-   /* Стили для кнопки "Сохранить" */
-.add-activity-menu .button-save {
-  margin-top: 20px;
-  position: absolute;
+
+/* Контейнер для кнопок в одной строке */
+.add-activity-menu .form-actions-row {
   display: flex;
-  top: 70%;
-  left: 7%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
   width: 100%;
+}
+
+/* Общие стили для обеих кнопок */
+.add-activity-menu .form-actions-row button {
+  flex: 1; /* Обе кнопки занимают равное пространство */
+  background-color: #280635;
+  border-radius: 28px;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-weight: 500;
+  min-width: 0; /* Позволяет кнопкам сжиматься при необходимости */
+}
+
+/* Специфичный стиль для кнопки "Отмена" */
+.add-activity-menu .form-actions-row .button-cancel {
+  background-color: #f0f0f0; /* Светлый фон для отмены */
+  color: #333; /* Темный текст */
+  border: 1px solid #ddd; /* Светлая граница */
+}
+
+/* Специфичный стиль для кнопки "Сохранить" */
+.add-activity-menu .form-actions-row .button-save {
+  background-color: #280635; /* Темный фиолетовый фон */
+  color: #ffffff; /* Белый текст */
+}
+
+/* Стили при наведении */
+.add-activity-menu .form-actions-row .button-cancel:hover {
+  background-color: #e0e0e0;
+}
+
+.add-activity-menu .form-actions-row .button-save:hover {
+  background-color: #3a0d4a; /* Немного светлее при наведении */
+}
+
+/* Стили для неактивной кнопки "Сохранить" */
+.add-activity-menu .form-actions-row .button-save:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .add-activity-menu .div-wrapper-save {
@@ -353,29 +398,6 @@ transform: translate(-50%, -50%);
   left: 338px;
   position: absolute;
   width: 27px;
-}
-
-/* Стили для кнопки "Сохранить" */
-.add-activity-menu .button-save {
-  margin-top: 20px;   
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  position: static;
-}
-
-.add-activity-menu .button-save button {
-  width: 80%;
-  background-color: #280635;
-  border-radius: 28px;
-  padding: 15px;
-  text-align: center;
-  cursor: pointer;
-  border: none;
-  color: #ffffff;
-  font-size: 16px;
-  font-family: "Rubik-Medium", Helvetica, sans-serif;
-  font-weight: 500;
 }
 
 /* Контейнер для карточки (окна) */

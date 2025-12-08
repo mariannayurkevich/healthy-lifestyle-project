@@ -301,23 +301,51 @@ html, body {
     width: 18px;
   }
 
-  /* Стили для кнопки "Сохранить" */
-.add-water-menu .button-save {
-  margin-top: 20px;
-  position: absolute;
+.add-water-menu .form-actions-row {
   display: flex;
-  top: 70%;
-  left: 7%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-top: 25px;
   width: 100%;
 }
 
-.add-water-menu .div-wrapper-save {
-  width: 80%;
+/* Общие стили для обеих кнопок */
+.add-water-menu .form-actions-row button {
+  flex: 1; /* Обе кнопки занимают равное пространство */
   background-color: #280635;
   border-radius: 28px;
-  padding: 12px;
+  padding: 15px;
   text-align: center;
   cursor: pointer;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: "Rubik-Medium", Helvetica, sans-serif;
+  font-weight: 500;
+  min-width: 0; /* Позволяет кнопкам сжиматься при необходимости */
+}
+
+/* Специфичный стиль для кнопки "Отмена" */
+.add-water-menu .form-actions-row .button-cancel {
+  background-color: #f0f0f0; /* Светлый фон для отмены */
+  color: #333; /* Темный текст */
+  border: 1px solid #ddd; /* Светлая граница */
+}
+
+/* Специфичный стиль для кнопки "Сохранить" */
+.add-water-menu .form-actions-row .button-save {
+  background-color: #280635; /* Темный фиолетовый фон */
+  color: #ffffff; /* Белый текст */
+}
+
+/* Стили при наведении */
+.add-water-menu .form-actions-row .button-cancel:hover {
+  background-color: #e0e0e0;
+}
+
+.add-water-menu .form-actions-row .button-save:hover {
+  background-color: #3a0d4a; /* Немного светлее при наведении */
 }
 
 .add-water-menu .text-wrapper-22 {
