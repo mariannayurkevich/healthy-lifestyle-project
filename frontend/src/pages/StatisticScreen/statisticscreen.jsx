@@ -17,21 +17,42 @@ const useWeeklyData = (userId) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userId = localStorage.getItem("userId");
+        if (!userId) {
+          setError("User ID is required");
+          setLoading(false);
+          return;
+        }
+
+        console.log("Fetching data for userId:", userId);
+
         const response = await axios.get(`${API_URL}/week`, {
           params: {
             userId: userId,
-            startDate: new Date().toISOString().split('T')[0].trim()
+            startDate: new Date().toISOString().split('T')[0]
           }
         });
-        setData(response.data.reverse());
+
+        console.log("API Response:", response.data);
+
+        let processedData = response.data;
+
+        if (Array.isArray(processedData)) {
+          setData(processedData.reverse());
+        } else {
+          console.warn("Backend returned non-array data, treating as empty:", processedData);
+          setData([]);
+        }
       } catch (err) {
+        console.error("Error fetching weekly data:", err);
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-    fetchData();
+
+    if (userId) {
+      fetchData();
+    }
   }, [userId]);
 
   return { data, loading, error };
@@ -372,10 +393,40 @@ export const StatisticScreen = () => {
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
 
+  console.log("Current userId from localStorage:", userId);
   const { data: weeklyData, loading, error } = useWeeklyData(userId);
+  console.log("Weekly data state:", { weeklyData, loading, error });
 
-  if (loading) return <div className="loading">Загрузка данных...</div>;
-  if (error) return <div className="error">Ошибка: {error}</div>;
+  if (loading) {
+    console.log("Loading...");
+    return <div className="loading">Загрузка данных...</div>;
+  }
+  if (error) {
+    console.log("Error:", error);
+    return <div className="error">Ошибка: {error}</div>;
+  }
+
+  if (!weeklyData || weeklyData.length === 0) {
+    console.log("No data available");
+    return (
+        <div className="statisticscreen">
+          <div className="div">
+            <div className="text-wrapper">Статистика</div>
+            <div className="advice">Нет данных для отображения</div>
+            <MenuGroup
+                activePage={"statistic"}
+                onMenuClickAccount={() => navigate("/account")}
+                onMenuClickSleep={() => navigate("/sleep")}
+                onMenuClickMain={() => navigate("/main")}
+                onMenuClickStatistic={() => navigate("/statistic")}
+                onMenuClickChat={() => navigate("/chat")}
+            />
+          </div>
+        </div>
+    );
+  }
+
+  console.log("Rendering with data:", weeklyData);
 
   const handleMenuClick = () => {
     navigate("/main");
