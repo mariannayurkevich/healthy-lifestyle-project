@@ -86,7 +86,7 @@ public class SleepTrackerServiceImpl implements SleepTrackerService {
     }
 
     @Override
-    public SleepTracker create(SleepTrackerRequest request) {
+    public SleepTracker create(Long userId, SleepTrackerRequest request) {
         SleepTracker sleepTracker = new SleepTracker(
                 0,
                 request.date(),
@@ -95,13 +95,11 @@ public class SleepTrackerServiceImpl implements SleepTrackerService {
                 request.sleepDuration(),
                 request.sleepQuality(),
                 request.notes(),
-                request.userId()
+                userId
         );
 
         SleepTracker createdTracker = sleepTrackerRepository.create(sleepTracker);
-
         invalidateSleepTrackerCaches(createdTracker);
-
         return createdTracker;
     }
 
@@ -109,6 +107,7 @@ public class SleepTrackerServiceImpl implements SleepTrackerService {
     public SleepTracker update(int id, SleepTrackerRequest request) {
         SleepTracker existingTracker = sleepTrackerRepository.findById(id)
                 .orElseThrow(() -> new SleepNotFoundException(id));
+
 
         SleepTracker sleepTracker = new SleepTracker(
                 id,
@@ -118,14 +117,12 @@ public class SleepTrackerServiceImpl implements SleepTrackerService {
                 request.sleepDuration(),
                 request.sleepQuality(),
                 request.notes(),
-                request.userId()
+                existingTracker.userId()
         );
 
         SleepTracker updatedTracker = sleepTrackerRepository.update(sleepTracker, id);
-
         invalidateSleepTrackerCaches(updatedTracker);
         invalidateSleepTrackerCaches(existingTracker);
-
         return updatedTracker;
     }
 

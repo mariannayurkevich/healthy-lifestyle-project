@@ -30,6 +30,5 @@ public record SleepTrackerRequest (
 
     String notes,
 
-    @NotNull(message = "User ID must not be null")
     Long userId
 ){}

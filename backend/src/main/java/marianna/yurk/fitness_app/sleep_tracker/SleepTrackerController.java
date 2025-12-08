@@ -44,8 +44,13 @@ public class SleepTrackerController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public SleepTracker create(@Valid @RequestBody SleepTrackerRequest request) {
-        return sleepTrackerService.create(request);
+    public SleepTracker create(@RequestParam Long userId, @Valid @RequestBody SleepTrackerRequest request) {
+        try {
+            return sleepTrackerService.create(userId, request);
+        }
+        catch (Exception e) {
+            throw new RuntimeException("Unexpected error creating sleep tracker", e);
+        }
     }
 
     @PutMapping("/{id}")

@@ -13,7 +13,7 @@ public interface SleepTrackerService {
 
     List<SleepTracker> findByUserIdAndDate(Long userId, LocalDate date);
 
-    SleepTracker create(SleepTrackerRequest request);
+    SleepTracker create(Long userId, SleepTrackerRequest request);
 
     SleepTracker update(int id, SleepTrackerRequest request);
 
