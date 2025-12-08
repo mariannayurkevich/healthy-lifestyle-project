@@ -99,31 +99,40 @@ public class FoodAnalyzer {
 
     private String buildNutritionPrompt() {
         return """
-                You are a very useful assistant. Help me with determining the caloric content of my meal
-                
-                The photo shows food products for a meal. Determine which products are shown in the photo and return them ONLY as a JSON list,\s
-                where each list element should contain:
-                * "title" - the name of the product,\s
-                * "weight" - weight in grams,\s
-                * "kilocalories_per100g" - how many calories are contained in this product in 100 grams,\s
-                * "proteins_per100g" - the amount of proteins of this product per 100 grams,\s
-                * "fats_per100g" - the amount of fat per 100 grams of this product,\s
-                * "carbohydrates_per100g" - the amount of carbohydrates per 100 grams of this product,\s
-                * "fiber_per100g" - the amount of fiber per 100 grams of this product
-                
-                Important: Return ONLY valid JSON array without any additional text, explanations, or markdown formatting.
-                                    Example format:
-                                    [
-                                      {
-                                        "title": "Apple",
-                                        "weight": 150,
-                                        "kilocalories_per100g": 52,
-                                        "proteins_per100g": 0.3,
-                                        "fats_per100g": 0.2,
-                                        "carbohydrates_per100g": 14,
-                                        "fiber_per100g": 2.4
-                                      }
-                                    ]
+               Ты - очень полезный помощник в определении калорийности и пищевой ценности еды.
+                              \s
+                               На фотографии изображены пищевые продукты для приема пищи. Определи, какие продукты показаны на фото, и верни их в виде JSON объекта с массивом "products",
+                               где каждый элемент массива должен содержать:
+                               * "title" - название продукта на русском языке,
+                               * "weight" - вес в граммах (примерная оценка),
+                               * "kilocalories_per100g" - сколько килокалорий содержится в 100 граммах этого продукта,
+                               * "proteins_per100g" - количество белков в 100 граммах этого продукта,
+                               * "fats_per100g" - количество жиров в 100 граммах этого продукта,
+                               * "carbohydrates_per100g" - количество углеводов в 100 граммах этого продукта,
+                               * "fiber_per100g" - количество пищевых волокон в 100 граммах этого продукта
+                              \s
+                               ВАЖНО:
+                               1. Названия продуктов должны быть на русском языке
+                               2. Вес указывай в граммах (реалистичная оценка по фото)
+                               3. Значения калорийности и БЖУ должны быть реалистичными для данного продукта
+                               4. Возвращай ТОЛЬКО валидный JSON без дополнительного текста, объяснений или форматирования markdown
+                               5. Если на фото несколько продуктов, верни массив со всеми найденными продуктами
+                               6. Используй точные научные данные о пищевой ценности продуктов
+                              \s
+                               Пример формата ответа:
+                               {
+                                 "products": [
+                                   {
+                                     "title": "Яблоко",
+                                     "weight": 150,
+                                     "kilocalories_per100g": 52,
+                                     "proteins_per100g": 0.3,
+                                     "fats_per100g": 0.2,
+                                     "carbohydrates_per100g": 14,
+                                     "fiber_per100g": 2.4
+                                   }
+                                 ]
+                               }
             """;
     }
 
