@@ -1,17 +1,27 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import line99 from "../../src/line-99.svg";
 import plane from "../../src/plane.svg";
 import line999 from "../../src/line-999.svg";
 import "../../activityscreenstyle.css";
 
-export const AddActivityMenu = ({ onClose }) => {
-  // Объект состояния для данных формы активности
+export const AddActivityMenu = ({ onClose, onSuccess, activityToEdit }) => {
   const [formData, setFormData] = useState({
     activityName: "",
     datetime: new Date().toISOString().slice(0, 16),
     duration: "",
     caloriesBurned: ""
   });
+
+  useEffect(() => {
+    if (activityToEdit) {
+      setFormData({
+        activityName: activityToEdit.rawType,
+        datetime: new Date(activityToEdit.rawTimestamp).toISOString().slice(0, 16),
+        duration: activityToEdit.rawDuration,
+        caloriesBurned: activityToEdit.rawCalories
+      });
+    }
+  }, [activityToEdit]);
 
   // Обработка изменения значений в полях
   const handleChange = (e) => {
@@ -20,6 +30,32 @@ export const AddActivityMenu = ({ onClose }) => {
       ...prev,
       [name]: value
     }));
+  };
+
+  const handleDelete = async () => {
+    if (!activityToEdit) return;
+
+    const confirmDelete = window.confirm("Вы уверены, что хотите удалить эту активность?");
+    if (!confirmDelete) return;
+
+    try {
+      const response = await fetch(`/api/activity/${activityToEdit.id}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        if (onSuccess) {
+          onSuccess();
+        } else {
+          onClose();
+          window.location.reload();
+        }
+      } else {
+        alert("Ошибка при удалении активности");
+      }
+    } catch (error) {
+      console.error("Ошибка при удалении:", error);
+    }
   };
 
   // Отправка данных формы
@@ -33,24 +69,43 @@ export const AddActivityMenu = ({ onClose }) => {
       return;
     }
 
+    const payload = {
+      activityType: formData.activityName,
+      duration: parseInt(formData.duration),
+      caloriesBurned: parseInt(formData.caloriesBurned),
+      activityTimestamp: formData.datetime,
+      userId: userId
+    };
+
     try {
-      const response = await fetch(`/api/activity?userId=${userId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          activityType: formData.activityName,
-          duration: parseInt(formData.duration),
-          caloriesBurned: parseInt(formData.caloriesBurned),
-          activityTimestamp: formData.datetime,
-          userId: userId
-        }),
-      });
+      let response;
+      if (activityToEdit) {
+        // Режим редактирования (PUT)
+        response = await fetch(`/api/activity/${activityToEdit.id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+      } else {
+        // Режим добавления (POST)
+        response = await fetch(`/api/activity?userId=${userId}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+      }
 
       if (response.ok) {
-        onClose();
-        window.location.reload();
+        if (onSuccess) {
+          onSuccess();
+        } else {
+          onClose();
+          window.location.reload();
+        }
       } else {
         alert("Ошибка при сохранении активности");
       }
@@ -131,11 +186,22 @@ export const AddActivityMenu = ({ onClose }) => {
             >
               Отмена
             </button>
+
+            {activityToEdit && (
+                <button
+                    type="button"
+                    className="button-delete"
+                    onClick={handleDelete}
+                >
+                  Удалить
+                </button>
+            )}
+
             <button
                 type="submit"
                 className="button-save"
             >
-              Сохранить
+              {activityToEdit ? "Обновить" : "Сохранить"}
             </button>
           </div>
         </form>

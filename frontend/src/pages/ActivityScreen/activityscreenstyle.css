@@ -507,4 +507,26 @@ transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
-  
+.activityscreen .activity-record {
+  transition: transform 0.1s ease, background-color 0.2s;
+  border-radius: 10px; /* Опционально, для красоты при наведении */
+}
+
+.activityscreen .activity-record:hover {
+  background-color: rgba(40, 6, 53, 0.05); /* Легкая подсветка */
+  transform: scale(1.02);
+}
+
+.activityscreen .activity-record:active {
+  transform: scale(0.98);
+}
+
+.add-activity-menu .form-actions-row .button-delete {
+  background-color: #ff4d4d; /* Красный цвет */
+  color: #ffffff;
+  border: none;
+}
+
+.add-activity-menu .form-actions-row .button-delete:hover {
+  background-color: #e60000; /* Темно-красный при наведении */
+}

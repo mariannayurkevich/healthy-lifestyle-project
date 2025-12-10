@@ -13,6 +13,7 @@ export const ActivityScreen = () => {
     const navigate = useNavigate();
     const [records, setRecords] = useState([]);
     const [showAddMenu, setShowAddMenu] = useState(false);
+    const [editingActivity, setEditingActivity] = useState(null);
     const userId = localStorage.getItem("userId");
     const [totalDuration, setTotalDuration] = useState(0);
 
@@ -42,7 +43,11 @@ export const ActivityScreen = () => {
             time: new Date(activity.activityTimestamp).toLocaleTimeString([], {
               hour: '2-digit',
               minute: '2-digit'
-            })
+            }),
+            rawType: activity.activityType,
+            rawCalories: activity.caloriesBurned,
+            rawDuration: activity.duration,
+            rawTimestamp: activity.activityTimestamp
           }));
 
       setRecords(formattedData);
@@ -55,19 +60,32 @@ export const ActivityScreen = () => {
     loadActivities();
   }, []);
 
-  // При нажатии на кнопку открываем меню
-  const handleActivityClick = () => {
+  // При нажатии на кнопку открываем меню для добавления
+  const handleAddClick = () => {
+    setEditingActivity(null);
     setShowAddMenu(true);
   };
 
-  const handleActivityAdd = async () => {
-    await loadActivities();
-    setShowAddMenu(false);
+  // При нажатии на запись открываем меню для редактирования
+  const handleEditClick = (record) => {
+    setEditingActivity(record);
+    setShowAddMenu(true);
   };
 
-    const handleClick = () => {
-      navigate('/main');
-    };
+  const handleActivitySave = async () => {
+    await loadActivities();
+    setShowAddMenu(false);
+    setEditingActivity(null);
+  };
+
+  const handleCloseMenu = () => {
+    setShowAddMenu(false);
+    setEditingActivity(null);
+  };
+
+  const handleClick = () => {
+    navigate('/main');
+  };
 
   return (
     <div className="activityscreen">
@@ -109,29 +127,13 @@ export const ActivityScreen = () => {
                   label={record.label}
                   grams= {record.grams}
                   time={record.time}
+                  onClick={() => handleEditClick(record)}
                 />
               ))}
             </div>
-        {/*
-        <div className="text-wrapper-5">150 ккал</div>
-
-        <p className="element">
-          <span className="span">
-            Активность
-            <br />
-          </span>
-
-          <span className="text-wrapper-6">10 мин</span>
-        </p>
-
-        <img className="line-2" alt="Line" src={line100} />
-
-        <img className="vector-2" alt="Vector" src={vector6} />
-        */}
-        
 
         <div className="overlap-group-wrapper">
-          <div className="div-wrapper" onClick={handleActivityClick}>
+          <div className="div-wrapper" onClick={handleAddClick}>
             <div className="text-wrapper-7">+ Активность</div>
           </div>
         </div>
@@ -142,8 +144,9 @@ export const ActivityScreen = () => {
       {showAddMenu && (
           <div className="add-activity-menu-container">
             <AddActivityMenu
-                onClose={() => setShowAddMenu(false)}
-                onSuccess={handleActivityAdd}
+                onClose={handleCloseMenu}
+                onSuccess={handleActivitySave}
+                activityToEdit={editingActivity}
             />
           </div>
       )}
