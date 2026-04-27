@@ -1,6 +1,7 @@
 package marianna.yurk.fitness_app.chat;
 
 
+import io.netty.resolver.DefaultAddressResolverGroup;
 import marianna.yurk.fitness_app.stats.DailyReportService;
 import marianna.yurk.fitness_app.stats.DailySummaryDTO;
 import marianna.yurk.fitness_app.user.Goal;
@@ -10,11 +11,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import reactor.netty.http.client.HttpClient;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -32,6 +36,9 @@ public class ChatService {
     private final DailyReportService dailyReportService;
     private final ChatHistoryRepository chatHistoryRepository;
 
+    @Value("${together.api.timeout:30}")
+    private int timeoutSeconds;
+
     @Value("${together.api.key}")
     private String apiKey;
 
@@ -39,7 +46,14 @@ public class ChatService {
                           UserService userService,
                           DailyReportService dailyReportService,
                           ChatHistoryRepository chatHistoryRepository) {
-        this.webClient = webClientBuilder.baseUrl("https://api.together.xyz/v1").build();
+        this.webClient = webClientBuilder
+                .baseUrl("https://api.together.xyz/v1")
+                .clientConnector(new ReactorClientHttpConnector(
+                        HttpClient.create()
+                                .responseTimeout(Duration.ofSeconds(timeoutSeconds))
+                                .resolver(DefaultAddressResolverGroup.INSTANCE)
+                ))
+                .build();
         this.userService = userService;
         this.dailyReportService = dailyReportService;
         this.chatHistoryRepository = chatHistoryRepository;
@@ -90,9 +104,9 @@ public class ChatService {
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + apiKey)
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(Map.of(
-                        "model", "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+                        "model", "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8",
                         "messages", messages,
-                        "temperature", 0.7,
+                        "temperature", 0.3,
                         "max_tokens", 500
                 ))
                 .retrieve()
@@ -103,26 +117,34 @@ public class ChatService {
 
     private String buildSystemPrompt(User user, DailySummaryDTO report, List<ChatHistory> history) {
         return String.format("""
-            Ты персональный помощник по здоровью. Анализируй ВСЮ информацию о пользователе чтобы давать персонализированные рекомендации.
-            
-            ### Профиль пользователя:
-            %s
-            
-            ### Сегодняшняя статистика:
-            %s
-            
-            ### История диалога:
-            %s
-            
-            ### Инструкции:
-            1. Отвечай на русском языке
-            2. Будь дружелюбным и поддерживающим
-            3. Используй эмодзи для визуализации
-            4. Учитывай цели и медицинские ограничения
-            5. Если данных недостаточно - уточни информацию
-            6. Делай ответы структурированными и краткими
-            7. Предлагай практические советы
-            8. Старайся, чтобы ответ был в пределах 4–6 предложений
+                        Ты русскоязычный персональный помощник по здоровью. Твоя задача - анализировать данные пользователя и давать персонализированные рекомендации на РУССКОМ ЯЗЫКЕ.
+                                                                                          \s
+                                                                                           КРИТИЧЕСКИ ВАЖНО:
+                                                                                           1. Отвечай ТОЛЬКО на русском языке. Никаких английских, китайских или других языков.
+                                                                                           2. Не используй английские слова и термины без крайней необходимости.
+                                                                                           3. Если вопрос неясен - уточни, но не пытайся отвечать на вопросы не по теме здоровья.
+                                                                                           4. Держись темы здоровья, питания и фитнеса.
+                                                                                          \s
+                                                                                           ### Профиль пользователя:
+                                                                                           %s
+                                                                                          \s
+                                                                                           ### Сегодняшняя статистика:
+                                                                                           %s
+                                                                                          \s
+                                                                                           ### История диалога (последние сообщения):
+                                                                                           %s
+                                                                                          \s
+                                                                                           ### Стиль ответа:
+                                                                                           1. Только на русском, без иностранных слов
+                                                                                           2. Дружелюбный, поддерживающий тон
+                                                                                           3. Используй эмодзи умеренно (1-2 в ответе)
+                                                                                                                   4. Учитывай цели и ограничения пользователя
+                                                                                                                   5. Если данных мало - попроси дополнить информацию
+                                                                                                                   6. Будь конкретным и практичным
+                                                                                                                   7. Длина ответа: 3-5 предложений
+                                                                                                                  \s
+                                                                                                                   ### Если вопрос не по теме здоровья:
+                                                                                                                   "Я специализируюсь на вопросах здоровья и питания. Могу помочь с анализом ваших данных, рекомендациями по питанию или тренировкам."
             """,
                 buildUserProfile(user),
                 buildTrackersInfo(report),
