@@ -10,7 +10,8 @@ export const AddFoodMenu = ({ onClose, onSuccess, foodToEdit, trackerId }) => {
     fats: "",
     carbs: "",
     fiber: "",
-    sugar: ""
+    sugar: "",
+    weight: ""
   });
 
   const [isEditMode, setIsEditMode] = useState(false);
@@ -29,7 +30,8 @@ export const AddFoodMenu = ({ onClose, onSuccess, foodToEdit, trackerId }) => {
         fats: foodToEdit.fats || foodToEdit.rawFats || "",
         carbs: foodToEdit.carbs || foodToEdit.rawCarbs || "",
         fiber: foodToEdit.fiber || foodToEdit.rawFiber || "",
-        sugar: foodToEdit.sugar || foodToEdit.rawSugar || ""
+        sugar: foodToEdit.sugar || foodToEdit.rawSugar || "",
+        weight: ""
       });
 
       if (foodToEdit.trackerId) {
@@ -58,12 +60,19 @@ export const AddFoodMenu = ({ onClose, onSuccess, foodToEdit, trackerId }) => {
     const file = event.target.files[0];
     if (!file) return;
 
+    const weightValue = parseFloat(formData.weight);
+    if (isNaN(weightValue) || weightValue <= 0) {
+      alert("Пожалуйста, укажите вес блюда в граммах перед анализом фото.");
+      return;
+    }
+
     setSelectedImage(file);
     setImageLoading(true);
 
     try {
       const formData = new FormData();
       formData.append("image", file);
+      formData.append("weight", weightValue.toString());
 
       const response = await fetch("/api/food/analyze-food", {
         method: "POST",
@@ -77,49 +86,25 @@ export const AddFoodMenu = ({ onClose, onSuccess, foodToEdit, trackerId }) => {
       const analysisResult = await response.json();
       console.log("Результат анализа:", analysisResult);
 
-      if (analysisResult.products && analysisResult.products.length > 0) {
-        if (analysisResult.products.length === 1) {
-          const product = analysisResult.products[0];
-          updateFormWithProduct(product);
-        } else {
-          updateFormWithTotals(analysisResult);
-        }
-
+      if (analysisResult.products && Array.isArray(analysisResult.products) && analysisResult.products.length > 0) {
+        setFormData(prev => ({
+          ...prev,
+          productName: analysisResult.products[0].title || "Распознанная еда",
+          calories: analysisResult.totalKilocalories?.toFixed(1) ?? "",
+          proteins: analysisResult.totalProteins?.toFixed(1) ?? "",
+          fats: analysisResult.totalFats?.toFixed(1) ?? "",
+          carbs: analysisResult.totalCarbohydrates?.toFixed(1) ?? "",
+          fiber: analysisResult.totalFiber?.toFixed(1) ?? "",
+        }));
         alert("Еда успешно распознана! Данные автоматически заполнены.");
       } else {
-        alert("Не удалось распознать еду на изображении. Заполните данные вручную.");
-      }
+        alert("Не удалось распознать еду на изображении. Заполните данные вручную.");}
     } catch (error) {
       console.error("Ошибка при анализе изображения:", error);
       alert("Ошибка при анализе изображения. Проверьте подключение к API.");
     } finally {
       setImageLoading(false);
     }
-  };
-
-  const updateFormWithProduct = (product) => {
-    const ratio = product.weight / 100;
-    setFormData(prev => ({
-      ...prev,
-      productName: product.title || "Распознанная еда",
-      calories: (product.kilocalories_per100g * ratio).toFixed(1),
-      proteins: (product.proteins_per100g * ratio).toFixed(1),
-      fats: (product.fats_per100g * ratio).toFixed(1),
-      carbs: (product.carbohydrates_per100g * ratio).toFixed(1),
-      fiber: (product.fiber_per100g * ratio).toFixed(1),
-    }));
-  };
-
-  const updateFormWithTotals = (analysisResult) => {
-    setFormData(prev => ({
-      ...prev,
-      productName: `Комплексное блюдо (${analysisResult.products.length} продуктов)`,
-      calories: analysisResult.totalKilocalories.toFixed(1),
-      proteins: analysisResult.totalProteins.toFixed(1),
-      fats: analysisResult.totalFats.toFixed(1),
-      carbs: analysisResult.totalCarbohydrates.toFixed(1),
-      fiber: analysisResult.totalFiber.toFixed(1),
-    }));
   };
 
   const handleRemoveImage = () => {
@@ -285,8 +270,24 @@ export const AddFoodMenu = ({ onClose, onSuccess, foodToEdit, trackerId }) => {
         <div className="add-food-menu-container">
           <form className="food-data-form" onSubmit={handleSubmit} style={{ maxHeight: '120vh', overflowY: 'auto' }}>
 
-            {/* Секция для загрузки фото */}
+            {/* Секция для загрузки фото и ввода веса*/}
             <div className="photo-section">
+              <div className="weight-input-row" style={{ marginBottom: '12px' }}>
+                <label htmlFor="weight" style={{ marginRight: '8px' }}>Вес блюда (г):</label>
+                <input
+                    type="number"
+                    id="weight"
+                    name="weight"
+                    className="input-field"
+                    value={formData.weight}
+                    onChange={handleChange}
+                    step="1"
+                    min="1"
+                    placeholder="Например, 250"
+                    style={{ width: '120px' }}
+                    required={!isEditMode} // при создании вес обязателен для анализа
+                />
+              </div>
               <div className="button-add-photo">
                 <button
                     type="button"
