@@ -17,12 +17,24 @@ export const AddFoodMenu = ({ onClose, onSuccess, foodToEdit, trackerId }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [currentTrackerId, setCurrentTrackerId] = useState(trackerId);
 
+  // === Open Food Facts search state ===
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [selectedProductCode, setSelectedProductCode] = useState(null);
-  const [selectedProductData, setSelectedProductData] = useState(null); // храним nutrition на 100г
+  // хранит нутриенты на 100г из выбранного продукта
+  const [selectedProductData, setSelectedProductData] = useState(null);
 
+  // === Barcode scanner state ===
+  const [barcodeInput, setBarcodeInput] = useState("");
+  const [isLoadingBarcode, setIsLoadingBarcode] = useState(false);
+
+  // === Photo analysis state (оставляем как есть) ===
+  const [imageLoading, setImageLoading] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const fileInputRef = useRef(null);
+
+  // === Инициализация при редактировании ===
   useEffect(() => {
     if (foodToEdit) {
       setIsEditMode(true);
@@ -45,18 +57,7 @@ export const AddFoodMenu = ({ onClose, onSuccess, foodToEdit, trackerId }) => {
     }
   }, [foodToEdit]);
 
-  const [imageLoading, setImageLoading] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const fileInputRef = useRef(null);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (name === "weight" && selectedProductData) {
-      recalcByWeight(parseFloat(value), selectedProductData);
-    }
-  };
-
+  // Пересчёт КБЖУ по весу (использует данные на 100г)
   const recalcByWeight = (weightGrams, productData) => {
     if (!weightGrams || weightGrams <= 0 || !productData) return;
     const factor = weightGrams / 100;
@@ -67,9 +68,20 @@ export const AddFoodMenu = ({ onClose, onSuccess, foodToEdit, trackerId }) => {
       fats: (productData.fatsPer100g * factor).toFixed(1),
       carbs: (productData.carbsPer100g * factor).toFixed(1),
       fiber: (productData.fiberPer100g * factor).toFixed(1),
+      sugar: (productData.sugarPer100g * factor).toFixed(1),
     }));
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    // Если меняется вес и есть загруженный продукт – пересчитываем
+    if (name === "weight" && selectedProductData) {
+      recalcByWeight(parseFloat(value), selectedProductData);
+    }
+  };
+
+  // === Поиск по имени (дебаунс) ===
   useEffect(() => {
     if (!searchQuery.trim() || searchQuery.length < 2) {
       setSearchResults([]);
@@ -84,35 +96,67 @@ export const AddFoodMenu = ({ onClose, onSuccess, foodToEdit, trackerId }) => {
   const fetchSearchResults = async (query) => {
     setIsSearching(true);
     try {
-      const response = await fetch(`/api/v1/products/search?query=${encodeURIComponent(query)}`);
-      if (!response.ok) throw new Error("Ошибка поиска");
+      const response = await fetch(`/api/v2/search?query=${encodeURIComponent(query)}`);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
       const data = await response.json();
-      const products = data?.content || [];
+      // ВАЖНО: API возвращает массив в поле "products", а не "content"
+      const products = data?.products || [];
       setSearchResults(products);
     } catch (err) {
-      console.error("Поиск продуктов:", err);
+      console.error("Ошибка поиска продуктов:", err);
       setSearchResults([]);
+      alert("Не удалось выполнить поиск. Проверьте соединение с сервером.");
     } finally {
       setIsSearching(false);
     }
   };
 
+  // === Запрос детальной информации по штрихкоду ===
   const fetchProductDetails = async (barcode) => {
     try {
       const response = await fetch(`/api/v1/products/${barcode}`);
-      if (!response.ok) throw new Error("Не удалось загрузить продукт");
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
-      const product = data?.product;
-      if (!product || !product.nutriments) {
-        alert("Не удалось получить данные о питательной ценности");
+
+      // Для отладки – посмотрите в консоли браузера, что пришло с сервера
+      console.log("Product details:", data);
+
+      if (data.status === 0 || !data.product) {
+        alert("Продукт не найден в базе Open Food Facts");
         return null;
       }
-      const nut = product.nutriments;
-      const caloriesPer100 = nut["energy-kcal_100g"] || 0;
-      const proteinsPer100 = nut["proteins_100g"] || 0;
-      const fatsPer100 = nut["fat_100g"] || 0;
-      const carbsPer100 = nut["carbohydrates_100g"] || 0;
-      const fiberPer100 = nut["fiber_100g"] || 0;
+
+      const product = data.product;
+      const nut = product.nutriments || {};
+
+      // ---- Извлечение значений на 100 г (без суффикса _100g) ----
+      // Белки
+      let proteinsPer100 = parseFloat(nut.proteins) || parseFloat(nut["proteins_100g"]) || 0;
+      // Жиры
+      let fatsPer100 = parseFloat(nut.fat) || parseFloat(nut["fat_100g"]) || 0;
+      // Углеводы
+      let carbsPer100 = parseFloat(nut.carbohydrates) || parseFloat(nut["carbohydrates_100g"]) || 0;
+      // Клетчатка
+      let fiberPer100 = parseFloat(nut.fiber) || parseFloat(nut["fiber_100g"]) || 0;
+      // Сахар
+      let sugarPer100 = parseFloat(nut.sugars) || parseFloat(nut["sugars_100g"]) || 0;
+
+      // Энергия (калории) – более хитрая логика
+      let caloriesPer100 = 0;
+      // Сначала ищем прямое поле energy-kcal (может быть с суффиксом или без)
+      if (nut["energy-kcal_100g"]) caloriesPer100 = parseFloat(nut["energy-kcal_100g"]);
+      else if (nut["energy-kcal"]) caloriesPer100 = parseFloat(nut["energy-kcal"]);
+      else if (nut.energy) {
+        let energyVal = parseFloat(nut.energy);
+        if (!isNaN(energyVal)) {
+          // Если значение больше 100 – скорее всего это килоджоули (кДж),
+          // переводим в килокалории (1 ккал = 4,184 кДж)
+          if (energyVal > 100) caloriesPer100 = energyVal / 4.184;
+          else caloriesPer100 = energyVal;
+        }
+      }
 
       const productData = {
         caloriesPer100g: caloriesPer100,
@@ -120,48 +164,64 @@ export const AddFoodMenu = ({ onClose, onSuccess, foodToEdit, trackerId }) => {
         fatsPer100g: fatsPer100,
         carbsPer100g: carbsPer100,
         fiberPer100g: fiberPer100,
+        sugarPer100g: sugarPer100,
       };
       setSelectedProductData(productData);
 
-      const name = product.product_name_ru || product.product_name || "Продукт";
-      setFormData(prev => ({ ...prev, productName: name }));
+      // Название продукта (русское или английское)
+      const productName = product.product_name_ru || product.product_name || "Продукт";
+      setFormData(prev => ({ ...prev, productName }));
 
+      // Если пользователь уже ввёл вес – пересчитываем КБЖУ
       const currentWeight = parseFloat(formData.weight);
       if (!isNaN(currentWeight) && currentWeight > 0) {
         recalcByWeight(currentWeight, productData);
       } else {
+        // Если вес не задан, очищаем поля, чтобы пользователь его ввёл
         setFormData(prev => ({
           ...prev,
           calories: "",
           proteins: "",
           fats: "",
           carbs: "",
-          fiber: ""
+          fiber: "",
+          sugar: ""
         }));
-        if (currentWeight === undefined || currentWeight === "") {
-          // дополнительно можно попросить ввести вес
-        }
       }
       return productData;
     } catch (err) {
-      console.error("Ошибка получения деталей:", err);
-      alert("Не удалось загрузить данные о продукте");
+      console.error("Ошибка получения деталей продукта:", err);
+      alert("Не удалось загрузить данные о продукте. Попробуйте позже.");
       return null;
     }
   };
 
+  // === Обработка выбора продукта из результатов поиска ===
   const handleSelectProduct = async (product) => {
     const barcode = product.code;
     if (!barcode) return;
     setSelectedProductCode(barcode);
-    await fetchProductDetails(barcode);
     setSearchQuery("");
     setSearchResults([]);
+    await fetchProductDetails(barcode);
     if (!formData.weight || parseFloat(formData.weight) <= 0) {
-      alert("Укажите вес блюда в граммах, чтобы рассчитать КБЖУ");
+      alert("Укажите вес порции в граммах, чтобы автоматически рассчитать КБЖУ.");
     }
   };
 
+  // === Поиск по штрихкоду (ручной ввод) ===
+  const handleBarcodeSearch = async () => {
+    const barcode = barcodeInput.trim();
+    if (!barcode) {
+      alert("Введите штрихкод");
+      return;
+    }
+    setIsLoadingBarcode(true);
+    await fetchProductDetails(barcode);
+    setIsLoadingBarcode(false);
+  };
+
+  // === Обработка фото (анализ еды) – остаётся без изменений ===
   const handleAddPhoto = () => {
     fileInputRef.current.click();
   };
@@ -194,8 +254,6 @@ export const AddFoodMenu = ({ onClose, onSuccess, foodToEdit, trackerId }) => {
       }
 
       const analysisResult = await response.json();
-      console.log("Результат анализа:", analysisResult);
-
       if (analysisResult.products && Array.isArray(analysisResult.products) && analysisResult.products.length > 0) {
         setFormData(prev => ({
           ...prev,
@@ -225,6 +283,7 @@ export const AddFoodMenu = ({ onClose, onSuccess, foodToEdit, trackerId }) => {
     }
   };
 
+  // === Сохранение записи ===
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -299,9 +358,7 @@ export const AddFoodMenu = ({ onClose, onSuccess, foodToEdit, trackerId }) => {
       if (onSuccess) {
         onSuccess();
       }
-
       onClose();
-
       if (!onSuccess) {
         window.location.reload();
       }
@@ -311,6 +368,7 @@ export const AddFoodMenu = ({ onClose, onSuccess, foodToEdit, trackerId }) => {
     }
   };
 
+  // === Удаление записи ===
   const handleDelete = async () => {
     if (!currentTrackerId || !foodToEdit) {
       alert("Невозможно удалить запись: недостаточно данных");
@@ -339,7 +397,6 @@ export const AddFoodMenu = ({ onClose, onSuccess, foodToEdit, trackerId }) => {
           method: "DELETE",
           credentials: "include"
         });
-
         if (!deleteResponse.ok) {
           throw new Error("Ошибка удаления трекера");
         }
@@ -348,40 +405,34 @@ export const AddFoodMenu = ({ onClose, onSuccess, foodToEdit, trackerId }) => {
           date: existingTracker.date,
           entries: updatedEntries
         };
-
         const updateResponse = await fetch(`/api/food/${currentTrackerId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(updatedTracker),
           credentials: "include"
         });
-
         if (!updateResponse.ok) {
           throw new Error("Ошибка обновления трекера");
         }
       }
 
-      if (onSuccess) {
-        onSuccess();
-      }
-
+      if (onSuccess) onSuccess();
       onClose();
-
-      if (!onSuccess) {
-        window.location.reload();
-      }
+      if (!onSuccess) window.location.reload();
     } catch (err) {
       console.error("Ошибка:", err);
       alert("Не удалось удалить запись о питании: " + err.message);
     }
   };
 
+  // --------------------------------------------------------------
+  // RENDER
+  // --------------------------------------------------------------
   return (
       <div className="add-food-menu">
         <div className="add-food-menu-container">
           <form className="food-data-form" onSubmit={handleSubmit} style={{ maxHeight: '120vh', overflowY: 'auto' }}>
-
-            {/* Секция загрузки фото и вес */}
+            {/* Блок фото и веса */}
             <div className="photo-section">
               <div className="weight-input-row" style={{ marginBottom: '12px' }}>
                 <label htmlFor="weight" style={{ marginRight: '8px' }}>Вес блюда (г):</label>
@@ -419,9 +470,9 @@ export const AddFoodMenu = ({ onClose, onSuccess, foodToEdit, trackerId }) => {
 
             <hr className="form-divider" />
 
-            {/* БЛОК ПОИСКА ПО ОТКРЫТОЙ БАЗЕ */}
+            {/* БЛОК ПОИСКА ПО ИМЕНИ */}
             <div className="search-section">
-              <label htmlFor="searchProduct">Поиск в Open Food Facts</label>
+              <label htmlFor="searchProduct">Поиск в Open Food Facts (по названию)</label>
               <input
                   type="text"
                   id="searchProduct"
@@ -445,6 +496,28 @@ export const AddFoodMenu = ({ onClose, onSuccess, foodToEdit, trackerId }) => {
 
             <hr className="form-divider" />
 
+            {/* БЛОК ПОИСКА ПО ШТРИХКОДУ */}
+            <div className="search-section">
+              <label htmlFor="barcode">Поиск по штрихкоду</label>
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <input
+                    type="text"
+                    id="barcode"
+                    className="input-field"
+                    placeholder="Введите штрихкод (13 цифр)"
+                    value={barcodeInput}
+                    onChange={(e) => setBarcodeInput(e.target.value)}
+                    style={{ flex: 1 }}
+                />
+                <button type="submit" onClick={handleBarcodeSearch} disabled={isLoadingBarcode} className="button-save">
+                  {isLoadingBarcode ? "Загрузка..." : "Найти"}
+                </button>
+              </div>
+            </div>
+
+            <hr className="form-divider" />
+
+            {/* ОСНОВНЫЕ ПОЛЯ ФОРМЫ */}
             <label htmlFor="productName">Название продукта (блюда)*</label>
             <input
                 type="text"
