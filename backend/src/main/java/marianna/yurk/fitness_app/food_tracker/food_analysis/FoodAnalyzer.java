@@ -84,6 +84,9 @@ public class FoodAnalyzer {
 
     private FoodAnalysisResult toFoodAnalysisResult(AIPredictionResponse response) {
         NutritionInfo dishInfo = getNutritionInfo(response);
+        String englishKey = response.getDish();
+        String russianName = DishNameFormatter.format(englishKey);
+        dishInfo.setTitle(russianName);
 
         NutritionForWeight totals = response.getNutrition_for_weight();
 

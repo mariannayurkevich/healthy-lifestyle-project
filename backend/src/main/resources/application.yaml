@@ -59,3 +59,11 @@ logging:
 together:
   api:
     key: ${TOGETHER_API_KEY}
+
+openfoodfacts:
+  base-url: "https://world.openfoodfacts.org"
+  search-path: "/api/v2/search"
+  product-path: "/api/v2/product"
+  username: "${OPEN_FOOD_FACTS_USERNAME}"
+  password: "${OPEN_FOOD_FACTS_PASSWORD}"
+

@@ -104,7 +104,7 @@ public class ChatService {
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + apiKey)
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(Map.of(
-                        "model", "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8",
+                        "model", "meta-llama/Llama-3.3-70B-Instruct-Turbo",
                         "messages", messages,
                         "temperature", 0.3,
                         "max_tokens", 500
